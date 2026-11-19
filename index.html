@@ -218,6 +218,30 @@ tr.flag td{background:#FFF6F5}
 .step .v{font-size:19px}
 .score{gap:20px}
 .stat b{font-size:28px}
+.kpirow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 22px}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi b{display:block;font-size:28px;font-weight:600;letter-spacing:-.02em;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.kpi small{font-size:12px;color:var(--faint)}
+.checks{padding-left:20px;display:flex;flex-direction:column;gap:10px;max-width:90ch;color:#33333B}
+.checks b{font-weight:600}
+.sel{padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);max-width:280px;font-size:13px}
+.minis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.minis h4{font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px}
+.alerts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.al{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;padding:10px 14px;border-radius:10px}
+.al.r{background:var(--red-t);color:#8A2A24}.al.a{background:var(--amber-t);color:#6B5320}.al.g{background:var(--green-t);color:#1F6B3B}.al.n{background:var(--bg);color:var(--muted)}
+.al b{font-weight:600}
+.tag.brand{background:var(--blue-t);color:var(--blue)}.tag.out{background:var(--amber-t);color:var(--amber)}.tag.in{background:var(--green-t);color:var(--green)}.tag.odd{background:var(--red-t);color:var(--red)}
+#seg-country{flex-wrap:wrap}
+@media (max-width:1180px){.minis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpirow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.minis{grid-template-columns:1fr}}
+
+#t-gpc td.path,#t-impr td.path{max-width:200px}
+#t-gpc table,#t-impr table{font-size:13px}
+
+.tag{white-space:nowrap}
+@media (max-width:900px){.kpi b{font-size:22px}.kpirow{gap:12px}}
 </style>
 </head>
 <body>
@@ -417,6 +441,87 @@ tr.flag td{background:#FFF6F5}
         </div>
       </section>
 
+      <!-- MEDICIÓN -->
+      <section class="view" id="v-medicion" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-medicion"></div>
+          <article class="card s12">
+            <div class="ch"><h2>Clics de Google frente a sesiones orgánicas de GA4</h2></div>
+            <p class="cap">Search Console cuenta los clics desde Google sin depender de la etiqueta de Analytics. Si las dos líneas se separan de golpe, el problema está en la medición, no en el tráfico. La zona sombreada es el periodo con la medición rota.</p>
+            <div class="legend"><span><i style="background:var(--green)"></i>Clics en Google (Search Console)</span><span><i style="background:var(--blue)"></i>Sesiones orgánicas (GA4)</span></div>
+            <div class="chart" id="ch-control"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Sesiones de GA4 por cada clic de Google</h2></div>
+            <p class="cap">Se mantiene estable mientras la medición funciona. Una caída de más del 30 % frente a la media de las 8 semanas anteriores dispara el aviso.</p>
+            <div class="chart" id="ch-ratio"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Sesiones por día alrededor del corte</h2></div>
+            <p class="cap">Todas las sesiones de GA4, del 19 de octubre al 4 de noviembre.</p>
+            <div class="chart" id="ch-daily"></div>
+          </article>
+          <article class="card s5">
+            <div class="ch"><h2>Qué cae y en qué proporción</h2></div>
+            <p class="cap">Semana del 19 de octubre frente a la del 26. Si fuera una caída real, se concentraría en un canal o un dispositivo.</p>
+            <div class="tw" id="t-diag"></div>
+          </article>
+          <article class="card s7">
+            <div class="ch"><h2>La caída de impresiones en Google</h2></div>
+            <p class="cap">Dos semanas antes y después del 2 de noviembre. Casi toda la pérdida es de una sola página, y sus clics apenas cambian.</p>
+            <div class="tw" id="t-impr"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Cómo confirmar la causa</h2></div>
+            <p class="cap">Comprobaciones en orden de probabilidad. Ninguna se puede hacer desde los datos: requieren acceso a la web y a Google Tag Manager.</p>
+            <ol class="checks">
+              <li><b>Historial de Google Tag Manager.</b> Revisar las versiones publicadas el 26 y 27 de octubre: cambios en la etiqueta de GA4, en su activador o en las condiciones de consentimiento.</li>
+              <li><b>Banner de cookies.</b> Comprobar si cambió la herramienta o su configuración esos días. Si ahora quien rechaza las cookies no se mide en absoluto, la caída sería de este tamaño.</li>
+              <li><b>Prueba en incógnito.</b> Abrir veridas.com con Tag Assistant, aceptar y rechazar cookies, y ver si la etiqueta de GA4 se dispara y envía la vista de página.</li>
+              <li><b>Cambios de la web por la fusión.</b> Preguntar al equipo web qué se publicó esa semana (páginas de la fusión, plantilla, scripts).</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <!-- SEO -->
+      <section class="view" id="v-seo" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-seo"></div>
+          <div class="s12 kpirow" id="seo-kpis"></div>
+          <article class="card s12">
+            <div class="ch"><h2>Países</h2></div>
+            <p class="cap">Los 14 países con más clics. «Marca» es el porcentaje de clics que llega buscando «veridas»; «oculto», el que Google no detalla por privacidad.</p>
+            <div class="tw" id="t-gscc"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Búsquedas que traen clics, por país</h2><div class="more"><div class="seg" id="seg-country"></div></div></div>
+            <p class="cap" id="q-cap">Las búsquedas con más clics en el país elegido. Las de marca llevan etiqueta.</p>
+            <div class="tw" id="t-q"></div>
+          </article>
+          <article class="card lav s12">
+            <div class="ch"><h2>Páginas nuevas de 2026</h2><div class="more"><select class="sel" id="sel-spot" aria-label="Página"></select></div></div>
+            <p class="cap">Evolución mensual de cada página destacada en el informe del primer semestre. Noviembre aún no está completo. Los avisos se calculan solos con los meses completos.</p>
+            <div id="spot-alerts" class="alerts"></div>
+            <div class="minis">
+              <div><h4>Clics</h4><div class="chart" id="sp-clicks"></div></div>
+              <div><h4>Impresiones</h4><div class="chart" id="sp-impr"></div></div>
+              <div><h4>CTR</h4><div class="chart" id="sp-ctr"></div></div>
+              <div><h4>Posición media (abajo es mejor)</h4><div class="chart" id="sp-pos"></div></div>
+            </div>
+          </article>
+          <article class="card s7">
+            <div class="ch"><h2>Oportunidades de posicionamiento</h2></div>
+            <p class="cap">Búsquedas en las posiciones 4 a 15 con más de 15.000 impresiones en los últimos 90 días. Subir unas pocas posiciones aquí es lo más rentable.</p>
+            <div class="tw" id="t-opps"></div>
+          </article>
+          <article class="card s5">
+            <div class="ch"><h2>Clics de Google que no convierten</h2></div>
+            <p class="cap">Las páginas con más clics de Google en 2026 y sus conversiones en GA4. En rojo, las de más de 3.000 clics con 3 conversiones o menos.</p>
+            <div class="tw" id="t-gpc"></div>
+          </article>
+        </div>
+      </section>
       <!-- IA -->
       <section class="view" id="v-ia" hidden>
         <div class="grid">
@@ -450,14 +555,16 @@ tr.flag td{background:#FFF6F5}
 
 <script>
 (() => {
-const FILES = ['meta','kpis','channels','landing','monthly','weekly','convEvents','convMonthly','convLanding','sourceMedium','campaigns','devices','newret','countries','pages','clicks','llmSources','llmLanding','llmMonthly'];
+const FILES = ['meta','kpis','channels','landing','monthly','weekly','convEvents','convMonthly','convLanding','sourceMedium','campaigns','devices','newret','countries','pages','clicks','llmSources','llmLanding','llmMonthly','gsc_kpis','gsc_countries','gsc_brand','gsc_queries','gsc_spotlight','gsc_opps','gsc_pages','gsc_control','diag_channels','diag_daily','diag_impr'];
 const VIEWS_DEF = [
   ['resumen','Resumen','<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'],
+  ['medicion','Medición','<path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l5-5"/><circle cx="12" cy="12" r="1.5"/>'],
   ['evolucion','Evolución','<path d="M4 18 9 12l4 3 7-9"/>'],
   ['adquisicion','Adquisición','<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/>'],
   ['audiencia','Audiencia','<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14c2 .7 3 2.6 3 6"/>'],
   ['paginas','Páginas','<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>'],
   ['conversiones','Conversiones','<path d="M5 12l4 4 10-10"/>'],
+  ['seo','SEO','<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>'],
   ['ia','Asistentes de IA','<path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/>']
 ];
 const C = {blue:'#3667F0', blueL:'#C9D6FB', green:'#2F9E57', violet:'#8B5CF6', amber:'#C4861A', red:'#D6453D', grey:'#A0A0AB'};
@@ -569,10 +676,19 @@ function isoMonday(key) { const [y, w] = key.split('-').map(Number); const j4 = 
 const fDay = (d) => d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()];
 
 // Gráfico de dos ejes: sesiones (área, izquierda) y conversiones (línea, derecha)
-function dualChart(el, labels, left, right, H, lfmt, axfmt) {
+function shade(svg, x, labels, from, mt, bottom, right) {
+  const i = labels.indexOf(from);
+  if (i < 0) return;
+  const step = labels.length > 1 ? x(labels[1]) - x(labels[0]) : 0;
+  const x0 = x(from) - step / 2;
+  svg.append('rect').attr('x', x0).attr('y', mt).attr('width', Math.max(0, right - x0)).attr('height', bottom - mt).attr('fill', '#D6453D').attr('opacity', 0.06);
+  svg.append('text').attr('x', x0 + 6).attr('y', mt + 12).style('fill', '#B23A33').style('font-size', '11px').text('Medición rota');
+}
+function dualChart(el, labels, left, right, H, lfmt, axfmt, shadeFrom) {
   const [svg, W] = svgBox(el, H);
   const ml = 46, mr = 36, mt = 10, mb = 26;
   const x = d3.scalePoint().domain(labels).range([ml, W - mr]);
+  if (shadeFrom) shade(svg, x, labels, shadeFrom, mt, H - mb, W - mr);
   const yl = d3.scaleLinear().domain([0, d3.max(left.vals) || 1]).nice().range([H - mb, mt]);
   const yr = d3.scaleLinear().domain([0, d3.max(right.vals) || 1]).nice().range([H - mb, mt]);
   grid(svg, yl, yl.ticks(4), ml, W - mr, (d) => d >= 1000 ? nf0.format(d / 1000) + ' k' : nf0.format(d));
@@ -592,13 +708,16 @@ function dualChart(el, labels, left, right, H, lfmt, axfmt) {
     }).on('pointerleave', () => { hideTip(); rule.style('opacity', 0); });
 }
 
-function lineChart(el, labels, series, H, yfmt, tipTitle) {
+function lineChart(el, labels, series, H, yfmt, tipTitle, opt) {
+  opt = opt || {};
   const [svg, W] = svgBox(el, H);
   const ml = 50, mr = 12, mt = 10, mb = 26;
   const x = d3.scalePoint().domain(labels).range([ml, W - mr]);
   const y = d3.scaleLinear().domain([0, d3.max(series, (s) => d3.max(s.vals.filter(has))) || 1]).nice().range([H - mb, mt]);
+  if (opt.shadeFrom) shade(svg, x, labels, opt.shadeFrom, mt, H - mb, W - mr);
+  if (has(opt.refY)) { svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(opt.refY)).attr('y2', y(opt.refY)).attr('stroke', C.grey).attr('stroke-dasharray', '4 4'); if (opt.refLabel) svg.append('text').attr('x', W - mr).attr('y', y(opt.refY) - 6).attr('text-anchor', 'end').text(opt.refLabel); }
   grid(svg, y, y.ticks(4), ml, W - mr, yfmt);
-  xLabels(svg, labels, x, H, W, ml);
+  xLabels(svg, labels, x, H, W, ml, opt.xfmt);
   series.forEach((s) => {
     const pts = labels.map((l, i) => has(s.vals[i]) ? [x(l), y(s.vals[i])] : null).filter(Boolean);
     svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pts)).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2.2);
@@ -660,6 +779,17 @@ function scatter(el, rows, o) {
 
 // ---------- Avisos ----------
 function weeks() { return (D.weekly || []).map((r) => ({k: r.yearWeekIso, d: isoMonday(r.yearWeekIso), s: +r.sessions, c: +r.conversions})); }
+function incident() {
+  const c = (D.gsc_control || []).map((r) => ({k: r.semana, d: isoMonday(r.semana), g: +r.gsc_clicks, a: +r.ga_organic_sessions, imp: +r.gsc_impressions, r: +r.ga_organic_sessions / +r.gsc_clicks}));
+  for (let i = 8; i < c.length; i++) {
+    const base = d3.mean(c.slice(i - 8, i), (x) => x.r);
+    if (c[i].r < base * 0.7) {
+      const after = c.slice(i);
+      return {start: c[i], k: c[i].k, base, after: d3.mean(after, (x) => x.r), gBefore: d3.mean(c.slice(i - 4, i), (x) => x.g), gAfter: d3.mean(after, (x) => x.g), aBefore: d3.mean(c.slice(i - 4, i), (x) => x.a), aAfter: d3.mean(after, (x) => x.a), rows: c};
+    }
+  }
+  return {rows: c};
+}
 function trackingDrop() {
   const w = weeks().slice(0, -1); // la última semana está incompleta
   if (w.length < 12) return null;
@@ -672,7 +802,9 @@ function trackingDrop() {
 function warnings() {
   const out = [];
   const t = trackingDrop();
-  if (t) out.push({title: 'Posible fallo de medición', text: 'Desde la semana del ' + fDay(t.from) + ' las sesiones bajan de unas ' + nf0.format(t.base) + ' a unas ' + nf0.format(t.after) + ' por semana (' + nf0.format(t.pct) + ' %). Un descenso tan brusco suele indicar que la etiqueta de Google Analytics ha dejado de cargarse en parte de la web. Conviene revisarlo antes de sacar conclusiones de las últimas semanas.'});
+  const inc = incident();
+  if (t && inc.start) out.push({title: 'Fallo de medición en Google Analytics', text: 'Desde la semana del ' + fDay(t.from) + ' las sesiones bajan de unas ' + nf0.format(t.base) + ' a unas ' + nf0.format(t.after) + ' por semana (' + nf0.format(t.pct) + ' %). No es una caída de tráfico: en esas mismas semanas los clics desde Google siguen en unos ' + nf0.format(inc.gAfter) + ' por semana, frente a ' + nf0.format(inc.gBefore) + ' antes. GA4 está dejando de registrar unas ' + nf0.format(10 * (1 - inc.after / inc.base)) + ' de cada 10 visitas, así que sus cifras desde entonces están infravaloradas. El detalle está en la pestaña Medición.'});
+  else if (t) out.push({title: 'Posible fallo de medición', text: 'Desde la semana del ' + fDay(t.from) + ' las sesiones bajan de unas ' + nf0.format(t.base) + ' a unas ' + nf0.format(t.after) + ' por semana (' + nf0.format(t.pct) + ' %).'});
   const footer = (D.convEvents || []).find((r) => /Footer/i.test(r.eventName));
   if (footer && has(footer.conversions_chg) && +footer.conversions_chg < -90) out.push({title: 'Formulario del pie casi sin conversiones', text: 'El formulario del pie de página ha pasado a ' + fInt(footer.conversions) + ' conversiones (' + fSigned(footer.conversions_chg) + '). Si sigue en la web, revisar que el evento se mide.'});
   return out;
@@ -730,7 +862,7 @@ function vResumen() {
   }
 
   const all = weeks();
-  dualChart($('ch-week'), all.map((r) => r.k), {name: 'Sesiones', color: C.blue, vals: all.map((r) => r.s)}, {name: 'Conversiones', color: C.green, vals: all.map((r) => r.c)}, 230, (k) => 'Semana del ' + fDay(isoMonday(k)), (k) => fDay(isoMonday(k)));
+  dualChart($('ch-week'), all.map((r) => r.k), {name: 'Sesiones', color: C.blue, vals: all.map((r) => r.s)}, {name: 'Conversiones', color: C.green, vals: all.map((r) => r.c)}, 230, (k) => 'Semana del ' + fDay(isoMonday(k)), (k) => fDay(isoMonday(k)), incident().k);
 }
 
 // ---------- Evolución ----------
@@ -848,8 +980,128 @@ function vIa() {
   table($('t-ail'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duración media', f: 'averageSessionDuration', n: 1, fmt: fDur, cls: (r) => +r.averageSessionDuration < 20 ? 'neg' : ''}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], D.llmLanding || []);
 }
 
+
+// ---------- Medición ----------
+function vMedicion() {
+  const inc = incident(), c = inc.rows;
+  if (inc.start) {
+    concl('cc-medicion', 'Desde la semana del <b>' + fDay(inc.start.d) + '</b>, Google Analytics registra ' + nf2.format(inc.after) + ' sesiones orgánicas por cada clic de Google, cuando antes registraba ' + nf2.format(inc.base) + '. Los clics desde Google apenas cambian (de ' + nf0.format(inc.gBefore) + ' a ' + nf0.format(inc.gAfter) + ' por semana). <b>El tráfico sigue llegando; lo que falla es la medición:</b> GA4 pierde unas ' + nf0.format(10 * (1 - inc.after / inc.base)) + ' de cada 10 visitas.',
+      'Cae igual en todos los canales, dispositivos y páginas, y a la vez, el martes 27 de octubre. Eso apunta a un cambio en la web que afecta a la etiqueta de Google Analytics o al banner de cookies, no a una pérdida de posiciones ni a una campaña.');
+  } else concl('cc-medicion', 'La medición de GA4 sigue el ritmo de los clics de Google: no se detecta ninguna rotura.', '');
+  const labs = c.map((r) => r.k), lf = (k) => fDay(isoMonday(k));
+  lineChart($('ch-control'), labs, [{name: 'Clics en Google', color: C.green, vals: c.map((r) => r.g)}, {name: 'Sesiones orgánicas GA4', color: C.blue, vals: c.map((r) => r.a)}], 280, (v) => nf0.format(v), (i) => 'Semana del ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf});
+  lineChart($('ch-ratio'), labs, [{name: 'Sesiones por clic', color: C.violet, vals: c.map((r) => r.r)}], 220, (v) => nf2.format(v), (i) => 'Semana del ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf, refY: inc.base ? inc.base * 0.7 : null, refLabel: 'Umbral de aviso'});
+  const dd = D.diag_daily || [];
+  const dl = dd.map((r) => r.fecha);
+  barChart($('ch-daily'), dl.map((f) => +f.slice(8) + ' ' + MONTHS[+f.slice(5, 7) - 1]), [{name: 'Sesiones', color: C.blue, vals: dd.map((r) => +r.sesiones)}], 220, (v) => nf0.format(v), false, (i) => new Date(dl[i] + 'T12:00:00').toLocaleDateString('es-ES', {weekday: 'long', day: 'numeric', month: 'long'}));
+  table($('t-diag'), [{h: '', html: (r) => esc(r.nombre) + ' <span style="color:var(--faint);font-size:12px">' + (r.grupo === 'canal' ? 'canal' : 'dispositivo') + '</span>'}, {h: 'Antes', f: 'antes', n: 1, fmt: fInt}, {h: 'Después', f: 'despues', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(100 * (+r.despues / +r.antes - 1))}], D.diag_channels || []);
+  table($('t-impr'), [{h: 'Página', f: 'page', cls: 'path'}, {h: 'Impresiones', n: 1, html: (r) => fInt(r.impr_antes) + ' → ' + fInt(r.impr_despues)}, {h: 'Cambio', n: 1, html: (r) => chg(100 * (+r.impr_despues / +r.impr_antes - 1))}, {h: 'Clics', n: 1, html: (r) => fInt(r.clicks_antes) + ' → ' + fInt(r.clicks_despues)}], D.diag_impr || []);
+}
+
+// ---------- SEO ----------
+const MARKET = {'Mexico':'in','Brazil':'in','Spain':'in','Italy':'in','Chile':'in','United States':'in','Colombia':'in','Argentina':'in','Portugal':'in','Peru':'latam','Venezuela':'latam','Guatemala':'latam','United Kingdom':'eu','India':'odd','Pakistan':'odd'};
+const MARKET_TAG = {in: ['in', 'Mercado del informe'], latam: ['in', 'LATAM'], eu: ['in', 'Europa'], odd: ['odd', 'Fuera de mercado']};
+const CO_ES2 = Object.assign({}, CO_ES, {'Peru':'Perú','Venezuela':'Venezuela','Guatemala':'Guatemala','Pakistan':'Pakistán','Portugal':'Portugal'});
+const isBrand = (q) => /veridas/i.test(q);
+const SPOT_NOTES = {
+  '/en/carding-proof/': 'Revisión manual: «carding» es jerga de quien comete fraude con tarjetas. El informe del primer semestre ve este tráfico concentrado en India, Pakistán, Bangladés y Nigeria, y India y Pakistán están entre los 14 países con más clics del sitio.',
+  '/en/selfie-with-id/': 'Revisión manual: el informe del primer semestre detecta búsquedas que copian el texto de verificación de otra empresa y tráfico de Sudáfrica, India y Filipinas. Conviene descartar contenido duplicado antes de invertir más en ella.',
+  '/br/identidade-falso/': 'Revisión manual: varias de las búsquedas con más clics en Brasil piden cómo fabricar una identidad falsa («como fazer identidade falsa»). El contenido debería orientarse a quien detecta el fraude, no a quien lo comete.'
+};
+let QCOUNTRY = 'Mexico', SPOT = null;
+
+function vSeo() {
+  const k = (D.gsc_kpis || [])[0] || {};
+  const co = D.gsc_countries || [], br = new Map((D.gsc_brand || []).map((r) => [r.country, +r.brand_clicks]));
+  const q = D.gsc_queries || [];
+  const unk = new Map(q.filter((r) => r.query === '(unknown)').map((r) => [r.country, +r.clicks]));
+  const prev = (v, c) => +v / (1 + +c / 100);
+  const pos0 = prev(k.position, k.position_chg);
+  const sp = (D.gsc_spotlight || []);
+  const esB = br.get('Spain') / +(co.find((r) => r.country === 'Spain') || {}).clicks, mxB = br.get('Mexico') / +(co.find((r) => r.country === 'Mexico') || {}).clicks;
+  const odd = co.filter((r) => MARKET[r.country] === 'odd');
+  concl('cc-seo', 'Del ' + fDayStr(k.desde) + ' al ' + fDayStr(k.hasta) + ', Google trae <b>' + fInt(k.clicks) + '</b> clics (' + fSigned(k.clicks_chg) + ' frente al mismo periodo de 2025) y la posición media mejora de ' + nf1.format(pos0) + ' a ' + nf1.format(+k.position) + '. México y Brasil concentran el ' + nf0.format(100 * (+co[0].clicks + +co[1].clicks) / d3.sum(co, (r) => +r.clicks)) + ' % de los clics de los 14 primeros países.',
+    'La marca pesa poco fuera de España (' + nf0.format(100 * esB) + ' % de los clics en España, ' + nf1.format(100 * mxB) + ' % en México): casi todo llega por búsquedas genéricas. ' + (odd.length ? odd.map((r) => CO_ES2[r.country] || r.country).join(' y ') + ' aparecen entre los países con más clics sin ser mercado de Veridas; encaja con el tráfico de la página de carding.' : ''));
+
+  const kp = [
+    ['Clics', fInt(k.clicks), chg(k.clicks_chg), '2025: ' + fInt(prev(k.clicks, k.clicks_chg))],
+    ['Impresiones', fInt(k.impressions), chg(k.impressions_chg), '2025: ' + fInt(prev(k.impressions, k.impressions_chg))],
+    ['CTR', fRate(k.ctr), chg(k.ctr_chg), '2025: ' + fRate(prev(k.ctr, k.ctr_chg))],
+    ['Posición media', nf1.format(+k.position), '<span class="chg ' + (pos0 > +k.position ? 'up' : 'down') + '">' + (pos0 > +k.position ? '↑ mejora ' : '↓ empeora ') + nf1.format(Math.abs(pos0 - +k.position)) + ' puestos</span>', '2025: ' + nf1.format(pos0) + ' · menos es mejor']
+  ];
+  $('seo-kpis').innerHTML = kp.map(([l, v, c, s]) => '<div class="kpi"><span>' + l + '</span><b>' + v + '</b>' + c + '<br><small>' + s + '</small></div>').join('');
+
+  table($('t-gscc'), [
+    {h: 'País', cls: 'nw', html: (r) => esc(CO_ES2[r.country] || r.country)},
+    {h: '', html: (r) => { const m = MARKET_TAG[MARKET[r.country]] || ['n', '']; return m[1] ? '<span class="tag ' + m[0] + '">' + m[1] + '</span>' : ''; }},
+    {h: 'Clics', f: 'clicks', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.clicks_chg)},
+    {h: 'Impresiones', f: 'impressions', n: 1, fmt: fInt}, {h: 'CTR', f: 'ctr', n: 1, fmt: fRate},
+    {h: 'Posición', n: 1, html: (r) => nf1.format(+r.position)},
+    {h: 'Marca', n: 1, html: (r) => br.has(r.country) ? nf1.format(100 * br.get(r.country) / +r.clicks) + ' %' : '—'},
+    {h: 'Oculto', n: 1, html: (r) => unk.has(r.country) ? nf0.format(100 * unk.get(r.country) / +r.clicks) + ' %' : '—'}
+  ], co);
+
+  const qc = [...new Set(q.map((r) => r.country))];
+  if (!qc.includes(QCOUNTRY)) QCOUNTRY = qc[0];
+  $('seg-country').innerHTML = qc.map((c) => '<button data-c="' + esc(c) + '" aria-pressed="' + (c === QCOUNTRY) + '">' + esc(CO_ES2[c] || c) + '</button>').join('');
+  const rows = q.filter((r) => r.country === QCOUNTRY && r.query !== '(unknown)');
+  const u = unk.get(QCOUNTRY), tot = +(co.find((r) => r.country === QCOUNTRY) || {}).clicks;
+  $('q-cap').innerHTML = 'Las búsquedas con más clics en ' + esc(CO_ES2[QCOUNTRY] || QCOUNTRY) + '. Google oculta por privacidad ' + (u ? fInt(u) + ' clics' + (tot ? ' (' + nf0.format(100 * u / tot) + ' % del total)' : '') : 'parte de las búsquedas') + ', que no aparecen aquí.';
+  table($('t-q'), [
+    {h: 'Búsqueda', html: (r) => esc(r.query) + (isBrand(r.query) ? ' <span class="tag brand">Marca</span>' : '') + (/como fazer|how to do|como hacer/i.test(r.query) ? ' <span class="tag odd">Intención dudosa</span>' : '')},
+    {h: 'Clics', f: 'clicks', n: 1, fmt: fInt}, {h: 'Impresiones', f: 'impressions', n: 1, fmt: fInt},
+    {h: 'CTR', n: 1, html: (r) => fRate(+r.clicks / +r.impressions)}, {h: 'Posición', n: 1, html: (r) => nf1.format(+r.position)}
+  ], rows);
+
+  const pages = [...new Set(sp.map((r) => r.page))].sort((a, b) => d3.sum(sp.filter((r) => r.page === b), (r) => +r.clicks) - d3.sum(sp.filter((r) => r.page === a), (r) => +r.clicks));
+  if (!SPOT || !pages.includes(SPOT)) SPOT = pages[0];
+  $('sel-spot').innerHTML = pages.map((p) => '<option value="' + esc(p) + '"' + (p === SPOT ? ' selected' : '') + '>' + esc(p) + '</option>').join('');
+  spotlight(sp.filter((r) => r.page === SPOT).sort((a, b) => a.month < b.month ? -1 : 1));
+
+  const opp = (D.gsc_opps || []).slice().sort((a, b) => +b.impressions - +a.impressions);
+  table($('t-opps'), [
+    {h: 'Búsqueda', html: (r) => esc(r.query) + (+r.ctr < 0.0005 ? ' <span class="tag out">Impresiones sin clics</span>' : +r.position <= 6 ? ' <span class="tag in">Cerca del top 3</span>' : '')},
+    {h: 'Impresiones', f: 'impressions', n: 1, fmt: fInt}, {h: 'Clics', f: 'clicks', n: 1, fmt: fInt},
+    {h: 'CTR', f: 'ctr', n: 1, fmt: fRate}, {h: 'Posición', n: 1, html: (r) => nf1.format(+r.position)}
+  ], opp);
+
+  const gp = D.gsc_pages || [];
+  table($('t-gpc'), [
+    {h: 'Página', f: 'page', cls: 'path'}, {h: 'Clics', f: 'clicks', n: 1, fmt: fInt},
+    {h: 'Conv. GA4', n: 1, html: (r) => has(r.ga_conversions) ? fInt(r.ga_conversions) : '<span style="color:var(--faint)">sin dato</span>'}
+  ], gp.filter((r) => has(r.ga_conversions)), (r) => +r.clicks > 3000 && +r.ga_conversions <= 3 ? 'flag' : '');
+}
+function fDayStr(s) { if (!s) return '—'; const d = new Date(s + 'T12:00:00'); return d.getDate() + ' de ' + ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()]; }
+
+function spotlight(rows) {
+  const full = rows.filter((r) => r.month < '2026-11');
+  const labs = rows.map((r) => MONTHS[+r.month.slice(5) - 1]);
+  const tt = (i) => MONTHS[+rows[i].month.slice(5) - 1] + ' 2026' + (rows[i].month >= '2026-11' ? ' (incompleto)' : '');
+  barChart($('sp-clicks'), labs, [{name: 'Clics', color: '#17171C', vals: rows.map((r) => +r.clicks)}], 150, (v) => nf0.format(v), false, tt);
+  barChart($('sp-impr'), labs, [{name: 'Impresiones', color: '#14A3B8', vals: rows.map((r) => +r.impressions)}], 150, (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v), false, tt);
+  barChart($('sp-ctr'), labs, [{name: 'CTR', color: C.red, vals: rows.map((r) => 100 * +r.ctr)}], 150, (v) => nf1.format(v) + ' %', false, tt);
+  barChart($('sp-pos'), labs, [{name: 'Posición', color: C.amber, vals: rows.map((r) => +r.position)}], 150, (v) => nf1.format(v), false, tt);
+  const al = [];
+  const live = full.filter((r) => +r.clicks >= 20);
+  if (live.length >= 4) {
+    const a = live.slice(0, 3), b = live.slice(-3);
+    const p0 = d3.mean(a, (r) => +r.position), p1 = d3.mean(b, (r) => +r.position);
+    if (p1 - p0 > 1.5) al.push(['r', '<b>La posición empeora</b> de ' + nf1.format(p0) + ' en sus primeros meses a ' + nf1.format(p1) + ' en los tres últimos. Conviene actualizar el contenido y reforzar los enlaces hacia ella.']);
+    else if (p0 - p1 > 1.5) al.push(['g', '<b>La posición mejora</b> de ' + nf1.format(p0) + ' a ' + nf1.format(p1) + '.']);
+    const sums = live.map((r, i) => i >= 2 ? d3.sum(live.slice(i - 2, i + 1), (x) => +x.clicks) : null).filter((v) => v != null);
+    const peak = d3.max(sums), last = sums[sums.length - 1];
+    if (peak && last < 0.6 * peak) al.push(['a', '<b>Los clics han caído un ' + nf0.format(100 * (1 - last / peak)) + ' %</b> desde su mejor trimestre. Search Console no depende de la etiqueta de Analytics, así que esta caída es real.']);
+  }
+  const ci = d3.sum(full, (r) => +r.clicks), im = d3.sum(full, (r) => +r.impressions);
+  const wpos = im ? d3.sum(full, (r) => +r.position * +r.impressions) / im : 0;
+  if (im && ci / im < 0.01 && wpos < 9) al.push(['a', '<b>Buena posición, pocos clics:</b> posición media ' + nf1.format(wpos) + ' pero solo un ' + nf2.format(100 * ci / im) + ' % de CTR. Es candidata a probar otro título y otra descripción.']);
+  if (SPOT_NOTES[SPOT]) al.push(['n', SPOT_NOTES[SPOT]]);
+  if (!al.length) al.push(['g', '<b>Sin avisos:</b> posición y clics estables.']);
+  $('spot-alerts').innerHTML = al.map(([c, h]) => '<div class="al ' + c + '">' + h + '</div>').join('');
+}
+
 // ---------- Navegación ----------
-const VIEWS = {resumen: vResumen, evolucion: vEvolucion, adquisicion: vAdquisicion, audiencia: vAudiencia, paginas: vPaginas, conversiones: vConversiones, ia: vIa};
+const VIEWS = {resumen: vResumen, medicion: vMedicion, seo: vSeo, evolucion: vEvolucion, adquisicion: vAdquisicion, audiencia: vAudiencia, paginas: vPaginas, conversiones: vConversiones, ia: vIa};
 function render() { hideTip(); try { VIEWS[TAB](); } catch (e) { console.error(e); $('errors').innerHTML = '<div class="err">Error al dibujar la vista: ' + esc(e.message) + '</div>'; } }
 function setTab(t, push) {
   if (!VIEWS[t]) t = 'resumen';
@@ -867,6 +1119,8 @@ function chrome() {
   $('tabs').addEventListener('click', go); $('sidenav').addEventListener('click', go);
   document.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => { setTab(b.dataset.go, true); scrollTo(0, 0); }));
   $('seg-month').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; MMETRIC = b.dataset.m; $('seg-month').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); render(); });
+  $('seg-country').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; QCOUNTRY = b.dataset.c; render(); });
+  $('sel-spot').addEventListener('change', (e) => { SPOT = e.target.value; render(); });
   let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(render, 150); });
   addEventListener('hashchange', () => setTab(location.hash.slice(1), false));
 
