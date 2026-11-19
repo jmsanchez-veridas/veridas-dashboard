@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Veridas · Conversión web → HubSpot</title>
+<title>Veridas · Rendimiento web</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -190,140 +190,179 @@ td.pos{color:var(--green);font-weight:500}td.neg{color:var(--red);font-weight:50
   .steps{gap:14px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.nav{display:flex;align-items:center;gap:10px;width:calc(100% - 20px);margin:0 10px;padding:9px 12px;border:0;background:none;border-radius:10px;cursor:pointer;text-align:left;font-size:14.5px;color:#33333B}
+.nav svg{width:17px;height:17px;stroke:var(--muted);fill:none;stroke-width:1.7}
+.nav:hover{background:var(--bg)}
+.nav[aria-current="true"]{background:var(--blue-t);color:var(--blue);font-weight:500}
+.nav[aria-current="true"] svg{stroke:var(--blue)}
+.sideinfo{padding:0 22px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.sideinfo p{display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--faint);flex:none;display:inline-block}
+.dot.g{background:var(--green)}
+.side-foot strong.red{color:var(--red)}
+.side-foot strong.red::before{background:var(--red)}
+.alert{display:flex;gap:14px;align-items:flex-start;background:var(--amber-t);border:1px solid #F1DDB3;border-radius:var(--r-lg);padding:16px 20px;margin-bottom:20px}
+.alert .ic{width:30px;height:30px;border-radius:9px;background:#F6E3BC;display:grid;place-items:center;flex:none}
+.alert .ic svg{width:17px;height:17px;stroke:var(--amber);fill:none;stroke-width:2}
+.alert b{display:block;font-weight:600;margin-bottom:2px}
+.alert p{color:#6B5320;font-size:13.5px;max-width:90ch}
+.chg{font-variant-numeric:tabular-nums;font-size:12.5px;font-weight:500}
+.chg.up{color:var(--green)}.chg.down{color:var(--red)}.chg.na{color:var(--faint);font-weight:400}
+td.path{font-family:var(--mono);font-size:12.5px;max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr.flag td{background:#FFF6F5}
+.step .v small{font-size:12px;font-weight:500;margin-left:4px}
+
+.step .row1{display:block}
+.step .l{display:block;margin-bottom:2px}
+.step .v{font-size:19px}
+.score{gap:20px}
+.stat b{font-size:28px}
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="side">
-    <div class="brand"><div class="logo">V</div><div><b>Veridas</b><span>Conversión web → HubSpot</span></div></div>
-    <h3>Regiones</h3>
-    <nav id="regions" aria-label="Región"></nav>
-    <div class="side-foot"><strong>Datos de ejemplo</strong>Todas las cifras son inventadas. Últimos 90 días.</div>
+    <div class="brand"><div class="logo">V</div><div><b>Veridas</b><span>Rendimiento web</span></div></div>
+    <h3>Vistas</h3>
+    <nav id="sidenav" aria-label="Vistas"></nav>
+    <h3>Datos</h3>
+    <div class="sideinfo">
+      <p><span class="dot g"></span>Google Analytics 4</p>
+      <p id="side-period"></p>
+      <p id="side-updated"></p>
+    </div>
+    <div class="side-foot" id="side-alerts"></div>
   </aside>
 
   <div class="main">
     <header class="top">
       <nav class="tabs" role="tablist" id="tabs"></nav>
-      <div class="mreg"><select id="mreg" aria-label="Región"></select></div>
     </header>
 
     <main class="page">
       <div class="hero">
         <div class="logo">V</div>
-        <div><h1>Veridas<span>, de un vistazo</span></h1><p id="hero-sub">veridas.com · últimos 90 días</p></div>
-        <div class="chips"><span class="chip a">Datos de ejemplo</span></div>
+        <div><h1>Veridas<span>, de un vistazo</span></h1><p id="hero-sub">veridas.com</p></div>
+        <div class="chips" id="hero-chips"></div>
       </div>
       <div id="errors"></div>
+      <div id="alert"></div>
 
       <!-- RESUMEN -->
       <section class="view" id="v-resumen">
         <div class="grid">
           <article class="card rose s5">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><h2>Salud del embudo</h2><button class="more" data-go="origen">Origen →</button></div>
-            <p class="cap">Cuántos leads llegan y cuántos pasan a XQL y a Deal.</p>
-            <div class="health">
-              <div class="ring" id="r-health"></div>
-              <div><h3 id="h-title">—</h3><div class="chips" id="h-chips"></div></div>
-            </div>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><h2>Salud del sitio</h2><button class="more" data-go="evolucion">Evolución →</button></div>
+            <p class="cap">El anillo es la tasa de interacción: sesiones de más de 10 segundos, con conversión o con dos o más páginas vistas.</p>
+            <div class="health"><div class="ring" id="r-health"></div><div><h3 id="h-title">—</h3><div class="chips" id="h-chips"></div></div></div>
             <div class="steps" id="h-steps"></div>
           </article>
-
           <article class="card s4">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M14.5 9.5a3 3 0 1 0 0 5M8 11h5M8 13h5"/></svg></div><h2>Inversión y retorno</h2><button class="more" data-go="origen">Detalle →</button></div>
-            <p class="cap">Lo gastado en canales con coste frente al pipeline abierto que generan.</p>
-            <div class="mlist" id="money"></div>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/></svg></div><h2>Calidad de las visitas</h2><button class="more" data-go="audiencia">Audiencia →</button></div>
+            <p class="cap">Frente al mismo periodo de 2025. Verde si mejora, rojo si empeora.</p>
+            <div class="mlist" id="quality"></div>
           </article>
-
           <article class="card s3">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2"/></svg></div><h2>Deals abiertos</h2></div>
-            <p class="cap">Oportunidades abiertas y XQLs de cada semana.</p>
-            <div class="big" id="d-big">—</div>
-            <div class="bigsub" id="d-sub"></div>
-            <div class="spark" id="d-spark" role="img" aria-label="XQLs por semana"></div>
-            <p class="foot" id="d-foot"></p>
-          </article>
-
-          <article class="card mint s3">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></div><h2>Canales</h2><button class="more" data-go="origen">Detalle →</button></div>
-            <p class="cap">El canal que mejor pasa a XQL y los que pierden dinero.</p>
-            <div class="score"><div class="ring" id="r-canal"></div><div class="stat" id="c-neg"></div><div class="stat" id="c-paid"></div></div>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></div><h2>Conversiones</h2><button class="more" data-go="conversiones">Detalle →</button></div>
+            <p class="cap">Formularios, descargas y citas de calendario.</p>
+            <div class="big" id="c-big">—</div>
+            <div class="bigsub" id="c-sub"></div>
+            <div class="spark" id="c-spark" role="img" aria-label="Conversiones por semana"></div>
             <p class="foot" id="c-foot"></p>
           </article>
-
-          <article class="card lav s3">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg></div><h2>Páginas</h2><button class="more" data-go="paginas">Detalle →</button></div>
-            <p class="cap">La página que más XQLs genera y la ruta más seguida.</p>
-            <div class="score"><div class="ring" id="r-page"></div><div class="stat" id="p-xql"></div><div class="stat" id="p-act"></div></div>
-            <p class="foot" id="p-foot"></p>
+          <article class="card mint s3">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></div><h2>Canales</h2><button class="more" data-go="adquisicion">Detalle →</button></div>
+            <p class="cap">Peso de la búsqueda orgánica y canales que pierden conversiones.</p>
+            <div class="score"><div class="ring" id="r-chan"></div><div class="stat" id="ch-down"></div><div class="stat" id="ch-up"></div></div>
+            <p class="foot" id="ch-foot"></p>
           </article>
-
+          <article class="card lav s3">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg></div><h2>Asistentes de IA</h2><button class="more" data-go="ia">Detalle →</button></div>
+            <p class="cap">Visitas que llegan desde ChatGPT, Claude, Gemini y otros.</p>
+            <div class="score"><div class="stat g" id="ai-ses"></div><div class="stat" id="ai-rate"></div></div>
+            <p class="foot" id="ai-foot"></p>
+          </article>
           <article class="card s6">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19V11M10 19V6M15 19v-5M20 19V9"/></svg></div><h2>Leads y XQLs (13 semanas)</h2><button class="more" data-go="origen">Por canal →</button></div>
-            <p class="cap">Leads y XQLs generados cada semana en la región elegida.</p>
-            <div class="legend"><span><i style="background:var(--blue)"></i>Leads</span><span><i style="background:var(--green)"></i>XQLs</span></div>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19V11M10 19V6M15 19v-5M20 19V9"/></svg></div><h2>Sesiones y conversiones por semana</h2><button class="more" data-go="evolucion">24 meses →</button></div>
+            <p class="cap">Sesiones a la izquierda, conversiones a la derecha. La última semana aún no está completa.</p>
+            <div class="legend"><span><i style="background:var(--blue)"></i>Sesiones</span><span><i style="background:var(--green)"></i>Conversiones</span></div>
             <div class="chart" id="ch-week"></div>
           </article>
         </div>
       </section>
 
-      <!-- ORIGEN -->
-      <section class="view" id="v-origen" hidden>
+      <!-- EVOLUCIÓN -->
+      <section class="view" id="v-evolucion" hidden>
         <div class="grid">
-          <div class="concl" id="cc-origen"></div>
+          <div class="concl" id="cc-evolucion"></div>
           <article class="card s12">
-            <div class="ch"><h2>Evolución semanal por canal</h2><div class="more"><div class="seg" id="seg-metric"><button data-m="leads" aria-pressed="true">Leads</button><button data-m="xqls" aria-pressed="false">XQLs</button></div></div></div>
-            <p class="cap">Cada línea es un canal. Pasa por encima para ver los valores de cada semana.</p>
-            <div class="legend" id="lg-week"></div>
-            <div class="chart" id="ch-week-canal"></div>
+            <div class="ch"><h2>Mes a mes: 2026 frente a 2025</h2><div class="more"><div class="seg" id="seg-month"><button data-m="sessions" aria-pressed="true">Sesiones</button><button data-m="conversions" aria-pressed="false">Conversiones</button></div></div></div>
+            <p class="cap">Barra clara: 2025. Barra oscura: 2026. Noviembre de 2026 aún no está completo.</p>
+            <div class="legend"><span><i style="background:#C9D6FB"></i>2025</span><span><i style="background:var(--blue)"></i>2026</span></div>
+            <div class="chart" id="ch-month"></div>
           </article>
+          <article class="card s6">
+            <div class="ch"><h2>Acumulado del año</h2></div>
+            <p class="cap">Total sumado mes a mes. Gris: 2025. Azul: 2026.</p>
+            <div class="legend"><span><i style="background:#A0A0AB"></i>2025</span><span><i style="background:var(--blue)"></i>2026</span></div>
+            <div class="chart" id="ch-cum"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Tasa de conversión por mes</h2></div>
+            <p class="cap">Conversiones por cada 100 sesiones, en los dos años.</p>
+            <div class="legend"><span><i style="background:#A0A0AB"></i>2025</span><span><i style="background:var(--green)"></i>2026</span></div>
+            <div class="chart" id="ch-rate"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ADQUISICIÓN -->
+      <section class="view" id="v-adquisicion" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-adquisicion"></div>
           <article class="card s5">
-            <div class="ch"><h2>Canales de origen</h2></div>
-            <p class="cap">Leads y XQLs por canal de la primera conversión.</p>
-            <div class="legend"><span><i style="background:var(--blue)"></i>Leads</span><span><i style="background:var(--green)"></i>XQLs</span></div>
-            <div id="hb-canales"></div>
+            <div class="ch"><h2>Sesiones por canal</h2></div>
+            <p class="cap">Canales con al menos 100 sesiones.</p>
+            <div id="hb-chan"></div>
           </article>
           <article class="card s7">
-            <div class="ch"><h2>Clasificación de canales</h2></div>
-            <p class="cap">ROI = (pipeline abierto − inversión) / inversión. Los canales sin coste directo no tienen ROI.</p>
-            <div class="tw" id="t-canales"></div>
+            <div class="ch"><h2>Tráfico y conversiones por canal</h2></div>
+            <p class="cap">La tasa sale en verde si el canal convierte por encima de la media del sitio, y en rojo si queda por debajo.</p>
+            <div class="tw" id="t-chan"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Volumen frente a calidad</h2></div>
-            <p class="cap">Arriba a la derecha, reforzar; abajo a la derecha, mejorar la oferta; abajo a la izquierda, revisar. El tamaño es el pipeline abierto.</p>
-            <div class="chart" id="ch-quad"></div>
+            <div class="ch"><h2>Fuente / medio</h2></div>
+            <p class="cap">Las 20 combinaciones con más sesiones.</p>
+            <div class="tw" id="t-sm"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Coste por Lead, XQL y Deal</h2></div>
-            <p class="cap">Solo canales con inversión, de menor a mayor coste por XQL. Cada medida con su propia escala.</p>
-            <div class="legend"><span><i style="background:var(--blue)"></i>Por Lead</span><span><i style="background:var(--green)"></i>Por XQL</span><span><i style="background:#8B5CF6"></i>Por Deal</span></div>
-            <div id="hb-coste"></div>
+            <div class="ch"><h2>Campañas</h2></div>
+            <p class="cap">Marcadas en rojo las que tienen más de 1000 sesiones y convierten por debajo de la mitad de la media del sitio.</p>
+            <div class="tw" id="t-camp"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- AUDIENCIA -->
+      <section class="view" id="v-audiencia" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-audiencia"></div>
+          <article class="card s7">
+            <div class="ch"><h2>Rendimiento por dispositivo</h2></div>
+            <p class="cap">Ordenador y móvil traen un volumen parecido; la diferencia está en cuánto convierte cada uno.</p>
+            <div class="tw" id="t-dev"></div>
+          </article>
+          <article class="card s5">
+            <div class="ch"><h2>Nuevos frente a recurrentes</h2></div>
+            <p class="cap">Quien vuelve convierte mucho más que quien llega por primera vez.</p>
+            <div class="tw" id="t-nr"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Deals abiertos más grandes</h2></div>
-            <p class="cap">Ordenados por importe, con el canal de origen y la ruta que siguió el lead hasta convertir.</p>
-            <div class="tw" id="t-deals"></div>
-          </article>
-          <article class="card s12">
-            <div class="ch"><h2>Flujo de canal a resultado</h2></div>
-            <p class="cap">Canal, página de entrada, formulario y resultado. El grosor de cada banda es el número de leads.</p>
-            <div class="tw"><div class="chart" id="ch-flow"></div></div>
-          </article>
-          <article class="card s12">
-            <div class="ch"><h2>Páginas vistas antes de convertir, por canal</h2></div>
-            <p class="cap">Porcentaje de los leads de cada canal que vio la página antes de su primera conversión.</p>
-            <div class="tw" id="t-matrix"></div>
-          </article>
-          <article class="card s6">
-            <div class="ch"><h2>Embudo comparado por región</h2></div>
-            <p class="cap">Las cuatro regiones a la vez, sea cual sea la región elegida.</p>
-            <div class="legend"><span><i style="background:var(--blue)"></i>Lead → XQL</span><span><i style="background:var(--green)"></i>XQL → Deal</span><span><i style="background:#8B5CF6"></i>Lead → Deal</span></div>
-            <div id="hb-regiones"></div>
-          </article>
-          <article class="card s6">
-            <div class="ch"><h2>Tiempo entre etapas</h2></div>
-            <p class="cap">Días medianos de Lead a XQL y de XQL a Deal, del canal más rápido al más lento.</p>
-            <div class="legend"><span><i style="background:var(--blue)"></i>Lead → XQL</span><span><i style="background:var(--green)"></i>XQL → Deal</span></div>
-            <div id="hb-tiempo"></div>
+            <div class="ch"><h2>Países</h2></div>
+            <p class="cap">Los 15 países con más usuarios. Barra azul: usuarios. Barra verde: conversiones.</p>
+            <div class="legend"><span><i style="background:var(--blue)"></i>Usuarios</span><span><i style="background:var(--green)"></i>Conversiones</span></div>
+            <div id="hb-country"></div>
           </article>
         </div>
       </section>
@@ -332,83 +371,75 @@ td.pos{color:var(--green);font-weight:500}td.neg{color:var(--red);font-weight:50
       <section class="view" id="v-paginas" hidden>
         <div class="grid">
           <div class="concl" id="cc-paginas"></div>
+          <article class="card s12">
+            <div class="ch"><h2>Páginas de entrada: tráfico frente a conversión</h2></div>
+            <p class="cap">Abajo a la derecha están las páginas con mucho tráfico que apenas convierten: ahí está la mayor oportunidad. La línea marca la tasa media del sitio. El tamaño son las conversiones.</p>
+            <div class="chart" id="ch-land"></div>
+          </article>
+          <article class="card s7">
+            <div class="ch"><h2>Rendimiento de las páginas de entrada</h2></div>
+            <p class="cap">Las 25 páginas por las que más se entra.</p>
+            <div class="tw" id="t-land"></div>
+          </article>
+          <article class="card s5">
+            <div class="ch"><h2>Dónde se hace clic</h2></div>
+            <p class="cap">Evento «Clic en enlace» por página de origen.</p>
+            <div id="hb-clicks"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Páginas más vistas</h2></div>
+            <p class="cap">Tiempo medio: tiempo de interacción total dividido entre usuarios activos.</p>
+            <div class="tw" id="t-pages"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONVERSIONES -->
+      <section class="view" id="v-conversiones" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-conversiones"></div>
+          <article class="card s5">
+            <div class="ch"><h2>Conversiones por tipo</h2></div>
+            <p class="cap">Con su cambio frente al mismo periodo de 2025.</p>
+            <div id="hb-ev"></div>
+          </article>
+          <article class="card s7">
+            <div class="ch"><h2>Conversiones por mes y tipo</h2></div>
+            <p class="cap">Noviembre aún no está completo.</p>
+            <div class="legend" id="lg-ev"></div>
+            <div class="chart" id="ch-evm"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Páginas de entrada que más convierten</h2></div>
+            <p class="cap">Ordenadas por conversiones, entre las 25 páginas de entrada con conversiones y más sesiones.</p>
+            <div class="tw" id="t-convland"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- IA -->
+      <section class="view" id="v-ia" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-ia"></div>
           <article class="card lav s12">
-            <div class="ch"><h2>Ruta habitual hasta la conversión</h2><div class="more"><button class="btn p" id="replay"><svg viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></svg>Reproducir ruta</button></div></div>
-            <p class="cap">La secuencia de páginas más frecuente entre los leads que convierten. Cada parada indica qué porcentaje llega hasta ahí; la X marca la conversión.</p>
-            <div class="chart" id="ch-route"></div>
-          </article>
-          <article class="card s12">
-            <div class="ch"><h2>Posición de cada página en la cadena</h2></div>
-            <p class="cap">En qué momento se consulta cada página. Debajo del nombre, su posición más frecuente.</p>
-            <div class="legend" id="lg-pos"></div>
-            <div id="st-pos"></div>
-          </article>
-          <article class="card s7">
-            <div class="ch"><h2>Páginas que más convierten</h2></div>
-            <p class="cap">Activación: porcentaje de vistas de la página seguidas de un formulario enviado.</p>
-            <div class="tw" id="t-paginas"></div>
-          </article>
-          <article class="card s5">
-            <div class="ch"><h2>Formularios</h2></div>
-            <p class="cap">Leads y paso a XQL de cada formulario.</p>
-            <div class="tw" id="t-forms"></div>
-          </article>
-          <article class="card s12">
-            <div class="ch"><h2>CTAs</h2></div>
-            <p class="cap">Clics, leads y XQLs de cada llamada a la acción.</p>
-            <div class="tw" id="t-ctas"></div>
-          </article>
-        </div>
-      </section>
-
-      <!-- LEADS EXISTENTES -->
-      <section class="view" id="v-leads" hidden>
-        <div class="grid">
-          <div class="concl" id="cc-leads"></div>
-          <article class="card s6">
-            <div class="ch"><h2>Páginas en el recorrido hasta el Deal</h2></div>
-            <p class="cap">Porcentaje de leads que consultó cada página entre su primer formulario y el Deal, frente a los que no llegaron a Deal.</p>
-            <div class="legend"><span><i style="background:var(--green)"></i>Con Deal</span><span><i style="background:#C9CAD3"></i>Sin Deal</span></div>
-            <div id="hb-recorrido"></div>
+            <div class="ch"><h2>Asistentes de IA frente a toda la web</h2></div>
+            <p class="cap">Canal «AI Assistant» de GA4. En esta propiedad aparece desde junio de 2026.</p>
+            <div class="tw" id="t-aivs"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Empresas más calientes</h2></div>
-            <p class="cap">Puntuación de 0 a 100 según la intención reciente. La variación es frente a la semana anterior.</p>
-            <div class="tw" id="t-calor"></div>
+            <div class="ch"><h2>Sesiones desde IA por mes</h2></div>
+            <p class="cap">Desde que el canal aparece en Google Analytics. Noviembre aún no está completo.</p>
+            <div class="chart" id="ch-aim"></div>
           </article>
-        </div>
-      </section>
-
-      <!-- NURTURING -->
-      <section class="view" id="v-nurturing" hidden>
-        <div class="grid">
-          <div class="concl" id="cc-nurturing"></div>
-          <article class="card s5">
-            <div class="ch"><h2>Embudo de los emails</h2></div>
-            <p class="cap">De email entregado a avance a XQL o Deal. La apertura es orientativa.</p>
-            <div id="hb-embudo"></div>
-          </article>
-          <article class="card s7">
-            <div class="ch"><h2>Rendimiento por email</h2></div>
-            <p class="cap">Ordenados por flujo y posición en el flujo. El clic es la métrica principal.</p>
-            <div class="tw" id="t-emails"></div>
-          </article>
-        </div>
-      </section>
-
-      <!-- SEO -->
-      <section class="view" id="v-seo" hidden>
-        <div class="grid">
-          <div class="concl" id="cc-seo"></div>
-          <article class="card s12">
-            <div class="ch"><h2>Oportunidades SEO</h2></div>
-            <p class="cap">Posición media en Google (a la izquierda, mejor) frente a impresiones. El tamaño son los XQLs. La línea marca el final de la primera página de resultados.</p>
-            <div class="chart" id="ch-seo"></div>
+          <article class="card s6">
+            <div class="ch"><h2>Asistentes que envían tráfico</h2></div>
+            <p class="cap">Sesiones, duración media y conversiones.</p>
+            <div class="tw" id="t-ais"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Tráfico, conversión y visibilidad por página</h2></div>
-            <p class="cap">Sesiones de Google Analytics e impresiones de Search Console.</p>
-            <div class="tw" id="t-seo"></div>
+            <div class="ch"><h2>Dónde aterrizan los usuarios de IA</h2></div>
+            <p class="cap">Una duración casi nula indica que la página no responde a lo que el asistente prometió.</p>
+            <div class="tw" id="t-ail"></div>
           </article>
         </div>
       </section>
@@ -419,39 +450,46 @@ td.pos{color:var(--green);font-weight:500}td.neg{color:var(--red);font-weight:50
 
 <script>
 (() => {
-const FILES = ['kpis','canales','canal_paginas','paginas','formularios','ctas','recorrido','calor','emails','embudo_emails','seo','deals','posiciones','ruta','semanal','flujos'];
-const REGIONS = ['Todas','Europa','USA','Brasil','LATAM'];
-const TABS = [
+const FILES = ['meta','kpis','channels','landing','monthly','weekly','convEvents','convMonthly','convLanding','sourceMedium','campaigns','devices','newret','countries','pages','clicks','llmSources','llmLanding','llmMonthly'];
+const VIEWS_DEF = [
   ['resumen','Resumen','<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'],
-  ['origen','Origen de leads','<path d="M4 18 10 12l4 4 6-8"/>'],
+  ['evolucion','Evolución','<path d="M4 18 9 12l4 3 7-9"/>'],
+  ['adquisicion','Adquisición','<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/>'],
+  ['audiencia','Audiencia','<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14c2 .7 3 2.6 3 6"/>'],
   ['paginas','Páginas','<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>'],
-  ['leads','Leads existentes','<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14c2 .7 3 2.6 3 6"/>'],
-  ['nurturing','Nurturing','<rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/>'],
-  ['seo','Web y SEO','<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>']
+  ['conversiones','Conversiones','<path d="M5 12l4 4 10-10"/>'],
+  ['ia','Asistentes de IA','<path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/>']
 ];
-const C = {blue:'#3667F0', green:'#2F9E57', violet:'#8B5CF6', amber:'#C4861A', red:'#D6453D', grey:'#C9CAD3'};
-const CHANNEL = {'Orgánico':'#2F9E57','Directo':'#64748B','Referido':'#C4861A','AI Referrals':'#8B5CF6','Redes sociales':'#E5566B','Email':'#14A3B8','De pago':'#3667F0'};
-const chColor = (c) => CHANNEL[c] || '#94A3B8';
+const C = {blue:'#3667F0', blueL:'#C9D6FB', green:'#2F9E57', violet:'#8B5CF6', amber:'#C4861A', red:'#D6453D', grey:'#A0A0AB'};
+const EV_COLORS = {'Descarga':'#3667F0','Contacto - Formulario Web':'#2F9E57','Contacto - Cita Calendario':'#8B5CF6','Contacto - Formulario Footer':'#C4861A'};
+const EV_ES = {'Descarga':'Descarga','Contacto - Formulario Web':'Formulario web','Contacto - Cita Calendario':'Cita de calendario','Contacto - Formulario Footer':'Formulario del pie'};
+const evn = (n) => EV_ES[n] || n;
+const CH_ES = {'Organic Search':'Búsqueda orgánica','Direct':'Directo','Cross-network':'Multired','Paid Search':'Búsqueda de pago','Referral':'Referido','Unassigned':'Sin asignar','Organic Social':'Social orgánico','Email':'Email','AI Assistant':'Asistentes de IA','Paid Social':'Social de pago','Organic Shopping':'Shopping orgánico','Paid Other':'Otros de pago','Organic Video':'Vídeo orgánico','Paid Video':'Vídeo de pago','Display':'Display'};
+const DEV_ES = {desktop:'Ordenador', mobile:'Móvil', tablet:'Tableta', 'smart tv':'Smart TV'};
+const NR_ES = {'new':'Nuevos', returning:'Recurrentes', '(not set)':'Sin definir'};
+const CO_ES = {'Mexico':'México','Brazil':'Brasil','Spain':'España','United States':'Estados Unidos','Colombia':'Colombia','Italy':'Italia','Peru':'Perú','China':'China','Chile':'Chile','India':'India','Argentina':'Argentina','United Kingdom':'Reino Unido','Germany':'Alemania','Netherlands':'Países Bajos','France':'Francia'};
+const MONTHS = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 
 const D = {};
-let REGION = 'Todas', TAB = 'resumen', METRIC = 'leads', lastRouteKey = null;
+let TAB = 'resumen', MMETRIC = 'sessions';
 
-// Formatos
 const nf0 = new Intl.NumberFormat('es-ES',{maximumFractionDigits:0});
 const nf1 = new Intl.NumberFormat('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1});
-const eur0 = new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
-const has = (v) => v !== undefined && v !== null && v !== '';
+const nf2 = new Intl.NumberFormat('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+const has = (v) => v !== undefined && v !== null && v !== '' && v !== 'null';
 const fInt = (v) => has(v) ? nf0.format(+v) : '—';
-const fPct = (v) => has(v) ? nf1.format(+v) + ' %' : '—';
-const fEur = (v) => has(v) ? eur0.format(+v) : '—';
-const fEurK = (v) => { if (!has(v)) return '—'; v = +v; return Math.abs(v) >= 1e6 ? nf1.format(v/1e6).replace(',0','') + ' M€' : Math.abs(v) >= 1e4 ? nf0.format(v/1e3) + ' k€' : eur0.format(v); };
-const fSigned = (v) => has(v) ? (+v > 0 ? '+' : '') + nf1.format(+v) + ' %' : '—';
+const fRate = (v) => has(v) ? nf2.format(+v * 100) + ' %' : '—';
+const fRate1 = (v) => has(v) ? nf1.format(+v * 100) + ' %' : '—';
+const fPct1 = (v) => has(v) ? nf1.format(+v) + ' %' : '—';
+const fDur = (s) => { if (!has(s)) return '—'; s = Math.round(+s); const m = Math.floor(s / 60); return m ? m + ' min ' + (s % 60) + ' s' : s + ' s'; };
+const fSigned = (v) => has(v) ? (+v > 0 ? '+' : '') + nf1.format(+v) + ' %' : 'nuevo';
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $ = (id) => document.getElementById(id);
-const R = (name) => (D[name] || []).filter((r) => r.region === REGION);
-const kpi = () => (D.kpis || []).find((r) => r.region === REGION) || {};
+const chg = (v, inverse) => { if (!has(v)) return '<span class="chg na">nuevo</span>'; const good = inverse ? +v < 0 : +v > 0; return '<span class="chg ' + (Math.abs(+v) < 0.05 ? 'na' : good ? 'up' : 'down') + '">' + (+v > 0 ? '↑ ' : '↓ ') + nf1.format(Math.abs(+v)) + ' %</span>'; };
+const path = (p) => p === '(not set)' ? '(sin definir)' : p;
 const maxBy = (rs, f) => rs.reduce((a, b) => (a == null || +b[f] > +a[f] ? b : a), null);
-const minBy = (rs, f) => rs.reduce((a, b) => (a == null || +b[f] < +a[f] ? b : a), null);
+const K = () => (D.kpis && D.kpis[0]) || {};
+const siteRate = () => +K().sessionConversionRate || 0;
 
 // Tooltip
 const tip = $('tip');
@@ -471,413 +509,384 @@ function hover(node, title, lines) {
   node.addEventListener('pointerleave', hideTip);
 }
 
-// Piezas comunes
 function ring(el, pct, color, size = 104) {
   const r = size / 2 - 7, c = 2 * Math.PI * r, p = Math.max(0, Math.min(100, +pct || 0));
   el.style.width = el.style.height = size + 'px';
-  el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' +
-    '<circle cx="' + size/2 + '" cy="' + size/2 + '" r="' + r + '" fill="none" stroke="#EDEDF2" stroke-width="7"/>' +
-    '<circle cx="' + size/2 + '" cy="' + size/2 + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="7" stroke-linecap="round" ' +
-    'stroke-dasharray="' + (c * p / 100) + ' ' + c + '" transform="rotate(-90 ' + size/2 + ' ' + size/2 + ')"/></svg>' +
+  el.innerHTML = '<svg width="' + size + '" height="' + size + '"><circle cx="' + size/2 + '" cy="' + size/2 + '" r="' + r + '" fill="none" stroke="#EDEDF2" stroke-width="7"/>' +
+    '<circle cx="' + size/2 + '" cy="' + size/2 + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="7" stroke-linecap="round" stroke-dasharray="' + (c * p / 100) + ' ' + c + '" transform="rotate(-90 ' + size/2 + ' ' + size/2 + ')"/></svg>' +
     '<b style="color:' + color + '">' + nf0.format(p) + '<small>%</small></b>';
 }
-function statusColor(v, good, ok) { return +v >= good ? C.green : +v >= ok ? C.amber : C.red; }
 
 function hbars(el, rows, label, series, opts = {}) {
   el.innerHTML = '';
-  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
-  const maxOf = (s) => opts.perSeries ? (d3.max(rows, (r) => +r[s.f]) || 1) : (opts.max || d3.max(rows, (r) => d3.max(series, (q) => +r[q.f] || 0)) || 1);
+  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos.</p>'; return; }
+  const maxOf = (s) => opts.perSeries ? (d3.max(rows, (r) => +r[s.f]) || 1) : (d3.max(rows, (r) => d3.max(series, (q) => +r[q.f] || 0)) || 1);
   rows.forEach((r) => {
     const row = document.createElement('div'); row.className = 'hb';
-    const sub = opts.sub ? '<small>' + esc(opts.sub(r)) + '</small>' : '';
-    row.innerHTML = '<div class="lab">' + esc(r[label]) + sub + '</div><div class="bars">' + series.map((s) => {
+    const name = opts.name ? opts.name(r) : r[label];
+    const sub = opts.sub ? '<small>' + opts.sub(r) + '</small>' : '';
+    row.innerHTML = '<div class="lab"' + (opts.mono ? ' style="font-family:var(--mono);font-size:12px"' : '') + '>' + esc(name) + sub + '</div><div class="bars">' + series.map((s) => {
       const v = r[s.f], w = has(v) ? Math.max(0, +v) / maxOf(s) : 0;
       return '<div class="bl"><i style="width:calc((100% - 80px) * ' + w.toFixed(4) + ');background:' + (s.color || C.blue) + '"></i><em>' + (has(v) ? s.fmt(v) : '—') + '</em></div>';
     }).join('') + '</div>';
-    hover(row, r[label], series.map((s) => s.label + ': ' + (has(r[s.f]) ? s.fmt(r[s.f]) : '—')));
+    hover(row, name, series.map((s) => s.label + ': ' + (has(r[s.f]) ? s.fmt(r[s.f]) : '—')).concat(opts.extra ? opts.extra(r) : []));
     el.append(row);
   });
 }
 
-function table(el, cols, rows) {
-  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
+function table(el, cols, rows, rowCls) {
+  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos.</p>'; return; }
   el.innerHTML = '<table><thead><tr>' + cols.map((c) => '<th class="' + (c.n ? 'n' : '') + '">' + esc(c.h) + '</th>').join('') + '</tr></thead><tbody>' +
-    rows.map((r) => '<tr>' + cols.map((c) => {
-      const cls = [c.n ? 'n' : '', c.cls ? c.cls(r) : ''].join(' ').trim();
+    rows.map((r) => '<tr class="' + (rowCls ? rowCls(r) : '') + '">' + cols.map((c) => {
+      const cls = [c.n ? 'n' : '', c.cls ? (typeof c.cls === 'function' ? c.cls(r) : c.cls) : ''].join(' ').trim();
       const v = c.html ? c.html(r) : esc(c.fmt ? c.fmt(r[c.f]) : (has(r[c.f]) ? r[c.f] : '—'));
       return '<td class="' + cls + '">' + v + '</td>';
     }).join('') + '</tr>').join('') + '</tbody></table>';
 }
 
 function concl(id, main, action) {
-  $(id).innerHTML = '<div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></div><div><p>' + main + '</p><p>' + esc(action) + '</p></div>';
+  $(id).innerHTML = '<div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></div><div><p>' + main + '</p>' + (action ? '<p>' + esc(action) + '</p>' : '') + '</div>';
 }
 
 function svgBox(el, h) {
   el.innerHTML = '';
-  const W = Math.max(280, el.clientWidth || el.parentElement.clientWidth || 600);
+  const W = Math.max(280, el.clientWidth || 600);
   const svg = d3.select(el).append('svg').attr('width', W).attr('height', h).attr('viewBox', '0 0 ' + W + ' ' + h);
   return [svg, W];
 }
-function yAxis(svg, y, ticks, x0, x1, fmt) {
+function grid(svg, y, ticks, x0, x1, fmt, side) {
   svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x0).attr('x2', x1).attr('y1', y).attr('y2', y).attr('stroke', '#EFEFF3');
-  svg.append('g').selectAll('text').data(ticks).join('text').attr('x', x0 - 8).attr('y', (d) => y(d)).attr('dy', '0.32em').attr('text-anchor', 'end').text(fmt);
+  svg.append('g').selectAll('text').data(ticks).join('text').attr('x', side === 'r' ? x1 + 8 : x0 - 8).attr('y', (d) => y(d)).attr('dy', '0.32em').attr('text-anchor', side === 'r' ? 'start' : 'end').text(fmt);
+}
+function xLabels(svg, labels, x, H, W, ml, fmt) {
+  const every = Math.max(1, Math.ceil(labels.length / Math.max(2, Math.floor((W - ml) / 58))));
+  svg.append('g').selectAll('text').data(labels.filter((l, i) => (labels.length - 1 - i) % every === 0)).join('text')
+    .attr('x', (l) => x(l) + (x.bandwidth ? x.bandwidth() / 2 : 0)).attr('y', H - 6).attr('text-anchor', 'middle').text(fmt || ((l) => l));
 }
 
-// ---------- Resumen ----------
-function weeklyTotals() {
-  const by = d3.rollup(R('semanal'), (v) => ({leads: d3.sum(v, (d) => +d.leads), xqls: d3.sum(v, (d) => +d.xqls)}), (d) => d.semana);
-  return [...by].map(([w, v]) => ({semana: w, ...v})).sort((a, b) => a.semana < b.semana ? -1 : 1);
-}
+// Semanas ISO -> lunes
+function isoMonday(key) { const [y, w] = key.split('-').map(Number); const j4 = new Date(Date.UTC(y, 0, 4)); const d = (j4.getUTCDay() + 6) % 7; return new Date(Date.UTC(y, 0, 4 - d + (w - 1) * 7)); }
+const fDay = (d) => d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()];
 
-function vResumen() {
-  const k = kpi(), can = R('canales');
-  const up = +k.var_leads_pct >= 0;
-  ring($('r-health'), +k.pct_xql, statusColor(k.pct_xql, 20, 12));
-  $('h-title').textContent = (up ? 'Más leads que el trimestre anterior' : 'Menos leads que el trimestre anterior') +
-    (+k.pct_xql >= 20 ? ', y uno de cada cinco pasa a XQL.' : ', con un paso a XQL que conviene vigilar.');
-  const neg = can.filter((r) => has(r.roi_pct) && +r.roi_pct < 0).length;
-  $('h-chips').innerHTML = '<span class="chip ' + (up ? 'g' : 'r') + '">' + (up ? '↗ ' : '↘ ') + fSigned(k.var_leads_pct) + ' / 90 d</span>' +
-    (neg ? '<span class="chip r">' + neg + (neg === 1 ? ' canal con ROI negativo' : ' canales con ROI negativo') + '</span>' : '<span class="chip g">Todos los canales con ROI positivo</span>') +
-    '<span class="chip">' + esc(REGION === 'Todas' ? 'Todas las regiones' : REGION) + '</span>';
-  const steps = [
-    {l: 'Leads', v: fInt(k.leads), w: 1, s: 'Entran por formulario'},
-    {l: 'XQLs', v: fInt(k.xqls), w: +k.xqls / +k.leads, s: fPct(k.pct_xql) + ' de los leads'},
-    {l: 'Deals', v: fInt(k.deals), w: +k.deals / +k.leads, s: fPct(k.pct_deal) + ' de los XQLs'}
-  ];
-  $('h-steps').innerHTML = steps.map((s) => '<div class="step"><div class="row1"><span class="l">' + s.l + '</span><span class="v">' + s.v + '</span></div><div class="bar"><i style="width:' + (100 * s.w).toFixed(1) + '%"></i></div><div class="s">' + esc(s.s) + '</div></div>').join('');
-
-  const paid = can.filter((r) => has(r.gasto_eur));
-  const cpx = d3.sum(paid, (r) => +r.gasto_eur) / (d3.sum(paid, (r) => +r.xqls) || 1);
-  const rows = [
-    {c: C.blue, l: 'Inversión', d: 'Gasto en canales con coste', v: fEurK(k.gasto_eur)},
-    {c: C.green, l: 'Pipeline', d: 'Valor de los Deals abiertos', v: fEurK(k.pipeline_eur)},
-    {c: +k.roi_pct >= 0 ? C.green : C.red, l: 'ROI', d: 'Pipeline frente a inversión', v: fPct(k.roi_pct)},
-    {c: C.amber, l: 'Coste / XQL', d: 'En canales con inversión', v: fEur(cpx)}
-  ];
-  $('money').innerHTML = rows.map((r) => '<div class="mrow"><i style="background:' + r.c + '"></i><div><b>' + r.l + '</b><span>' + r.d + '</span></div><code>' + r.v + '</code></div>').join('');
-
-  $('d-big').textContent = fInt(k.deals_abiertos);
-  $('d-sub').textContent = fEurK(k.pipeline_eur) + ' en pipeline abierto';
-  const wk = weeklyTotals(), mx = d3.max(wk, (w) => w.xqls) || 1;
-  const sp = $('d-spark'); sp.innerHTML = '';
-  wk.forEach((w) => { const i = document.createElement('i'); i.style.height = (100 * w.xqls / mx) + '%'; i.style.opacity = 0.45 + 0.55 * w.xqls / mx; hover(i, 'Semana del ' + d3.timeFormat('%d/%m')(new Date(w.semana)), [fInt(w.xqls) + ' XQLs', fInt(w.leads) + ' leads']); sp.append(i); });
-  const top = maxBy(R('deals'), 'importe_eur');
-  $('d-foot').innerHTML = top ? 'Mayor: <b>' + esc(top.deal) + '</b>, ' + fEurK(top.importe_eur) : '';
-
-  const best = maxBy(can, 'pct_xql');
-  ring($('r-canal'), best ? +best.pct_xql : 0, C.green, 96);
-  $('c-neg').className = 'stat ' + (neg ? 'r' : 'n'); $('c-neg').innerHTML = '<b>' + neg + '</b><span>ROI negativo</span>';
-  $('c-paid').className = 'stat a'; $('c-paid').innerHTML = '<b>' + paid.length + '</b><span>con inversión</span>';
-  const worst = minBy(paid.filter((r) => has(r.roi_pct)), 'roi_pct');
-  $('c-foot').innerHTML = best ? 'Mejor paso a XQL: <b>' + esc(best.canal) + '</b>' + (worst && +worst.roi_pct < 0 ? '. Revisar <b>' + esc(worst.canal) + '</b> (' + fPct(worst.roi_pct) + ')' : '') : '';
-
-  const pg = maxBy(R('paginas'), 'xqls');
-  ring($('r-page'), pg ? +pg.pct_xql : 0, '#7556E0', 96);
-  $('p-xql').className = 'stat g'; $('p-xql').innerHTML = '<b>' + (pg ? fInt(pg.xqls) : '—') + '</b><span>XQLs</span>';
-  $('p-act').className = 'stat a'; $('p-act').innerHTML = '<b>' + (pg ? nf1.format(+pg.pct_activacion) : '—') + '</b><span>% activación</span>';
-  const rt = R('ruta').sort((a, b) => +a.paso - +b.paso);
-  $('p-foot').innerHTML = pg ? '<b>' + esc(pg.pagina) + '</b>. Ruta habitual: ' + esc(rt.length ? rt[0].pagina + ' → ' + rt[rt.length - 1].pagina + ' en ' + rt.length + ' pasos' : '—') : '';
-
-  weekChart($('ch-week'), wk.map((w) => w.semana), [{name: 'Leads', color: C.blue, vals: wk.map((w) => w.leads), area: true}, {name: 'XQLs', color: C.green, vals: wk.map((w) => w.xqls)}], 220);
-}
-
-function weekChart(el, weeks, series, H) {
+// Gráfico de dos ejes: sesiones (área, izquierda) y conversiones (línea, derecha)
+function dualChart(el, labels, left, right, H, lfmt, axfmt) {
   const [svg, W] = svgBox(el, H);
-  if (!weeks.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
-  const max = d3.max(series, (s) => d3.max(s.vals)) || 1;
-  const y = d3.scaleLinear().domain([0, max]).nice().range([H - 26, 10]);
-  const ticks = y.ticks(4);
-  const ml = 34, mr = 10;
-  const x = d3.scalePoint().domain(weeks).range([ml, W - mr]);
-  yAxis(svg, y, ticks, ml, W - mr, (d) => nf0.format(d));
-  const every = Math.max(1, Math.ceil(weeks.length / Math.floor((W - ml) / 64)));
-  svg.append('g').selectAll('text').data(weeks.filter((w, i) => (weeks.length - 1 - i) % every === 0)).join('text')
-    .attr('x', (w) => x(w)).attr('y', H - 6).attr('text-anchor', 'middle').text((w) => d3.timeFormat('%d %b')(new Date(w)).replace('.', ''));
-  series.forEach((s) => {
-    const pts = weeks.map((w, i) => [x(w), y(s.vals[i] || 0)]);
-    if (s.area) svg.append('path').attr('d', d3.area().x((p) => p[0]).y0(H - 26).y1((p) => p[1]).curve(d3.curveMonotoneX)(pts)).attr('fill', s.color).attr('opacity', 0.07);
-    svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pts)).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2.2).attr('stroke-linejoin', 'round');
-  });
-  const rule = svg.append('line').attr('y1', 10).attr('y2', H - 26).attr('stroke', '#C9CAD3').attr('stroke-dasharray', '3 3').style('opacity', 0);
-  const dots = svg.append('g').selectAll('circle').data(series).join('circle').attr('r', 4).attr('fill', '#fff').attr('stroke', (s) => s.color).attr('stroke-width', 2).style('opacity', 0);
-  const step = weeks.length > 1 ? (W - ml - mr) / (weeks.length - 1) : 1;
-  svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H - 20).attr('fill', 'transparent')
+  const ml = 46, mr = 36, mt = 10, mb = 26;
+  const x = d3.scalePoint().domain(labels).range([ml, W - mr]);
+  const yl = d3.scaleLinear().domain([0, d3.max(left.vals) || 1]).nice().range([H - mb, mt]);
+  const yr = d3.scaleLinear().domain([0, d3.max(right.vals) || 1]).nice().range([H - mb, mt]);
+  grid(svg, yl, yl.ticks(4), ml, W - mr, (d) => d >= 1000 ? nf0.format(d / 1000) + ' k' : nf0.format(d));
+  svg.append('g').selectAll('text').data(yr.ticks(4)).join('text').attr('x', W - mr + 8).attr('y', (d) => yr(d)).attr('dy', '0.32em').style('fill', C.green).text((d) => nf0.format(d));
+  xLabels(svg, labels, x, H, W, ml, axfmt || lfmt);
+  const pl = labels.map((l, i) => [x(l), yl(left.vals[i])]), pr = labels.map((l, i) => [x(l), yr(right.vals[i])]);
+  svg.append('path').attr('d', d3.area().x((p) => p[0]).y0(H - mb).y1((p) => p[1]).curve(d3.curveMonotoneX)(pl)).attr('fill', left.color).attr('opacity', 0.08);
+  svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pl)).attr('fill', 'none').attr('stroke', left.color).attr('stroke-width', 2.2);
+  svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pr)).attr('fill', 'none').attr('stroke', right.color).attr('stroke-width', 2.2);
+  const rule = svg.append('line').attr('y1', mt).attr('y2', H - mb).attr('stroke', '#C9CAD3').attr('stroke-dasharray', '3 3').style('opacity', 0);
+  const step = labels.length > 1 ? (W - ml - mr) / (labels.length - 1) : 1;
+  svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H - mb).attr('fill', 'transparent')
     .on('pointermove pointerdown', (ev) => {
-      const i = Math.max(0, Math.min(weeks.length - 1, Math.round((d3.pointer(ev)[0] - ml) / step)));
-      rule.attr('x1', x(weeks[i])).attr('x2', x(weeks[i])).style('opacity', 1);
-      dots.attr('cx', x(weeks[i])).attr('cy', (s) => y(s.vals[i] || 0)).style('opacity', 1);
-      const lines = series.map((s) => [s.name, s.vals[i] || 0]).sort((a, b) => b[1] - a[1]).map((p) => p[0] + ': ' + nf0.format(p[1]));
-      showTip(ev, 'Semana del ' + d3.timeFormat('%d/%m')(new Date(weeks[i])), lines);
-    })
-    .on('pointerleave', () => { hideTip(); rule.style('opacity', 0); dots.style('opacity', 0); });
+      const i = Math.max(0, Math.min(labels.length - 1, Math.round((d3.pointer(ev)[0] - ml) / step)));
+      rule.attr('x1', x(labels[i])).attr('x2', x(labels[i])).style('opacity', 1);
+      showTip(ev, (lfmt ? lfmt(labels[i]) : labels[i]), [left.name + ': ' + nf0.format(left.vals[i]), right.name + ': ' + nf0.format(right.vals[i])]);
+    }).on('pointerleave', () => { hideTip(); rule.style('opacity', 0); });
 }
 
-// ---------- Origen ----------
-function vOrigen() {
-  const can = R('canales').sort((a, b) => +b.xqls - +a.xqls);
-  const vol = maxBy(can, 'leads'), best = maxBy(can, 'pct_xql'), roi = maxBy(can.filter((r) => has(r.roi_pct)), 'roi_pct');
-  const worst = minBy(can.filter((r) => has(r.roi_pct)), 'roi_pct');
-  concl('cc-origen',
-    vol ? 'Más volumen: <b>' + esc(vol.canal) + '</b> (' + fInt(vol.leads) + ' leads). Mejor calidad: <b>' + esc(best.canal) + '</b> (' + fPct(best.pct_xql) + ' a XQL). Mejor ROI: <b>' + esc(roi ? roi.canal : '—') + '</b>' + (roi ? ' (' + fPct(roi.roi_pct) + ')' : '') + '.' : 'Sin datos para esta región.',
-    worst && +worst.roi_pct < 0 ? 'Acción sugerida: reforzar ' + best.canal + ' y revisar la inversión en ' + worst.canal + ', que no recupera lo gastado.' : 'Acción sugerida: reforzar ' + (best ? best.canal : 'el mejor canal') + ' y revisar la oferta de los canales con mucho volumen y poca calidad.');
+function lineChart(el, labels, series, H, yfmt, tipTitle) {
+  const [svg, W] = svgBox(el, H);
+  const ml = 50, mr = 12, mt = 10, mb = 26;
+  const x = d3.scalePoint().domain(labels).range([ml, W - mr]);
+  const y = d3.scaleLinear().domain([0, d3.max(series, (s) => d3.max(s.vals.filter(has))) || 1]).nice().range([H - mb, mt]);
+  grid(svg, y, y.ticks(4), ml, W - mr, yfmt);
+  xLabels(svg, labels, x, H, W, ml);
+  series.forEach((s) => {
+    const pts = labels.map((l, i) => has(s.vals[i]) ? [x(l), y(s.vals[i])] : null).filter(Boolean);
+    svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pts)).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2.2);
+    svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => p[0]).attr('cy', (p) => p[1]).attr('r', 3).attr('fill', '#fff').attr('stroke', s.color).attr('stroke-width', 1.8);
+  });
+  const step = labels.length > 1 ? (W - ml - mr) / (labels.length - 1) : 1;
+  svg.append('rect').attr('x', ml - step / 2).attr('y', 0).attr('width', W - ml - mr + step).attr('height', H - mb).attr('fill', 'transparent')
+    .on('pointermove pointerdown', (ev) => {
+      const i = Math.max(0, Math.min(labels.length - 1, Math.round((d3.pointer(ev)[0] - ml) / step)));
+      showTip(ev, tipTitle ? tipTitle(i) : labels[i], series.map((s) => s.name + ': ' + (has(s.vals[i]) ? yfmt(s.vals[i]) : '—')));
+    }).on('pointerleave', hideTip);
+}
 
-  // semanal por canal
-  const rs = R('semanal'), weeks = [...new Set(rs.map((r) => r.semana))].sort(), chans = [...new Set(rs.map((r) => r.canal))];
-  const val = new Map(rs.map((r) => [r.canal + '|' + r.semana, +r[METRIC]]));
-  $('lg-week').innerHTML = chans.map((c) => '<span><i style="background:' + chColor(c) + '"></i>' + esc(c) + '</span>').join('');
-  weekChart($('ch-week-canal'), weeks, chans.map((c) => ({name: c, color: chColor(c), vals: weeks.map((w) => val.get(c + '|' + w) || 0)})), 280);
-
-  hbars($('hb-canales'), can, 'canal', [{f: 'leads', label: 'Leads', fmt: fInt, color: C.blue}, {f: 'xqls', label: 'XQLs', fmt: fInt, color: C.green}]);
-  table($('t-canales'), [
-    {h: 'Canal', cls: () => 'nw', html: (r) => '<span style="display:inline-flex;align-items:center;gap:8px"><i style="width:8px;height:8px;border-radius:50%;background:' + chColor(r.canal) + '"></i>' + esc(r.canal) + '</span>'},
-    {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Lead → XQL', f: 'pct_xql', n: 1, fmt: fPct},
-    {h: 'Deals', f: 'deals', n: 1, fmt: fInt}, {h: 'Inversión', f: 'gasto_eur', n: 1, fmt: fEur}, {h: 'Pipeline', f: 'pipeline_eur', n: 1, fmt: fEur},
-    {h: 'ROI', f: 'roi_pct', n: 1, fmt: fPct, cls: (r) => has(r.roi_pct) ? (+r.roi_pct >= 0 ? 'pos' : 'neg') : ''}
-  ], can);
-
-  scatter($('ch-quad'), can, {x: 'leads', y: 'pct_xql', r: 'pipeline_eur', label: 'canal', color: (r) => chColor(r.canal),
-    xfmt: fInt, yfmt: (v) => nf0.format(v) + ' %', lines: (r) => ['Leads: ' + fInt(r.leads), 'Lead → XQL: ' + fPct(r.pct_xql), 'Pipeline: ' + fEur(r.pipeline_eur)],
-    refX: d3.median(can, (r) => +r.leads), refY: +kpi().pct_xql});
-
-  hbars($('hb-coste'), can.filter((r) => has(r.gasto_eur)).sort((a, b) => +a.cpxql_eur - +b.cpxql_eur), 'canal',
-    [{f: 'cpl_eur', label: 'Coste por Lead', fmt: fEur, color: C.blue}, {f: 'cpxql_eur', label: 'Coste por XQL', fmt: fEur, color: C.green}, {f: 'cpdeal_eur', label: 'Coste por Deal', fmt: fEur, color: C.violet}], {perSeries: true});
-
-  const deals = R('deals').sort((a, b) => +b.importe_eur - +a.importe_eur).slice(0, 8);
-  table($('t-deals'), [
-    {h: 'Deal', html: (r) => '<b style="font-weight:500">' + esc(r.deal) + '</b>'}, {h: 'Región', f: 'region_cuenta'},
-    {h: 'Importe', f: 'importe_eur', n: 1, fmt: fEur}, {h: 'Etapa', html: (r) => '<span class="tag" style="background:' + ({'Negociación': 'var(--green-t);color:var(--green)', 'Propuesta': 'var(--blue-t);color:var(--blue)'}[r.etapa] || 'var(--amber-t);color:var(--amber)') + '">' + esc(r.etapa) + '</span>'},
-    {h: 'Días hasta el Deal', f: 'dias_hasta_deal', n: 1, fmt: fInt},
-    {h: 'Ruta hasta convertir', html: (r) => '<div class="route">' + String(r.ruta).split(' → ').map((s) => '<span>' + esc(s) + '</span>').join('<b>→</b>') + '</div>'}
-  ], deals);
-
-  flow($('ch-flow'));
-
-  const mx = R('canal_paginas'), mch = [...new Set(mx.map((r) => r.canal))], mpg = [...new Set(mx.map((r) => r.pagina))];
-  const mv = new Map(mx.map((r) => [r.pagina + '|' + r.canal, +r.pct_leads]));
-  $('t-matrix').innerHTML = mx.length ? '<table class="mx"><thead><tr><th>Página</th>' + mch.map((c) => '<th class="n">' + esc(c) + '</th>').join('') + '</tr></thead><tbody>' +
-    mpg.map((p) => '<tr><td>' + esc(p) + '</td>' + mch.map((c) => { const v = mv.get(p + '|' + c); return '<td class="c" style="background:rgba(54,103,240,' + (has(v) ? (0.06 + v / 100 * 0.9).toFixed(3) : 0) + ');color:' + (v >= 45 ? '#fff' : 'inherit') + ';font-weight:' + (v >= 45 ? 600 : 400) + '">' + (has(v) ? nf0.format(v) + ' %' : '—') + '</td>'; }).join('') + '</tr>').join('') + '</tbody></table>' : '<p class="empty">Sin datos para esta región.</p>';
-
-  const reg = (D.kpis || []).filter((r) => r.region !== 'Todas');
-  hbars($('hb-regiones'), reg, 'region', [{f: 'pct_xql', label: 'Lead → XQL', fmt: fPct, color: C.blue}, {f: 'pct_deal', label: 'XQL → Deal', fmt: fPct, color: C.green}, {f: 'pct_lead_deal', label: 'Lead → Deal', fmt: fPct, color: C.violet}]);
-  const fd = (v) => fInt(v) + ' días';
-  hbars($('hb-tiempo'), can.slice().sort((a, b) => +a.dias_lead_xql - +b.dias_lead_xql), 'canal', [{f: 'dias_lead_xql', label: 'Lead → XQL', fmt: fd, color: C.blue}, {f: 'dias_xql_deal', label: 'XQL → Deal', fmt: fd, color: C.green}]);
+function barChart(el, labels, series, H, yfmt, stacked, tipTitle) {
+  const [svg, W] = svgBox(el, H);
+  const ml = 50, mr = 12, mt = 10, mb = 26;
+  const x = d3.scaleBand().domain(labels).range([ml, W - mr]).paddingInner(0.28).paddingOuter(0.1);
+  const tot = labels.map((l, i) => stacked ? d3.sum(series, (s) => +s.vals[i] || 0) : d3.max(series, (s) => +s.vals[i] || 0));
+  const y = d3.scaleLinear().domain([0, d3.max(tot) || 1]).nice().range([H - mb, mt]);
+  grid(svg, y, y.ticks(4), ml, W - mr, yfmt);
+  xLabels(svg, labels, x, H, W, ml);
+  const sub = stacked ? null : d3.scaleBand().domain(series.map((s) => s.name)).range([0, x.bandwidth()]).paddingInner(0.12);
+  labels.forEach((l, i) => {
+    let acc = 0;
+    const g = svg.append('g');
+    series.forEach((s) => {
+      const v = +s.vals[i] || 0;
+      if (stacked) { g.append('rect').attr('x', x(l)).attr('width', x.bandwidth()).attr('y', y(acc + v)).attr('height', y(acc) - y(acc + v)).attr('fill', s.color); acc += v; }
+      else if (has(s.vals[i])) g.append('rect').attr('x', x(l) + sub(s.name)).attr('width', sub.bandwidth()).attr('y', y(v)).attr('height', y(0) - y(v)).attr('rx', 2).attr('fill', s.color);
+    });
+    g.append('rect').attr('x', x(l)).attr('width', x.bandwidth()).attr('y', mt).attr('height', H - mb - mt).attr('fill', 'transparent')
+      .on('pointermove pointerdown', (ev) => showTip(ev, tipTitle ? tipTitle(i) : l, series.map((s) => s.name + ': ' + (has(s.vals[i]) ? yfmt(s.vals[i]) : '—'))))
+      .on('pointerleave', hideTip);
+  });
 }
 
 function scatter(el, rows, o) {
-  const H = 320, [svg, W] = svgBox(el, H);
-  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
-  const ys = rows.map((r) => +r[o.y]), xs = rows.map((r) => +r[o.x]);
-  const y = o.yLog ? d3.scaleLog().domain([d3.min(ys) * 0.6, d3.max(ys) * 1.8]).range([H - 28, 14]) : d3.scaleLinear().domain([0, d3.max(ys) * 1.2]).nice().range([H - 28, 14]);
-  let yt = y.ticks(5);
-  if (o.yLog) yt = yt.filter((v) => Math.abs(v / Math.pow(10, Math.floor(Math.log10(v) + 1e-9)) - 1) < 0.01);
-  const ml = 54, mr = 16;
-  const x = d3.scaleLinear().domain([o.x0 || 0, d3.max(xs) * 1.15]).nice().range([ml, W - mr]);
-  yAxis(svg, y, yt, ml, W - mr, o.yfmt);
+  const H = 340, [svg, W] = svgBox(el, H);
+  const ml = 54, mr = 18, mt = 14, mb = 28;
+  const x = d3.scaleLinear().domain([0, d3.max(rows, (r) => +r[o.x]) * 1.08]).nice().range([ml, W - mr]);
+  const y = d3.scaleLinear().domain([0, d3.max(rows, (r) => o.yv(r)) * 1.15]).nice().range([H - mb, mt]);
+  grid(svg, y, y.ticks(5), ml, W - mr, o.yfmt);
   svg.append('g').selectAll('text').data(x.ticks(Math.max(3, Math.floor((W - ml) / 90)))).join('text').attr('x', (d) => x(d)).attr('y', H - 6).attr('text-anchor', 'middle').text(o.xfmt);
-  if (has(o.refX)) svg.append('line').attr('x1', x(o.refX)).attr('x2', x(o.refX)).attr('y1', 14).attr('y2', H - 28).attr('stroke', '#A0A0AB').attr('stroke-dasharray', '4 4');
-  if (has(o.refY)) svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(o.refY)).attr('y2', y(o.refY)).attr('stroke', '#A0A0AB').attr('stroke-dasharray', '4 4');
-  const rad = d3.scaleSqrt().domain([0, d3.max(rows, (r) => +r[o.r]) || 1]).range([5, 26]);
-  const g = svg.append('g').selectAll('g').data(rows.slice().sort((a, b) => +b[o.r] - +a[o.r])).join('g').attr('transform', (r) => 'translate(' + x(+r[o.x]) + ',' + y(+r[o.y]) + ')');
-  g.append('circle').attr('r', (r) => rad(+r[o.r])).attr('fill', (r) => o.color(r)).attr('fill-opacity', 0.22).attr('stroke', (r) => o.color(r)).attr('stroke-width', 1.5);
-  const right = (r) => x(+r[o.x]) > ml + (W - ml - mr) * 0.68;
-  g.append('text').attr('x', (r) => right(r) ? -rad(+r[o.r]) - 6 : rad(+r[o.r]) + 6).attr('dy', '0.32em').attr('text-anchor', (r) => right(r) ? 'end' : 'start')
-    .style('fill', '#17171C').style('font-weight', 500).style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', 3).text((r) => r[o.label]);
-  const lab = g.selectAll('text').nodes().map((n) => ({n, r: d3.select(n.parentNode).datum()}));
-  lab.forEach((l) => { l.y = y(+l.r[o.y]); l.side = right(l.r); l.x = x(+l.r[o.x]); });
-  for (let pass = 0; pass < 6; pass++) {
-    lab.sort((a, b) => a.y - b.y);
-    for (let i = 1; i < lab.length; i++) for (let j = 0; j < i; j++) {
-      const a = lab[j], b = lab[i];
-      if (a.side === b.side && Math.abs(a.x - b.x) < 150 && b.y - a.y < 15) b.y = a.y + 15;
-    }
+  if (has(o.refY)) {
+    svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(o.refY)).attr('y2', y(o.refY)).attr('stroke', C.grey).attr('stroke-dasharray', '4 4');
+    svg.append('text').attr('x', W - mr).attr('y', y(o.refY) - 6).attr('text-anchor', 'end').text('Media del sitio');
   }
-  lab.forEach((l) => d3.select(l.n).attr('y', l.y - y(+l.r[o.y])));
-  g.on('pointermove pointerdown', (ev, r) => showTip(ev, r[o.label], o.lines(r))).on('pointerleave', hideTip);
+  const rad = d3.scaleSqrt().domain([0, d3.max(rows, (r) => +r[o.r]) || 1]).range([4, 22]);
+  const g = svg.append('g').selectAll('g').data(rows.slice().sort((a, b) => +b[o.r] - +a[o.r])).join('g').attr('transform', (r) => 'translate(' + x(+r[o.x]) + ',' + y(o.yv(r)) + ')');
+  g.append('circle').attr('r', (r) => rad(+r[o.r])).attr('fill', (r) => o.color(r)).attr('fill-opacity', 0.22).attr('stroke', (r) => o.color(r)).attr('stroke-width', 1.5);
+  const right = (r) => x(+r[o.x]) > ml + (W - ml - mr) * 0.62;
+  const lab = g.filter((r) => o.labelIf(r)).append('text').attr('x', (r) => right(r) ? -rad(+r[o.r]) - 6 : rad(+r[o.r]) + 6).attr('dy', '0.32em').attr('text-anchor', (r) => right(r) ? 'end' : 'start')
+    .style('fill', '#17171C').style('font-family', 'var(--mono)').style('font-size', '11px').style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', 3).text((r) => o.label(r));
+  const L = lab.nodes().map((n) => { const r = d3.select(n.parentNode).datum(); return {n, r, y: y(o.yv(r)), x: x(+r[o.x]), side: right(r)}; });
+  for (let pass = 0; pass < 8; pass++) { L.sort((a, b) => b.y - a.y); for (let i = 1; i < L.length; i++) for (let j = 0; j < i; j++) { const a = L[j], b = L[i]; if (a.side === b.side && Math.abs(a.x - b.x) < 230 && a.y - b.y < 14) b.y = a.y - 14; } }
+  L.forEach((l) => d3.select(l.n).attr('y', l.y - y(o.yv(l.r))));
+  g.on('pointermove pointerdown', (ev, r) => showTip(ev, o.label(r), o.lines(r))).on('pointerleave', hideTip);
 }
 
-function flow(el) {
-  const rs = R('flujos');
-  el.innerHTML = '';
-  if (!rs.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
-  const W = Math.max(760, el.parentElement.clientWidth), H = 440, nw = 10, pad = 10, left = 140, right = 170;
-  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('viewBox', '0 0 ' + W + ' ' + H);
-  const cols = [new Map(), new Map(), new Map(), new Map()];
-  const links = rs.map((r) => ({lv: +r.nivel, a: r.origen, b: r.destino, v: +r.leads})).filter((l) => l.v > 0);
-  const node = (c, n) => { if (!cols[c].has(n)) cols[c].set(n, {name: n, c, out: 0, inn: 0, so: 0, to: 0}); return cols[c].get(n); };
-  links.forEach((l) => { l.s = node(l.lv - 1, l.a); l.t = node(l.lv, l.b); l.s.out += l.v; l.t.inn += l.v; });
-  const total = d3.sum([...cols[0].values()], (n) => n.out) || 1;
-  const maxN = d3.max(cols, (c) => c.size);
-  const k = (H - 16 - pad * (maxN - 1)) / total;
-  const order = ['Deal', 'XQL sin Deal', 'Solo lead'];
-  const outC = {'Deal': C.green, 'XQL sin Deal': C.blue, 'Solo lead': '#C9CAD3'};
-  const xOf = (c) => left + c * (W - left - right - nw) / 3;
-  cols.forEach((m, c) => {
-    const ns = [...m.values()]; ns.forEach((n) => { n.v = Math.max(n.out, n.inn); });
-    ns.sort((a, b) => c === 3 ? order.indexOf(a.name) - order.indexOf(b.name) : b.v - a.v);
-    let yc = 8 + (H - 16 - (d3.sum(ns, (n) => n.v) * k + pad * (ns.length - 1))) / 2;
-    ns.forEach((n, i) => { n.i = i; n.y = yc; n.h = Math.max(1.5, n.v * k); yc += n.h + pad; });
+// ---------- Avisos ----------
+function weeks() { return (D.weekly || []).map((r) => ({k: r.yearWeekIso, d: isoMonday(r.yearWeekIso), s: +r.sessions, c: +r.conversions})); }
+function trackingDrop() {
+  const w = weeks().slice(0, -1); // la última semana está incompleta
+  if (w.length < 12) return null;
+  const base = d3.mean(w.slice(-12, -4), (r) => r.s);
+  const idx = w.findIndex((r, i) => i >= w.length - 6 && r.s < base * 0.5);
+  if (idx < 0) return null;
+  const after = d3.mean(w.slice(idx), (r) => r.s);
+  return {from: w[idx].d, base, after, pct: 100 * (after / base - 1)};
+}
+function warnings() {
+  const out = [];
+  const t = trackingDrop();
+  if (t) out.push({title: 'Posible fallo de medición', text: 'Desde la semana del ' + fDay(t.from) + ' las sesiones bajan de unas ' + nf0.format(t.base) + ' a unas ' + nf0.format(t.after) + ' por semana (' + nf0.format(t.pct) + ' %). Un descenso tan brusco suele indicar que la etiqueta de Google Analytics ha dejado de cargarse en parte de la web. Conviene revisarlo antes de sacar conclusiones de las últimas semanas.'});
+  const footer = (D.convEvents || []).find((r) => /Footer/i.test(r.eventName));
+  if (footer && has(footer.conversions_chg) && +footer.conversions_chg < -90) out.push({title: 'Formulario del pie casi sin conversiones', text: 'El formulario del pie de página ha pasado a ' + fInt(footer.conversions) + ' conversiones (' + fSigned(footer.conversions_chg) + '). Si sigue en la web, revisar que el evento se mide.'});
+  return out;
+}
+
+// ---------- Resumen ----------
+function vResumen() {
+  const k = K();
+  ring($('r-health'), +k.engagementRate * 100, +k.engagementRate >= 0.5 ? C.green : +k.engagementRate >= 0.35 ? C.amber : C.red);
+  const sUp = +k.sessions_chg > 0, cUp = +k.conversions_chg > 0;
+  $('h-title').textContent = (sUp ? 'Más tráfico que en 2025' : 'Menos tráfico que en 2025') + (sUp === cUp ? (cUp ? ' y más conversiones.' : ' y menos conversiones.') : (cUp ? ', y aun así más conversiones.' : ', pero menos conversiones.'));
+  $('h-chips').innerHTML = '<span class="chip ' + (sUp ? 'g' : 'r') + '">Sesiones ' + fSigned(k.sessions_chg) + '</span><span class="chip ' + (cUp ? 'g' : 'r') + '">Conversiones ' + fSigned(k.conversions_chg) + '</span><span class="chip">Conversión ' + fRate(k.sessionConversionRate) + '</span>';
+  const st = [['Sesiones', 'sessions'], ['Usuarios', 'totalUsers'], ['Conversiones', 'conversions']].map(([l, f]) => {
+    const v = +k[f], prev = v / (1 + +k[f + '_chg'] / 100), up = v >= prev;
+    return '<div class="step"><div class="row1"><span class="l">' + l + '</span><span class="v" style="color:' + (up ? C.green : C.red) + '">' + fInt(v) + '</span></div><div class="bar"><i style="width:' + (100 * v / Math.max(v, prev)).toFixed(1) + '%;background:' + (up ? C.green : C.red) + '"></i></div><div class="s">2025: ' + fInt(prev) + '</div></div>';
   });
-  links.slice().sort((a, b) => a.s.i - b.s.i || a.t.i - b.t.i).forEach((l) => { l.sy = l.s.y + l.s.so; l.s.so += l.v * k; });
-  links.slice().sort((a, b) => a.t.i - b.t.i || a.s.i - b.s.i).forEach((l) => { l.ty = l.t.y + l.t.to; l.t.to += l.v * k; });
-  const band = (l) => { const x0 = xOf(l.lv - 1) + nw, x1 = xOf(l.lv), m = (x0 + x1) / 2, h = Math.max(1, l.v * k);
-    return 'M' + x0 + ',' + l.sy + 'C' + m + ',' + l.sy + ' ' + m + ',' + l.ty + ' ' + x1 + ',' + l.ty + 'L' + x1 + ',' + (l.ty + h) + 'C' + m + ',' + (l.ty + h) + ' ' + m + ',' + (l.sy + h) + ' ' + x0 + ',' + (l.sy + h) + 'Z'; };
-  const bandColor = (l) => l.lv === 1 ? chColor(l.a) : l.lv === 3 ? outC[l.b] : '#8B9BB4';
-  svg.append('g').selectAll('path').data(links).join('path').attr('d', band).attr('fill', bandColor).attr('fill-opacity', 0.28)
-    .on('pointermove pointerdown', function (ev, l) { d3.select(this).attr('fill-opacity', 0.6); showTip(ev, l.a + ' → ' + l.b, [nf0.format(l.v) + ' leads']); })
-    .on('pointerleave', function () { d3.select(this).attr('fill-opacity', 0.28); hideTip(); });
-  const all = cols.flatMap((m) => [...m.values()]);
-  svg.append('g').selectAll('rect').data(all).join('rect').attr('x', (n) => xOf(n.c)).attr('y', (n) => n.y).attr('width', nw).attr('height', (n) => n.h).attr('rx', 2)
-    .attr('fill', (n) => n.c === 0 ? chColor(n.name) : n.c === 3 ? outC[n.name] : '#17171C');
-  svg.append('g').selectAll('text').data(all).join('text').attr('x', (n) => n.c === 0 ? xOf(0) - 8 : xOf(n.c) + nw + 8).attr('y', (n) => n.y + n.h / 2).attr('dy', '0.32em')
-    .attr('text-anchor', (n) => n.c === 0 ? 'end' : 'start').style('fill', '#17171C').style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', 3).style('pointer-events', 'none')
-    .text((n) => n.name + '  ' + nf0.format(n.v));
+  $('h-steps').innerHTML = st.join('');
+
+  const q = [
+    ['Conversión', 'Conversiones por sesión', fRate(k.sessionConversionRate), k.sessionConversionRate_chg],
+    ['Interacción', 'Sesiones con interacción', fRate1(k.engagementRate), k.engagementRate_chg],
+    ['Duración', 'Media por sesión', fDur(k.averageSessionDuration), k.averageSessionDuration_chg],
+    ['Vistas', 'Páginas por sesión', has(k.screenPageViewsPerSession) ? nf2.format(+k.screenPageViewsPerSession) : '—', k.screenPageViewsPerSession_chg],
+    ['Rebote', 'Sesiones sin interacción', fRate1(k.bounceRate), k.bounceRate_chg, true]
+  ];
+  $('quality').innerHTML = q.map(([l, d, v, c, inv]) => { const good = inv ? +c < 0 : +c > 0; return '<div class="mrow"><i style="background:' + (good ? C.green : C.red) + '"></i><div><b>' + l + '</b><span>' + d + ' · ' + chg(c, inv) + '</span></div><code>' + v + '</code></div>'; }).join('');
+
+  $('c-big').textContent = fInt(k.conversions);
+  $('c-big').style.color = cUp ? C.green : C.red;
+  $('c-sub').innerHTML = chg(k.conversions_chg) + ' frente a 2025';
+  const w = weeks().slice(-26), mx = d3.max(w, (r) => r.c) || 1;
+  const sp = $('c-spark'); sp.innerHTML = '';
+  w.forEach((r) => { const i = document.createElement('i'); i.style.height = (100 * r.c / mx) + '%'; i.style.opacity = 0.4 + 0.6 * r.c / mx; hover(i, 'Semana del ' + fDay(r.d), [nf0.format(r.c) + ' conversiones', nf0.format(r.s) + ' sesiones']); sp.append(i); });
+  const top = maxBy(D.convEvents || [], 'conversions');
+  $('c-foot').innerHTML = top ? 'La más frecuente: <b>' + esc(evn(top.eventName)) + '</b> (' + fInt(top.conversions) + ')' : '';
+
+  const ch = (D.channels || []);
+  const tot = d3.sum(ch, (r) => +r.sessions || 0);
+  const org = ch.find((r) => r.sessionDefaultChannelGrouping === 'Organic Search');
+  ring($('r-chan'), org ? 100 * +org.sessions / tot : 0, C.green, 96);
+  const big = ch.filter((r) => +r.sessions >= 1000 && has(r.conversions_chg));
+  const down = big.filter((r) => +r.conversions_chg < 0).length, up = big.filter((r) => +r.conversions_chg > 0).length;
+  $('ch-down').className = 'stat ' + (down ? 'r' : 'n'); $('ch-down').innerHTML = '<b>' + down + '</b><span>convierten menos</span>';
+  $('ch-up').className = 'stat ' + (up ? 'g' : 'n'); $('ch-up').innerHTML = '<b>' + up + '</b><span>convierten más</span>';
+  const best = maxBy(ch.filter((r) => +r.sessions >= 1000), 'sessionConversionRate');
+  $('ch-foot').innerHTML = 'Búsqueda orgánica trae el ' + nf0.format(org ? 100 * +org.sessions / tot : 0) + ' % de las sesiones. Mejor tasa: <b>' + esc(CH_ES[best.sessionDefaultChannelGrouping] || best.sessionDefaultChannelGrouping) + '</b> (' + fRate(best.sessionConversionRate) + ')';
+
+  const ai = ch.find((r) => r.sessionDefaultChannelGrouping === 'AI Assistant');
+  if (ai) {
+    $('ai-ses').innerHTML = '<b>' + fInt(ai.sessions) + '</b><span>sesiones</span>';
+    const better = +ai.sessionConversionRate > siteRate();
+    $('ai-rate').className = 'stat ' + (better ? 'g' : 'a'); $('ai-rate').innerHTML = '<b>' + fRate(ai.sessionConversionRate) + '</b><span>conversión</span>';
+    const src = maxBy(D.llmSources || [], 'sessions');
+    $('ai-foot').innerHTML = (better ? 'Convierte <b>' + nf1.format(+ai.sessionConversionRate / siteRate()) + ' veces</b> más que la media del sitio. ' : '') + (src ? 'Principal: <b>' + esc(src.sessionSource) + '</b>' : '');
+  }
+
+  const all = weeks();
+  dualChart($('ch-week'), all.map((r) => r.k), {name: 'Sesiones', color: C.blue, vals: all.map((r) => r.s)}, {name: 'Conversiones', color: C.green, vals: all.map((r) => r.c)}, 230, (k) => 'Semana del ' + fDay(isoMonday(k)), (k) => fDay(isoMonday(k)));
+}
+
+// ---------- Evolución ----------
+function growthNote() {
+  const sr = siteRate();
+  const g = (D.landing || []).filter((r) => r.landingPage !== '(not set)').map((r) => ({p: r.landingPage, add: has(r.sessions_chg) ? +r.sessions - +r.sessions / (1 + +r.sessions_chg / 100) : +r.sessions, low: +r.sessionConversionRate < sr / 4}))
+    .sort((a, b) => b.add - a.add).slice(0, 4);
+  const lows = g.filter((x) => x.low);
+  if (lows.length < 2) return '';
+  return 'De las cuatro páginas de entrada que más tráfico han ganado, ' + lows.length + ' apenas convierten (' + lows.map((x) => x.p).join(', ') + '). El tráfico nuevo llega sobre todo a contenido informativo.';
+}
+function byMonth() {
+  const m = {}; (D.monthly || []).forEach((r) => { const [y, mo] = r.yearMonth.split('-'); (m[y] = m[y] || {})[+mo] = r; });
+  return m;
+}
+function vEvolucion() {
+  const m = byMonth(), y0 = m['2025'] || {}, y1 = m['2026'] || {};
+  const months = d3.range(1, 13);
+  const full = months.filter((i) => y1[i] && i < 11); // meses completos de 2026 hasta octubre
+  const lastFull = d3.max(full) || 10;
+  const sum = (o, f, upto) => d3.sum(d3.range(1, upto + 1), (i) => o[i] ? +o[i][f] : 0);
+  const s0 = sum(y0, 'sessions', lastFull), s1 = sum(y1, 'sessions', lastFull), c0 = sum(y0, 'conversions', lastFull), c1 = sum(y1, 'conversions', lastFull);
+  concl('cc-evolucion', 'De enero a ' + ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][lastFull - 1] + ', 2026 suma <b>' + fInt(s1) + '</b> sesiones (' + fSigned(100 * (s1 / s0 - 1)) + ') y <b>' + fInt(c1) + '</b> conversiones (' + fSigned(100 * (c1 / c0 - 1)) + '). Las conversiones por cada 100 sesiones pasan de ' + nf2.format(100 * c0 / s0) + ' a ' + nf2.format(100 * c1 / s1) + '.', growthNote());
+  const lab = MONTHS;
+  const fm = MMETRIC === 'sessions' ? (v) => (v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v)) : (v) => nf0.format(v);
+  barChart($('ch-month'), lab, [{name: '2025', color: C.blueL, vals: months.map((i) => y0[i] ? +y0[i][MMETRIC] : null)}, {name: '2026', color: C.blue, vals: months.map((i) => y1[i] ? +y1[i][MMETRIC] : null)}], 260, fm, false, (i) => MONTHS[i] + (i === 10 ? ' (2026 incompleto)' : ''));
+  const cum = (o, f) => { let a = 0; return months.map((i) => { if (!o[i]) return null; a += +o[i][f]; return a; }); };
+  lineChart($('ch-cum'), lab, [{name: '2025', color: C.grey, vals: cum(y0, MMETRIC)}, {name: '2026', color: C.blue, vals: cum(y1, MMETRIC)}], 240, fm);
+  const rate = (o) => months.map((i) => o[i] ? 100 * +o[i].conversions / +o[i].sessions : null);
+  lineChart($('ch-rate'), lab, [{name: '2025', color: C.grey, vals: rate(y0)}, {name: '2026', color: C.green, vals: rate(y1)}], 240, (v) => nf1.format(v) + ' %');
+}
+
+// ---------- Adquisición ----------
+function vAdquisicion() {
+  const ch = (D.channels || []).filter((r) => +r.sessions >= 100);
+  const tot = d3.sum(D.channels || [], (r) => +r.sessions || 0);
+  const org = ch.find((r) => r.sessionDefaultChannelGrouping === 'Organic Search'), paid = ch.find((r) => r.sessionDefaultChannelGrouping === 'Paid Search');
+  concl('cc-adquisicion', 'La búsqueda orgánica trae el <b>' + nf0.format(100 * +org.sessions / tot) + ' %</b> de las sesiones y ' + (+org.sessions_chg >= 0 ? 'ha crecido' : 'ha caído') + ' un ' + nf1.format(Math.abs(+org.sessions_chg)) + ' %, pero sus conversiones bajan un ' + nf1.format(Math.abs(+org.conversions_chg)) + ' %. ' + (paid ? 'La búsqueda de pago pierde ' + nf0.format(Math.abs(+paid.sessions_chg)) + ' % de sesiones y ' + nf0.format(Math.abs(+paid.conversions_chg)) + ' % de conversiones.' : ''),
+    'Acción sugerida: revisar las campañas marcadas en rojo y llevar el tráfico orgánico informativo hacia páginas de producto con una llamada a la acción clara.');
+  const nm = (r) => CH_ES[r.sessionDefaultChannelGrouping] || r.sessionDefaultChannelGrouping;
+  hbars($('hb-chan'), ch, 'sessionDefaultChannelGrouping', [{f: 'sessions', label: 'Sesiones', fmt: fInt, color: C.blue}], {name: nm, sub: (r) => chg(r.sessions_chg)});
+  const sr = siteRate();
+  const rateCls = (r) => +r.sessionConversionRate >= sr ? 'pos' : 'neg';
+  table($('t-chan'), [{h: 'Canal', html: (r) => esc(nm(r)), cls: 'nw'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.conversions_chg)}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], ch);
+  table($('t-sm'), [{h: 'Fuente / medio', f: 'sessionSourceMedium', cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], D.sourceMedium || []);
+  table($('t-camp'), [{h: 'Campaña', f: 'sessionCampaignName', cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], D.campaigns || [], (r) => +r.sessions > 1000 && +r.sessionConversionRate < sr / 2 ? 'flag' : '');
+}
+
+// ---------- Audiencia ----------
+function vAudiencia() {
+  const dv = D.devices || [], nr = (D.newret || []).filter((r) => r.newVsReturning);
+  const desk = dv.find((r) => r.deviceCategory === 'desktop'), mob = dv.find((r) => r.deviceCategory === 'mobile');
+  const nw = nr.find((r) => r.newVsReturning === 'new'), rt = nr.find((r) => r.newVsReturning === 'returning');
+  const co = D.countries || [];
+  concl('cc-audiencia', (desk && mob ? 'El ordenador convierte <b>' + nf1.format(+desk.sessionConversionRate / +mob.sessionConversionRate) + ' veces</b> más que el móvil con un volumen de sesiones parecido. ' : '') + (nw && rt ? 'Un visitante recurrente convierte ' + nf1.format(+rt.sessionConversionRate / +nw.sessionConversionRate) + ' veces más que uno nuevo. ' : '') + (co[0] ? 'México es el primer país en usuarios (' + fInt(co[0].totalUsers) + ').' : ''),
+    'Acción sugerida: revisar los formularios y las llamadas a la acción en móvil, y dar a quien vuelve un motivo claro para pedir una demo.');
+  table($('t-dev'), [{h: 'Dispositivo', html: (r) => esc(DEV_ES[r.deviceCategory] || r.deviceCategory)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Duración', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], dv);
+  table($('t-nr'), [{h: 'Tipo', html: (r) => esc(NR_ES[r.newVsReturning] || r.newVsReturning)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], nr);
+  hbars($('hb-country'), co, 'country', [{f: 'totalUsers', label: 'Usuarios', fmt: fInt, color: C.blue}, {f: 'conversions', label: 'Conversiones', fmt: fInt, color: C.green}], {perSeries: true, name: (r) => CO_ES[r.country] || r.country, sub: (r) => 'Usuarios ' + chg(r.totalUsers_chg), extra: (r) => ['Tasa de conversión: ' + fRate(r.sessionConversionRate)]});
 }
 
 // ---------- Páginas ----------
-const POS = [['pct_primera', 'Primera página', C.blue], ['pct_intermedia', 'Intermedia', '#8B9BB4'], ['pct_ultima', 'Última antes de convertir', C.green], ['pct_post_deal', 'Con el Deal ya abierto', C.violet]];
 function vPaginas() {
-  const pg = R('paginas').sort((a, b) => +b.xqls - +a.xqls);
-  const top = pg[0], act = maxBy(pg, 'pct_activacion'), rt = R('ruta').sort((a, b) => +a.paso - +b.paso);
-  concl('cc-paginas', top ? 'La página que más XQLs genera es <b>' + esc(top.pagina) + '</b> (' + fInt(top.xqls) + '). La que mejor activa es <b>' + esc(act.pagina) + '</b> (' + fPct(act.pct_activacion) + ' de sus vistas acaba en formulario).' : 'Sin datos para esta región.',
-    rt.length ? 'La ruta habitual empieza en ' + rt[0].pagina + ' y termina en ' + rt[rt.length - 1].pagina + '; solo el ' + nf0.format(rt[rt.length - 1].pct_usuarios) + ' % la completa. Acción sugerida: reforzar el enlace entre las paradas donde más leads se pierden.' : '');
-  route($('ch-route'), rt, false);
-  $('lg-pos').innerHTML = POS.map((p) => '<span><i style="background:' + p[2] + '"></i>' + p[1] + '</span>').join('');
-  const st = $('st-pos'); st.innerHTML = '';
-  R('posiciones').forEach((r) => {
-    const row = document.createElement('div'); row.className = 'hb';
-    row.innerHTML = '<div class="lab">' + esc(r.pagina) + '<small>' + esc(r.posicion_frecuente) + '</small></div><div class="stack">' +
-      POS.map((p) => '<i style="width:' + (+r[p[0]]) + '%;background:' + p[2] + '">' + (+r[p[0]] >= 10 ? nf0.format(+r[p[0]]) + ' %' : '') + '</i>').join('') + '</div>';
-    hover(row, r.pagina, POS.map((p) => p[1] + ': ' + nf0.format(+r[p[0]]) + ' %'));
-    st.append(row);
-  });
-  table($('t-paginas'), [{h: 'Página', f: 'pagina'}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Lead → XQL', f: 'pct_xql', n: 1, fmt: fPct}, {h: 'Vistas', f: 'vistas', n: 1, fmt: fInt}, {h: 'Activación', f: 'pct_activacion', n: 1, fmt: fPct}], pg);
-  table($('t-forms'), [{h: 'Formulario', f: 'formulario'}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Lead → XQL', f: 'pct_xql', n: 1, fmt: fPct}], R('formularios').sort((a, b) => +b.xqls - +a.xqls));
-  table($('t-ctas'), [{h: 'CTA', f: 'cta'}, {h: 'Ubicación', f: 'ubicacion'}, {h: 'Vistas', f: 'vistas', n: 1, fmt: fInt}, {h: 'Clics', f: 'clics', n: 1, fmt: fInt}, {h: 'CTR', f: 'ctr', n: 1, fmt: fPct}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}], R('ctas').sort((a, b) => +b.xqls - +a.xqls));
+  const ld = (D.landing || []).filter((r) => r.landingPage !== '(not set)' && +r.sessions >= 20);
+  const sr = siteRate();
+  const leak = ld.filter((r) => +r.sessionConversionRate < sr / 4).sort((a, b) => +b.sessions - +a.sessions);
+  const leakSes = d3.sum(leak, (r) => +r.sessions);
+  const best = maxBy(ld, 'conversions');
+  concl('cc-paginas', 'Las páginas de entrada que convierten menos de una cuarta parte de la media suman <b>' + fInt(leakSes) + '</b> sesiones; la mayor es <b>' + esc(leak[0] ? leak[0].landingPage : '—') + '</b> (' + fInt(leak[0] && leak[0].sessions) + ' sesiones, ' + fInt(leak[0] && leak[0].conversions) + ' conversiones). La que más convierte es <b>' + esc(best.landingPage) + '</b> (' + fInt(best.conversions) + ').',
+    'Acción sugerida: añadir en esas páginas informativas un bloque que enlace al producto relacionado y una llamada a la acción visible.');
+  scatter($('ch-land'), ld, {x: 'sessions', r: 'conversions', yv: (r) => 100 * +r.sessionConversionRate, refY: 100 * sr,
+    xfmt: (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v), yfmt: (v) => nf1.format(v) + ' %',
+    color: (r) => +r.sessionConversionRate >= sr ? C.green : +r.sessions > 8000 ? C.red : C.blue,
+    label: (r) => r.landingPage, labelIf: (r) => +r.sessions > 9000 || +r.conversions >= 30,
+    lines: (r) => ['Sesiones: ' + fInt(r.sessions), 'Conversiones: ' + fInt(r.conversions), 'Tasa: ' + fRate(r.sessionConversionRate)]});
+  table($('t-land'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= sr ? 'pos' : 'neg'}], D.landing || []);
+  hbars($('hb-clicks'), D.clicks || [], 'pagePathWithoutQueryString', [{f: 'eventCount', label: 'Clics', fmt: fInt, color: C.violet}], {mono: true, sub: (r) => chg(r.eventCount_chg)});
+  table($('t-pages'), [{h: 'Página', f: 'pagePathWithoutQueryString', cls: 'path'}, {h: 'Vistas', f: 'screenPageViews', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.screenPageViews_chg)}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Tiempo medio', n: 1, html: (r) => fDur(+r.userEngagementDuration / +r.activeUsers)}, {h: 'Usuarios', f: 'activeUsers', n: 1, fmt: fInt}], D.pages || []);
 }
 
-function route(el, stops, forceAnim) {
-  el.innerHTML = '';
-  if (!stops.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
-  const n = stops.length, W = Math.max(300, el.clientWidth), wide = W >= 640;
-  const pts = stops.map((s, i) => wide ? {x: 90 + i * (W - 180) / Math.max(1, n - 1), y: i % 2 ? 176 : 96} : {x: i % 2 ? 100 : 40, y: 36 + i * 86});
-  const H = wide ? 270 : 36 + (n - 1) * 86 + 46;
-  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img').attr('aria-label', 'Ruta habitual: ' + stops.map((s) => s.pagina).join(', '));
-  const dPath = d3.line().x((p) => p.x).y((p) => p.y).curve(d3.curveCatmullRom.alpha(0.5))(pts);
-  svg.append('path').attr('d', dPath).attr('fill', 'none').attr('stroke', '#E4DEFA').attr('stroke-width', 10).attr('stroke-linecap', 'round');
-  const trail = svg.append('path').attr('d', dPath).attr('fill', 'none').attr('stroke', '#7556E0').attr('stroke-width', 2.5).attr('stroke-dasharray', '2 8').attr('stroke-linecap', 'round');
-  const g = svg.selectAll('g.stop').data(stops).join('g').attr('class', 'stop').attr('transform', (s, i) => 'translate(' + pts[i].x + ',' + pts[i].y + ')');
-  g.each(function (s, i) {
-    const nd = d3.select(this), last = i === n - 1;
-    nd.append('circle').attr('r', 17).attr('fill', '#fff').attr('stroke', last ? C.red : '#7556E0').attr('stroke-width', 2.5);
-    if (last) nd.append('path').attr('d', 'M-6,-6L6,6M6,-6L-6,6').attr('stroke', C.red).attr('stroke-width', 3).attr('stroke-linecap', 'round');
-    else nd.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').style('fill', '#7556E0').style('font-weight', 600).text(s.paso);
-    const lbl = wide ? {x: 0, y: i % 2 ? 36 : -44, a: 'middle'} : {x: 130 - pts[i].x, y: -4, a: 'start'};
-    nd.append('text').attr('x', lbl.x).attr('y', lbl.y).attr('text-anchor', lbl.a).style('fill', '#17171C').style('font-weight', 600).style('font-size', '13px').text(s.pagina);
-    nd.append('text').attr('x', lbl.x).attr('y', lbl.y + 16).attr('text-anchor', lbl.a).text(nf0.format(s.pct_usuarios) + ' % llega aquí');
-    const lines = [nf0.format(s.pct_usuarios) + ' % de los leads que convierten llega aquí'];
-    if (i) lines.push(nf0.format(s.dias_desde_anterior) + ' días desde el paso anterior');
-    lines.push('Desvío más frecuente: ' + s.desvio + ' (' + nf0.format(s.pct_desvio) + ' %)');
-    nd.on('pointermove pointerdown', (ev) => showTip(ev, (last ? 'Conversión: ' : 'Paso ' + s.paso + ': ') + s.pagina, lines)).on('pointerleave', hideTip);
-  });
-  const animate = !matchMedia('(prefers-reduced-motion: reduce)').matches && (forceAnim || lastRouteKey !== REGION);
-  lastRouteKey = REGION;
-  if (!animate) return;
-  const len = trail.node().getTotalLength(), T = 2600;
-  const mask = svg.insert('defs', ':first-child').append('mask').attr('id', 'rm').attr('maskUnits', 'userSpaceOnUse').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H);
-  const rv = mask.append('path').attr('d', dPath).attr('fill', 'none').attr('stroke', '#fff').attr('stroke-width', 14).attr('stroke-dasharray', len + ' ' + len).attr('stroke-dashoffset', len);
-  trail.attr('mask', 'url(#rm)');
-  rv.transition().duration(T).ease(d3.easeLinear).attr('stroke-dashoffset', 0);
-  const pn = trail.node();
-  const at = pts.map((p) => { let best = 0, bd = Infinity; for (let l = 0; l <= len; l += len / 240) { const q = pn.getPointAtLength(l), d = (q.x - p.x) ** 2 + (q.y - p.y) ** 2; if (d < bd) { bd = d; best = l; } } return best; });
-  g.style('opacity', 0).transition().delay((s, i) => T * at[i] / len).duration(300).style('opacity', 1);
-  const walker = svg.append('circle').attr('r', 7).attr('fill', '#7556E0').attr('stroke', '#fff').attr('stroke-width', 2);
-  walker.transition().duration(T).ease(d3.easeLinear).attrTween('transform', () => (u) => { const q = pn.getPointAtLength(u * len); return 'translate(' + q.x + ',' + q.y + ')'; }).transition().duration(300).style('opacity', 0).remove();
+// ---------- Conversiones ----------
+function vConversiones() {
+  const ev = (D.convEvents || []).slice().sort((a, b) => +b.conversions - +a.conversions);
+  const tot = d3.sum(ev, (r) => +r.conversions);
+  const dl = ev.find((r) => r.eventName === 'Descarga'), fw = ev.find((r) => r.eventName === 'Contacto - Formulario Web'), cal = ev.find((r) => /Cita/.test(r.eventName));
+  concl('cc-conversiones', (dl ? 'Las descargas son el <b>' + nf0.format(100 * +dl.conversions / tot) + ' %</b> de las conversiones y bajan un ' + nf1.format(Math.abs(+dl.conversions_chg)) + ' %. ' : '') + (fw ? 'El formulario web ' + (+fw.conversions_chg >= 0 ? 'crece' : 'baja') + ' un ' + nf1.format(Math.abs(+fw.conversions_chg)) + ' %; ' : '') + (cal ? 'las citas de calendario caen un ' + nf1.format(Math.abs(+cal.conversions_chg)) + ' %.' : ''),
+    'Las conversiones de contacto (formulario y cita) son las que más se acercan a una oportunidad: conviene seguirlas por separado de las descargas.');
+  hbars($('hb-ev'), ev, 'eventName', [{f: 'conversions', label: 'Conversiones', fmt: fInt, color: C.blue}], {name: (r) => evn(r.eventName), sub: (r) => chg(r.conversions_chg) + ' · ' + fInt(r.totalUsers) + ' usuarios'});
+  const names = ev.map((r) => r.eventName);
+  $('lg-ev').innerHTML = names.map((n) => '<span><i style="background:' + (EV_COLORS[n] || C.grey) + '"></i>' + esc(evn(n)) + '</span>').join('');
+  const cm = D.convMonthly || [];
+  const ms = [...new Set(cm.map((r) => r.yearMonth))].sort();
+  const val = new Map(cm.map((r) => [r.yearMonth + '|' + r.eventName, +r.conversions]));
+  barChart($('ch-evm'), ms.map((m) => MONTHS[+m.split('-')[1] - 1]), names.map((n) => ({name: evn(n), color: EV_COLORS[n] || C.grey, vals: ms.map((m) => val.get(m + '|' + n) || 0)})), 260, (v) => nf0.format(v), true);
+  const cl = (D.convLanding || []).slice().sort((a, b) => +b.conversions - +a.conversions);
+  table($('t-convland'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.conversions_chg)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], cl);
 }
 
-// ---------- Leads existentes ----------
-function vLeads() {
-  const rc = R('recorrido').sort((a, b) => (+b.pct_con_deal - +b.pct_sin_deal) - (+a.pct_con_deal - +a.pct_sin_deal));
-  const cal = R('calor').sort((a, b) => +b.puntuacion - +a.puntuacion);
-  const hot = cal.filter((r) => +r.puntuacion >= 70 && r.deal_abierto !== 'Sí');
-  concl('cc-leads', rc.length ? 'Los leads que llegan a Deal consultan mucho más <b>' + esc(rc[0].pagina) + '</b> (' + nf0.format(rc[0].pct_con_deal) + ' % frente a ' + nf0.format(rc[0].pct_sin_deal) + ' %). Hay <b>' + hot.length + '</b> ' + (hot.length === 1 ? 'empresa' : 'empresas') + ' con intención alta y sin Deal abierto.' : 'Sin datos para esta región.',
-    'Acción sugerida: llevar a los leads hacia ' + (rc[0] ? rc[0].pagina : 'las páginas que más pesan') + ' en los emails y vigilar las empresas que suben de puntuación.');
-  hbars($('hb-recorrido'), rc, 'pagina', [{f: 'pct_con_deal', label: 'Con Deal', fmt: (v) => nf0.format(v) + ' %', color: C.green}, {f: 'pct_sin_deal', label: 'Sin Deal', fmt: (v) => nf0.format(v) + ' %', color: C.grey}], {max: 100});
-  const hc = (v) => v >= 70 ? C.red : v >= 40 ? C.amber : C.blue;
-  table($('t-calor'), [
-    {h: 'Empresa', html: (r) => esc(r.empresa) + (REGION === 'Todas' ? '<div style="font-size:11.5px;color:var(--faint)">' + esc(r.region_cuenta) + '</div>' : '')},
-    {h: 'Calor', n: 1, html: (r) => '<span class="heat"><i><u style="width:' + (+r.puntuacion) + '%;background:' + hc(+r.puntuacion) + '"></u></i>' + fInt(r.puntuacion) + '</span>'},
-    {h: 'Semana', f: 'variacion', n: 1, fmt: (v) => (+v > 0 ? '+' : '') + nf0.format(+v), cls: (r) => +r.variacion > 0 ? 'pos' : +r.variacion < 0 ? 'neg' : ''},
-    {h: 'Última señal', f: 'ultima_senal'}, {h: 'Deal', f: 'deal_abierto'}
-  ], cal.slice(0, 12));
-}
-
-// ---------- Nurturing ----------
-function vNurturing() {
-  const em = R('embudo_emails').sort((a, b) => +a.orden - +b.orden);
-  const ems = R('emails').sort((a, b) => a.flujo < b.flujo ? -1 : a.flujo > b.flujo ? 1 : +a.orden - +b.orden);
-  const best = maxBy(ems, 'pct_clic'), worst = minBy(ems, 'pct_clic');
-  const ent = em.find((r) => r.paso === 'Entregado'), clic = em.find((r) => /clic/i.test(r.paso));
-  concl('cc-nurturing', best ? 'El email con más clics es <b>' + esc(best.email) + '</b> (' + esc(best.flujo) + ', ' + fPct(best.pct_clic) + '). ' + (ent && clic ? 'De cada 100 emails entregados, ' + nf1.format(100 * +clic.valor / +ent.valor) + ' reciben clic.' : '') : 'Sin datos para esta región.',
-    worst ? 'Acción sugerida: reescribir el asunto y la llamada a la acción de «' + worst.email + '» (' + fPct(worst.pct_clic) + ' de clic).' : '');
-  hbars($('hb-embudo'), em, 'paso', [{f: 'valor', label: 'Total', fmt: fInt, color: C.blue}], {sub: (r) => ent && r !== ent ? nf1.format(100 * +r.valor / +ent.valor) + ' % de los entregados' : ''});
-  table($('t-emails'), [{h: 'Flujo', f: 'flujo'}, {h: 'Email', f: 'email'}, {h: 'Entregados', f: 'entregados', n: 1, fmt: fInt}, {h: 'Clic', f: 'pct_clic', n: 1, fmt: fPct}, {h: 'Visitas', f: 'visitas', n: 1, fmt: fInt}, {h: 'Conversiones', f: 'conversiones', n: 1, fmt: fInt}, {h: 'Avances', f: 'avances', n: 1, fmt: fInt}], ems);
-}
-
-// ---------- SEO ----------
-function vSeo() {
-  const s = R('seo').sort((a, b) => +b.sesiones - +a.sesiones);
-  const top5 = s.slice(0, 5), low = minBy(top5, 'pct_conv');
-  const opp = s.filter((r) => +r.posicion > 4 && +r.xqls > 0).sort((a, b) => +b.xqls - +a.xqls)[0];
-  concl('cc-seo', low ? 'Entre las cinco páginas con más tráfico, la que menos convierte es <b>' + esc(low.pagina) + '</b> (' + fPct(low.pct_conv) + ' de sus sesiones).' + (opp ? ' La mayor oportunidad SEO es <b>' + esc(opp.pagina) + '</b>: genera ' + fInt(opp.xqls) + ' XQLs desde la posición ' + nf1.format(+opp.posicion) + '.' : '') : 'Sin datos para esta región.',
-    'Acción sugerida: revisar la propuesta y el CTA de las páginas con mucho tráfico y poca conversión, y priorizar el SEO de las que ya traen buenos leads.');
-  scatter($('ch-seo'), s, {x: 'posicion', y: 'impresiones', r: 'xqls', label: 'pagina', color: () => C.violet, yLog: true, xfmt: (v) => nf0.format(v), yfmt: (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v),
-    lines: (r) => ['Posición media: ' + nf1.format(+r.posicion), 'Impresiones: ' + fInt(r.impresiones), 'XQLs: ' + fInt(r.xqls)], refX: 10});
-  table($('t-seo'), [{h: 'Página', f: 'pagina'}, {h: 'Sesiones', f: 'sesiones', n: 1, fmt: fInt}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Conversión', f: 'pct_conv', n: 1, fmt: fPct}, {h: 'Impresiones', f: 'impresiones', n: 1, fmt: fInt}, {h: 'CTR', f: 'ctr', n: 1, fmt: fPct}, {h: 'Posición', f: 'posicion', n: 1, fmt: (v) => nf1.format(+v)}], s);
+// ---------- IA ----------
+function vIa() {
+  const ch = D.channels || [], ai = ch.find((r) => r.sessionDefaultChannelGrouping === 'AI Assistant'), k = K();
+  const src = (D.llmSources || []).slice().sort((a, b) => +b.sessions - +a.sessions);
+  const ref = (D.sourceMedium || []).filter((r) => /chatgpt|gemini|claude|perplexity|copilot/.test(r.sessionSourceMedium) && /referral/.test(r.sessionSourceMedium));
+  const refSes = d3.sum(ref, (r) => +r.sessions);
+  concl('cc-ia', ai ? 'Los asistentes de IA traen <b>' + fInt(ai.sessions) + '</b> sesiones con una conversión del <b>' + fRate(ai.sessionConversionRate) + '</b>, ' + nf1.format(+ai.sessionConversionRate / siteRate()) + ' veces la media del sitio. ' + (src[0] ? esc(src[0].sessionSource) + ' aporta el ' + nf0.format(100 * +src[0].sessions / +ai.sessions) + ' %.' : '') : 'Sin datos.',
+    refSes ? 'Otras ' + nf0.format(refSes) + ' sesiones desde asistentes de IA aparecen como referidos y no en este canal, así que el peso real de la IA es mayor de lo que muestra.' : '');
+  const rows = [
+    {n: 'Asistentes de IA', s: ai && ai.sessions, e: ai && ai.engagementRate, c: ai && ai.conversions, r: ai && ai.sessionConversionRate},
+    {n: 'Toda la web', s: k.sessions, e: k.engagementRate, c: k.conversions, r: k.sessionConversionRate}
+  ];
+  table($('t-aivs'), [{h: '', html: (r) => '<b style="font-weight:500">' + r.n + '</b>'}, {h: 'Sesiones', f: 's', n: 1, fmt: fInt}, {h: 'Interacción', f: 'e', n: 1, fmt: fRate1}, {h: 'Conversiones', f: 'c', n: 1, fmt: fInt}, {h: 'Tasa conv.', f: 'r', n: 1, fmt: fRate}], rows);
+  const lm = D.llmMonthly || [];
+  barChart($('ch-aim'), lm.map((r) => MONTHS[+r.yearMonth.split('-')[1] - 1]), [{name: 'Sesiones', color: C.violet, vals: lm.map((r) => +r.sessions)}, {name: 'Conversiones', color: C.green, vals: lm.map((r) => +r.conversions)}], 230, (v) => nf0.format(v), false, (i) => MONTHS[+lm[i].yearMonth.split('-')[1] - 1] + ' 2026' + (i === lm.length - 1 ? ' (incompleto)' : ''));
+  table($('t-ais'), [{h: 'Asistente', f: 'sessionSource', cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duración', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], src);
+  table($('t-ail'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duración media', f: 'averageSessionDuration', n: 1, fmt: fDur, cls: (r) => +r.averageSessionDuration < 20 ? 'neg' : ''}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], D.llmLanding || []);
 }
 
 // ---------- Navegación ----------
-const VIEWS = {resumen: vResumen, origen: vOrigen, paginas: vPaginas, leads: vLeads, nurturing: vNurturing, seo: vSeo};
+const VIEWS = {resumen: vResumen, evolucion: vEvolucion, adquisicion: vAdquisicion, audiencia: vAudiencia, paginas: vPaginas, conversiones: vConversiones, ia: vIa};
 function render() { hideTip(); try { VIEWS[TAB](); } catch (e) { console.error(e); $('errors').innerHTML = '<div class="err">Error al dibujar la vista: ' + esc(e.message) + '</div>'; } }
-
-function setRegion(r) {
-  REGION = r;
-  document.querySelectorAll('.reg').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.r === r)));
-  $('mreg').value = r;
-  $('hero-sub').textContent = 'veridas.com · ' + (r === 'Todas' ? 'todas las regiones' : r) + ' · últimos 90 días';
-  render();
-}
 function setTab(t, push) {
   if (!VIEWS[t]) t = 'resumen';
   TAB = t;
   document.querySelectorAll('.tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.t === t)));
+  document.querySelectorAll('.nav').forEach((b) => b.setAttribute('aria-current', String(b.dataset.t === t)));
   document.querySelectorAll('.view').forEach((v) => { v.hidden = v.id !== 'v-' + t; });
   if (push) history.replaceState(null, '', '#' + t);
   render();
 }
-
-function buildChrome() {
-  $('tabs').innerHTML = TABS.map(([id, l, ic]) => '<button class="tab" role="tab" data-t="' + id + '" aria-selected="false"><svg viewBox="0 0 24 24">' + ic + '</svg>' + l + '</button>').join('');
-  $('tabs').addEventListener('click', (e) => { const b = e.target.closest('.tab'); if (b) setTab(b.dataset.t, true); });
-  const lc = (r) => { const k = (D.kpis || []).find((x) => x.region === r); return k ? fInt(k.leads) : ''; };
-  $('regions').innerHTML = REGIONS.map((r) => '<button class="reg" data-r="' + r + '" aria-pressed="false"><span class="dot"></span>' + (r === 'Todas' ? 'Todas las regiones' : r) + '<em>' + lc(r) + '</em></button>').join('');
-  $('regions').addEventListener('click', (e) => { const b = e.target.closest('.reg'); if (b) setRegion(b.dataset.r); });
-  $('mreg').innerHTML = REGIONS.map((r) => '<option value="' + r + '">' + (r === 'Todas' ? 'Todas las regiones' : r) + '</option>').join('');
-  $('mreg').addEventListener('change', (e) => setRegion(e.target.value));
+function chrome() {
+  $('tabs').innerHTML = VIEWS_DEF.map(([id, l, ic]) => '<button class="tab" role="tab" data-t="' + id + '"><svg viewBox="0 0 24 24">' + ic + '</svg>' + l + '</button>').join('');
+  $('sidenav').innerHTML = VIEWS_DEF.map(([id, l, ic]) => '<button class="nav" data-t="' + id + '"><svg viewBox="0 0 24 24">' + ic + '</svg>' + l + '</button>').join('');
+  const go = (e) => { const b = e.target.closest('[data-t]'); if (b) { setTab(b.dataset.t, true); scrollTo(0, 0); } };
+  $('tabs').addEventListener('click', go); $('sidenav').addEventListener('click', go);
   document.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => { setTab(b.dataset.go, true); scrollTo(0, 0); }));
-  $('seg-metric').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; METRIC = b.dataset.m; $('seg-metric').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); render(); });
-  $('replay').addEventListener('click', () => route($('ch-route'), R('ruta').sort((a, b) => +a.paso - +b.paso), true));
-  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { lastRouteKey = REGION; render(); }, 150); });
+  $('seg-month').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; MMETRIC = b.dataset.m; $('seg-month').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); render(); });
+  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(render, 150); });
   addEventListener('hashchange', () => setTab(location.hash.slice(1), false));
-}
 
+  const meta = (D.meta && D.meta[0]) || {};
+  const upd = meta.actualizado ? new Date(meta.actualizado + 'T12:00:00') : null;
+  const fUpd = upd ? upd.getDate() + ' ' + MONTHS[upd.getMonth()] + ' ' + upd.getFullYear() : '—';
+  $('hero-sub').textContent = 'veridas.com · Google Analytics 4 · ' + (meta.periodo || '') + ', frente al ' + (meta.comparacion || '');
+  $('hero-chips').innerHTML = '<span class="chip g">Datos reales</span><span class="chip">Actualizado el ' + fUpd + '</span>';
+  $('side-period').innerHTML = '<span class="dot"></span>' + esc(meta.periodo || '');
+  $('side-updated').innerHTML = '<span class="dot"></span>Actualizado el ' + fUpd;
+  const ws = warnings();
+  $('side-alerts').innerHTML = ws.length ? '<strong class="red">' + ws.length + (ws.length === 1 ? ' aviso' : ' avisos') + '</strong>' + esc(ws[0].title) : '<strong>Sin avisos</strong>Ningún dato fuera de lo normal.';
+  $('alert').innerHTML = ws.map((w) => '<div class="alert"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></svg></div><div><b>' + esc(w.title) + '</b><p>' + esc(w.text) + '</p></div></div>').join('');
+}
 async function start() {
-  if (!window.d3) { $('errors').innerHTML = '<div class="err">No se ha podido cargar la librería de gráficos (d3). Comprueba la conexión a internet.</div>'; return; }
+  if (!window.d3) { $('errors').innerHTML = '<div class="err">No se ha podido cargar la librería de gráficos. Comprueba la conexión a internet.</div>'; return; }
   const missing = [];
-  await Promise.all(FILES.map((f) => d3.csv(f + '.csv').then((rows) => { D[f] = rows; }).catch(() => { D[f] = []; missing.push(f + '.csv'); })));
-  if (missing.length) $('errors').innerHTML = '<div class="err">Faltan estos ficheros junto a index.html: ' + esc(missing.join(', ')) + '. Súbelos a la misma carpeta del repositorio.</div>';
-  buildChrome();
-  setRegion('Todas');
+  await Promise.all(FILES.map((f) => d3.csv(f + '.csv').then((r) => { D[f] = r; }).catch(() => { D[f] = []; missing.push(f + '.csv'); })));
+  if (missing.length) $('errors').innerHTML = '<div class="err">Faltan estos ficheros junto a index.html: ' + esc(missing.join(', ')) + '.</div>';
+  chrome();
   setTab(location.hash.slice(1), false);
 }
 start();

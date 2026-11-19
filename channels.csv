@@ -1,0 +1,13 @@
+sessionDefaultChannelGrouping,sessions,sessions_chg,engagementRate,engagementRate_chg,conversions,conversions_chg,sessionConversionRate,sessionConversionRate_chg
+Organic Search,258098,135.17,0.44,-23.16,1461,-18.33,0.0031,-63.58
+Direct,49267,58.17,0.3716,-26.58,476,-28.64,0.0057,-49.03
+Cross-network,22478,12.97,0.3684,-29.59,128,-66.67,0.0036,-76.74
+Paid Search,19416,-45.54,0.4381,-13.02,207,-59.96,0.0069,-28.89
+Referral,11975,39.08,0.3789,-32.75,137,-40.43,0.0066,-53.44
+Unassigned,5618,-14.99,0.186,25.83,27,-55,0.0028,-47.72
+Organic Social,3676,25.89,0.3594,-29.72,35,-44.44,0.0057,-46.19
+Email,1884,208.35,0.4591,-14.73,48,220,0.0143,25.09
+AI Assistant,948,,0.4146,,11,,0.0105,
+Paid Social,853,23.44,0.1735,-57.18,10,-23.08,0.0035,-69.62
+Organic Shopping,144,-82.48,0.3333,-39.78,2,-93.55,0.0139,-54.33
+Paid Other,64,-40.19,0.3906,-9.14,0,-100,0,-100

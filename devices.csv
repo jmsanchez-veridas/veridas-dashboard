@@ -1,0 +1,5 @@
+deviceCategory,sessions,sessions_chg,averageSessionDuration,averageSessionDuration_chg,engagementRate,engagementRate_chg,conversions,conversions_chg,sessionConversionRate,sessionConversionRate_chg
+desktop,188624,34.28,122.1852,-24.55,0.4404,-22.33,2118,-30.51,0.0064,-45.67
+mobile,174860,136.51,54.1764,-14.93,0.3996,-19.26,411,-42.11,0.0015,-79.14
+tablet,2982,106.08,66.436,6.26,0.3712,-17.36,13,-13.33,0.0023,-57.54
+smart tv,192,231.03,29.712,-55.79,0.4583,-8.33,0,,0,
