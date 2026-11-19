@@ -1,0 +1,51 @@
+region,pagina,leads,xqls,pct_xql,vistas,envios,pct_activacion
+Todas,Solicitar demo,148,59,39.9,1900,164,8.6
+Europa,Solicitar demo,71,30,42.3,819,63,7.7
+USA,Solicitar demo,21,6,28.6,321,29,9.0
+Brasil,Solicitar demo,15,5,33.3,250,23,9.2
+LATAM,Solicitar demo,41,18,43.9,510,49,9.6
+Todas,Contacto,121,33,27.3,2300,154,6.7
+Europa,Contacto,47,12,25.5,1104,78,7.1
+USA,Contacto,22,6,27.3,284,18,6.3
+Brasil,Contacto,14,3,21.4,252,18,7.1
+LATAM,Contacto,38,12,31.6,660,40,6.1
+Todas,Verificación de identidad,83,19,22.9,5200,175,3.4
+Europa,Verificación de identidad,39,10,25.6,2060,66,3.2
+USA,Verificación de identidad,10,2,20.0,855,31,3.6
+Brasil,Verificación de identidad,8,2,25.0,654,21,3.2
+LATAM,Verificación de identidad,26,5,19.2,1631,57,3.5
+Todas,Biometría de voz,53,13,24.5,2099,83,4.0
+Europa,Biometría de voz,26,6,23.1,1077,41,3.8
+USA,Biometría de voz,7,2,28.6,272,10,3.7
+Brasil,Biometría de voz,7,2,28.6,277,12,4.3
+LATAM,Biometría de voz,13,3,23.1,473,20,4.2
+Todas,Biometría facial,47,10,21.3,2600,82,3.2
+Europa,Biometría facial,22,5,22.7,1279,43,3.4
+USA,Biometría facial,7,2,28.6,433,13,3.0
+Brasil,Biometría facial,6,1,16.7,265,7,2.6
+LATAM,Biometría facial,12,2,16.7,623,19,3.0
+Todas,Casos de éxito,42,13,31.0,1500,65,4.3
+Europa,Casos de éxito,17,5,29.4,682,26,3.8
+USA,Casos de éxito,6,2,33.3,251,12,4.8
+Brasil,Casos de éxito,6,2,33.3,208,11,5.3
+LATAM,Casos de éxito,13,4,30.8,359,16,4.5
+Todas,Precios,38,12,31.6,1200,71,5.9
+Europa,Precios,19,6,31.6,546,35,6.4
+USA,Precios,6,2,33.3,201,13,6.5
+Brasil,Precios,4,1,25.0,145,7,4.8
+LATAM,Precios,9,3,33.3,308,16,5.2
+Todas,Recursos: guía KYC,63,8,12.7,2900,74,2.6
+Europa,Recursos: guía KYC,28,4,14.3,1226,35,2.9
+USA,Recursos: guía KYC,9,1,11.1,423,10,2.4
+Brasil,Recursos: guía KYC,8,1,12.5,315,8,2.5
+LATAM,Recursos: guía KYC,18,2,11.1,936,21,2.2
+Todas,Blog,32,1,3.1,7400,41,0.6
+Europa,Blog,16,1,6.2,3413,17,0.5
+USA,Blog,4,0,0.0,1248,7,0.6
+Brasil,Blog,4,0,0.0,818,5,0.6
+LATAM,Blog,8,0,0.0,1921,12,0.6
+Todas,Home,16,3,18.8,9800,38,0.4
+Europa,Home,6,1,16.7,4254,15,0.4
+USA,Home,3,1,33.3,1784,8,0.4
+Brasil,Home,2,0,0.0,1069,5,0.5
+LATAM,Home,5,1,20.0,2693,10,0.4

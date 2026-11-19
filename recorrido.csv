@@ -1,0 +1,36 @@
+region,pagina,pct_con_deal,pct_sin_deal
+Todas,Casos de éxito,64,22
+Europa,Casos de éxito,61,17
+USA,Casos de éxito,73,17
+Brasil,Casos de éxito,59,27
+LATAM,Casos de éxito,71,20
+Todas,Precios,58,17
+Europa,Precios,60,13
+USA,Precios,65,15
+Brasil,Precios,52,22
+LATAM,Precios,60,14
+Todas,Solicitar demo,71,38
+Europa,Solicitar demo,77,39
+USA,Solicitar demo,74,32
+Brasil,Solicitar demo,67,32
+LATAM,Solicitar demo,77,42
+Todas,Documentación técnica,46,9
+Europa,Documentación técnica,51,9
+USA,Documentación técnica,46,14
+Brasil,Documentación técnica,41,9
+LATAM,Documentación técnica,48,9
+Todas,Verificación de identidad,55,41
+Europa,Verificación de identidad,56,36
+USA,Verificación de identidad,56,35
+Brasil,Verificación de identidad,56,47
+LATAM,Verificación de identidad,56,41
+Todas,Seguridad y certificaciones,39,8
+Europa,Seguridad y certificaciones,33,5
+USA,Seguridad y certificaciones,30,13
+Brasil,Seguridad y certificaciones,39,6
+LATAM,Seguridad y certificaciones,41,3
+Todas,Blog,21,33
+Europa,Blog,24,33
+USA,Blog,30,28
+Brasil,Blog,23,33
+LATAM,Blog,20,27

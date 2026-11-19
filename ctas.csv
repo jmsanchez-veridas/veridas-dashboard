@@ -1,0 +1,36 @@
+region,cta,ubicacion,vistas,clics,ctr,leads,xqls
+Todas,Solicita una demo,Cabecera,41000,963,2.3,147,44
+Europa,Solicita una demo,Cabecera,18535,465,2.5,73,18
+USA,Solicita una demo,Cabecera,5534,134,2.4,20,6
+Brasil,Solicita una demo,Cabecera,5127,101,2.0,14,4
+LATAM,Solicita una demo,Cabecera,11804,263,2.2,40,16
+Todas,Habla con un experto,Páginas de producto,12500,404,3.2,89,41
+Europa,Habla con un experto,Páginas de producto,5080,165,3.2,32,14
+USA,Habla con un experto,Páginas de producto,2212,63,2.8,16,8
+Brasil,Habla con un experto,Páginas de producto,1385,41,3.0,10,5
+LATAM,Habla con un experto,Páginas de producto,3823,135,3.5,31,14
+Todas,Descarga la guía KYC,Blog,9800,511,5.2,135,14
+Europa,Descarga la guía KYC,Blog,4600,244,5.3,69,7
+USA,Descarga la guía KYC,Blog,1417,65,4.6,18,2
+Brasil,Descarga la guía KYC,Blog,1282,70,5.5,20,2
+LATAM,Descarga la guía KYC,Blog,2501,132,5.3,28,3
+Todas,Ver casos de éxito,Home,15199,397,2.6,18,4
+Europa,Ver casos de éxito,Home,6924,167,2.4,7,2
+USA,Ver casos de éxito,Home,2243,77,3.4,4,1
+Brasil,Ver casos de éxito,Home,1941,46,2.4,2,0
+LATAM,Ver casos de éxito,Home,4091,107,2.6,5,1
+Todas,Prueba gratuita,Precios,2101,155,7.4,47,14
+Europa,Prueba gratuita,Precios,859,62,7.2,19,6
+USA,Prueba gratuita,Precios,392,31,7.9,10,3
+Brasil,Prueba gratuita,Precios,310,24,7.7,6,2
+LATAM,Prueba gratuita,Precios,540,38,7.0,12,3
+Todas,Suscríbete,Pie de página,38000,150,0.4,45,2
+Europa,Suscríbete,Pie de página,18713,66,0.4,21,1
+USA,Suscríbete,Pie de página,5019,21,0.4,7,0
+Brasil,Suscríbete,Pie de página,3638,12,0.3,4,0
+LATAM,Suscríbete,Pie de página,10630,51,0.5,13,1
+Todas,Reserva una reunión,Casos de éxito,1899,119,6.3,44,19
+Europa,Reserva una reunión,Casos de éxito,854,55,6.4,22,10
+USA,Reserva una reunión,Casos de éxito,307,16,5.2,4,2
+Brasil,Reserva una reunión,Casos de éxito,211,11,5.2,3,1
+LATAM,Reserva una reunión,Casos de éxito,527,37,7.0,15,6

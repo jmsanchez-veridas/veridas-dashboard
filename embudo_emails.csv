@@ -1,0 +1,31 @@
+region,paso,orden,valor
+Todas,Entregado,1,27678
+Todas,Abierto,2,10603
+Todas,Clic,3,1830
+Todas,Visita,4,1466
+Todas,Conversión,5,273
+Todas,Avance a XQL o Deal,6,80
+Europa,Entregado,1,12337
+Europa,Abierto,2,4703
+Europa,Clic,3,821
+Europa,Visita,4,665
+Europa,Conversión,5,123
+Europa,Avance a XQL o Deal,6,38
+USA,Entregado,1,3984
+USA,Abierto,2,1568
+USA,Clic,3,255
+USA,Visita,4,194
+USA,Conversión,5,35
+USA,Avance a XQL o Deal,6,9
+Brasil,Entregado,1,3337
+Brasil,Abierto,2,1291
+Brasil,Clic,3,221
+Brasil,Visita,4,177
+Brasil,Conversión,5,29
+Brasil,Avance a XQL o Deal,6,7
+LATAM,Entregado,1,8020
+LATAM,Abierto,2,3041
+LATAM,Clic,3,533
+LATAM,Visita,4,430
+LATAM,Conversión,5,86
+LATAM,Avance a XQL o Deal,6,26

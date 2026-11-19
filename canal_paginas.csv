@@ -1,0 +1,211 @@
+region,canal,pagina,pct_leads
+Todas,Orgánico,Home,62
+Europa,Orgánico,Home,62
+USA,Orgánico,Home,61
+Brasil,Orgánico,Home,63
+LATAM,Orgánico,Home,59
+Todas,Orgánico,Contacto,18
+Europa,Orgánico,Contacto,25
+USA,Orgánico,Contacto,13
+Brasil,Orgánico,Contacto,24
+LATAM,Orgánico,Contacto,17
+Todas,Orgánico,Solicitar demo,22
+Europa,Orgánico,Solicitar demo,28
+USA,Orgánico,Solicitar demo,23
+Brasil,Orgánico,Solicitar demo,19
+LATAM,Orgánico,Solicitar demo,26
+Todas,Orgánico,Verificación de identidad,41
+Europa,Orgánico,Verificación de identidad,40
+USA,Orgánico,Verificación de identidad,39
+Brasil,Orgánico,Verificación de identidad,44
+LATAM,Orgánico,Verificación de identidad,48
+Todas,Orgánico,Casos de éxito,19
+Europa,Orgánico,Casos de éxito,18
+USA,Orgánico,Casos de éxito,15
+Brasil,Orgánico,Casos de éxito,14
+LATAM,Orgánico,Casos de éxito,13
+Todas,Orgánico,Precios,14
+Europa,Orgánico,Precios,9
+USA,Orgánico,Precios,9
+Brasil,Orgánico,Precios,10
+LATAM,Orgánico,Precios,17
+Todas,Directo,Home,55
+Europa,Directo,Home,51
+USA,Directo,Home,48
+Brasil,Directo,Home,55
+LATAM,Directo,Home,61
+Todas,Directo,Contacto,31
+Europa,Directo,Contacto,33
+USA,Directo,Contacto,26
+Brasil,Directo,Contacto,28
+LATAM,Directo,Contacto,28
+Todas,Directo,Solicitar demo,35
+Europa,Directo,Solicitar demo,28
+USA,Directo,Solicitar demo,30
+Brasil,Directo,Solicitar demo,34
+LATAM,Directo,Solicitar demo,36
+Todas,Directo,Verificación de identidad,24
+Europa,Directo,Verificación de identidad,22
+USA,Directo,Verificación de identidad,26
+Brasil,Directo,Verificación de identidad,26
+LATAM,Directo,Verificación de identidad,22
+Todas,Directo,Casos de éxito,16
+Europa,Directo,Casos de éxito,11
+USA,Directo,Casos de éxito,20
+Brasil,Directo,Casos de éxito,22
+LATAM,Directo,Casos de éxito,17
+Todas,Directo,Precios,21
+Europa,Directo,Precios,23
+USA,Directo,Precios,24
+Brasil,Directo,Precios,24
+LATAM,Directo,Precios,25
+Todas,Referido,Home,28
+Europa,Referido,Home,21
+USA,Referido,Home,28
+Brasil,Referido,Home,35
+LATAM,Referido,Home,34
+Todas,Referido,Contacto,24
+Europa,Referido,Contacto,29
+USA,Referido,Contacto,30
+Brasil,Referido,Contacto,27
+LATAM,Referido,Contacto,29
+Todas,Referido,Solicitar demo,38
+Europa,Referido,Solicitar demo,39
+USA,Referido,Solicitar demo,37
+Brasil,Referido,Solicitar demo,37
+LATAM,Referido,Solicitar demo,37
+Todas,Referido,Verificación de identidad,36
+Europa,Referido,Verificación de identidad,35
+USA,Referido,Verificación de identidad,30
+Brasil,Referido,Verificación de identidad,36
+LATAM,Referido,Verificación de identidad,39
+Todas,Referido,Casos de éxito,33
+Europa,Referido,Casos de éxito,32
+USA,Referido,Casos de éxito,26
+Brasil,Referido,Casos de éxito,29
+LATAM,Referido,Casos de éxito,27
+Todas,Referido,Precios,17
+Europa,Referido,Precios,13
+USA,Referido,Precios,17
+Brasil,Referido,Precios,12
+LATAM,Referido,Precios,11
+Todas,AI Referrals,Home,19
+Europa,AI Referrals,Home,17
+USA,AI Referrals,Home,21
+Brasil,AI Referrals,Home,12
+LATAM,AI Referrals,Home,13
+Todas,AI Referrals,Contacto,58
+Europa,AI Referrals,Contacto,51
+USA,AI Referrals,Contacto,60
+Brasil,AI Referrals,Contacto,53
+LATAM,AI Referrals,Contacto,59
+Todas,AI Referrals,Solicitar demo,34
+Europa,AI Referrals,Solicitar demo,28
+USA,AI Referrals,Solicitar demo,32
+Brasil,AI Referrals,Solicitar demo,36
+LATAM,AI Referrals,Solicitar demo,27
+Todas,AI Referrals,Verificación de identidad,27
+Europa,AI Referrals,Verificación de identidad,21
+USA,AI Referrals,Verificación de identidad,33
+Brasil,AI Referrals,Verificación de identidad,23
+LATAM,AI Referrals,Verificación de identidad,29
+Todas,AI Referrals,Casos de éxito,22
+Europa,AI Referrals,Casos de éxito,21
+USA,AI Referrals,Casos de éxito,17
+Brasil,AI Referrals,Casos de éxito,25
+LATAM,AI Referrals,Casos de éxito,19
+Todas,AI Referrals,Precios,29
+Europa,AI Referrals,Precios,27
+USA,AI Referrals,Precios,31
+Brasil,AI Referrals,Precios,27
+LATAM,AI Referrals,Precios,29
+Todas,Redes sociales,Home,47
+Europa,Redes sociales,Home,41
+USA,Redes sociales,Home,41
+Brasil,Redes sociales,Home,53
+LATAM,Redes sociales,Home,47
+Todas,Redes sociales,Contacto,9
+Europa,Redes sociales,Contacto,9
+USA,Redes sociales,Contacto,9
+Brasil,Redes sociales,Contacto,9
+LATAM,Redes sociales,Contacto,6
+Todas,Redes sociales,Solicitar demo,12
+Europa,Redes sociales,Solicitar demo,6
+USA,Redes sociales,Solicitar demo,7
+Brasil,Redes sociales,Solicitar demo,6
+LATAM,Redes sociales,Solicitar demo,16
+Todas,Redes sociales,Verificación de identidad,31
+Europa,Redes sociales,Verificación de identidad,29
+USA,Redes sociales,Verificación de identidad,35
+Brasil,Redes sociales,Verificación de identidad,28
+LATAM,Redes sociales,Verificación de identidad,31
+Todas,Redes sociales,Casos de éxito,26
+Europa,Redes sociales,Casos de éxito,32
+USA,Redes sociales,Casos de éxito,30
+Brasil,Redes sociales,Casos de éxito,21
+LATAM,Redes sociales,Casos de éxito,27
+Todas,Redes sociales,Precios,8
+Europa,Redes sociales,Precios,2
+USA,Redes sociales,Precios,4
+Brasil,Redes sociales,Precios,9
+LATAM,Redes sociales,Precios,6
+Todas,Email,Home,14
+Europa,Email,Home,9
+USA,Email,Home,18
+Brasil,Email,Home,15
+LATAM,Email,Home,21
+Todas,Email,Contacto,22
+Europa,Email,Contacto,15
+USA,Email,Contacto,27
+Brasil,Email,Contacto,23
+LATAM,Email,Contacto,19
+Todas,Email,Solicitar demo,44
+Europa,Email,Solicitar demo,47
+USA,Email,Solicitar demo,50
+Brasil,Email,Solicitar demo,38
+LATAM,Email,Solicitar demo,48
+Todas,Email,Verificación de identidad,29
+Europa,Email,Verificación de identidad,35
+USA,Email,Verificación de identidad,26
+Brasil,Email,Verificación de identidad,30
+LATAM,Email,Verificación de identidad,27
+Todas,Email,Casos de éxito,37
+Europa,Email,Casos de éxito,44
+USA,Email,Casos de éxito,32
+Brasil,Email,Casos de éxito,35
+LATAM,Email,Casos de éxito,42
+Todas,Email,Precios,25
+Europa,Email,Precios,21
+USA,Email,Precios,26
+Brasil,Email,Precios,26
+LATAM,Email,Precios,30
+Todas,De pago,Home,21
+Europa,De pago,Home,22
+USA,De pago,Home,19
+Brasil,De pago,Home,24
+LATAM,De pago,Home,17
+Todas,De pago,Contacto,16
+Europa,De pago,Contacto,18
+USA,De pago,Contacto,21
+Brasil,De pago,Contacto,21
+LATAM,De pago,Contacto,21
+Todas,De pago,Solicitar demo,57
+Europa,De pago,Solicitar demo,63
+USA,De pago,Solicitar demo,53
+Brasil,De pago,Solicitar demo,62
+LATAM,De pago,Solicitar demo,53
+Todas,De pago,Verificación de identidad,33
+Europa,De pago,Verificación de identidad,39
+USA,De pago,Verificación de identidad,32
+Brasil,De pago,Verificación de identidad,37
+LATAM,De pago,Verificación de identidad,38
+Todas,De pago,Casos de éxito,12
+Europa,De pago,Casos de éxito,8
+USA,De pago,Casos de éxito,8
+Brasil,De pago,Casos de éxito,13
+LATAM,De pago,Casos de éxito,12
+Todas,De pago,Precios,19
+Europa,De pago,Precios,17
+USA,De pago,Precios,23
+Brasil,De pago,Precios,12
+LATAM,De pago,Precios,12

@@ -1,803 +1,887 @@
-<meta name="dash-one-writer">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veridas · Conversión web → HubSpot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
-.vx{display:flex;flex-direction:column;gap:var(--cds-gap-lg);font-family:var(--font-anthropic-sans);color:var(--color-fg);font-size:var(--cds-font-size-body)}
-.vx-head{display:flex;flex-wrap:wrap;gap:var(--cds-gap-md);align-items:flex-end;justify-content:space-between}
-.vx-title{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
-.vx-sub{color:var(--color-fg-muted);margin:4px 0 0}
-.vx-lead{margin:0;max-width:70ch}
-.vx-badge{display:inline-block;border:1px solid var(--color-warn);color:var(--color-warn);border-radius:var(--cds-radius);padding:2px 8px;font-size:var(--cds-font-size-caption)}
-.vx-note{margin:0;color:var(--color-warn);font-size:var(--cds-font-size-caption)}
-.vx-ctl{display:flex;flex-direction:column;gap:4px;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
-.vx-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--cds-gap-md)}
-.vx-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
-.vx-kpi-l{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:0}
-.vx-kpi-v{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:4px 0 0;font-variant-numeric:tabular-nums}
-.vx-kpi-d{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:2px 0 0}
-.vx-tabs{display:flex;flex-wrap:wrap;gap:var(--cds-gap-xs);border-bottom:1px solid var(--color-border-line)}
-.vx-tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;font:inherit;color:var(--color-fg-muted);cursor:pointer}
-.vx-tab[aria-selected="true"]{color:var(--color-fg);border-bottom-color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
-.vx-page{display:flex;flex-direction:column;gap:var(--cds-gap-lg)}
-.vx-page[hidden]{display:none}
-.vx-concl{margin:0;padding:var(--cds-pad-md);border-left:3px solid var(--color-fg);background:var(--color-panel);border-radius:var(--cds-radius)}
-.vx-concl p{margin:0}
-.vx-concl p+p{margin-top:6px;color:var(--color-fg-muted)}
-.vx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:var(--cds-gap-lg)}
-.vx-h{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 4px}
-.vx-cap{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:0 0 12px}
-.vx-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:0 0 10px}
-.vx-sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-.vx-chart{position:relative;min-height:160px}
-.vx-row{display:grid;grid-template-columns:minmax(84px,34%) 1fr;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--cds-chart-grid)}
-.vx-row:last-of-type{border-bottom:0}
-.vx-lab{font-size:var(--cds-font-size-caption);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.vx-bars{display:flex;flex-direction:column;gap:3px;min-width:0}
-.vx-barline{display:flex;align-items:center;gap:6px;min-width:0}
-.vx-bar{height:10px;border-radius:2px;min-width:2px;flex:none}
-.vx-val{font-size:var(--cds-font-size-caption);color:var(--cds-text-secondary);font-variant-numeric:tabular-nums;white-space:nowrap}
-.vx-tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);box-shadow:var(--cds-shadow-popover);border-radius:var(--cds-radius);padding:6px 8px;font-size:var(--cds-font-size-caption);max-width:240px;z-index:2}
-.vx-tip[hidden]{display:none}
-.vx-scroll{overflow-x:auto}
-.vx-table{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption)}
-.vx-table th{text-align:left;font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted);padding:6px 8px;border-bottom:1px solid var(--color-border-line);white-space:nowrap}
-.vx-table td{padding:6px 8px;border-bottom:1px solid var(--cds-chart-grid);vertical-align:middle}
-.vx-table .vx-num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.vx-mx td.vx-cell{text-align:center;font-variant-numeric:tabular-nums}
-.vx-score{display:flex;align-items:center;gap:6px;justify-content:flex-end}
-.vx-btn{appearance:none;font:inherit;font-size:var(--cds-font-size-caption);background:var(--color-bg);color:var(--color-fg);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:5px 10px;cursor:pointer}
-.vx-cardhead{display:flex;flex-wrap:wrap;gap:var(--cds-gap-sm);justify-content:space-between;align-items:flex-start}
-.vx-route{display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-width:220px}
-.vx-chip{border:1px solid var(--color-border-line);border-radius:999px;padding:1px 7px;white-space:nowrap}
-.vx-chip-first{background:var(--color-bg);font-weight:var(--cds-font-weight-medium)}
-.vx-arrow{color:var(--color-fg-muted)}
-.vx-stack{display:flex;height:16px;border-radius:3px;overflow:hidden;min-width:0}
-.vx-seg{display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--color-bg);font-variant-numeric:tabular-nums;overflow:hidden;min-width:0}
-.vx-sublab{display:block;color:var(--color-fg-muted);font-size:10px;overflow:hidden;text-overflow:ellipsis}
-.vx-map{min-height:250px}
-.vx-plot{min-height:300px}
-.vx-plot text{font-family:var(--font-anthropic-sans);font-size:var(--cds-font-size-caption)}
-.vx-halo{paint-order:stroke;stroke:var(--color-panel);stroke-width:3px;stroke-linejoin:round}
-.vx-map text{font-family:var(--font-anthropic-sans);font-size:var(--cds-font-size-caption)}
-.vx-stop{cursor:default}
-.vx-score i{display:block;height:8px;border-radius:2px;flex:none}
-[data-dash-source-state=refreshing]{opacity:.5}
+:root{
+  --bg:#F7F7F9; --panel:#FFFFFF; --line:#E9E9EF; --line2:#F1F1F5;
+  --ink:#17171C; --muted:#6E6E7A; --faint:#A0A0AB;
+  --blue:#3667F0; --blue-t:#EEF3FF; --green:#2F9E57; --green-t:#EAF6EE; --amber:#C4861A; --amber-t:#FBF3E4; --red:#D6453D; --red-t:#FDEDEC;
+  --rose-bg:#FFF7F7; --rose-bd:#F6DCDC; --mint-bg:#F4FAF7; --mint-bd:#D3EBDF; --lav-bg:#F8F6FF; --lav-bd:#E4DEFA;
+  --brand:#EF5B5B;
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px}
+
+/* Estructura */
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.side{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:10px;padding:22px 22px 20px;border-bottom:1px solid var(--line)}
+.logo{width:30px;height:30px;border-radius:8px;background:var(--brand);color:#fff;font-weight:700;display:grid;place-items:center;font-size:17px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+.brand b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.brand span{display:block;font-size:11.5px;color:var(--muted);margin-top:-2px}
+.side h3{font-size:12px;font-weight:500;color:var(--faint);padding:22px 22px 8px}
+.reg{display:flex;align-items:center;gap:10px;width:calc(100% - 20px);margin:0 10px;padding:9px 12px;border:0;background:none;border-radius:10px;cursor:pointer;text-align:left;font-size:14.5px;color:#33333B}
+.reg:hover{background:var(--bg)}
+.reg[aria-pressed="true"]{background:var(--blue-t);color:var(--blue);font-weight:500}
+.reg .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+.reg[aria-pressed="true"] .dot{background:var(--blue)}
+.reg em{margin-left:auto;font-style:normal;font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side-foot{margin-top:auto;padding:18px 22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.side-foot strong{display:flex;align-items:center;gap:7px;color:var(--amber);font-weight:500;margin-bottom:4px}
+.side-foot strong::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber)}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.top{background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.tabs{display:flex;gap:4px;padding:10px 28px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:9px 14px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:14.5px;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.tab svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--blue-t);color:var(--blue);font-weight:500}
+.mreg{display:none;padding:0 16px 10px}
+.mreg select{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+
+.page{padding:30px 28px 48px;max-width:1440px;width:100%}
+.hero{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.hero .logo{width:52px;height:52px;border-radius:14px;font-size:28px}
+.hero h1{font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.hero h1 span{color:var(--faint);font-weight:400}
+.hero p{color:var(--muted);font-size:14.5px;margin-top:3px}
+.hero .chips{margin-left:auto}
+
+.view[hidden]{display:none}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
+.s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 26px;min-width:0;position:relative}
+.card.rose{background:linear-gradient(160deg,var(--rose-bg),var(--panel) 70%);border-color:var(--rose-bd)}
+.card.mint{background:linear-gradient(160deg,var(--mint-bg),var(--panel) 70%);border-color:var(--mint-bd)}
+.card.lav{background:linear-gradient(160deg,var(--lav-bg),var(--panel) 70%);border-color:var(--lav-bd)}
+.ch{display:flex;align-items:center;gap:12px;margin-bottom:6px;min-height:34px}
+.ch .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--bg)}
+.ch .ic svg{width:18px;height:18px;fill:none;stroke-width:1.7}
+.mint .ic{background:#E1F2EA}.mint .ic svg{stroke:var(--green)}
+.lav .ic{background:#ECE7FD}.lav .ic svg{stroke:#7556E0}
+.rose .ic{background:transparent}.rose .ic svg{stroke:var(--red)}
+.ic svg{stroke:var(--muted)}
+.ch h2{font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.ch .more{margin-left:auto;font-size:13px;color:var(--muted);border:0;background:none;cursor:pointer;white-space:nowrap}
+.ch .more:hover{color:var(--ink)}
+.cap{color:var(--muted);font-size:13.5px;max-width:64ch;margin-bottom:18px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--panel);color:var(--muted)}
+.chip.g{background:var(--green-t);border-color:transparent;color:var(--green)}
+.chip.r{background:var(--red-t);border-color:transparent;color:var(--red)}
+.chip.a{background:var(--amber-t);border-color:transparent;color:var(--amber)}
+
+/* Salud del embudo */
+.health{display:flex;gap:24px;align-items:center;margin:14px 0 22px}
+.health h3{font-size:21px;font-weight:600;letter-spacing:-.015em;line-height:1.3;margin-bottom:12px;max-width:30ch}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;border-top:1px solid var(--line);padding-top:18px}
+.step .row1{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.step .l{font-size:13px;color:var(--muted)}
+.step .v{font-size:20px;font-weight:600;color:var(--green);font-variant-numeric:tabular-nums}
+.step .bar{height:5px;border-radius:5px;background:var(--line2);margin-top:8px;overflow:hidden}
+.step .bar i{display:block;height:100%;background:var(--green);border-radius:5px}
+.step .s{font-size:12px;color:var(--faint);margin-top:6px}
+
+.ring{position:relative;flex:none}
+.ring svg{display:block}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:1px;font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
+.ring b small{font-size:13px;font-weight:500;margin-left:1px}
+
+/* Lista estilo CrUX */
+.mlist{margin-top:14px}
+.mrow{display:grid;grid-template-columns:10px 1fr auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:0}
+.mrow i{width:9px;height:9px;border-radius:50%}
+.mrow b{font-weight:600;display:block}
+.mrow span{color:var(--muted);font-size:12.5px;display:block}
+.mrow code{font-family:var(--mono);font-size:15px;font-weight:500;text-align:right;white-space:nowrap}
+
+.big{font-size:52px;font-weight:600;letter-spacing:-.03em;color:var(--green);line-height:1;margin:18px 0 6px;font-variant-numeric:tabular-nums}
+.bigsub{color:var(--muted);font-size:13.5px}
+.spark{display:flex;gap:4px;align-items:flex-end;height:58px;margin:22px 0 18px}
+.spark i{flex:1;border-radius:3px;background:var(--green);min-height:4px}
+.foot{color:var(--muted);font-size:13.5px}
+.foot b{color:var(--ink);font-weight:500}
+
+.score{display:flex;gap:26px;align-items:center;margin:16px 0 18px}
+.stat b{display:block;font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.stat.r b{color:var(--red)}.stat.a b{color:var(--amber)}.stat.g b{color:var(--green)}.stat.n b{color:var(--faint)}
+
+/* Conclusión de cada vista */
+.concl{grid-column:span 12;display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 24px}
+.concl .ic{width:34px;height:34px;border-radius:10px;background:var(--blue-t);display:grid;place-items:center;flex:none}
+.concl .ic svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:1.8}
+.concl p{font-size:16px;font-weight:500;letter-spacing:-.01em;max-width:80ch}
+.concl p + p{font-size:13.5px;font-weight:400;color:var(--muted);margin-top:4px}
+
+/* Gráficos */
+.chart{position:relative;width:100%}
+.chart svg{display:block;overflow:visible}
+.chart text{font-family:var(--font);font-size:12px;fill:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:5px 12px;border-radius:7px;cursor:pointer;font-size:13px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(23,23,28,.08);font-weight:500}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 13px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.btn.p{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn svg{width:14px;height:14px;fill:currentColor}
+
+.hb{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line2)}
+.hb:last-child{border-bottom:0}
+.hb .lab{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb .lab small{display:block;font-size:11.5px;color:var(--faint)}
+.hb .bars{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hb .bl{display:flex;align-items:center;gap:8px;min-width:0}
+.hb .bl i{height:9px;border-radius:3px;flex:none;min-width:2px}
+.hb .bl em{font-style:normal;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stack{display:flex;height:18px;border-radius:5px;overflow:hidden}
+.stack i{display:grid;place-items:center;font-style:normal;font-size:10.5px;color:#fff;font-weight:500;overflow:hidden}
+
+.tw{overflow-x:auto;margin:0 -6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{text-align:left;font-weight:500;color:var(--muted);font-size:12.5px;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td.nw{white-space:nowrap}
+td{padding:11px 10px;border-bottom:1px solid var(--line2);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.pos{color:var(--green);font-weight:500}td.neg{color:var(--red);font-weight:500}
+.route{display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-width:240px}
+.route span{border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:12px;white-space:nowrap;background:var(--panel)}
+.route span:first-child{background:var(--blue-t);border-color:transparent;color:var(--blue);font-weight:500}
+.route b{color:var(--faint);font-weight:400;font-size:11px}
+.heat{display:inline-flex;align-items:center;gap:8px;justify-content:flex-end}
+.heat i{width:60px;height:6px;border-radius:6px;background:var(--line2);overflow:hidden;display:block}
+.heat i u{display:block;height:100%;border-radius:6px}
+.mx td.c{text-align:center;font-variant-numeric:tabular-nums;font-size:12.5px;border-radius:6px}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:500}
+
+#tip{position:fixed;z-index:100;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(23,23,28,.12);padding:9px 11px;font-size:12.5px;max-width:260px;line-height:1.5}
+#tip[hidden]{display:none}
+#tip strong{display:block;font-weight:600;margin-bottom:2px}
+.empty{color:var(--muted);font-size:13.5px;padding:24px 0}
+.err{grid-column:span 12;background:var(--red-t);color:var(--red);border-radius:var(--r-md);padding:14px 18px;margin-bottom:20px;font-size:13.5px}
+
+@media (max-width:1180px){.s3,.s4,.s5{grid-column:span 6}.s7,.s8{grid-column:span 12}}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}.side{display:none}.mreg{display:block}
+  .tabs{padding:10px 12px}.page{padding:22px 16px 40px}
+  .s3,.s4,.s5,.s6,.s7,.s8{grid-column:span 12}
+  .hero h1{font-size:24px}.hero .chips{margin-left:0}
+  .steps{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="logo">V</div><div><b>Veridas</b><span>Conversión web → HubSpot</span></div></div>
+    <h3>Regiones</h3>
+    <nav id="regions" aria-label="Región"></nav>
+    <div class="side-foot"><strong>Datos de ejemplo</strong>Todas las cifras son inventadas. Últimos 90 días.</div>
+  </aside>
 
-<div class="vx">
-  <header class="vx-head" id="cabecera">
-    <div>
-      <h1 class="vx-title" id="titulo">Conversión web → HubSpot</h1>
-      <p class="vx-sub">Últimos 90 días · <span class="vx-badge">Datos de ejemplo: todas las cifras son inventadas</span></p>
-    </div>
-    <label class="vx-ctl">Región
-      <select class="dash-select" id="sel-region" aria-label="Región">
-        <option value="Todas">Todas las regiones</option>
-        <option value="Europa">Europa</option>
-        <option value="USA">USA</option>
-        <option value="Brasil">Brasil</option>
-        <option value="LATAM">LATAM</option>
-      </select>
-    </label>
-  </header>
+  <div class="main">
+    <header class="top">
+      <nav class="tabs" role="tablist" id="tabs"></nav>
+      <div class="mreg"><select id="mreg" aria-label="Región"></select></div>
+    </header>
 
-  <p class="vx-lead" id="conclusion-general">El canal con mayor paso a XQL es <b data-draw="w-canal-pct" data-source="canales" data-field="canal">—</b> (<span data-draw="n-canal-pct" data-source="canales" data-field="pct_xql">—</span>) y la página que más XQLs genera es <b data-draw="w-pag-xql" data-source="paginas" data-field="pagina">—</b> (<span data-draw="n-pag-xql" data-source="paginas" data-field="xqls">—</span>).</p>
-  <p class="vx-note" id="aviso-muestra" hidden>Muestra reducida en esta región: las conclusiones son orientativas y conviene contrastarlas con el dato global.</p>
+    <main class="page">
+      <div class="hero">
+        <div class="logo">V</div>
+        <div><h1>Veridas<span>, de un vistazo</span></h1><p id="hero-sub">veridas.com · últimos 90 días</p></div>
+        <div class="chips"><span class="chip a">Datos de ejemplo</span></div>
+      </div>
+      <div id="errors"></div>
 
-  <div class="vx-kpis" id="kpis">
-    <div class="vx-card" id="kpi-leads"><p class="vx-kpi-l">Leads</p><p class="vx-kpi-v" data-draw="k-leads" data-source="kpis" data-field="leads">—</p><p class="vx-kpi-d"><span data-draw="k-var" data-source="kpis" data-field="var_leads_pct">—</span> frente a los 90 días anteriores</p></div>
-    <div class="vx-card" id="kpi-xqls"><p class="vx-kpi-l">XQLs</p><p class="vx-kpi-v" data-draw="k-xqls" data-source="kpis" data-field="xqls">—</p><p class="vx-kpi-d">Leads cualificados como buenos</p></div>
-    <div class="vx-card" id="kpi-pct-xql"><p class="vx-kpi-l">Lead → XQL</p><p class="vx-kpi-v" data-draw="k-pct-xql" data-source="kpis" data-field="pct_xql">—</p><p class="vx-kpi-d">Porcentaje de leads que pasa a XQL</p></div>
-    <div class="vx-card" id="kpi-deals"><p class="vx-kpi-l">Deals</p><p class="vx-kpi-v" data-draw="k-deals" data-source="kpis" data-field="deals">—</p><p class="vx-kpi-d">XQLs que generan oportunidad</p></div>
-    <div class="vx-card" id="kpi-pct-deal"><p class="vx-kpi-l">XQL → Deal</p><p class="vx-kpi-v" data-draw="k-pct-deal" data-source="kpis" data-field="pct_deal">—</p><p class="vx-kpi-d">Porcentaje de XQLs con Deal</p></div>
-    <div class="vx-card" id="kpi-gasto"><p class="vx-kpi-l">Inversión</p><p class="vx-kpi-v" data-draw="k-gasto" data-source="kpis" data-field="gasto_eur">—</p><p class="vx-kpi-d">Importe gastado en canales con coste</p></div>
-    <div class="vx-card" id="kpi-pipeline"><p class="vx-kpi-l">Pipeline abierto</p><p class="vx-kpi-v" data-draw="k-pipeline" data-source="kpis" data-field="pipeline_eur">—</p><p class="vx-kpi-d"><span data-draw="k-abiertos" data-source="kpis" data-field="deals_abiertos">—</span> oportunidades abiertas</p></div>
-    <div class="vx-card" id="kpi-roi"><p class="vx-kpi-l">ROI</p><p class="vx-kpi-v" data-draw="k-roi" data-source="kpis" data-field="roi_pct">—</p><p class="vx-kpi-d">Pipeline abierto frente a inversión</p></div>
+      <!-- RESUMEN -->
+      <section class="view" id="v-resumen">
+        <div class="grid">
+          <article class="card rose s5">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><h2>Salud del embudo</h2><button class="more" data-go="origen">Origen →</button></div>
+            <p class="cap">Cuántos leads llegan y cuántos pasan a XQL y a Deal.</p>
+            <div class="health">
+              <div class="ring" id="r-health"></div>
+              <div><h3 id="h-title">—</h3><div class="chips" id="h-chips"></div></div>
+            </div>
+            <div class="steps" id="h-steps"></div>
+          </article>
+
+          <article class="card s4">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M14.5 9.5a3 3 0 1 0 0 5M8 11h5M8 13h5"/></svg></div><h2>Inversión y retorno</h2><button class="more" data-go="origen">Detalle →</button></div>
+            <p class="cap">Lo gastado en canales con coste frente al pipeline abierto que generan.</p>
+            <div class="mlist" id="money"></div>
+          </article>
+
+          <article class="card s3">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2"/></svg></div><h2>Deals abiertos</h2></div>
+            <p class="cap">Oportunidades abiertas y XQLs de cada semana.</p>
+            <div class="big" id="d-big">—</div>
+            <div class="bigsub" id="d-sub"></div>
+            <div class="spark" id="d-spark" role="img" aria-label="XQLs por semana"></div>
+            <p class="foot" id="d-foot"></p>
+          </article>
+
+          <article class="card mint s3">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></div><h2>Canales</h2><button class="more" data-go="origen">Detalle →</button></div>
+            <p class="cap">El canal que mejor pasa a XQL y los que pierden dinero.</p>
+            <div class="score"><div class="ring" id="r-canal"></div><div class="stat" id="c-neg"></div><div class="stat" id="c-paid"></div></div>
+            <p class="foot" id="c-foot"></p>
+          </article>
+
+          <article class="card lav s3">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg></div><h2>Páginas</h2><button class="more" data-go="paginas">Detalle →</button></div>
+            <p class="cap">La página que más XQLs genera y la ruta más seguida.</p>
+            <div class="score"><div class="ring" id="r-page"></div><div class="stat" id="p-xql"></div><div class="stat" id="p-act"></div></div>
+            <p class="foot" id="p-foot"></p>
+          </article>
+
+          <article class="card s6">
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19V11M10 19V6M15 19v-5M20 19V9"/></svg></div><h2>Leads y XQLs (13 semanas)</h2><button class="more" data-go="origen">Por canal →</button></div>
+            <p class="cap">Leads y XQLs generados cada semana en la región elegida.</p>
+            <div class="legend"><span><i style="background:var(--blue)"></i>Leads</span><span><i style="background:var(--green)"></i>XQLs</span></div>
+            <div class="chart" id="ch-week"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ORIGEN -->
+      <section class="view" id="v-origen" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-origen"></div>
+          <article class="card s12">
+            <div class="ch"><h2>Evolución semanal por canal</h2><div class="more"><div class="seg" id="seg-metric"><button data-m="leads" aria-pressed="true">Leads</button><button data-m="xqls" aria-pressed="false">XQLs</button></div></div></div>
+            <p class="cap">Cada línea es un canal. Pasa por encima para ver los valores de cada semana.</p>
+            <div class="legend" id="lg-week"></div>
+            <div class="chart" id="ch-week-canal"></div>
+          </article>
+          <article class="card s5">
+            <div class="ch"><h2>Canales de origen</h2></div>
+            <p class="cap">Leads y XQLs por canal de la primera conversión.</p>
+            <div class="legend"><span><i style="background:var(--blue)"></i>Leads</span><span><i style="background:var(--green)"></i>XQLs</span></div>
+            <div id="hb-canales"></div>
+          </article>
+          <article class="card s7">
+            <div class="ch"><h2>Clasificación de canales</h2></div>
+            <p class="cap">ROI = (pipeline abierto − inversión) / inversión. Los canales sin coste directo no tienen ROI.</p>
+            <div class="tw" id="t-canales"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Volumen frente a calidad</h2></div>
+            <p class="cap">Arriba a la derecha, reforzar; abajo a la derecha, mejorar la oferta; abajo a la izquierda, revisar. El tamaño es el pipeline abierto.</p>
+            <div class="chart" id="ch-quad"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Coste por Lead, XQL y Deal</h2></div>
+            <p class="cap">Solo canales con inversión, de menor a mayor coste por XQL. Cada medida con su propia escala.</p>
+            <div class="legend"><span><i style="background:var(--blue)"></i>Por Lead</span><span><i style="background:var(--green)"></i>Por XQL</span><span><i style="background:#8B5CF6"></i>Por Deal</span></div>
+            <div id="hb-coste"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Deals abiertos más grandes</h2></div>
+            <p class="cap">Ordenados por importe, con el canal de origen y la ruta que siguió el lead hasta convertir.</p>
+            <div class="tw" id="t-deals"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Flujo de canal a resultado</h2></div>
+            <p class="cap">Canal, página de entrada, formulario y resultado. El grosor de cada banda es el número de leads.</p>
+            <div class="tw"><div class="chart" id="ch-flow"></div></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Páginas vistas antes de convertir, por canal</h2></div>
+            <p class="cap">Porcentaje de los leads de cada canal que vio la página antes de su primera conversión.</p>
+            <div class="tw" id="t-matrix"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Embudo comparado por región</h2></div>
+            <p class="cap">Las cuatro regiones a la vez, sea cual sea la región elegida.</p>
+            <div class="legend"><span><i style="background:var(--blue)"></i>Lead → XQL</span><span><i style="background:var(--green)"></i>XQL → Deal</span><span><i style="background:#8B5CF6"></i>Lead → Deal</span></div>
+            <div id="hb-regiones"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Tiempo entre etapas</h2></div>
+            <p class="cap">Días medianos de Lead a XQL y de XQL a Deal, del canal más rápido al más lento.</p>
+            <div class="legend"><span><i style="background:var(--blue)"></i>Lead → XQL</span><span><i style="background:var(--green)"></i>XQL → Deal</span></div>
+            <div id="hb-tiempo"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PÁGINAS -->
+      <section class="view" id="v-paginas" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-paginas"></div>
+          <article class="card lav s12">
+            <div class="ch"><h2>Ruta habitual hasta la conversión</h2><div class="more"><button class="btn p" id="replay"><svg viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></svg>Reproducir ruta</button></div></div>
+            <p class="cap">La secuencia de páginas más frecuente entre los leads que convierten. Cada parada indica qué porcentaje llega hasta ahí; la X marca la conversión.</p>
+            <div class="chart" id="ch-route"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Posición de cada página en la cadena</h2></div>
+            <p class="cap">En qué momento se consulta cada página. Debajo del nombre, su posición más frecuente.</p>
+            <div class="legend" id="lg-pos"></div>
+            <div id="st-pos"></div>
+          </article>
+          <article class="card s7">
+            <div class="ch"><h2>Páginas que más convierten</h2></div>
+            <p class="cap">Activación: porcentaje de vistas de la página seguidas de un formulario enviado.</p>
+            <div class="tw" id="t-paginas"></div>
+          </article>
+          <article class="card s5">
+            <div class="ch"><h2>Formularios</h2></div>
+            <p class="cap">Leads y paso a XQL de cada formulario.</p>
+            <div class="tw" id="t-forms"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>CTAs</h2></div>
+            <p class="cap">Clics, leads y XQLs de cada llamada a la acción.</p>
+            <div class="tw" id="t-ctas"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- LEADS EXISTENTES -->
+      <section class="view" id="v-leads" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-leads"></div>
+          <article class="card s6">
+            <div class="ch"><h2>Páginas en el recorrido hasta el Deal</h2></div>
+            <p class="cap">Porcentaje de leads que consultó cada página entre su primer formulario y el Deal, frente a los que no llegaron a Deal.</p>
+            <div class="legend"><span><i style="background:var(--green)"></i>Con Deal</span><span><i style="background:#C9CAD3"></i>Sin Deal</span></div>
+            <div id="hb-recorrido"></div>
+          </article>
+          <article class="card s6">
+            <div class="ch"><h2>Empresas más calientes</h2></div>
+            <p class="cap">Puntuación de 0 a 100 según la intención reciente. La variación es frente a la semana anterior.</p>
+            <div class="tw" id="t-calor"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- NURTURING -->
+      <section class="view" id="v-nurturing" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-nurturing"></div>
+          <article class="card s5">
+            <div class="ch"><h2>Embudo de los emails</h2></div>
+            <p class="cap">De email entregado a avance a XQL o Deal. La apertura es orientativa.</p>
+            <div id="hb-embudo"></div>
+          </article>
+          <article class="card s7">
+            <div class="ch"><h2>Rendimiento por email</h2></div>
+            <p class="cap">Ordenados por flujo y posición en el flujo. El clic es la métrica principal.</p>
+            <div class="tw" id="t-emails"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SEO -->
+      <section class="view" id="v-seo" hidden>
+        <div class="grid">
+          <div class="concl" id="cc-seo"></div>
+          <article class="card s12">
+            <div class="ch"><h2>Oportunidades SEO</h2></div>
+            <p class="cap">Posición media en Google (a la izquierda, mejor) frente a impresiones. El tamaño son los XQLs. La línea marca el final de la primera página de resultados.</p>
+            <div class="chart" id="ch-seo"></div>
+          </article>
+          <article class="card s12">
+            <div class="ch"><h2>Tráfico, conversión y visibilidad por página</h2></div>
+            <p class="cap">Sesiones de Google Analytics e impresiones de Search Console.</p>
+            <div class="tw" id="t-seo"></div>
+          </article>
+        </div>
+      </section>
+    </main>
   </div>
-
-  <nav class="vx-tabs" role="tablist" aria-label="Vistas" id="vistas">
-    <button class="vx-tab" role="tab" data-tab="origen" aria-selected="true">Origen de leads</button>
-    <button class="vx-tab" role="tab" data-tab="paginas" aria-selected="false">Páginas</button>
-    <button class="vx-tab" role="tab" data-tab="leads" aria-selected="false">Leads existentes</button>
-    <button class="vx-tab" role="tab" data-tab="nurturing" aria-selected="false">Nurturing</button>
-    <button class="vx-tab" role="tab" data-tab="seo" aria-selected="false">Web y SEO</button>
-  </nav>
-
-  <section class="vx-page" id="origen" data-page>
-    <div class="vx-concl" id="concl-origen">
-      <p>Mayor volumen de leads: <b data-draw="w-canal-vol" data-source="canales" data-field="canal">—</b> (<span data-draw="n-canal-vol" data-source="canales" data-field="leads">—</span>). Mejor paso a XQL: <b data-draw="w-canal-pct" data-source="canales" data-field="canal">—</b> (<span data-draw="n-canal-pct" data-source="canales" data-field="pct_xql">—</span>). Mejor ROI: <b data-draw="w-canal-roi" data-source="canales" data-field="canal">—</b> (<span data-draw="n-canal-roi" data-source="canales" data-field="roi_pct">—</span>).</p>
-      <p>Acción sugerida: reforzar el canal con mejor paso a XQL y revisar la oferta de los canales con mucho volumen y poca calidad.</p>
-    </div>
-    <div class="vx-card" id="semanal-grafico">
-      <div class="vx-cardhead">
-        <div>
-          <h2 class="vx-h">Evolución semanal por canal</h2>
-          <p class="vx-cap">Leads o XQLs generados cada semana, por canal de origen. Las últimas 13 semanas.</p>
-        </div>
-        <label class="vx-ctl">Métrica
-          <select class="dash-select" id="sel-metrica" aria-label="Métrica">
-            <option value="leads">Leads</option>
-            <option value="xqls">XQLs</option>
-          </select>
-        </label>
-      </div>
-      <div class="vx-chart vx-plot" data-draw="ch-semanal" data-source="semanal"></div>
-    </div>
-    <div class="vx-grid">
-      <div class="vx-card" id="canales-grafico">
-        <h2 class="vx-h">Canales de origen</h2>
-        <p class="vx-cap">Leads y XQLs por canal de la primera conversión.</p>
-        <p class="vx-legend"><span><i class="vx-sw" data-sw="0"></i>Leads</span><span><i class="vx-sw" data-sw="1"></i>XQLs</span></p>
-        <div class="vx-chart" data-draw="ch-canales" data-source="canales" role="img" aria-label="Barras de leads y XQLs por canal de origen"></div>
-      </div>
-      <div class="vx-card" id="canales-tabla">
-        <h2 class="vx-h">Clasificación de canales</h2>
-        <p class="vx-cap">Ordenados por XQLs generados. ROI: pipeline abierto menos inversión, dividido entre la inversión. Los canales sin coste directo no tienen ROI.</p>
-        <div class="vx-scroll"><table class="vx-table" data-source="canales" data-row-key="region,canal">
-          <thead><tr><th data-field="canal">Canal</th><th class="vx-num" data-field="leads">Leads</th><th class="vx-num" data-field="xqls">XQLs</th><th class="vx-num" data-field="pct_xql">Lead → XQL</th><th class="vx-num" data-field="deals">Deals</th><th class="vx-num" data-field="gasto_eur">Inversión</th><th class="vx-num" data-field="pipeline_eur">Pipeline abierto</th><th class="vx-num" data-field="roi_pct">ROI</th></tr></thead>
-          <tbody data-draw="t-canales"></tbody>
-        </table></div>
-      </div>
-    </div>
-    <div class="vx-grid">
-      <div class="vx-card" id="cuadrante-grafico">
-        <h2 class="vx-h">Volumen frente a calidad</h2>
-        <p class="vx-cap">Cada canal según sus leads (horizontal) y su paso a XQL (vertical). El tamaño es el pipeline abierto. Las líneas marcan la mediana de leads y el paso a XQL del conjunto.</p>
-        <div class="vx-chart vx-plot" data-draw="ch-cuadrante" data-source="canales kpis"></div>
-      </div>
-      <div class="vx-card" id="coste-grafico">
-        <h2 class="vx-h">Coste por Lead, XQL y Deal</h2>
-        <p class="vx-cap">Solo canales con inversión. Cada medida tiene su propia escala; ordenados por coste por XQL.</p>
-        <p class="vx-legend"><span><i class="vx-sw" data-sw="0"></i>Coste por Lead</span><span><i class="vx-sw" data-sw="1"></i>Coste por XQL</span><span><i class="vx-sw" data-sw="2"></i>Coste por Deal</span></p>
-        <div class="vx-chart" data-draw="ch-coste" data-source="canales" role="img" aria-label="Barras de coste por lead, por XQL y por Deal en cada canal con inversión"></div>
-      </div>
-      <div class="vx-card" id="regiones-grafico">
-        <h2 class="vx-h">Embudo comparado por región</h2>
-        <p class="vx-cap">Las cuatro regiones a la vez, sea cual sea la región elegida arriba.</p>
-        <p class="vx-legend"><span><i class="vx-sw" data-sw="0"></i>Lead → XQL</span><span><i class="vx-sw" data-sw="1"></i>XQL → Deal</span><span><i class="vx-sw" data-sw="2"></i>Lead → Deal</span></p>
-        <div class="vx-chart" data-draw="ch-regiones" data-source="kpis" role="img" aria-label="Barras con las tasas de conversión del embudo en cada región"></div>
-      </div>
-    </div>
-    <div class="vx-card" id="flujo-grafico">
-      <h2 class="vx-h">Flujo de canal a resultado</h2>
-      <p class="vx-cap">De izquierda a derecha: canal de origen, página de entrada, formulario y resultado. El grosor de cada banda es el número de leads.</p>
-      <div class="vx-scroll vx-chart vx-plot" data-draw="ch-flujo" data-source="flujos"></div>
-    </div>
-    <div class="vx-card" id="deals-tabla">
-      <h2 class="vx-h">Deals abiertos más grandes</h2>
-      <p class="vx-cap">Oportunidades abiertas ordenadas por importe, con el canal de origen y la ruta que siguió el lead hasta convertir.</p>
-      <div class="vx-scroll"><table class="vx-table" data-source="deals" data-row-key="region,deal">
-        <thead><tr><th data-field="deal">Deal</th><th data-field="region_cuenta">Región</th><th class="vx-num" data-field="importe_eur">Importe</th><th data-field="etapa">Etapa</th><th class="vx-num" data-field="dias_hasta_deal">Días hasta el Deal</th><th data-field="ruta">Ruta hasta convertir</th></tr></thead>
-        <tbody data-draw="t-deals"></tbody>
-      </table></div>
-    </div>
-    <div class="vx-card" id="canal-paginas">
-      <h2 class="vx-h">Páginas consultadas antes de convertir, por canal</h2>
-      <p class="vx-cap">Porcentaje de los leads de cada canal que vio la página antes de su primera conversión.</p>
-      <div class="vx-scroll vx-chart" data-draw="mx-canal-paginas" data-source="canal_paginas"></div>
-    </div>
-    <div class="vx-card" id="formularios-tabla">
-      <h2 class="vx-h">Clasificación de formularios</h2>
-      <p class="vx-cap">Ordenados por XQLs generados.</p>
-      <div class="vx-scroll"><table class="vx-table" data-source="formularios" data-row-key="region,formulario">
-        <thead><tr><th data-field="formulario">Formulario</th><th class="vx-num" data-field="envios">Envíos</th><th class="vx-num" data-field="leads">Leads</th><th class="vx-num" data-field="xqls">XQLs</th><th class="vx-num" data-field="pct_xql">Lead → XQL</th></tr></thead>
-        <tbody data-draw="t-formularios"></tbody>
-      </table></div>
-    </div>
-  </section>
-
-  <section class="vx-page" id="paginas" data-page hidden>
-    <div class="vx-concl" id="concl-paginas">
-      <p>Más XQLs: <b data-draw="w-pag-xql" data-source="paginas" data-field="pagina">—</b> (<span data-draw="n-pag-xql" data-source="paginas" data-field="xqls">—</span>). Mejor activación: <b data-draw="w-pag-act" data-source="paginas" data-field="pagina">—</b> (<span data-draw="n-pag-act" data-source="paginas" data-field="pct_activacion">—</span> de sus vistas termina en formulario).</p>
-      <p>Acción sugerida: dar más visibilidad a las páginas que mejor activan y revisar el CTA de las que tienen muchas vistas y poca activación.</p>
-    </div>
-    <div class="vx-card" id="ruta-habitual">
-      <div class="vx-cardhead">
-        <div>
-          <h2 class="vx-h">Ruta habitual hasta la conversión</h2>
-          <p class="vx-cap">Secuencia de páginas más frecuente entre los leads que acaban convirtiendo. Cada parada indica qué porcentaje de ellos llega hasta ahí; la X marca la conversión.</p>
-        </div>
-        <button class="vx-btn" id="ruta-replay" type="button">Reproducir ruta</button>
-      </div>
-      <div class="vx-chart vx-map" data-draw="ch-ruta" data-source="ruta"></div>
-    </div>
-    <div class="vx-card" id="posiciones-grafico">
-      <h2 class="vx-h">Posición de cada página en la cadena de interacciones</h2>
-      <p class="vx-cap">Reparto de las visitas de cada página según el momento en que se consulta. Bajo cada página, su posición más frecuente.</p>
-      <p class="vx-legend"><span><i class="vx-sw" data-sw="0"></i>Primera página</span><span><i class="vx-sw" data-sw="1"></i>Intermedia</span><span><i class="vx-sw" data-sw="2"></i>Última antes de convertir</span><span><i class="vx-sw" data-sw="3"></i>Con el Deal ya abierto</span></p>
-      <div class="vx-chart" data-draw="ch-posiciones" data-source="posiciones" role="img" aria-label="Barras apiladas con la posición de cada página en la cadena de interacciones"></div>
-    </div>
-    <div class="vx-grid">
-      <div class="vx-card" id="paginas-tabla">
-        <h2 class="vx-h">Páginas que más convierten</h2>
-        <p class="vx-cap">Página donde se envió el formulario, ordenadas por XQLs.</p>
-        <div class="vx-scroll"><table class="vx-table" data-source="paginas" data-row-key="region,pagina">
-          <thead><tr><th data-field="pagina">Página</th><th class="vx-num" data-field="leads">Leads</th><th class="vx-num" data-field="xqls">XQLs</th><th class="vx-num" data-field="pct_xql">Lead → XQL</th></tr></thead>
-          <tbody data-draw="t-paginas"></tbody>
-        </table></div>
-      </div>
-      <div class="vx-card" id="paginas-activacion">
-        <h2 class="vx-h">Páginas que mejor activan</h2>
-        <p class="vx-cap">Porcentaje de vistas de contactos seguidas de un formulario enviado.</p>
-        <div class="vx-chart" data-draw="ch-activacion" data-source="paginas" role="img" aria-label="Barras de tasa de activación por página"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="vx-page" id="leads" data-page hidden>
-    <div class="vx-concl" id="concl-leads">
-      <p>CTA con más XQLs: <b data-draw="w-cta" data-source="ctas" data-field="cta">—</b> (<span data-draw="n-cta" data-source="ctas" data-field="xqls">—</span>). Cuenta más caliente: <b data-draw="w-calor" data-source="calor" data-field="empresa">—</b> (<span data-draw="n-calor" data-source="calor" data-field="puntuacion">—</span> puntos).</p>
-      <p>Acción sugerida: incluir en un flujo con oferta de demo a las cuentas calientes sin Deal abierto y reactivar con otro contenido a las que pierden puntuación.</p>
-    </div>
-    <div class="vx-grid">
-      <div class="vx-card" id="recorrido-grafico">
-        <h2 class="vx-h">Recorrido antes del Deal</h2>
-        <p class="vx-cap">Porcentaje de leads que vio cada página entre su primer formulario y la creación del Deal, frente a los leads sin Deal.</p>
-        <p class="vx-legend"><span><i class="vx-sw" data-sw="0"></i>Leads con Deal</span><span><i class="vx-sw" data-sw="1"></i>Leads sin Deal</span></p>
-        <div class="vx-chart" data-draw="ch-recorrido" data-source="recorrido" role="img" aria-label="Barras de páginas vistas por leads con Deal y sin Deal"></div>
-      </div>
-      <div class="vx-card" id="tiempo-grafico">
-        <h2 class="vx-h">Tiempo entre etapas por canal</h2>
-        <p class="vx-cap">Días medianos de Lead a XQL y de XQL a Deal, ordenados del canal más rápido al más lento.</p>
-        <p class="vx-legend"><span><i class="vx-sw" data-sw="0"></i>De Lead a XQL</span><span><i class="vx-sw" data-sw="1"></i>De XQL a Deal</span></p>
-        <div class="vx-chart" data-draw="ch-tiempo" data-source="canales" role="img" aria-label="Barras de días entre etapas por canal"></div>
-      </div>
-      <div class="vx-card" id="calor-tabla">
-        <h2 class="vx-h">Cuentas más calientes</h2>
-        <p class="vx-cap">Puntuación de interés actual (0 a 100) y variación frente a la semana anterior.</p>
-        <div class="vx-scroll"><table class="vx-table" data-source="calor" data-row-key="region,empresa">
-          <thead><tr><th data-field="empresa">Empresa</th><th data-field="region_cuenta">Región</th><th class="vx-num" data-field="contactos_activos">Contactos activos</th><th class="vx-num" data-field="puntuacion">Calor</th><th class="vx-num" data-field="variacion">Variación</th><th data-field="ultima_senal">Última señal</th><th data-field="deal_abierto">Deal abierto</th></tr></thead>
-          <tbody data-draw="t-calor"></tbody>
-        </table></div>
-      </div>
-    </div>
-    <div class="vx-card" id="ctas-tabla">
-      <h2 class="vx-h">Clasificación de CTAs</h2>
-      <p class="vx-cap">Cadena completa de cada CTA, ordenados por XQLs generados.</p>
-      <div class="vx-scroll"><table class="vx-table" data-source="ctas" data-row-key="region,cta">
-        <thead><tr><th data-field="cta">CTA</th><th data-field="ubicacion">Ubicación</th><th class="vx-num" data-field="vistas">Vistas</th><th class="vx-num" data-field="clics">Clics</th><th class="vx-num" data-field="ctr">Tasa de clic</th><th class="vx-num" data-field="leads">Leads</th><th class="vx-num" data-field="xqls">XQLs</th></tr></thead>
-        <tbody data-draw="t-ctas"></tbody>
-      </table></div>
-    </div>
-  </section>
-
-  <section class="vx-page" id="nurturing" data-page hidden>
-    <div class="vx-concl" id="concl-nurturing">
-      <p>Mejor tasa de clic: <b data-draw="w-mail-clic" data-source="emails" data-field="email">—</b> (<span data-draw="n-mail-clic" data-source="emails" data-field="pct_clic">—</span>). Más avances a XQL o Deal: <b data-draw="w-mail-av" data-source="emails" data-field="email">—</b> (<span data-draw="n-mail-av" data-source="emails" data-field="avances">—</span>).</p>
-      <p>Acción sugerida: revisar la página de destino de los emails con muchos clics y pocos avances, y retirar del flujo los que apenas generan clics.</p>
-    </div>
-    <div class="vx-grid">
-      <div class="vx-card" id="embudo-grafico">
-        <h2 class="vx-h">Embudo de emails</h2>
-        <p class="vx-cap">Suma de todos los flujos. La apertura es solo orientativa.</p>
-        <div class="vx-chart" data-draw="ch-embudo" data-source="embudo_emails" role="img" aria-label="Embudo de emails, de entregado a avance de etapa"></div>
-      </div>
-      <div class="vx-card" id="emails-tabla">
-        <h2 class="vx-h">Emails por flujo</h2>
-        <p class="vx-cap">Ordenados por avances a XQL o Deal.</p>
-        <div class="vx-scroll"><table class="vx-table" data-source="emails" data-row-key="region,email">
-          <thead><tr><th data-field="flujo">Flujo</th><th data-field="email">Email</th><th class="vx-num" data-field="entregados">Entregados</th><th class="vx-num" data-field="clics">Clics</th><th class="vx-num" data-field="pct_clic">Tasa de clic</th><th class="vx-num" data-field="conversiones">Conversiones</th><th class="vx-num" data-field="avances">Avances</th></tr></thead>
-          <tbody data-draw="t-emails"></tbody>
-        </table></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="vx-page" id="seo" data-page hidden>
-    <div class="vx-concl" id="concl-seo">
-      <p>Entre las cinco páginas con más tráfico, la de menor conversión es <b data-draw="w-seo" data-source="seo" data-field="pagina">—</b> (<span data-draw="n-seo" data-source="seo" data-field="pct_conv">—</span> de sus sesiones genera un lead).</p>
-      <p>Acción sugerida: revisar su propuesta de valor y su CTA, y priorizar el SEO de las páginas que ya generan buenos leads y aparecen lejos de la primera posición.</p>
-    </div>
-    <div class="vx-card" id="seo-cuadrante">
-      <h2 class="vx-h">Oportunidades SEO</h2>
-      <p class="vx-cap">Cada página según su posición media en Google (horizontal, más a la izquierda es mejor) y sus impresiones (vertical, escala logarítmica). El tamaño son los XQLs que genera. La línea marca la posición 10, el final de la primera página.</p>
-      <div class="vx-chart vx-plot" data-draw="ch-seo" data-source="seo"></div>
-    </div>
-    <div class="vx-card" id="seo-tabla">
-      <h2 class="vx-h">Tráfico, conversión y visibilidad por página</h2>
-      <p class="vx-cap">Sesiones de Google Analytics e impresiones de Search Console, ordenadas por sesiones.</p>
-      <div class="vx-scroll"><table class="vx-table" data-source="seo" data-row-key="region,pagina">
-        <thead><tr><th data-field="pagina">Página</th><th class="vx-num" data-field="sesiones">Sesiones</th><th class="vx-num" data-field="leads">Leads</th><th class="vx-num" data-field="pct_conv">Conversión</th><th class="vx-num" data-field="impresiones">Impresiones</th><th class="vx-num" data-field="ctr">CTR</th><th class="vx-num" data-field="posicion">Posición media</th></tr></thead>
-        <tbody data-draw="t-seo"></tbody>
-      </table></div>
-    </div>
-  </section>
 </div>
+<div id="tip" hidden></div>
 
 <script>
-const REGION = () => dash.params().region || 'Todas';
-const nInt = new Intl.NumberFormat('es-ES', {maximumFractionDigits: 0});
-const nDec = new Intl.NumberFormat('es-ES', {minimumFractionDigits: 1, maximumFractionDigits: 1});
-const fInt = (v) => nInt.format(+v);
-const fPct = (v) => nDec.format(+v) + ' %';
-const fDec = (v) => nDec.format(+v);
-const nEur = new Intl.NumberFormat('es-ES', {style: 'currency', currency: 'EUR', maximumFractionDigits: 0});
-const fEur = (v) => nEur.format(+v);
-const blank = (v) => v == null || v === '';
-const fSigned = (v) => (+v > 0 ? '+' : '') + nInt.format(+v);
-const enc = encodeURIComponent;
-const rowsOf = (id) => { const g = dash.data(id); return g.status === 'ok' ? g.data.filter((r) => r.region === REGION()) : null; };
-const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-const maxBy = (rs, f) => rs.reduce((a, b) => (+b[f] > +a[f] ? b : a));
-const minBy = (rs, f) => rs.reduce((a, b) => (+b[f] < +a[f] ? b : a));
+(() => {
+const FILES = ['kpis','canales','canal_paginas','paginas','formularios','ctas','recorrido','calor','emails','embudo_emails','seo','deals','posiciones','ruta','semanal','flujos'];
+const REGIONS = ['Todas','Europa','USA','Brasil','LATAM'];
+const TABS = [
+  ['resumen','Resumen','<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'],
+  ['origen','Origen de leads','<path d="M4 18 10 12l4 4 6-8"/>'],
+  ['paginas','Páginas','<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>'],
+  ['leads','Leads existentes','<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14c2 .7 3 2.6 3 6"/>'],
+  ['nurturing','Nurturing','<rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/>'],
+  ['seo','Web y SEO','<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>']
+];
+const C = {blue:'#3667F0', green:'#2F9E57', violet:'#8B5CF6', amber:'#C4861A', red:'#D6453D', grey:'#C9CAD3'};
+const CHANNEL = {'Orgánico':'#2F9E57','Directo':'#64748B','Referido':'#C4861A','AI Referrals':'#8B5CF6','Redes sociales':'#E5566B','Email':'#14A3B8','De pago':'#3667F0'};
+const chColor = (c) => CHANNEL[c] || '#94A3B8';
 
-// A word or a number taken from one row that the data picks.
-function pick(name, id, key, field, chooser, fmt) {
-  dash.draw(name, (node) => {
-    const rs = rowsOf(id);
-    const r = rs && rs.length ? chooser(rs) : null;
-    if (!r) { node.textContent = '—'; node.removeAttribute('data-where'); return; }
-    node.setAttribute('data-where', 'region=' + enc(r.region) + '&' + key + '=' + enc(r[key]));
-    node.textContent = fmt ? fmt(r[field]) : r[field];
+const D = {};
+let REGION = 'Todas', TAB = 'resumen', METRIC = 'leads', lastRouteKey = null;
+
+// Formatos
+const nf0 = new Intl.NumberFormat('es-ES',{maximumFractionDigits:0});
+const nf1 = new Intl.NumberFormat('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1});
+const eur0 = new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const has = (v) => v !== undefined && v !== null && v !== '';
+const fInt = (v) => has(v) ? nf0.format(+v) : '—';
+const fPct = (v) => has(v) ? nf1.format(+v) + ' %' : '—';
+const fEur = (v) => has(v) ? eur0.format(+v) : '—';
+const fEurK = (v) => { if (!has(v)) return '—'; v = +v; return Math.abs(v) >= 1e6 ? nf1.format(v/1e6).replace(',0','') + ' M€' : Math.abs(v) >= 1e4 ? nf0.format(v/1e3) + ' k€' : eur0.format(v); };
+const fSigned = (v) => has(v) ? (+v > 0 ? '+' : '') + nf1.format(+v) + ' %' : '—';
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = (id) => document.getElementById(id);
+const R = (name) => (D[name] || []).filter((r) => r.region === REGION);
+const kpi = () => (D.kpis || []).find((r) => r.region === REGION) || {};
+const maxBy = (rs, f) => rs.reduce((a, b) => (a == null || +b[f] > +a[f] ? b : a), null);
+const minBy = (rs, f) => rs.reduce((a, b) => (a == null || +b[f] < +a[f] ? b : a), null);
+
+// Tooltip
+const tip = $('tip');
+function showTip(ev, title, lines) {
+  tip.innerHTML = '<strong>' + esc(title) + '</strong>' + lines.map((l) => '<div>' + esc(l) + '</div>').join('');
+  tip.hidden = false;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
+  tip.style.left = Math.max(8, x) + 'px'; tip.style.top = Math.max(8, y) + 'px';
+}
+const hideTip = () => { tip.hidden = true; };
+function hover(node, title, lines) {
+  node.addEventListener('pointermove', (e) => showTip(e, title, lines));
+  node.addEventListener('pointerdown', (e) => showTip(e, title, lines));
+  node.addEventListener('pointerleave', hideTip);
+}
+
+// Piezas comunes
+function ring(el, pct, color, size = 104) {
+  const r = size / 2 - 7, c = 2 * Math.PI * r, p = Math.max(0, Math.min(100, +pct || 0));
+  el.style.width = el.style.height = size + 'px';
+  el.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' +
+    '<circle cx="' + size/2 + '" cy="' + size/2 + '" r="' + r + '" fill="none" stroke="#EDEDF2" stroke-width="7"/>' +
+    '<circle cx="' + size/2 + '" cy="' + size/2 + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="7" stroke-linecap="round" ' +
+    'stroke-dasharray="' + (c * p / 100) + ' ' + c + '" transform="rotate(-90 ' + size/2 + ' ' + size/2 + ')"/></svg>' +
+    '<b style="color:' + color + '">' + nf0.format(p) + '<small>%</small></b>';
+}
+function statusColor(v, good, ok) { return +v >= good ? C.green : +v >= ok ? C.amber : C.red; }
+
+function hbars(el, rows, label, series, opts = {}) {
+  el.innerHTML = '';
+  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
+  const maxOf = (s) => opts.perSeries ? (d3.max(rows, (r) => +r[s.f]) || 1) : (opts.max || d3.max(rows, (r) => d3.max(series, (q) => +r[q.f] || 0)) || 1);
+  rows.forEach((r) => {
+    const row = document.createElement('div'); row.className = 'hb';
+    const sub = opts.sub ? '<small>' + esc(opts.sub(r)) + '</small>' : '';
+    row.innerHTML = '<div class="lab">' + esc(r[label]) + sub + '</div><div class="bars">' + series.map((s) => {
+      const v = r[s.f], w = has(v) ? Math.max(0, +v) / maxOf(s) : 0;
+      return '<div class="bl"><i style="width:calc((100% - 80px) * ' + w.toFixed(4) + ');background:' + (s.color || C.blue) + '"></i><em>' + (has(v) ? s.fmt(v) : '—') + '</em></div>';
+    }).join('') + '</div>';
+    hover(row, r[label], series.map((s) => s.label + ': ' + (has(r[s.f]) ? s.fmt(r[s.f]) : '—')));
+    el.append(row);
   });
 }
-const enough = (rs) => { const big = rs.filter((r) => +r.leads >= 10); return big.length ? big : rs; };
-const topPctCanal = (rs) => maxBy(enough(rs), 'pct_xql');
-pick('w-canal-pct', 'canales', 'canal', 'canal', topPctCanal);
-pick('n-canal-pct', 'canales', 'canal', 'pct_xql', topPctCanal, fPct);
-pick('w-canal-vol', 'canales', 'canal', 'canal', (rs) => maxBy(rs, 'leads'));
-pick('n-canal-vol', 'canales', 'canal', 'leads', (rs) => maxBy(rs, 'leads'), fInt);
-const bestRoi = (rs) => { const w = rs.filter((r) => !blank(r.roi_pct)); return w.length ? maxBy(w, 'roi_pct') : null; };
-pick('w-canal-roi', 'canales', 'canal', 'canal', bestRoi);
-pick('n-canal-roi', 'canales', 'canal', 'roi_pct', bestRoi, fPct);
-pick('w-pag-xql', 'paginas', 'pagina', 'pagina', (rs) => maxBy(rs, 'xqls'));
-pick('n-pag-xql', 'paginas', 'pagina', 'xqls', (rs) => maxBy(rs, 'xqls'), fInt);
-pick('w-pag-act', 'paginas', 'pagina', 'pagina', (rs) => maxBy(rs, 'pct_activacion'));
-pick('n-pag-act', 'paginas', 'pagina', 'pct_activacion', (rs) => maxBy(rs, 'pct_activacion'), fPct);
-pick('w-cta', 'ctas', 'cta', 'cta', (rs) => maxBy(rs, 'xqls'));
-pick('n-cta', 'ctas', 'cta', 'xqls', (rs) => maxBy(rs, 'xqls'), fInt);
-pick('w-calor', 'calor', 'empresa', 'empresa', (rs) => maxBy(rs, 'puntuacion'));
-pick('n-calor', 'calor', 'empresa', 'puntuacion', (rs) => maxBy(rs, 'puntuacion'), fInt);
-pick('w-mail-clic', 'emails', 'email', 'email', (rs) => maxBy(rs, 'pct_clic'));
-pick('n-mail-clic', 'emails', 'email', 'pct_clic', (rs) => maxBy(rs, 'pct_clic'), fPct);
-pick('w-mail-av', 'emails', 'email', 'email', (rs) => maxBy(rs, 'avances'));
-pick('n-mail-av', 'emails', 'email', 'avances', (rs) => maxBy(rs, 'avances'), fInt);
-const worstSeo = (rs) => minBy(rs.slice().sort((a, b) => +b.sesiones - +a.sesiones).slice(0, 5), 'pct_conv');
-pick('w-seo', 'seo', 'pagina', 'pagina', worstSeo);
-pick('n-seo', 'seo', 'pagina', 'pct_conv', worstSeo, fPct);
 
-// Headline figures: one row of kpis per region.
-function kpi(name, field, fmt, good) {
-  dash.draw(name, (node) => {
-    const rs = rowsOf('kpis');
-    const r = rs && rs[0];
-    if (!r) { node.textContent = '—'; node.style.color = ''; return; }
-    node.setAttribute('data-where', 'region=' + enc(r.region));
-    node.textContent = fmt(r[field]);
-    if (good) node.style.color = +r[field] >= 0 ? 'var(--color-ok)' : 'var(--color-bad)';
-  });
+function table(el, cols, rows) {
+  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
+  el.innerHTML = '<table><thead><tr>' + cols.map((c) => '<th class="' + (c.n ? 'n' : '') + '">' + esc(c.h) + '</th>').join('') + '</tr></thead><tbody>' +
+    rows.map((r) => '<tr>' + cols.map((c) => {
+      const cls = [c.n ? 'n' : '', c.cls ? c.cls(r) : ''].join(' ').trim();
+      const v = c.html ? c.html(r) : esc(c.fmt ? c.fmt(r[c.f]) : (has(r[c.f]) ? r[c.f] : '—'));
+      return '<td class="' + cls + '">' + v + '</td>';
+    }).join('') + '</tr>').join('') + '</tbody></table>';
 }
-kpi('k-leads', 'leads', fInt);
-kpi('k-xqls', 'xqls', fInt);
-kpi('k-deals', 'deals', fInt);
-kpi('k-pct-xql', 'pct_xql', fPct);
-kpi('k-pct-deal', 'pct_deal', fPct);
-kpi('k-gasto', 'gasto_eur', fEur);
-kpi('k-pipeline', 'pipeline_eur', fEur);
-kpi('k-abiertos', 'deals_abiertos', fInt);
-kpi('k-roi', 'roi_pct', fPct, true);
-kpi('k-var', 'var_leads_pct', (v) => (+v > 0 ? '+' : '') + fPct(v), true);
 
-// Tables: the body is drawn, the headings are in the page.
-function table(name, id, key, cols, sortField, limit) {
-  dash.draw(name, (tb) => {
-    const rs = rowsOf(id);
-    if (!rs) { tb.replaceChildren(); return; }
-    const sorted = rs.slice().sort((a, b) => +b[sortField] - +a[sortField]).slice(0, limit || 50);
-    tb.replaceChildren(...sorted.map((r) => {
-      const tr = el('tr');
-      tr.setAttribute('data-key', enc(r.region) + ',' + enc(r[key]));
-      cols.forEach((c) => {
-        const td = el('td', c.cls != null ? c.cls : (c.fmt || c.render ? 'vx-num' : ''));
-        if (c.render) c.render(td, r); else td.textContent = blank(r[c.f]) ? '—' : (c.fmt ? c.fmt(r[c.f]) : r[c.f]);
-        tr.append(td);
-      });
-      return tr;
-    }));
-  });
+function concl(id, main, action) {
+  $(id).innerHTML = '<div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></div><div><p>' + main + '</p><p>' + esc(action) + '</p></div>';
 }
-table('t-canales', 'canales', 'canal', [{f: 'canal'}, {f: 'leads', fmt: fInt}, {f: 'xqls', fmt: fInt}, {f: 'pct_xql', fmt: fPct}, {f: 'deals', fmt: fInt}, {f: 'gasto_eur', fmt: fEur}, {f: 'pipeline_eur', fmt: fEur},
-  {f: 'roi_pct', render: (td, r) => { if (blank(r.roi_pct)) { td.textContent = '—'; return; } td.textContent = fPct(r.roi_pct); td.style.color = +r.roi_pct >= 0 ? 'var(--color-ok)' : 'var(--color-bad)'; }}], 'xqls');
-table('t-deals', 'deals', 'deal', [{f: 'deal'}, {f: 'region_cuenta'}, {f: 'importe_eur', fmt: fEur}, {f: 'etapa'}, {f: 'dias_hasta_deal', fmt: fInt},
-  {f: 'ruta', cls: '', render: (td, r) => {
-    const box = el('span', 'vx-route');
-    String(r.ruta).split(' → ').forEach((step, i) => { if (i) box.append(el('span', 'vx-arrow', '→')); box.append(el('span', i ? 'vx-chip' : 'vx-chip vx-chip-first', step)); });
-    td.append(box);
-  }}], 'importe_eur', 8);
-table('t-formularios', 'formularios', 'formulario', [{f: 'formulario'}, {f: 'envios', fmt: fInt}, {f: 'leads', fmt: fInt}, {f: 'xqls', fmt: fInt}, {f: 'pct_xql', fmt: fPct}], 'xqls');
-table('t-paginas', 'paginas', 'pagina', [{f: 'pagina'}, {f: 'leads', fmt: fInt}, {f: 'xqls', fmt: fInt}, {f: 'pct_xql', fmt: fPct}], 'xqls');
-table('t-ctas', 'ctas', 'cta', [{f: 'cta'}, {f: 'ubicacion'}, {f: 'vistas', fmt: fInt}, {f: 'clics', fmt: fInt}, {f: 'ctr', fmt: fPct}, {f: 'leads', fmt: fInt}, {f: 'xqls', fmt: fInt}], 'xqls');
-table('t-emails', 'emails', 'email', [{f: 'flujo'}, {f: 'email'}, {f: 'entregados', fmt: fInt}, {f: 'clics', fmt: fInt}, {f: 'pct_clic', fmt: fPct}, {f: 'conversiones', fmt: fInt}, {f: 'avances', fmt: fInt}], 'avances');
-table('t-seo', 'seo', 'pagina', [{f: 'pagina'}, {f: 'sesiones', fmt: fInt}, {f: 'leads', fmt: fInt}, {f: 'pct_conv', fmt: fPct}, {f: 'impresiones', fmt: fInt}, {f: 'ctr', fmt: fPct}, {f: 'posicion', fmt: fDec}], 'sesiones');
-table('t-calor', 'calor', 'empresa', [
-  {f: 'empresa'}, {f: 'region_cuenta'}, {f: 'contactos_activos', fmt: fInt},
-  {f: 'puntuacion', render: (td, r) => {
-    const box = el('span', 'vx-score');
-    const bar = el('i'); bar.style.width = Math.round(+r.puntuacion * 0.6) + 'px'; bar.style.background = dash.colors[0];
-    box.append(bar, el('span', '', fInt(r.puntuacion))); td.append(box);
-  }},
-  {f: 'variacion', render: (td, r) => { td.textContent = fSigned(r.variacion); td.style.color = +r.variacion >= 0 ? 'var(--color-ok)' : 'var(--color-bad)'; }},
-  {f: 'ultima_senal'}, {f: 'deal_abierto'},
-], 'puntuacion', 10);
 
-// Shared by the drawn charts.
-const col = (i) => dash.colors[i % dash.colors.length];
-function place(box, tip, ev) {
-  const b = box.getBoundingClientRect();
-  tip.style.left = Math.max(0, Math.min(ev.clientX - b.left + box.scrollLeft + 12, box.scrollLeft + box.clientWidth - tip.offsetWidth - 4)) + 'px';
-  tip.style.top = (ev.clientY - b.top + 14) + 'px';
+function svgBox(el, h) {
+  el.innerHTML = '';
+  const W = Math.max(280, el.clientWidth || el.parentElement.clientWidth || 600);
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', h).attr('viewBox', '0 0 ' + W + ' ' + h);
+  return [svg, W];
 }
-function fail(box, id) { box.textContent = dash.data(id).status === 'error' ? 'No se ha podido cargar' : '—'; }
-function textW(svg, labels) {
-  const t = svg.append('text'); let m = 0;
-  labels.forEach((l) => { t.text(l); m = Math.max(m, t.node().getComputedTextLength()); });
-  t.remove(); return m;
+function yAxis(svg, y, ticks, x0, x1, fmt) {
+  svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x0).attr('x2', x1).attr('y1', y).attr('y2', y).attr('stroke', '#EFEFF3');
+  svg.append('g').selectAll('text').data(ticks).join('text').attr('x', x0 - 8).attr('y', (d) => y(d)).attr('dy', '0.32em').attr('text-anchor', 'end').text(fmt);
 }
-const fDias = (v) => fInt(v) + ' días';
 
-// Horizontal bars, one or two series per row, with a tooltip inside the chart.
-function bars(name, id, label, series, sortField, limit, fixedMax, opt) {
-  opt = opt || {};
-  dash.draw(name, (box) => {
-    const g = dash.data(id);
-    let rs = opt.rows ? opt.rows() : rowsOf(id);
-    box.replaceChildren();
-    if (!rs) { box.textContent = g.status === 'error' ? 'No se ha podido cargar' : '—'; return; }
-    if (opt.filter) rs = rs.filter(opt.filter);
-    const sorted = rs.slice().sort((a, b) => sortField.asc ? +a[sortField.f] - +b[sortField.f] : +b[sortField.f] - +a[sortField.f]).slice(0, limit || 20);
-    const max = fixedMax || d3.max(sorted, (r) => d3.max(series, (s) => +r[s.f])) || 1;
-    const maxOf = (s) => (opt.perSeries ? d3.max(sorted, (r) => +r[s.f]) || 1 : max);
-    const show = (v, s) => (blank(v) ? '—' : s.fmt(v));
-    const tip = el('div', 'vx-tip'); tip.hidden = true;
-    sorted.forEach((r) => {
-      const row = el('div', 'vx-row');
-      row.append(el('div', 'vx-lab', r[label]));
-      const group = el('div', 'vx-bars');
-      series.forEach((s, i) => {
-        const line = el('div', 'vx-barline');
-        const bar = el('div', 'vx-bar');
-        bar.style.width = 'calc((100% - 86px) * ' + (blank(r[s.f]) ? 0 : +r[s.f] / maxOf(s)).toFixed(4) + ')';
-        bar.style.background = dash.colors[i];
-        line.append(bar, el('span', 'vx-val', show(r[s.f], s)));
-        group.append(line);
-      });
-      row.append(group);
-      const over = (ev) => {
-        tip.replaceChildren(el('strong', '', r[label]), ...series.map((s) => el('div', '', s.label + ': ' + show(r[s.f], s))));
-        tip.hidden = false;
-        place(box, tip, ev);
-      };
-      row.addEventListener('pointermove', over);
-      row.addEventListener('pointerdown', over);
-      row.addEventListener('pointerleave', () => { tip.hidden = true; });
-      box.append(row);
-    });
-    box.append(tip);
-  });
+// ---------- Resumen ----------
+function weeklyTotals() {
+  const by = d3.rollup(R('semanal'), (v) => ({leads: d3.sum(v, (d) => +d.leads), xqls: d3.sum(v, (d) => +d.xqls)}), (d) => d.semana);
+  return [...by].map(([w, v]) => ({semana: w, ...v})).sort((a, b) => a.semana < b.semana ? -1 : 1);
 }
-bars('ch-canales', 'canales', 'canal', [{f: 'leads', label: 'Leads', fmt: fInt}, {f: 'xqls', label: 'XQLs', fmt: fInt}], {f: 'leads'});
-bars('ch-activacion', 'paginas', 'pagina', [{f: 'pct_activacion', label: 'Activación', fmt: fPct}], {f: 'pct_activacion'});
-bars('ch-recorrido', 'recorrido', 'pagina', [{f: 'pct_con_deal', label: 'Leads con Deal', fmt: fPct}, {f: 'pct_sin_deal', label: 'Leads sin Deal', fmt: fPct}], {f: 'pct_con_deal'}, 20, 100);
-bars('ch-embudo', 'embudo_emails', 'paso', [{f: 'valor', label: 'Emails', fmt: fInt}], {f: 'orden', asc: true});
 
-// Channel by page matrix: each cell is one row of canal_paginas.
-dash.draw('mx-canal-paginas', (box) => {
-  const g = dash.data('canal_paginas');
-  const rs = rowsOf('canal_paginas');
-  box.replaceChildren();
-  if (!rs) { box.textContent = g.status === 'error' ? 'No se ha podido cargar' : '—'; return; }
-  const pages = [...new Set(rs.map((r) => r.pagina))];
-  const chans = [...new Set(rs.map((r) => r.canal))];
-  const t = el('table', 'vx-table vx-mx');
-  const head = el('tr'); head.append(el('th', '', 'Página'), ...chans.map((c) => el('th', 'vx-num', c)));
-  const thead = el('thead'); thead.append(head);
-  const tb = el('tbody');
-  pages.forEach((p) => {
-    const tr = el('tr'); tr.append(el('td', '', p));
-    chans.forEach((c) => {
-      const r = rs.find((x) => x.canal === c && x.pagina === p);
-      const td = el('td', 'vx-cell', r ? fInt(r.pct_leads) + ' %' : '—');
-      if (r) {
-        td.setAttribute('data-source', 'canal_paginas');
-        td.setAttribute('data-field', 'pct_leads');
-        td.setAttribute('data-where', 'region=' + enc(r.region) + '&canal=' + enc(c) + '&pagina=' + enc(p));
-        td.style.background = 'color-mix(in srgb, ' + dash.colors[0] + ' ' + Math.round(+r.pct_leads * 0.7) + '%, transparent)';
-      }
-      tr.append(td);
-    });
-    tb.append(tr);
-  });
-  t.append(thead, tb); box.append(t);
-});
+function vResumen() {
+  const k = kpi(), can = R('canales');
+  const up = +k.var_leads_pct >= 0;
+  ring($('r-health'), +k.pct_xql, statusColor(k.pct_xql, 20, 12));
+  $('h-title').textContent = (up ? 'Más leads que el trimestre anterior' : 'Menos leads que el trimestre anterior') +
+    (+k.pct_xql >= 20 ? ', y uno de cada cinco pasa a XQL.' : ', con un paso a XQL que conviene vigilar.');
+  const neg = can.filter((r) => has(r.roi_pct) && +r.roi_pct < 0).length;
+  $('h-chips').innerHTML = '<span class="chip ' + (up ? 'g' : 'r') + '">' + (up ? '↗ ' : '↘ ') + fSigned(k.var_leads_pct) + ' / 90 d</span>' +
+    (neg ? '<span class="chip r">' + neg + (neg === 1 ? ' canal con ROI negativo' : ' canales con ROI negativo') + '</span>' : '<span class="chip g">Todos los canales con ROI positivo</span>') +
+    '<span class="chip">' + esc(REGION === 'Todas' ? 'Todas las regiones' : REGION) + '</span>';
+  const steps = [
+    {l: 'Leads', v: fInt(k.leads), w: 1, s: 'Entran por formulario'},
+    {l: 'XQLs', v: fInt(k.xqls), w: +k.xqls / +k.leads, s: fPct(k.pct_xql) + ' de los leads'},
+    {l: 'Deals', v: fInt(k.deals), w: +k.deals / +k.leads, s: fPct(k.pct_deal) + ' de los XQLs'}
+  ];
+  $('h-steps').innerHTML = steps.map((s) => '<div class="step"><div class="row1"><span class="l">' + s.l + '</span><span class="v">' + s.v + '</span></div><div class="bar"><i style="width:' + (100 * s.w).toFixed(1) + '%"></i></div><div class="s">' + esc(s.s) + '</div></div>').join('');
 
-bars('ch-coste', 'canales', 'canal', [{f: 'cpl_eur', label: 'Coste por Lead', fmt: fEur}, {f: 'cpxql_eur', label: 'Coste por XQL', fmt: fEur}, {f: 'cpdeal_eur', label: 'Coste por Deal', fmt: fEur}], {f: 'cpxql_eur', asc: true}, 20, null, {filter: (r) => !blank(r.gasto_eur), perSeries: true});
-bars('ch-tiempo', 'canales', 'canal', [{f: 'dias_lead_xql', label: 'De Lead a XQL', fmt: fDias}, {f: 'dias_xql_deal', label: 'De XQL a Deal', fmt: fDias}], {f: 'dias_lead_xql', asc: true});
-bars('ch-regiones', 'kpis', 'region', [{f: 'pct_xql', label: 'Lead → XQL', fmt: fPct}, {f: 'pct_deal', label: 'XQL → Deal', fmt: fPct}, {f: 'pct_lead_deal', label: 'Lead → Deal', fmt: fPct}], {f: 'pct_xql'}, 20, null,
-  {rows: () => { const k = dash.data('kpis'); return k.status === 'ok' ? k.data.filter((r) => r.region !== 'Todas') : null; }});
+  const paid = can.filter((r) => has(r.gasto_eur));
+  const cpx = d3.sum(paid, (r) => +r.gasto_eur) / (d3.sum(paid, (r) => +r.xqls) || 1);
+  const rows = [
+    {c: C.blue, l: 'Inversión', d: 'Gasto en canales con coste', v: fEurK(k.gasto_eur)},
+    {c: C.green, l: 'Pipeline', d: 'Valor de los Deals abiertos', v: fEurK(k.pipeline_eur)},
+    {c: +k.roi_pct >= 0 ? C.green : C.red, l: 'ROI', d: 'Pipeline frente a inversión', v: fPct(k.roi_pct)},
+    {c: C.amber, l: 'Coste / XQL', d: 'En canales con inversión', v: fEur(cpx)}
+  ];
+  $('money').innerHTML = rows.map((r) => '<div class="mrow"><i style="background:' + r.c + '"></i><div><b>' + r.l + '</b><span>' + r.d + '</span></div><code>' + r.v + '</code></div>').join('');
 
-// Weekly lines by channel, point to point.
-dash.draw('ch-semanal', (box) => {
-  const rs = rowsOf('semanal');
-  box.replaceChildren();
-  if (!rs || !rs.length) { fail(box, 'semanal'); return; }
-  const m = dash.params().metrica === 'xqls' ? 'xqls' : 'leads';
-  const weeks = [...new Set(rs.map((r) => r.semana))].sort();
-  const chans = [...new Set(rs.map((r) => r.canal))];
-  const val = new Map(rs.map((r) => [r.canal + '|' + r.semana, +r[m]]));
-  const legend = el('p', 'vx-legend');
-  chans.forEach((c, i) => { const s = el('span'); const sw = el('i', 'vx-sw'); sw.style.background = col(i); s.append(sw, c); legend.append(s); });
-  box.append(legend);
-  const W = Math.max(260, box.clientWidth), H = 280;
-  const svg = d3.create('svg').attr('width', '100%').attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img')
-    .attr('aria-label', 'Líneas semanales de ' + (m === 'xqls' ? 'XQLs' : 'leads') + ' por canal');
-  box.append(svg.node());
-  const y = d3.scaleLinear().domain([0, d3.max(rs, (r) => +r[m]) || 1]).nice();
-  const yt = y.ticks(5);
-  const ml = textW(svg, yt.map(fInt)) + 12, mr = 14, mt = 10, mb = 26;
-  y.range([H - mb, mt]);
+  $('d-big').textContent = fInt(k.deals_abiertos);
+  $('d-sub').textContent = fEurK(k.pipeline_eur) + ' en pipeline abierto';
+  const wk = weeklyTotals(), mx = d3.max(wk, (w) => w.xqls) || 1;
+  const sp = $('d-spark'); sp.innerHTML = '';
+  wk.forEach((w) => { const i = document.createElement('i'); i.style.height = (100 * w.xqls / mx) + '%'; i.style.opacity = 0.45 + 0.55 * w.xqls / mx; hover(i, 'Semana del ' + d3.timeFormat('%d/%m')(new Date(w.semana)), [fInt(w.xqls) + ' XQLs', fInt(w.leads) + ' leads']); sp.append(i); });
+  const top = maxBy(R('deals'), 'importe_eur');
+  $('d-foot').innerHTML = top ? 'Mayor: <b>' + esc(top.deal) + '</b>, ' + fEurK(top.importe_eur) : '';
+
+  const best = maxBy(can, 'pct_xql');
+  ring($('r-canal'), best ? +best.pct_xql : 0, C.green, 96);
+  $('c-neg').className = 'stat ' + (neg ? 'r' : 'n'); $('c-neg').innerHTML = '<b>' + neg + '</b><span>ROI negativo</span>';
+  $('c-paid').className = 'stat a'; $('c-paid').innerHTML = '<b>' + paid.length + '</b><span>con inversión</span>';
+  const worst = minBy(paid.filter((r) => has(r.roi_pct)), 'roi_pct');
+  $('c-foot').innerHTML = best ? 'Mejor paso a XQL: <b>' + esc(best.canal) + '</b>' + (worst && +worst.roi_pct < 0 ? '. Revisar <b>' + esc(worst.canal) + '</b> (' + fPct(worst.roi_pct) + ')' : '') : '';
+
+  const pg = maxBy(R('paginas'), 'xqls');
+  ring($('r-page'), pg ? +pg.pct_xql : 0, '#7556E0', 96);
+  $('p-xql').className = 'stat g'; $('p-xql').innerHTML = '<b>' + (pg ? fInt(pg.xqls) : '—') + '</b><span>XQLs</span>';
+  $('p-act').className = 'stat a'; $('p-act').innerHTML = '<b>' + (pg ? nf1.format(+pg.pct_activacion) : '—') + '</b><span>% activación</span>';
+  const rt = R('ruta').sort((a, b) => +a.paso - +b.paso);
+  $('p-foot').innerHTML = pg ? '<b>' + esc(pg.pagina) + '</b>. Ruta habitual: ' + esc(rt.length ? rt[0].pagina + ' → ' + rt[rt.length - 1].pagina + ' en ' + rt.length + ' pasos' : '—') : '';
+
+  weekChart($('ch-week'), wk.map((w) => w.semana), [{name: 'Leads', color: C.blue, vals: wk.map((w) => w.leads), area: true}, {name: 'XQLs', color: C.green, vals: wk.map((w) => w.xqls)}], 220);
+}
+
+function weekChart(el, weeks, series, H) {
+  const [svg, W] = svgBox(el, H);
+  if (!weeks.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
+  const max = d3.max(series, (s) => d3.max(s.vals)) || 1;
+  const y = d3.scaleLinear().domain([0, max]).nice().range([H - 26, 10]);
+  const ticks = y.ticks(4);
+  const ml = 34, mr = 10;
   const x = d3.scalePoint().domain(weeks).range([ml, W - mr]);
-  svg.append('g').selectAll('line').data(yt).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', (d) => y(d)).attr('y2', (d) => y(d)).style('stroke', 'var(--cds-chart-grid)');
-  svg.append('g').selectAll('text').data(yt).join('text').attr('x', ml - 8).attr('y', (d) => y(d)).attr('dy', '0.32em').attr('text-anchor', 'end').style('fill', 'var(--cds-text-secondary)').text((d) => fInt(d));
-  const every = Math.max(1, Math.ceil(weeks.length / Math.max(2, Math.floor((W - ml - mr) / 56))));
-  const dfmt = d3.utcFormat('%d/%m');
-  svg.append('g').selectAll('text').data(weeks.filter((w, i) => (weeks.length - 1 - i) % every === 0)).join('text').attr('x', (w) => x(w)).attr('y', H - 8).attr('text-anchor', 'middle').style('fill', 'var(--cds-text-secondary)').text((w) => dfmt(new Date(w)));
-  const line = (c) => d3.line().x((w) => x(w)).y((w) => y(val.get(c + '|' + w) || 0))(weeks);
-  chans.forEach((c, i) => svg.append('path').attr('d', line(c)).attr('fill', 'none').attr('stroke-width', 2).attr('stroke-linejoin', 'round').style('stroke', col(i)));
-  const rule = svg.append('line').attr('y1', mt).attr('y2', H - mb).style('stroke', 'var(--cds-chart-axis)').style('opacity', 0);
-  const tip = el('div', 'vx-tip'); tip.hidden = true; box.append(tip);
-  const stepX = weeks.length > 1 ? (W - ml - mr) / (weeks.length - 1) : 1;
-  const over = (ev) => {
-    const px = d3.pointer(ev, svg.node())[0];
-    const i = Math.max(0, Math.min(weeks.length - 1, Math.round((px - ml) / stepX)));
-    const w = weeks[i];
-    rule.attr('x1', x(w)).attr('x2', x(w)).style('opacity', 1);
-    const rowsT = chans.map((c) => [c, val.get(c + '|' + w) || 0]).sort((a, b) => b[1] - a[1]);
-    tip.replaceChildren(el('strong', '', 'Semana del ' + dfmt(new Date(w))), ...rowsT.map((p) => el('div', '', p[0] + ': ' + fInt(p[1]))));
-    tip.hidden = false;
-    place(box, tip, ev);
-  };
-  svg.append('rect').attr('x', ml).attr('y', mt).attr('width', Math.max(1, W - ml - mr)).attr('height', H - mt - mb).attr('fill', 'transparent')
-    .on('pointermove', over).on('pointerdown', over).on('pointerleave', () => { tip.hidden = true; rule.style('opacity', 0); });
-});
-
-// Bubble chart: two measures and a size per row.
-function scatter(name, id, o) {
-  dash.draw(name, (box) => {
-    const rs = rowsOf(id);
-    box.replaceChildren();
-    if (!rs || !rs.length) { fail(box, id); return; }
-    const W = Math.max(260, box.clientWidth), H = 300;
-    const svg = d3.create('svg').attr('width', '100%').attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img').attr('aria-label', o.aria);
-    box.append(svg.node());
-    const ys = rs.map((r) => +r[o.y]), xs = rs.map((r) => +r[o.x]);
-    const y = o.yLog ? d3.scaleLog().domain([d3.min(ys) * 0.6, d3.max(ys) * 1.6]) : d3.scaleLinear().domain([0, d3.max(ys) * 1.18]).nice();
-    let yt = y.ticks(5);
-    if (o.yLog) yt = yt.filter((v) => { const mnt = v / Math.pow(10, Math.floor(Math.log10(v) + 1e-9)); return Math.abs(mnt - 1) < 0.01; });
-    const ml = textW(svg, yt.map(o.yfmt)) + 12, mr = 18, mt = 12, mb = 28;
-    y.range([H - mb, mt]);
-    const x = d3.scaleLinear().domain([0, d3.max(xs) * 1.15]).nice().range([ml, W - mr]);
-    const xt = x.ticks(Math.max(3, Math.floor((W - ml - mr) / 80)));
-    const rad = d3.scaleSqrt().domain([0, d3.max(rs, (r) => +r[o.r]) || 1]).range([4, 24]);
-    svg.append('g').selectAll('line').data(yt).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', (d) => y(d)).attr('y2', (d) => y(d)).style('stroke', 'var(--cds-chart-grid)');
-    svg.append('g').selectAll('text').data(yt).join('text').attr('x', ml - 8).attr('y', (d) => y(d)).attr('dy', '0.32em').attr('text-anchor', 'end').style('fill', 'var(--cds-text-secondary)').text((d) => o.yfmt(d));
-    svg.append('g').selectAll('text').data(xt).join('text').attr('x', (d) => x(d)).attr('y', H - 8).attr('text-anchor', 'middle').style('fill', 'var(--cds-text-secondary)').text((d) => o.xfmt(d));
-    const refX = o.refX ? o.refX(rs) : null, refY = o.refY ? o.refY(rs) : null;
-    if (refX != null) svg.append('line').attr('x1', x(refX)).attr('x2', x(refX)).attr('y1', mt).attr('y2', H - mb).attr('stroke-dasharray', '4 4').style('stroke', 'var(--cds-chart-reference)');
-    if (refY != null) svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(refY)).attr('y2', y(refY)).attr('stroke-dasharray', '4 4').style('stroke', 'var(--cds-chart-reference)');
-    const tip = el('div', 'vx-tip'); tip.hidden = true; box.append(tip);
-    const sorted = rs.slice().sort((a, b) => +b[o.r] - +a[o.r]);
-    const pt = svg.append('g').selectAll('g').data(sorted).join('g').attr('transform', (r) => 'translate(' + x(+r[o.x]) + ',' + y(+r[o.y]) + ')');
-    pt.append('circle').attr('r', (r) => rad(+r[o.r])).style('fill', dash.colors[0]).style('fill-opacity', 0.55).style('stroke', dash.colors[0]);
-    pt.append('text').attr('class', 'vx-halo').attr('dy', '0.32em')
-      .attr('x', (r) => (x(+r[o.x]) > ml + (W - ml - mr) * 0.62 ? -rad(+r[o.r]) - 5 : rad(+r[o.r]) + 5))
-      .attr('text-anchor', (r) => (x(+r[o.x]) > ml + (W - ml - mr) * 0.62 ? 'end' : 'start'))
-      .style('fill', 'var(--color-fg)').text((r) => r[o.label]);
-    const over = (ev, r) => {
-      tip.replaceChildren(el('strong', '', r[o.label]), el('div', '', o.xl + ': ' + o.xfmt(r[o.x])), el('div', '', o.yl + ': ' + o.yfmt(r[o.y])), el('div', '', o.rl + ': ' + o.rfmt(r[o.r])));
-      tip.hidden = false;
-      place(box, tip, ev);
-    };
-    pt.on('pointermove', over).on('pointerdown', over).on('pointerleave', () => { tip.hidden = true; });
+  yAxis(svg, y, ticks, ml, W - mr, (d) => nf0.format(d));
+  const every = Math.max(1, Math.ceil(weeks.length / Math.floor((W - ml) / 64)));
+  svg.append('g').selectAll('text').data(weeks.filter((w, i) => (weeks.length - 1 - i) % every === 0)).join('text')
+    .attr('x', (w) => x(w)).attr('y', H - 6).attr('text-anchor', 'middle').text((w) => d3.timeFormat('%d %b')(new Date(w)).replace('.', ''));
+  series.forEach((s) => {
+    const pts = weeks.map((w, i) => [x(w), y(s.vals[i] || 0)]);
+    if (s.area) svg.append('path').attr('d', d3.area().x((p) => p[0]).y0(H - 26).y1((p) => p[1]).curve(d3.curveMonotoneX)(pts)).attr('fill', s.color).attr('opacity', 0.07);
+    svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pts)).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2.2).attr('stroke-linejoin', 'round');
   });
+  const rule = svg.append('line').attr('y1', 10).attr('y2', H - 26).attr('stroke', '#C9CAD3').attr('stroke-dasharray', '3 3').style('opacity', 0);
+  const dots = svg.append('g').selectAll('circle').data(series).join('circle').attr('r', 4).attr('fill', '#fff').attr('stroke', (s) => s.color).attr('stroke-width', 2).style('opacity', 0);
+  const step = weeks.length > 1 ? (W - ml - mr) / (weeks.length - 1) : 1;
+  svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H - 20).attr('fill', 'transparent')
+    .on('pointermove pointerdown', (ev) => {
+      const i = Math.max(0, Math.min(weeks.length - 1, Math.round((d3.pointer(ev)[0] - ml) / step)));
+      rule.attr('x1', x(weeks[i])).attr('x2', x(weeks[i])).style('opacity', 1);
+      dots.attr('cx', x(weeks[i])).attr('cy', (s) => y(s.vals[i] || 0)).style('opacity', 1);
+      const lines = series.map((s) => [s.name, s.vals[i] || 0]).sort((a, b) => b[1] - a[1]).map((p) => p[0] + ': ' + nf0.format(p[1]));
+      showTip(ev, 'Semana del ' + d3.timeFormat('%d/%m')(new Date(weeks[i])), lines);
+    })
+    .on('pointerleave', () => { hideTip(); rule.style('opacity', 0); dots.style('opacity', 0); });
 }
-scatter('ch-cuadrante', 'canales', {x: 'leads', y: 'pct_xql', r: 'pipeline_eur', label: 'canal', xfmt: fInt, yfmt: fPct, rfmt: fEur, xl: 'Leads', yl: 'Lead → XQL', rl: 'Pipeline abierto',
-  aria: 'Burbujas de canales por leads y paso a XQL, con tamaño según el pipeline abierto',
-  refX: (rs) => d3.median(rs, (r) => +r.leads),
-  refY: () => { const k = dash.data('kpis'); const r = k.status === 'ok' ? k.data.find((q) => q.region === REGION()) : null; return r ? +r.pct_xql : null; }});
-const PRIMERA_PAGINA = 10;
-scatter('ch-seo', 'seo', {x: 'posicion', y: 'impresiones', r: 'xqls', label: 'pagina', xfmt: fDec, yfmt: fInt, rfmt: fInt, xl: 'Posición media', yl: 'Impresiones', rl: 'XQLs', yLog: true,
-  aria: 'Burbujas de páginas por posición media e impresiones, con tamaño según los XQLs', refX: () => PRIMERA_PAGINA});
 
-// Flow from channel to outcome: four columns of nodes joined by bands.
-dash.draw('ch-flujo', (box) => {
-  const rs = rowsOf('flujos');
-  box.replaceChildren();
-  if (!rs || !rs.length) { fail(box, 'flujos'); return; }
-  const W = Math.max(640, box.clientWidth), H = 420, nodeW = 10, pad = 10, top = 8, left = 132, right = 132;
-  const svg = d3.create('svg').attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img').attr('aria-label', 'Flujo de leads de canal a página de entrada, formulario y resultado')
-    .style('width', box.clientWidth < 640 ? W + 'px' : '100%').style('display', 'block');
-  box.append(svg.node());
+// ---------- Origen ----------
+function vOrigen() {
+  const can = R('canales').sort((a, b) => +b.xqls - +a.xqls);
+  const vol = maxBy(can, 'leads'), best = maxBy(can, 'pct_xql'), roi = maxBy(can.filter((r) => has(r.roi_pct)), 'roi_pct');
+  const worst = minBy(can.filter((r) => has(r.roi_pct)), 'roi_pct');
+  concl('cc-origen',
+    vol ? 'Más volumen: <b>' + esc(vol.canal) + '</b> (' + fInt(vol.leads) + ' leads). Mejor calidad: <b>' + esc(best.canal) + '</b> (' + fPct(best.pct_xql) + ' a XQL). Mejor ROI: <b>' + esc(roi ? roi.canal : '—') + '</b>' + (roi ? ' (' + fPct(roi.roi_pct) + ')' : '') + '.' : 'Sin datos para esta región.',
+    worst && +worst.roi_pct < 0 ? 'Acción sugerida: reforzar ' + best.canal + ' y revisar la inversión en ' + worst.canal + ', que no recupera lo gastado.' : 'Acción sugerida: reforzar ' + (best ? best.canal : 'el mejor canal') + ' y revisar la oferta de los canales con mucho volumen y poca calidad.');
+
+  // semanal por canal
+  const rs = R('semanal'), weeks = [...new Set(rs.map((r) => r.semana))].sort(), chans = [...new Set(rs.map((r) => r.canal))];
+  const val = new Map(rs.map((r) => [r.canal + '|' + r.semana, +r[METRIC]]));
+  $('lg-week').innerHTML = chans.map((c) => '<span><i style="background:' + chColor(c) + '"></i>' + esc(c) + '</span>').join('');
+  weekChart($('ch-week-canal'), weeks, chans.map((c) => ({name: c, color: chColor(c), vals: weeks.map((w) => val.get(c + '|' + w) || 0)})), 280);
+
+  hbars($('hb-canales'), can, 'canal', [{f: 'leads', label: 'Leads', fmt: fInt, color: C.blue}, {f: 'xqls', label: 'XQLs', fmt: fInt, color: C.green}]);
+  table($('t-canales'), [
+    {h: 'Canal', cls: () => 'nw', html: (r) => '<span style="display:inline-flex;align-items:center;gap:8px"><i style="width:8px;height:8px;border-radius:50%;background:' + chColor(r.canal) + '"></i>' + esc(r.canal) + '</span>'},
+    {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Lead → XQL', f: 'pct_xql', n: 1, fmt: fPct},
+    {h: 'Deals', f: 'deals', n: 1, fmt: fInt}, {h: 'Inversión', f: 'gasto_eur', n: 1, fmt: fEur}, {h: 'Pipeline', f: 'pipeline_eur', n: 1, fmt: fEur},
+    {h: 'ROI', f: 'roi_pct', n: 1, fmt: fPct, cls: (r) => has(r.roi_pct) ? (+r.roi_pct >= 0 ? 'pos' : 'neg') : ''}
+  ], can);
+
+  scatter($('ch-quad'), can, {x: 'leads', y: 'pct_xql', r: 'pipeline_eur', label: 'canal', color: (r) => chColor(r.canal),
+    xfmt: fInt, yfmt: (v) => nf0.format(v) + ' %', lines: (r) => ['Leads: ' + fInt(r.leads), 'Lead → XQL: ' + fPct(r.pct_xql), 'Pipeline: ' + fEur(r.pipeline_eur)],
+    refX: d3.median(can, (r) => +r.leads), refY: +kpi().pct_xql});
+
+  hbars($('hb-coste'), can.filter((r) => has(r.gasto_eur)).sort((a, b) => +a.cpxql_eur - +b.cpxql_eur), 'canal',
+    [{f: 'cpl_eur', label: 'Coste por Lead', fmt: fEur, color: C.blue}, {f: 'cpxql_eur', label: 'Coste por XQL', fmt: fEur, color: C.green}, {f: 'cpdeal_eur', label: 'Coste por Deal', fmt: fEur, color: C.violet}], {perSeries: true});
+
+  const deals = R('deals').sort((a, b) => +b.importe_eur - +a.importe_eur).slice(0, 8);
+  table($('t-deals'), [
+    {h: 'Deal', html: (r) => '<b style="font-weight:500">' + esc(r.deal) + '</b>'}, {h: 'Región', f: 'region_cuenta'},
+    {h: 'Importe', f: 'importe_eur', n: 1, fmt: fEur}, {h: 'Etapa', html: (r) => '<span class="tag" style="background:' + ({'Negociación': 'var(--green-t);color:var(--green)', 'Propuesta': 'var(--blue-t);color:var(--blue)'}[r.etapa] || 'var(--amber-t);color:var(--amber)') + '">' + esc(r.etapa) + '</span>'},
+    {h: 'Días hasta el Deal', f: 'dias_hasta_deal', n: 1, fmt: fInt},
+    {h: 'Ruta hasta convertir', html: (r) => '<div class="route">' + String(r.ruta).split(' → ').map((s) => '<span>' + esc(s) + '</span>').join('<b>→</b>') + '</div>'}
+  ], deals);
+
+  flow($('ch-flow'));
+
+  const mx = R('canal_paginas'), mch = [...new Set(mx.map((r) => r.canal))], mpg = [...new Set(mx.map((r) => r.pagina))];
+  const mv = new Map(mx.map((r) => [r.pagina + '|' + r.canal, +r.pct_leads]));
+  $('t-matrix').innerHTML = mx.length ? '<table class="mx"><thead><tr><th>Página</th>' + mch.map((c) => '<th class="n">' + esc(c) + '</th>').join('') + '</tr></thead><tbody>' +
+    mpg.map((p) => '<tr><td>' + esc(p) + '</td>' + mch.map((c) => { const v = mv.get(p + '|' + c); return '<td class="c" style="background:rgba(54,103,240,' + (has(v) ? (0.06 + v / 100 * 0.9).toFixed(3) : 0) + ');color:' + (v >= 45 ? '#fff' : 'inherit') + ';font-weight:' + (v >= 45 ? 600 : 400) + '">' + (has(v) ? nf0.format(v) + ' %' : '—') + '</td>'; }).join('') + '</tr>').join('') + '</tbody></table>' : '<p class="empty">Sin datos para esta región.</p>';
+
+  const reg = (D.kpis || []).filter((r) => r.region !== 'Todas');
+  hbars($('hb-regiones'), reg, 'region', [{f: 'pct_xql', label: 'Lead → XQL', fmt: fPct, color: C.blue}, {f: 'pct_deal', label: 'XQL → Deal', fmt: fPct, color: C.green}, {f: 'pct_lead_deal', label: 'Lead → Deal', fmt: fPct, color: C.violet}]);
+  const fd = (v) => fInt(v) + ' días';
+  hbars($('hb-tiempo'), can.slice().sort((a, b) => +a.dias_lead_xql - +b.dias_lead_xql), 'canal', [{f: 'dias_lead_xql', label: 'Lead → XQL', fmt: fd, color: C.blue}, {f: 'dias_xql_deal', label: 'XQL → Deal', fmt: fd, color: C.green}]);
+}
+
+function scatter(el, rows, o) {
+  const H = 320, [svg, W] = svgBox(el, H);
+  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
+  const ys = rows.map((r) => +r[o.y]), xs = rows.map((r) => +r[o.x]);
+  const y = o.yLog ? d3.scaleLog().domain([d3.min(ys) * 0.6, d3.max(ys) * 1.8]).range([H - 28, 14]) : d3.scaleLinear().domain([0, d3.max(ys) * 1.2]).nice().range([H - 28, 14]);
+  let yt = y.ticks(5);
+  if (o.yLog) yt = yt.filter((v) => Math.abs(v / Math.pow(10, Math.floor(Math.log10(v) + 1e-9)) - 1) < 0.01);
+  const ml = 54, mr = 16;
+  const x = d3.scaleLinear().domain([o.x0 || 0, d3.max(xs) * 1.15]).nice().range([ml, W - mr]);
+  yAxis(svg, y, yt, ml, W - mr, o.yfmt);
+  svg.append('g').selectAll('text').data(x.ticks(Math.max(3, Math.floor((W - ml) / 90)))).join('text').attr('x', (d) => x(d)).attr('y', H - 6).attr('text-anchor', 'middle').text(o.xfmt);
+  if (has(o.refX)) svg.append('line').attr('x1', x(o.refX)).attr('x2', x(o.refX)).attr('y1', 14).attr('y2', H - 28).attr('stroke', '#A0A0AB').attr('stroke-dasharray', '4 4');
+  if (has(o.refY)) svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(o.refY)).attr('y2', y(o.refY)).attr('stroke', '#A0A0AB').attr('stroke-dasharray', '4 4');
+  const rad = d3.scaleSqrt().domain([0, d3.max(rows, (r) => +r[o.r]) || 1]).range([5, 26]);
+  const g = svg.append('g').selectAll('g').data(rows.slice().sort((a, b) => +b[o.r] - +a[o.r])).join('g').attr('transform', (r) => 'translate(' + x(+r[o.x]) + ',' + y(+r[o.y]) + ')');
+  g.append('circle').attr('r', (r) => rad(+r[o.r])).attr('fill', (r) => o.color(r)).attr('fill-opacity', 0.22).attr('stroke', (r) => o.color(r)).attr('stroke-width', 1.5);
+  const right = (r) => x(+r[o.x]) > ml + (W - ml - mr) * 0.68;
+  g.append('text').attr('x', (r) => right(r) ? -rad(+r[o.r]) - 6 : rad(+r[o.r]) + 6).attr('dy', '0.32em').attr('text-anchor', (r) => right(r) ? 'end' : 'start')
+    .style('fill', '#17171C').style('font-weight', 500).style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', 3).text((r) => r[o.label]);
+  const lab = g.selectAll('text').nodes().map((n) => ({n, r: d3.select(n.parentNode).datum()}));
+  lab.forEach((l) => { l.y = y(+l.r[o.y]); l.side = right(l.r); l.x = x(+l.r[o.x]); });
+  for (let pass = 0; pass < 6; pass++) {
+    lab.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < lab.length; i++) for (let j = 0; j < i; j++) {
+      const a = lab[j], b = lab[i];
+      if (a.side === b.side && Math.abs(a.x - b.x) < 150 && b.y - a.y < 15) b.y = a.y + 15;
+    }
+  }
+  lab.forEach((l) => d3.select(l.n).attr('y', l.y - y(+l.r[o.y])));
+  g.on('pointermove pointerdown', (ev, r) => showTip(ev, r[o.label], o.lines(r))).on('pointerleave', hideTip);
+}
+
+function flow(el) {
+  const rs = R('flujos');
+  el.innerHTML = '';
+  if (!rs.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
+  const W = Math.max(760, el.parentElement.clientWidth), H = 440, nw = 10, pad = 10, left = 140, right = 170;
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('viewBox', '0 0 ' + W + ' ' + H);
   const cols = [new Map(), new Map(), new Map(), new Map()];
-  const links = rs.map((r) => ({lv: +r.nivel, a: r.origen, b: r.destino, v: +r.leads})).filter((l) => l.lv >= 1 && l.lv <= 3 && l.v > 0);
-  const node = (c, name) => { if (!cols[c].has(name)) cols[c].set(name, {name, c, out: 0, inn: 0, so: 0, to: 0}); return cols[c].get(name); };
+  const links = rs.map((r) => ({lv: +r.nivel, a: r.origen, b: r.destino, v: +r.leads})).filter((l) => l.v > 0);
+  const node = (c, n) => { if (!cols[c].has(n)) cols[c].set(n, {name: n, c, out: 0, inn: 0, so: 0, to: 0}); return cols[c].get(n); };
   links.forEach((l) => { l.s = node(l.lv - 1, l.a); l.t = node(l.lv, l.b); l.s.out += l.v; l.t.inn += l.v; });
   const total = d3.sum([...cols[0].values()], (n) => n.out) || 1;
   const maxN = d3.max(cols, (c) => c.size);
-  const k = (H - 2 * top - pad * (maxN - 1)) / total;
-  const fixed = ['Deal', 'XQL sin Deal', 'Solo lead'];
-  const xOf = (c) => left + c * (W - left - right - nodeW) / 3;
+  const k = (H - 16 - pad * (maxN - 1)) / total;
+  const order = ['Deal', 'XQL sin Deal', 'Solo lead'];
+  const outC = {'Deal': C.green, 'XQL sin Deal': C.blue, 'Solo lead': '#C9CAD3'};
+  const xOf = (c) => left + c * (W - left - right - nw) / 3;
   cols.forEach((m, c) => {
-    const ns = [...m.values()];
-    ns.forEach((n) => { n.v = Math.max(n.out, n.inn); });
-    ns.sort((a, b) => (c === 3 ? fixed.indexOf(a.name) - fixed.indexOf(b.name) : b.v - a.v));
-    let yc = top + (H - 2 * top - (d3.sum(ns, (n) => n.v) * k + pad * (ns.length - 1))) / 2;
-    ns.forEach((n, i) => { n.i = i; n.y = yc; n.h = Math.max(1, n.v * k); yc += n.h + pad; });
+    const ns = [...m.values()]; ns.forEach((n) => { n.v = Math.max(n.out, n.inn); });
+    ns.sort((a, b) => c === 3 ? order.indexOf(a.name) - order.indexOf(b.name) : b.v - a.v);
+    let yc = 8 + (H - 16 - (d3.sum(ns, (n) => n.v) * k + pad * (ns.length - 1))) / 2;
+    ns.forEach((n, i) => { n.i = i; n.y = yc; n.h = Math.max(1.5, n.v * k); yc += n.h + pad; });
   });
   links.slice().sort((a, b) => a.s.i - b.s.i || a.t.i - b.t.i).forEach((l) => { l.sy = l.s.y + l.s.so; l.s.so += l.v * k; });
   links.slice().sort((a, b) => a.t.i - b.t.i || a.s.i - b.s.i).forEach((l) => { l.ty = l.t.y + l.t.to; l.t.to += l.v * k; });
-  const tip = el('div', 'vx-tip'); tip.hidden = true; box.append(tip);
-  const band = (l) => {
-    const x0 = xOf(l.lv - 1) + nodeW, x1 = xOf(l.lv), mx = (x0 + x1) / 2, h = Math.max(1, l.v * k);
-    return 'M' + x0 + ',' + l.sy + 'C' + mx + ',' + l.sy + ' ' + mx + ',' + l.ty + ' ' + x1 + ',' + l.ty + 'L' + x1 + ',' + (l.ty + h) + 'C' + mx + ',' + (l.ty + h) + ' ' + mx + ',' + (l.sy + h) + ' ' + x0 + ',' + (l.sy + h) + 'Z';
-  };
-  const over = (ev, l) => {
-    tip.replaceChildren(el('strong', '', l.a + ' → ' + l.b), el('div', '', fInt(l.v) + ' leads'));
-    tip.hidden = false;
-    place(box, tip, ev);
-  };
-  svg.append('g').selectAll('path').data(links).join('path').attr('d', band).style('fill', (l) => col(l.lv - 1)).style('fill-opacity', 0.32)
-    .on('pointermove', function (ev, l) { d3.select(this).style('fill-opacity', 0.7); over(ev, l); })
-    .on('pointerdown', over)
-    .on('pointerleave', function () { d3.select(this).style('fill-opacity', 0.32); tip.hidden = true; });
+  const band = (l) => { const x0 = xOf(l.lv - 1) + nw, x1 = xOf(l.lv), m = (x0 + x1) / 2, h = Math.max(1, l.v * k);
+    return 'M' + x0 + ',' + l.sy + 'C' + m + ',' + l.sy + ' ' + m + ',' + l.ty + ' ' + x1 + ',' + l.ty + 'L' + x1 + ',' + (l.ty + h) + 'C' + m + ',' + (l.ty + h) + ' ' + m + ',' + (l.sy + h) + ' ' + x0 + ',' + (l.sy + h) + 'Z'; };
+  const bandColor = (l) => l.lv === 1 ? chColor(l.a) : l.lv === 3 ? outC[l.b] : '#8B9BB4';
+  svg.append('g').selectAll('path').data(links).join('path').attr('d', band).attr('fill', bandColor).attr('fill-opacity', 0.28)
+    .on('pointermove pointerdown', function (ev, l) { d3.select(this).attr('fill-opacity', 0.6); showTip(ev, l.a + ' → ' + l.b, [nf0.format(l.v) + ' leads']); })
+    .on('pointerleave', function () { d3.select(this).attr('fill-opacity', 0.28); hideTip(); });
   const all = cols.flatMap((m) => [...m.values()]);
-  svg.append('g').selectAll('rect').data(all).join('rect').attr('x', (n) => xOf(n.c)).attr('y', (n) => n.y).attr('width', nodeW).attr('height', (n) => n.h).style('fill', 'var(--color-fg)');
-  svg.append('g').selectAll('text').data(all).join('text').attr('class', 'vx-halo')
-    .attr('x', (n) => (n.c === 0 ? xOf(0) - 6 : xOf(n.c) + nodeW + 6)).attr('y', (n) => n.y + n.h / 2).attr('dy', '0.32em')
-    .attr('text-anchor', (n) => (n.c === 0 ? 'end' : 'start')).style('fill', 'var(--color-fg)').style('pointer-events', 'none')
-    .text((n) => n.name + ' · ' + fInt(n.v));
-});
-
-// Stacked bars: where in the chain each page is read.
-const POS = [{f: 'pct_primera', label: 'Primera página'}, {f: 'pct_intermedia', label: 'Intermedia'}, {f: 'pct_ultima', label: 'Última antes de convertir'}, {f: 'pct_post_deal', label: 'Con el Deal ya abierto'}];
-dash.draw('ch-posiciones', (box) => {
-  const g = dash.data('posiciones');
-  const rs = rowsOf('posiciones');
-  box.replaceChildren();
-  if (!rs) { box.textContent = g.status === 'error' ? 'No se ha podido cargar' : '—'; return; }
-  const tip = el('div', 'vx-tip'); tip.hidden = true;
-  rs.forEach((r) => {
-    const row = el('div', 'vx-row');
-    const lab = el('div', 'vx-lab', r.pagina);
-    lab.append(el('span', 'vx-sublab', r.posicion_frecuente));
-    const stack = el('div', 'vx-stack');
-    POS.forEach((s, i) => {
-      const seg = el('div', 'vx-seg', +r[s.f] >= 12 ? fInt(r[s.f]) + ' %' : '');
-      seg.style.width = (+r[s.f]) + '%';
-      seg.style.background = dash.colors[i];
-      stack.append(seg);
-    });
-    row.append(lab, stack);
-    const show = (ev) => {
-      tip.replaceChildren(el('strong', '', r.pagina), ...POS.map((s) => el('div', '', s.label + ': ' + fInt(r[s.f]) + ' %')));
-      tip.hidden = false;
-      const b = box.getBoundingClientRect();
-      tip.style.left = Math.max(0, Math.min(ev.clientX - b.left + 12, box.clientWidth - tip.offsetWidth - 4)) + 'px';
-      tip.style.top = (ev.clientY - b.top + 14) + 'px';
-    };
-    row.addEventListener('pointermove', show);
-    row.addEventListener('pointerdown', show);
-    row.addEventListener('pointerleave', () => { tip.hidden = true; });
-    box.append(row);
-  });
-  box.append(tip);
-});
-
-// The usual route, drawn as a map: a dashed path, numbered stops and an X at the conversion.
-let rutaKey = null;
-let rutaReplay = false;
-const twoLines = (s) => {
-  if (s.length <= 16 || !s.includes(' ')) return [s];
-  const mid = s.length / 2; let best = -1;
-  for (let i = 0; i < s.length; i++) if (s[i] === ' ' && (best < 0 || Math.abs(i - mid) < Math.abs(best - mid))) best = i;
-  return [s.slice(0, best), s.slice(best + 1)];
-};
-dash.draw('ch-ruta', (box) => {
-  const g = dash.data('ruta');
-  const rs = rowsOf('ruta');
-  box.replaceChildren();
-  if (!rs || !rs.length) { box.textContent = g.status === 'error' ? 'No se ha podido cargar' : '—'; return; }
-  const stops = rs.slice().sort((a, b) => +a.paso - +b.paso);
-  const n = stops.length;
-  const W = Math.max(260, box.clientWidth);
-  const wide = W >= 600;
-  const step = n > 1 ? (W - 160) / (n - 1) : 0;
-  const pts = stops.map((s, i) => (wide ? {x: 80 + i * step, y: i % 2 ? 158 : 92} : {x: i % 2 ? 92 : 40, y: 40 + i * 80}));
-  const H = wide ? 250 : 40 + (n - 1) * 80 + 50;
-  const svg = d3.create('svg').attr('width', '100%').attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img')
-    .attr('aria-label', 'Ruta habitual hasta la conversión: ' + stops.map((s) => s.pagina).join(', '));
-  box.append(svg.node());
-  const d = d3.line().x((p) => p.x).y((p) => p.y).curve(d3.curveCatmullRom.alpha(0.5))(pts);
-  const mask = svg.append('defs').append('mask').attr('id', 'vx-ruta-mask').attr('maskUnits', 'userSpaceOnUse').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H);
-  const reveal = mask.append('path').attr('d', d).attr('fill', 'none').attr('stroke', '#fff').attr('stroke-width', 12).attr('stroke-linecap', 'round');
-  svg.append('path').attr('d', d).attr('fill', 'none').attr('stroke-width', 3).attr('stroke-linecap', 'round').attr('stroke-dasharray', '1 9')
-    .attr('mask', 'url(#vx-ruta-mask)').style('stroke', 'var(--color-fg-muted)');
-  const tip = el('div', 'vx-tip'); tip.hidden = true;
-  const groups = svg.selectAll('g.vx-stop').data(stops).join('g').attr('class', 'vx-stop').attr('transform', (s, i) => 'translate(' + pts[i].x + ',' + pts[i].y + ')');
-  groups.each(function (s, i) {
-    const node = d3.select(this);
-    const last = i === n - 1;
-    node.append('circle').attr('r', 15).style('fill', 'var(--color-panel)').style('stroke', last ? 'var(--cds-chart-status-critical)' : dash.colors[0]).attr('stroke-width', 2);
-    if (last) {
-      node.append('path').attr('d', 'M-6,-6L6,6M6,-6L-6,6').attr('fill', 'none').attr('stroke-width', 3).attr('stroke-linecap', 'round').style('stroke', 'var(--cds-chart-status-critical)');
-    } else {
-      node.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').style('fill', 'var(--color-fg)').text(s.paso);
-    }
-    const lines = twoLines(s.pagina);
-    const sub = fInt(s.pct_usuarios) + ' % llega aquí';
-    if (wide) {
-      const up = i % 2 === 0;
-      const y0 = up ? -24 - lines.length * 14 - 14 + 14 : 34;
-      lines.forEach((ln, k) => node.append('text').attr('text-anchor', 'middle').attr('y', y0 + k * 14).style('fill', 'var(--color-fg)').style('font-weight', 'var(--cds-font-weight-medium)').text(ln));
-      node.append('text').attr('text-anchor', 'middle').attr('y', y0 + lines.length * 14).style('fill', 'var(--cds-text-secondary)').text(sub);
-    } else {
-      const x0 = 124 - pts[i].x;
-      node.append('text').attr('x', x0).attr('y', -3).style('fill', 'var(--color-fg)').style('font-weight', 'var(--cds-font-weight-medium)').text(s.pagina);
-      node.append('text').attr('x', x0).attr('y', 13).style('fill', 'var(--cds-text-secondary)').text(sub);
-    }
-    const show = (ev) => {
-      const rows = [el('strong', '', (last ? 'Conversión · ' : 'Paso ' + s.paso + ' · ') + s.pagina), el('div', '', fInt(s.pct_usuarios) + ' % de los leads que convierten llega aquí')];
-      if (i) rows.push(el('div', '', fInt(s.dias_desde_anterior) + ' días desde el paso anterior'));
-      rows.push(el('div', '', 'Desvío más frecuente: ' + s.desvio + ' (' + fInt(s.pct_desvio) + ' %)'));
-      tip.replaceChildren(...rows);
-      tip.hidden = false;
-      const b = box.getBoundingClientRect();
-      tip.style.left = Math.max(0, Math.min(ev.clientX - b.left + 12, box.clientWidth - tip.offsetWidth - 4)) + 'px';
-      tip.style.top = (ev.clientY - b.top + 14) + 'px';
-    };
-    node.on('pointermove', show).on('pointerdown', show).on('pointerleave', () => { tip.hidden = true; });
-  });
-  box.append(tip);
-  const key = REGION();
-  const motion = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-  const animate = motion && n > 1 && (rutaReplay || key !== rutaKey);
-  rutaKey = key; rutaReplay = false;
-  if (!animate) return;
-  const total = 2800;
-  const len = reveal.node().getTotalLength();
-  reveal.attr('stroke-dasharray', len + ' ' + len).attr('stroke-dashoffset', len)
-    .transition().duration(total).ease(d3.easeLinear).attr('stroke-dashoffset', 0);
-  const pathNode = reveal.node();
-  const lens = pts.map((p) => { let best = 0, bd = Infinity; for (let l = 0; l <= len; l += len / 200) { const q = pathNode.getPointAtLength(l); const dd = (q.x - p.x) ** 2 + (q.y - p.y) ** 2; if (dd < bd) { bd = dd; best = l; } } return best; });
-  groups.style('opacity', 0).transition().delay((s, i) => total * lens[i] / len).duration(350).style('opacity', 1);
-  const marker = svg.append('circle').attr('r', 6).style('fill', dash.colors[1]).attr('cx', pts[0].x).attr('cy', pts[0].y);
-  marker.transition().duration(total).ease(d3.easeLinear)
-    .attrTween('transform', () => (u) => { const q = pathNode.getPointAtLength(u * len); return 'translate(' + (q.x - pts[0].x) + ',' + (q.y - pts[0].y) + ')'; })
-    .transition().duration(300).style('opacity', 0).remove();
-});
-
-// Controls and tabs: the script only listens and sets hidden, value, style and aria-*.
-const root = document.getElementById('dash-root') || document;
-const sel = root.querySelector('#sel-region');
-if (sel) sel.addEventListener('change', () => dash.setParams({region: sel.value}));
-const selM = root.querySelector('#sel-metrica');
-if (selM) selM.addEventListener('change', () => dash.setParams({metrica: selM.value}));
-const replay = root.querySelector('#ruta-replay');
-if (replay) replay.addEventListener('click', () => { rutaReplay = true; dash.draw('ch-ruta'); });
-const tabs = [...root.querySelectorAll('[data-tab]')];
-const pages = [...root.querySelectorAll('section[data-page]')];
-function openTab(id, link) {
-  if (!pages.some((s) => s.id === id)) return;
-  pages.forEach((s) => { s.hidden = s.id !== id; });
-  tabs.forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === id)));
-  if (link) dash.setLink(id);
+  svg.append('g').selectAll('rect').data(all).join('rect').attr('x', (n) => xOf(n.c)).attr('y', (n) => n.y).attr('width', nw).attr('height', (n) => n.h).attr('rx', 2)
+    .attr('fill', (n) => n.c === 0 ? chColor(n.name) : n.c === 3 ? outC[n.name] : '#17171C');
+  svg.append('g').selectAll('text').data(all).join('text').attr('x', (n) => n.c === 0 ? xOf(0) - 8 : xOf(n.c) + nw + 8).attr('y', (n) => n.y + n.h / 2).attr('dy', '0.32em')
+    .attr('text-anchor', (n) => n.c === 0 ? 'end' : 'start').style('fill', '#17171C').style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', 3).style('pointer-events', 'none')
+    .text((n) => n.name + '  ' + nf0.format(n.v));
 }
-tabs.forEach((b) => b.addEventListener('click', () => openTab(b.dataset.tab, true)));
-openTab((location.hash || '').slice(1), false);
-dash.onData(() => {
-  if (sel && document.activeElement !== sel) sel.value = REGION();
-  if (selM && document.activeElement !== selM) selM.value = dash.params().metrica === 'xqls' ? 'xqls' : 'leads';
-  root.querySelectorAll('[data-sw]').forEach((s) => { s.style.background = dash.colors[+s.dataset.sw]; });
-  const note = root.querySelector('#aviso-muestra');
-  const k = dash.data('kpis');
-  const r = k.status === 'ok' ? k.data.find((x) => x.region === REGION()) : null;
-  if (note) note.hidden = !(r && +r.leads < 100);
-});
+
+// ---------- Páginas ----------
+const POS = [['pct_primera', 'Primera página', C.blue], ['pct_intermedia', 'Intermedia', '#8B9BB4'], ['pct_ultima', 'Última antes de convertir', C.green], ['pct_post_deal', 'Con el Deal ya abierto', C.violet]];
+function vPaginas() {
+  const pg = R('paginas').sort((a, b) => +b.xqls - +a.xqls);
+  const top = pg[0], act = maxBy(pg, 'pct_activacion'), rt = R('ruta').sort((a, b) => +a.paso - +b.paso);
+  concl('cc-paginas', top ? 'La página que más XQLs genera es <b>' + esc(top.pagina) + '</b> (' + fInt(top.xqls) + '). La que mejor activa es <b>' + esc(act.pagina) + '</b> (' + fPct(act.pct_activacion) + ' de sus vistas acaba en formulario).' : 'Sin datos para esta región.',
+    rt.length ? 'La ruta habitual empieza en ' + rt[0].pagina + ' y termina en ' + rt[rt.length - 1].pagina + '; solo el ' + nf0.format(rt[rt.length - 1].pct_usuarios) + ' % la completa. Acción sugerida: reforzar el enlace entre las paradas donde más leads se pierden.' : '');
+  route($('ch-route'), rt, false);
+  $('lg-pos').innerHTML = POS.map((p) => '<span><i style="background:' + p[2] + '"></i>' + p[1] + '</span>').join('');
+  const st = $('st-pos'); st.innerHTML = '';
+  R('posiciones').forEach((r) => {
+    const row = document.createElement('div'); row.className = 'hb';
+    row.innerHTML = '<div class="lab">' + esc(r.pagina) + '<small>' + esc(r.posicion_frecuente) + '</small></div><div class="stack">' +
+      POS.map((p) => '<i style="width:' + (+r[p[0]]) + '%;background:' + p[2] + '">' + (+r[p[0]] >= 10 ? nf0.format(+r[p[0]]) + ' %' : '') + '</i>').join('') + '</div>';
+    hover(row, r.pagina, POS.map((p) => p[1] + ': ' + nf0.format(+r[p[0]]) + ' %'));
+    st.append(row);
+  });
+  table($('t-paginas'), [{h: 'Página', f: 'pagina'}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Lead → XQL', f: 'pct_xql', n: 1, fmt: fPct}, {h: 'Vistas', f: 'vistas', n: 1, fmt: fInt}, {h: 'Activación', f: 'pct_activacion', n: 1, fmt: fPct}], pg);
+  table($('t-forms'), [{h: 'Formulario', f: 'formulario'}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Lead → XQL', f: 'pct_xql', n: 1, fmt: fPct}], R('formularios').sort((a, b) => +b.xqls - +a.xqls));
+  table($('t-ctas'), [{h: 'CTA', f: 'cta'}, {h: 'Ubicación', f: 'ubicacion'}, {h: 'Vistas', f: 'vistas', n: 1, fmt: fInt}, {h: 'Clics', f: 'clics', n: 1, fmt: fInt}, {h: 'CTR', f: 'ctr', n: 1, fmt: fPct}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}], R('ctas').sort((a, b) => +b.xqls - +a.xqls));
+}
+
+function route(el, stops, forceAnim) {
+  el.innerHTML = '';
+  if (!stops.length) { el.innerHTML = '<p class="empty">Sin datos para esta región.</p>'; return; }
+  const n = stops.length, W = Math.max(300, el.clientWidth), wide = W >= 640;
+  const pts = stops.map((s, i) => wide ? {x: 90 + i * (W - 180) / Math.max(1, n - 1), y: i % 2 ? 176 : 96} : {x: i % 2 ? 100 : 40, y: 36 + i * 86});
+  const H = wide ? 270 : 36 + (n - 1) * 86 + 46;
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('viewBox', '0 0 ' + W + ' ' + H).attr('role', 'img').attr('aria-label', 'Ruta habitual: ' + stops.map((s) => s.pagina).join(', '));
+  const dPath = d3.line().x((p) => p.x).y((p) => p.y).curve(d3.curveCatmullRom.alpha(0.5))(pts);
+  svg.append('path').attr('d', dPath).attr('fill', 'none').attr('stroke', '#E4DEFA').attr('stroke-width', 10).attr('stroke-linecap', 'round');
+  const trail = svg.append('path').attr('d', dPath).attr('fill', 'none').attr('stroke', '#7556E0').attr('stroke-width', 2.5).attr('stroke-dasharray', '2 8').attr('stroke-linecap', 'round');
+  const g = svg.selectAll('g.stop').data(stops).join('g').attr('class', 'stop').attr('transform', (s, i) => 'translate(' + pts[i].x + ',' + pts[i].y + ')');
+  g.each(function (s, i) {
+    const nd = d3.select(this), last = i === n - 1;
+    nd.append('circle').attr('r', 17).attr('fill', '#fff').attr('stroke', last ? C.red : '#7556E0').attr('stroke-width', 2.5);
+    if (last) nd.append('path').attr('d', 'M-6,-6L6,6M6,-6L-6,6').attr('stroke', C.red).attr('stroke-width', 3).attr('stroke-linecap', 'round');
+    else nd.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').style('fill', '#7556E0').style('font-weight', 600).text(s.paso);
+    const lbl = wide ? {x: 0, y: i % 2 ? 36 : -44, a: 'middle'} : {x: 130 - pts[i].x, y: -4, a: 'start'};
+    nd.append('text').attr('x', lbl.x).attr('y', lbl.y).attr('text-anchor', lbl.a).style('fill', '#17171C').style('font-weight', 600).style('font-size', '13px').text(s.pagina);
+    nd.append('text').attr('x', lbl.x).attr('y', lbl.y + 16).attr('text-anchor', lbl.a).text(nf0.format(s.pct_usuarios) + ' % llega aquí');
+    const lines = [nf0.format(s.pct_usuarios) + ' % de los leads que convierten llega aquí'];
+    if (i) lines.push(nf0.format(s.dias_desde_anterior) + ' días desde el paso anterior');
+    lines.push('Desvío más frecuente: ' + s.desvio + ' (' + nf0.format(s.pct_desvio) + ' %)');
+    nd.on('pointermove pointerdown', (ev) => showTip(ev, (last ? 'Conversión: ' : 'Paso ' + s.paso + ': ') + s.pagina, lines)).on('pointerleave', hideTip);
+  });
+  const animate = !matchMedia('(prefers-reduced-motion: reduce)').matches && (forceAnim || lastRouteKey !== REGION);
+  lastRouteKey = REGION;
+  if (!animate) return;
+  const len = trail.node().getTotalLength(), T = 2600;
+  const mask = svg.insert('defs', ':first-child').append('mask').attr('id', 'rm').attr('maskUnits', 'userSpaceOnUse').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H);
+  const rv = mask.append('path').attr('d', dPath).attr('fill', 'none').attr('stroke', '#fff').attr('stroke-width', 14).attr('stroke-dasharray', len + ' ' + len).attr('stroke-dashoffset', len);
+  trail.attr('mask', 'url(#rm)');
+  rv.transition().duration(T).ease(d3.easeLinear).attr('stroke-dashoffset', 0);
+  const pn = trail.node();
+  const at = pts.map((p) => { let best = 0, bd = Infinity; for (let l = 0; l <= len; l += len / 240) { const q = pn.getPointAtLength(l), d = (q.x - p.x) ** 2 + (q.y - p.y) ** 2; if (d < bd) { bd = d; best = l; } } return best; });
+  g.style('opacity', 0).transition().delay((s, i) => T * at[i] / len).duration(300).style('opacity', 1);
+  const walker = svg.append('circle').attr('r', 7).attr('fill', '#7556E0').attr('stroke', '#fff').attr('stroke-width', 2);
+  walker.transition().duration(T).ease(d3.easeLinear).attrTween('transform', () => (u) => { const q = pn.getPointAtLength(u * len); return 'translate(' + q.x + ',' + q.y + ')'; }).transition().duration(300).style('opacity', 0).remove();
+}
+
+// ---------- Leads existentes ----------
+function vLeads() {
+  const rc = R('recorrido').sort((a, b) => (+b.pct_con_deal - +b.pct_sin_deal) - (+a.pct_con_deal - +a.pct_sin_deal));
+  const cal = R('calor').sort((a, b) => +b.puntuacion - +a.puntuacion);
+  const hot = cal.filter((r) => +r.puntuacion >= 70 && r.deal_abierto !== 'Sí');
+  concl('cc-leads', rc.length ? 'Los leads que llegan a Deal consultan mucho más <b>' + esc(rc[0].pagina) + '</b> (' + nf0.format(rc[0].pct_con_deal) + ' % frente a ' + nf0.format(rc[0].pct_sin_deal) + ' %). Hay <b>' + hot.length + '</b> ' + (hot.length === 1 ? 'empresa' : 'empresas') + ' con intención alta y sin Deal abierto.' : 'Sin datos para esta región.',
+    'Acción sugerida: llevar a los leads hacia ' + (rc[0] ? rc[0].pagina : 'las páginas que más pesan') + ' en los emails y vigilar las empresas que suben de puntuación.');
+  hbars($('hb-recorrido'), rc, 'pagina', [{f: 'pct_con_deal', label: 'Con Deal', fmt: (v) => nf0.format(v) + ' %', color: C.green}, {f: 'pct_sin_deal', label: 'Sin Deal', fmt: (v) => nf0.format(v) + ' %', color: C.grey}], {max: 100});
+  const hc = (v) => v >= 70 ? C.red : v >= 40 ? C.amber : C.blue;
+  table($('t-calor'), [
+    {h: 'Empresa', html: (r) => esc(r.empresa) + (REGION === 'Todas' ? '<div style="font-size:11.5px;color:var(--faint)">' + esc(r.region_cuenta) + '</div>' : '')},
+    {h: 'Calor', n: 1, html: (r) => '<span class="heat"><i><u style="width:' + (+r.puntuacion) + '%;background:' + hc(+r.puntuacion) + '"></u></i>' + fInt(r.puntuacion) + '</span>'},
+    {h: 'Semana', f: 'variacion', n: 1, fmt: (v) => (+v > 0 ? '+' : '') + nf0.format(+v), cls: (r) => +r.variacion > 0 ? 'pos' : +r.variacion < 0 ? 'neg' : ''},
+    {h: 'Última señal', f: 'ultima_senal'}, {h: 'Deal', f: 'deal_abierto'}
+  ], cal.slice(0, 12));
+}
+
+// ---------- Nurturing ----------
+function vNurturing() {
+  const em = R('embudo_emails').sort((a, b) => +a.orden - +b.orden);
+  const ems = R('emails').sort((a, b) => a.flujo < b.flujo ? -1 : a.flujo > b.flujo ? 1 : +a.orden - +b.orden);
+  const best = maxBy(ems, 'pct_clic'), worst = minBy(ems, 'pct_clic');
+  const ent = em.find((r) => r.paso === 'Entregado'), clic = em.find((r) => /clic/i.test(r.paso));
+  concl('cc-nurturing', best ? 'El email con más clics es <b>' + esc(best.email) + '</b> (' + esc(best.flujo) + ', ' + fPct(best.pct_clic) + '). ' + (ent && clic ? 'De cada 100 emails entregados, ' + nf1.format(100 * +clic.valor / +ent.valor) + ' reciben clic.' : '') : 'Sin datos para esta región.',
+    worst ? 'Acción sugerida: reescribir el asunto y la llamada a la acción de «' + worst.email + '» (' + fPct(worst.pct_clic) + ' de clic).' : '');
+  hbars($('hb-embudo'), em, 'paso', [{f: 'valor', label: 'Total', fmt: fInt, color: C.blue}], {sub: (r) => ent && r !== ent ? nf1.format(100 * +r.valor / +ent.valor) + ' % de los entregados' : ''});
+  table($('t-emails'), [{h: 'Flujo', f: 'flujo'}, {h: 'Email', f: 'email'}, {h: 'Entregados', f: 'entregados', n: 1, fmt: fInt}, {h: 'Clic', f: 'pct_clic', n: 1, fmt: fPct}, {h: 'Visitas', f: 'visitas', n: 1, fmt: fInt}, {h: 'Conversiones', f: 'conversiones', n: 1, fmt: fInt}, {h: 'Avances', f: 'avances', n: 1, fmt: fInt}], ems);
+}
+
+// ---------- SEO ----------
+function vSeo() {
+  const s = R('seo').sort((a, b) => +b.sesiones - +a.sesiones);
+  const top5 = s.slice(0, 5), low = minBy(top5, 'pct_conv');
+  const opp = s.filter((r) => +r.posicion > 4 && +r.xqls > 0).sort((a, b) => +b.xqls - +a.xqls)[0];
+  concl('cc-seo', low ? 'Entre las cinco páginas con más tráfico, la que menos convierte es <b>' + esc(low.pagina) + '</b> (' + fPct(low.pct_conv) + ' de sus sesiones).' + (opp ? ' La mayor oportunidad SEO es <b>' + esc(opp.pagina) + '</b>: genera ' + fInt(opp.xqls) + ' XQLs desde la posición ' + nf1.format(+opp.posicion) + '.' : '') : 'Sin datos para esta región.',
+    'Acción sugerida: revisar la propuesta y el CTA de las páginas con mucho tráfico y poca conversión, y priorizar el SEO de las que ya traen buenos leads.');
+  scatter($('ch-seo'), s, {x: 'posicion', y: 'impresiones', r: 'xqls', label: 'pagina', color: () => C.violet, yLog: true, xfmt: (v) => nf0.format(v), yfmt: (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v),
+    lines: (r) => ['Posición media: ' + nf1.format(+r.posicion), 'Impresiones: ' + fInt(r.impresiones), 'XQLs: ' + fInt(r.xqls)], refX: 10});
+  table($('t-seo'), [{h: 'Página', f: 'pagina'}, {h: 'Sesiones', f: 'sesiones', n: 1, fmt: fInt}, {h: 'Leads', f: 'leads', n: 1, fmt: fInt}, {h: 'XQLs', f: 'xqls', n: 1, fmt: fInt}, {h: 'Conversión', f: 'pct_conv', n: 1, fmt: fPct}, {h: 'Impresiones', f: 'impresiones', n: 1, fmt: fInt}, {h: 'CTR', f: 'ctr', n: 1, fmt: fPct}, {h: 'Posición', f: 'posicion', n: 1, fmt: (v) => nf1.format(+v)}], s);
+}
+
+// ---------- Navegación ----------
+const VIEWS = {resumen: vResumen, origen: vOrigen, paginas: vPaginas, leads: vLeads, nurturing: vNurturing, seo: vSeo};
+function render() { hideTip(); try { VIEWS[TAB](); } catch (e) { console.error(e); $('errors').innerHTML = '<div class="err">Error al dibujar la vista: ' + esc(e.message) + '</div>'; } }
+
+function setRegion(r) {
+  REGION = r;
+  document.querySelectorAll('.reg').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.r === r)));
+  $('mreg').value = r;
+  $('hero-sub').textContent = 'veridas.com · ' + (r === 'Todas' ? 'todas las regiones' : r) + ' · últimos 90 días';
+  render();
+}
+function setTab(t, push) {
+  if (!VIEWS[t]) t = 'resumen';
+  TAB = t;
+  document.querySelectorAll('.tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.t === t)));
+  document.querySelectorAll('.view').forEach((v) => { v.hidden = v.id !== 'v-' + t; });
+  if (push) history.replaceState(null, '', '#' + t);
+  render();
+}
+
+function buildChrome() {
+  $('tabs').innerHTML = TABS.map(([id, l, ic]) => '<button class="tab" role="tab" data-t="' + id + '" aria-selected="false"><svg viewBox="0 0 24 24">' + ic + '</svg>' + l + '</button>').join('');
+  $('tabs').addEventListener('click', (e) => { const b = e.target.closest('.tab'); if (b) setTab(b.dataset.t, true); });
+  const lc = (r) => { const k = (D.kpis || []).find((x) => x.region === r); return k ? fInt(k.leads) : ''; };
+  $('regions').innerHTML = REGIONS.map((r) => '<button class="reg" data-r="' + r + '" aria-pressed="false"><span class="dot"></span>' + (r === 'Todas' ? 'Todas las regiones' : r) + '<em>' + lc(r) + '</em></button>').join('');
+  $('regions').addEventListener('click', (e) => { const b = e.target.closest('.reg'); if (b) setRegion(b.dataset.r); });
+  $('mreg').innerHTML = REGIONS.map((r) => '<option value="' + r + '">' + (r === 'Todas' ? 'Todas las regiones' : r) + '</option>').join('');
+  $('mreg').addEventListener('change', (e) => setRegion(e.target.value));
+  document.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => { setTab(b.dataset.go, true); scrollTo(0, 0); }));
+  $('seg-metric').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; METRIC = b.dataset.m; $('seg-metric').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); render(); });
+  $('replay').addEventListener('click', () => route($('ch-route'), R('ruta').sort((a, b) => +a.paso - +b.paso), true));
+  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { lastRouteKey = REGION; render(); }, 150); });
+  addEventListener('hashchange', () => setTab(location.hash.slice(1), false));
+}
+
+async function start() {
+  if (!window.d3) { $('errors').innerHTML = '<div class="err">No se ha podido cargar la librería de gráficos (d3). Comprueba la conexión a internet.</div>'; return; }
+  const missing = [];
+  await Promise.all(FILES.map((f) => d3.csv(f + '.csv').then((rows) => { D[f] = rows; }).catch(() => { D[f] = []; missing.push(f + '.csv'); })));
+  if (missing.length) $('errors').innerHTML = '<div class="err">Faltan estos ficheros junto a index.html: ' + esc(missing.join(', ')) + '. Súbelos a la misma carpeta del repositorio.</div>';
+  buildChrome();
+  setRegion('Todas');
+  setTab(location.hash.slice(1), false);
+}
+start();
+})();
 </script>
+</body>
+</html>

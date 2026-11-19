@@ -1,0 +1,33 @@
+region,empresa,region_cuenta,contactos_activos,puntuacion,variacion,ultima_senal,deal_abierto
+Todas,Banco Albor,Europa,1,55,-15,Casos de éxito,No
+Europa,Banco Albor,Europa,1,55,-15,Casos de éxito,No
+Todas,Telco Meridia,Europa,2,97,-3,Visita a precios,No
+Europa,Telco Meridia,Europa,2,97,-3,Visita a precios,No
+Todas,Seguros Vértice,Europa,3,70,-6,Casos de éxito,No
+Europa,Seguros Vértice,Europa,3,70,-6,Casos de éxito,No
+Todas,Fintech Lumo,Europa,1,94,33,Formulario de contacto,No
+Europa,Fintech Lumo,Europa,1,94,33,Formulario de contacto,No
+Todas,Caja Ribera,Europa,5,96,17,Reserva de demo,No
+Europa,Caja Ribera,Europa,5,96,17,Reserva de demo,No
+Todas,Neobank Quanta,USA,1,43,28,Registro en webinar,No
+USA,Neobank Quanta,USA,1,43,28,Registro en webinar,No
+Todas,Atlas Payments,USA,2,77,23,Visita a precios,No
+USA,Atlas Payments,USA,2,77,23,Visita a precios,No
+Todas,Harbor Insurance,USA,5,41,-10,Descarga de contenido,No
+USA,Harbor Insurance,USA,5,41,-10,Descarga de contenido,No
+Todas,Banco Ipê,Brasil,3,64,0,Casos de éxito,No
+Brasil,Banco Ipê,Brasil,3,64,0,Casos de éxito,No
+Todas,Pagamentos Sabiá,Brasil,6,85,23,Visita a precios,No
+Brasil,Pagamentos Sabiá,Brasil,6,85,23,Visita a precios,No
+Todas,Seguradora Jatobá,Brasil,2,79,1,Visita a precios,No
+Brasil,Seguradora Jatobá,Brasil,2,79,1,Visita a precios,No
+Todas,Banco Cóndor,LATAM,4,80,-11,Reserva de demo,No
+LATAM,Banco Cóndor,LATAM,4,80,-11,Reserva de demo,No
+Todas,Telco Andina Uno,LATAM,1,48,-5,Registro en webinar,No
+LATAM,Telco Andina Uno,LATAM,1,48,-5,Registro en webinar,No
+Todas,Financiera Quetzal,LATAM,4,52,3,Registro en webinar,No
+LATAM,Financiera Quetzal,LATAM,4,52,3,Registro en webinar,No
+Todas,Cooperativa Maipo,LATAM,5,46,-6,Descarga de contenido,Sí
+LATAM,Cooperativa Maipo,LATAM,5,46,-6,Descarga de contenido,Sí
+Todas,Pagos Yaguar,LATAM,3,49,17,Formulario de contacto,No
+LATAM,Pagos Yaguar,LATAM,3,49,17,Formulario de contacto,No

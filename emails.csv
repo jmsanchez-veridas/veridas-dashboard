@@ -1,0 +1,46 @@
+region,flujo,email,orden,entregados,abiertos,clics,visitas,conversiones,avances,pct_clic
+Todas,Bienvenida,Presentación de la solución,1,3089,1399,165,131,29,9,5.3
+Europa,Bienvenida,Presentación de la solución,1,1418,655,75,56,13,5,5.3
+USA,Bienvenida,Presentación de la solución,1,551,246,31,25,4,2,5.6
+Brasil,Bienvenida,Presentación de la solución,1,354,166,17,14,2,0,4.8
+LATAM,Bienvenida,Presentación de la solución,1,766,332,42,36,10,2,5.5
+Todas,Bienvenida,Caso de éxito del sector,2,2841,1163,100,77,15,2,3.5
+Europa,Bienvenida,Caso de éxito del sector,2,1171,487,49,39,7,2,4.2
+USA,Bienvenida,Caso de éxito del sector,2,439,177,13,9,2,0,3.0
+Brasil,Bienvenida,Caso de éxito del sector,2,356,145,13,11,3,0,3.7
+LATAM,Bienvenida,Caso de éxito del sector,2,875,354,25,18,3,0,2.9
+Todas,Bienvenida,Invitación a demo,3,2614,926,195,161,21,6,7.5
+Europa,Bienvenida,Invitación a demo,3,1187,410,87,77,9,3,7.3
+USA,Bienvenida,Invitación a demo,3,428,170,27,21,6,2,6.3
+Brasil,Bienvenida,Invitación a demo,3,307,111,28,20,3,1,9.1
+LATAM,Bienvenida,Invitación a demo,3,692,235,53,43,3,0,7.7
+Todas,Post-descarga guía KYC,Entrega de la guía,4,3980,1449,291,225,43,13,7.3
+Europa,Post-descarga guía KYC,Entrega de la guía,4,1921,729,145,112,18,4,7.5
+USA,Post-descarga guía KYC,Entrega de la guía,4,516,180,40,28,5,1,7.8
+Brasil,Post-descarga guía KYC,Entrega de la guía,4,439,169,26,20,2,1,5.9
+LATAM,Post-descarga guía KYC,Entrega de la guía,4,1104,371,80,65,18,7,7.2
+Todas,Post-descarga guía KYC,Checklist de cumplimiento,5,3662,1187,118,97,13,3,3.2
+Europa,Post-descarga guía KYC,Checklist de cumplimiento,5,1737,563,53,44,5,2,3.1
+USA,Post-descarga guía KYC,Checklist de cumplimiento,5,424,140,12,8,0,0,2.8
+Brasil,Post-descarga guía KYC,Checklist de cumplimiento,5,417,124,14,11,2,0,3.4
+LATAM,Post-descarga guía KYC,Checklist de cumplimiento,5,1084,360,39,34,6,1,3.6
+Todas,Post-descarga guía KYC,Webinar bajo demanda,6,3369,1319,306,238,54,14,9.1
+Europa,Post-descarga guía KYC,Webinar bajo demanda,6,1362,523,136,103,26,7,10.0
+USA,Post-descarga guía KYC,Webinar bajo demanda,6,454,186,36,29,5,1,7.9
+Brasil,Post-descarga guía KYC,Webinar bajo demanda,6,416,171,37,30,4,1,8.9
+LATAM,Post-descarga guía KYC,Webinar bajo demanda,6,1137,439,97,76,19,5,8.5
+Todas,Post-descarga guía KYC,Oferta de demo,7,3100,1105,293,247,51,17,9.5
+Europa,Post-descarga guía KYC,Oferta de demo,7,1353,442,131,109,30,10,9.7
+USA,Post-descarga guía KYC,Oferta de demo,7,427,160,39,33,9,2,9.1
+Brasil,Post-descarga guía KYC,Oferta de demo,7,421,161,31,26,4,2,7.4
+LATAM,Post-descarga guía KYC,Oferta de demo,7,899,342,92,79,8,3,10.2
+Todas,Reactivación,Novedades de producto,8,2617,1010,136,111,17,4,5.2
+Europa,Reactivación,Novedades de producto,8,1184,457,62,53,5,1,5.2
+USA,Reactivación,Novedades de producto,8,386,162,19,13,1,0,4.9
+Brasil,Reactivación,Novedades de producto,8,318,123,21,18,5,1,6.6
+LATAM,Reactivación,Novedades de producto,8,729,268,34,27,6,2,4.7
+Todas,Reactivación,Informe del sector,9,2406,1045,226,179,30,12,9.4
+Europa,Reactivación,Informe del sector,9,1004,437,83,72,10,4,8.3
+USA,Reactivación,Informe del sector,9,359,147,38,28,3,1,10.6
+Brasil,Reactivación,Informe del sector,9,309,121,34,27,4,1,11.0
+LATAM,Reactivación,Informe del sector,9,734,340,71,52,13,6,9.7
