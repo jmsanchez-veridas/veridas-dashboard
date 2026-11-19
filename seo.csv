@@ -1,0 +1,51 @@
+region,pagina,sesiones,leads,pct_conv,impresiones,clics,ctr,posicion,xqls
+Todas,Verificación de identidad,18400,84,0.5,212000,7214,3.4,6.2,19
+Europa,Verificación de identidad,8946,41,0.5,86622,3031,3.5,6.1,10
+USA,Verificación de identidad,2171,14,0.6,29721,1022,3.4,6.2,2
+Brasil,Verificación de identidad,2009,8,0.4,31326,901,2.9,7.0,2
+LATAM,Verificación de identidad,5274,21,0.4,64331,2260,3.5,5.5,5
+Todas,Blog,31200,31,0.1,540000,11782,2.2,9.8,1
+Europa,Blog,14575,13,0.1,264183,6122,2.3,9.0,1
+USA,Blog,4899,4,0.1,74588,1548,2.1,9.0,0
+Brasil,Blog,3375,4,0.1,55051,1318,2.4,10.2,0
+LATAM,Blog,8351,10,0.1,146178,2794,1.9,8.7,0
+Todas,Home,26901,15,0.1,98000,11751,12.0,2.1,3
+Europa,Home,12255,6,0.0,41380,4673,11.3,2.1,1
+USA,Home,4322,3,0.1,17238,2256,13.1,2.5,1
+Brasil,Home,3566,2,0.1,11055,1251,11.3,1.9,0
+LATAM,Home,6758,4,0.1,28327,3571,12.6,1.9,1
+Todas,Biometría de voz,6100,51,0.8,87999,1561,1.8,8.4,13
+Europa,Biometría de voz,2325,23,1.0,33640,560,1.7,9.0,6
+USA,Biometría de voz,1079,9,0.8,13838,252,1.8,8.6,2
+Brasil,Biometría de voz,733,6,0.8,11419,193,1.7,8.0,2
+LATAM,Biometría de voz,1963,13,0.7,29102,556,1.9,9.9,3
+Todas,Biometría facial,7900,47,0.6,131000,3370,2.6,7.1,10
+Europa,Biometría facial,3066,19,0.6,59767,1608,2.7,7.6,5
+USA,Biometría facial,1185,6,0.5,16824,443,2.6,6.4,2
+Brasil,Biometría facial,1056,7,0.7,18498,482,2.6,6.6,1
+LATAM,Biometría facial,2593,15,0.6,35911,837,2.3,8.1,2
+Todas,Casos de éxito,3200,40,1.2,24000,1047,4.4,11.3,13
+Europa,Casos de éxito,1589,19,1.2,11179,493,4.4,9.8,5
+USA,Casos de éxito,419,6,1.4,3940,177,4.5,10.1,2
+Brasil,Casos de éxito,340,4,1.2,2302,97,4.2,11.8,2
+LATAM,Casos de éxito,852,11,1.3,6579,280,4.3,10.8,4
+Todas,Precios,2700,38,1.4,9099,804,8.8,3.4,12
+Europa,Precios,1175,17,1.4,3985,369,9.3,3.1,6
+USA,Precios,415,6,1.4,1206,112,9.3,3.0,2
+Brasil,Precios,314,4,1.3,1168,97,8.3,3.4,1
+LATAM,Precios,796,11,1.4,2740,226,8.2,3.4,3
+Todas,Recursos: guía KYC,8800,63,0.7,76000,2859,3.8,5.5,8
+Europa,Recursos: guía KYC,4225,30,0.7,35060,1397,4.0,6.6,4
+USA,Recursos: guía KYC,1171,10,0.9,11157,429,3.8,6.2,1
+Brasil,Recursos: guía KYC,1178,8,0.7,10852,354,3.3,6.6,1
+LATAM,Recursos: guía KYC,2226,15,0.7,18931,679,3.6,6.5,2
+Todas,Solicitar demo,4099,148,3.6,6200,957,15.4,1.8,59
+Europa,Solicitar demo,1919,63,3.3,3096,501,16.2,2.1,30
+USA,Solicitar demo,489,23,4.7,830,122,14.7,1.7,6
+Brasil,Solicitar demo,491,22,4.5,805,130,16.1,1.7,5
+LATAM,Solicitar demo,1200,40,3.3,1469,204,13.9,1.6,18
+Todas,Contacto,5201,121,2.3,7399,1082,14.6,1.6,33
+Europa,Contacto,2022,51,2.5,3371,493,14.6,1.9,12
+USA,Contacto,888,21,2.4,1017,128,12.6,1.9,6
+Brasil,Contacto,654,13,2.0,972,144,14.8,1.6,3
+LATAM,Contacto,1637,36,2.2,2039,317,15.5,1.5,12

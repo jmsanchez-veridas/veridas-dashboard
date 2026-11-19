@@ -1,0 +1,51 @@
+region,deal,region_cuenta,importe_eur,canal,etapa,dias_hasta_deal,ruta
+Todas,Neobank Tesela,Europa,22300,Orgánico,Negociación,13,Orgánico → Home → Documentación técnica → Casos de éxito → Biometría de voz → Solicitar demo
+Europa,Neobank Tesela,Europa,22300,Orgánico,Negociación,13,Orgánico → Home → Documentación técnica → Casos de éxito → Biometría de voz → Solicitar demo
+Todas,Telco Andina,Europa,16700,Orgánico,Negociación,64,Orgánico → Home → Documentación técnica → Seguridad y certificaciones → Contacto
+Europa,Telco Andina,Europa,16700,Orgánico,Negociación,64,Orgánico → Home → Documentación técnica → Seguridad y certificaciones → Contacto
+Todas,Telco Jatobá,Europa,136700,Orgánico,Propuesta,39,Orgánico → Blog → Biometría facial → Seguridad y certificaciones → Biometría de voz → Solicitar demo
+Europa,Telco Jatobá,Europa,136700,Orgánico,Propuesta,39,Orgánico → Blog → Biometría facial → Seguridad y certificaciones → Biometría de voz → Solicitar demo
+Todas,Seguros Ipê,Europa,50100,Orgánico,Propuesta,39,Orgánico → Blog → Biometría de voz → Contacto
+Europa,Seguros Ipê,Europa,50100,Orgánico,Propuesta,39,Orgánico → Blog → Biometría de voz → Contacto
+Todas,Caja Lince,USA,132200,Orgánico,Negociación,9,Orgánico → Verificación de identidad → Documentación técnica → Seguridad y certificaciones → Precios → Contacto
+USA,Caja Lince,USA,132200,Orgánico,Negociación,9,Orgánico → Verificación de identidad → Documentación técnica → Seguridad y certificaciones → Precios → Contacto
+Todas,Financiera Cima,Brasil,43500,Orgánico,Negociación,18,Orgánico → Home → Documentación técnica → Biometría de voz → Contacto
+Brasil,Financiera Cima,Brasil,43500,Orgánico,Negociación,18,Orgánico → Home → Documentación técnica → Biometría de voz → Contacto
+Todas,Caja Mistral,LATAM,15900,Orgánico,Negociación,29,Orgánico → Blog → Biometría de voz → Solicitar demo
+LATAM,Caja Mistral,LATAM,15900,Orgánico,Negociación,29,Orgánico → Blog → Biometría de voz → Solicitar demo
+Todas,Banco Delta,Europa,15500,Directo,Negociación,14,Directo → Solicitar demo → Documentación técnica
+Europa,Banco Delta,Europa,15500,Directo,Negociación,14,Directo → Solicitar demo → Documentación técnica
+Todas,Banco Quanta,Europa,49300,Directo,Negociación,17,Directo → Home → Verificación de identidad → Seguridad y certificaciones → Precios → Contacto
+Europa,Banco Quanta,Europa,49300,Directo,Negociación,17,Directo → Home → Verificación de identidad → Seguridad y certificaciones → Precios → Contacto
+Todas,Pagos Faro,Europa,39800,Directo,Cualificación,20,Directo → Solicitar demo → Biometría de voz
+Europa,Pagos Faro,Europa,39800,Directo,Cualificación,20,Directo → Solicitar demo → Biometría de voz
+Todas,Neobank Bruma,USA,42200,Directo,Propuesta,63,Directo → Solicitar demo → Verificación de identidad → Biometría de voz
+USA,Neobank Bruma,USA,42200,Directo,Propuesta,63,Directo → Solicitar demo → Verificación de identidad → Biometría de voz
+Todas,Neobank Quetzal,LATAM,51900,Directo,Propuesta,50,Directo → Solicitar demo → Biometría facial → Contacto
+LATAM,Neobank Quetzal,LATAM,51900,Directo,Propuesta,50,Directo → Solicitar demo → Biometría facial → Contacto
+Todas,Fintech Prisma,Europa,77300,Referido,Negociación,21,Referido → Verificación de identidad → Precios → Documentación técnica → Solicitar demo
+Europa,Fintech Prisma,Europa,77300,Referido,Negociación,21,Referido → Verificación de identidad → Precios → Documentación técnica → Solicitar demo
+Todas,Seguros Cobre,USA,24500,Referido,Propuesta,30,Referido → Verificación de identidad → Documentación técnica → Solicitar demo
+USA,Seguros Cobre,USA,24500,Referido,Propuesta,30,Referido → Verificación de identidad → Documentación técnica → Solicitar demo
+Todas,Banco Atlas,LATAM,64700,Referido,Cualificación,9,Referido → Verificación de identidad → Precios → Solicitar demo
+LATAM,Banco Atlas,LATAM,64700,Referido,Cualificación,9,Referido → Verificación de identidad → Precios → Solicitar demo
+Todas,Banco Volcán,Europa,123300,AI Referrals,Negociación,42,AI Referrals → Precios → Verificación de identidad → Casos de éxito → Solicitar demo
+Europa,Banco Volcán,Europa,123300,AI Referrals,Negociación,42,AI Referrals → Precios → Verificación de identidad → Casos de éxito → Solicitar demo
+Todas,Banco Alba,USA,108000,AI Referrals,Negociación,19,AI Referrals → Contacto → Seguridad y certificaciones → Biometría de voz → Solicitar demo
+USA,Banco Alba,USA,108000,AI Referrals,Negociación,19,AI Referrals → Contacto → Seguridad y certificaciones → Biometría de voz → Solicitar demo
+Todas,Banco Nébula,Brasil,23300,AI Referrals,Propuesta,20,AI Referrals → Precios → Verificación de identidad → Biometría facial → Contacto
+Brasil,Banco Nébula,Brasil,23300,AI Referrals,Propuesta,20,AI Referrals → Precios → Verificación de identidad → Biometría facial → Contacto
+Todas,Financiera Roble,LATAM,58700,AI Referrals,Negociación,73,AI Referrals → Precios → Verificación de identidad → Biometría facial → Biometría de voz → Contacto
+LATAM,Financiera Roble,LATAM,58700,AI Referrals,Negociación,73,AI Referrals → Precios → Verificación de identidad → Biometría facial → Biometría de voz → Contacto
+Todas,Seguros Estela,Europa,32300,Redes sociales,Negociación,13,Redes sociales → Blog → Documentación técnica → Biometría de voz → Contacto
+Europa,Seguros Estela,Europa,32300,Redes sociales,Negociación,13,Redes sociales → Blog → Documentación técnica → Biometría de voz → Contacto
+Todas,Fintech Cóndor,Europa,171600,Email,Cualificación,68,Email → Solicitar demo → Biometría facial → Precios → Biometría de voz → Contacto
+Europa,Fintech Cóndor,Europa,171600,Email,Cualificación,68,Email → Solicitar demo → Biometría facial → Precios → Biometría de voz → Contacto
+Todas,Seguros Nogal,USA,30400,Email,Negociación,39,Email → Solicitar demo → Seguridad y certificaciones → Biometría facial → Precios
+USA,Seguros Nogal,USA,30400,Email,Negociación,39,Email → Solicitar demo → Seguridad y certificaciones → Biometría facial → Precios
+Todas,Banco Zafiro,Brasil,36600,Email,Negociación,50,Email → Casos de éxito → Biometría facial → Documentación técnica → Solicitar demo
+Brasil,Banco Zafiro,Brasil,36600,Email,Negociación,50,Email → Casos de éxito → Biometría facial → Documentación técnica → Solicitar demo
+Todas,Telco Pampa,LATAM,41700,Email,Negociación,22,Email → Solicitar demo → Biometría de voz → Contacto
+LATAM,Telco Pampa,LATAM,41700,Email,Negociación,22,Email → Solicitar demo → Biometría de voz → Contacto
+Todas,Banco Albor,Europa,34800,De pago,Negociación,47,De pago → Solicitar demo → Verificación de identidad → Biometría de voz → Casos de éxito
+Europa,Banco Albor,Europa,34800,De pago,Negociación,47,De pago → Solicitar demo → Verificación de identidad → Biometría de voz → Casos de éxito

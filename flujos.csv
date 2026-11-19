@@ -1,0 +1,218 @@
+region,nivel,origen,destino,leads
+Todas,1,Orgánico,Home,99
+Todas,1,Directo,Home,70
+Todas,1,Orgánico,Verificación de identidad,63
+Todas,1,Orgánico,Blog,59
+Todas,1,Directo,Solicitar demo,45
+Todas,1,Redes sociales,Blog,36
+Todas,1,De pago,Solicitar demo,36
+Todas,1,Referido,Verificación de identidad,27
+Todas,1,Email,Casos de éxito,26
+Todas,1,De pago,Verificación de identidad,24
+Todas,1,Email,Solicitar demo,22
+Todas,1,AI Referrals,Contacto,20
+Todas,1,Referido,Casos de éxito,19
+Todas,1,Orgánico,Casos de éxito,18
+Todas,1,Directo,Precios,15
+Todas,1,Referido,Home,14
+Todas,1,AI Referrals,Precios,14
+Todas,1,Redes sociales,Home,14
+Todas,1,AI Referrals,Verificación de identidad,11
+Todas,1,Email,Blog,7
+Todas,2,Home,Formulario de contacto,97
+Todas,2,Solicitar demo,Solicitud de demo,96
+Todas,2,Home,Solicitud de demo,62
+Todas,2,Verificación de identidad,Solicitud de demo,61
+Todas,2,Blog,Descarga de guía,60
+Todas,2,Verificación de identidad,Formulario de contacto,39
+Todas,2,Home,Descarga de guía,38
+Todas,2,Casos de éxito,Solicitud de demo,38
+Todas,2,Blog,Registro en webinar,32
+Todas,2,Verificación de identidad,Descarga de guía,25
+Todas,2,Casos de éxito,Formulario de contacto,25
+Todas,2,Precios,Solicitud de demo,20
+Todas,2,Contacto,Formulario de contacto,15
+Todas,2,Blog,Formulario de contacto,10
+Todas,2,Precios,Formulario de contacto,9
+Todas,2,Solicitar demo,Formulario de contacto,7
+Todas,2,Contacto,Solicitud de demo,5
+Todas,3,Formulario de contacto,Solo lead,184
+Todas,3,Solicitud de demo,Solo lead,167
+Todas,3,Descarga de guía,Solo lead,123
+Todas,3,Solicitud de demo,XQL sin Deal,82
+Todas,3,Solicitud de demo,Deal,33
+Todas,3,Registro en webinar,Solo lead,32
+Todas,3,Formulario de contacto,XQL sin Deal,17
+Todas,3,Formulario de contacto,Deal,1
+Europa,1,Orgánico,Home,45
+Europa,1,Directo,Home,35
+Europa,1,Orgánico,Blog,29
+Europa,1,Orgánico,Verificación de identidad,27
+Europa,1,Redes sociales,Blog,21
+Europa,1,Directo,Solicitar demo,19
+Europa,1,Email,Casos de éxito,14
+Europa,1,De pago,Solicitar demo,14
+Europa,1,AI Referrals,Contacto,13
+Europa,1,De pago,Verificación de identidad,13
+Europa,1,Referido,Verificación de identidad,12
+Europa,1,Orgánico,Casos de éxito,9
+Europa,1,Email,Solicitar demo,8
+Europa,1,Referido,Casos de éxito,7
+Europa,1,Referido,Home,6
+Europa,1,AI Referrals,Precios,6
+Europa,1,Directo,Precios,5
+Europa,1,Email,Blog,4
+Europa,1,Redes sociales,Home,3
+Europa,1,AI Referrals,Verificación de identidad,2
+Europa,2,Home,Formulario de contacto,41
+Europa,2,Solicitar demo,Solicitud de demo,38
+Europa,2,Home,Solicitud de demo,35
+Europa,2,Blog,Descarga de guía,33
+Europa,2,Verificación de identidad,Solicitud de demo,25
+Europa,2,Verificación de identidad,Formulario de contacto,20
+Europa,2,Blog,Registro en webinar,17
+Europa,2,Casos de éxito,Solicitud de demo,17
+Europa,2,Home,Descarga de guía,13
+Europa,2,Casos de éxito,Formulario de contacto,13
+Europa,2,Verificación de identidad,Descarga de guía,9
+Europa,2,Contacto,Formulario de contacto,9
+Europa,2,Precios,Solicitud de demo,6
+Europa,2,Precios,Formulario de contacto,5
+Europa,2,Blog,Formulario de contacto,4
+Europa,2,Contacto,Solicitud de demo,4
+Europa,2,Solicitar demo,Formulario de contacto,3
+Europa,3,Formulario de contacto,Solo lead,87
+Europa,3,Solicitud de demo,Solo lead,70
+Europa,3,Descarga de guía,Solo lead,55
+Europa,3,Solicitud de demo,XQL sin Deal,38
+Europa,3,Registro en webinar,Solo lead,17
+Europa,3,Solicitud de demo,Deal,17
+Europa,3,Formulario de contacto,XQL sin Deal,7
+Europa,3,Formulario de contacto,Deal,1
+USA,1,Orgánico,Home,16
+USA,1,Directo,Home,11
+USA,1,Orgánico,Verificación de identidad,10
+USA,1,Directo,Solicitar demo,10
+USA,1,De pago,Solicitar demo,7
+USA,1,Orgánico,Blog,6
+USA,1,Referido,Casos de éxito,5
+USA,1,Redes sociales,Blog,4
+USA,1,Email,Solicitar demo,4
+USA,1,AI Referrals,Precios,3
+USA,1,Redes sociales,Home,3
+USA,1,De pago,Verificación de identidad,3
+USA,1,Orgánico,Casos de éxito,2
+USA,1,Directo,Precios,2
+USA,1,Referido,Verificación de identidad,2
+USA,1,AI Referrals,Verificación de identidad,2
+USA,1,Email,Casos de éxito,2
+USA,1,Referido,Home,1
+USA,1,AI Referrals,Contacto,1
+USA,1,Email,Blog,1
+USA,2,Solicitar demo,Solicitud de demo,20
+USA,2,Home,Formulario de contacto,16
+USA,2,Verificación de identidad,Solicitud de demo,11
+USA,2,Blog,Descarga de guía,9
+USA,2,Home,Descarga de guía,8
+USA,2,Home,Solicitud de demo,7
+USA,2,Casos de éxito,Solicitud de demo,6
+USA,2,Verificación de identidad,Descarga de guía,5
+USA,2,Precios,Solicitud de demo,4
+USA,2,Casos de éxito,Formulario de contacto,3
+USA,2,Verificación de identidad,Formulario de contacto,1
+USA,2,Solicitar demo,Formulario de contacto,1
+USA,2,Precios,Formulario de contacto,1
+USA,2,Contacto,Formulario de contacto,1
+USA,2,Blog,Formulario de contacto,1
+USA,2,Blog,Registro en webinar,1
+USA,3,Solicitud de demo,Solo lead,30
+USA,3,Descarga de guía,Solo lead,22
+USA,3,Formulario de contacto,Solo lead,22
+USA,3,Solicitud de demo,XQL sin Deal,12
+USA,3,Solicitud de demo,Deal,6
+USA,3,Formulario de contacto,XQL sin Deal,2
+USA,3,Registro en webinar,Solo lead,1
+Brasil,1,Orgánico,Home,14
+Brasil,1,Orgánico,Blog,11
+Brasil,1,Directo,Home,8
+Brasil,1,Orgánico,Verificación de identidad,6
+Brasil,1,Email,Casos de éxito,5
+Brasil,1,De pago,Solicitar demo,5
+Brasil,1,Directo,Solicitar demo,4
+Brasil,1,Redes sociales,Home,4
+Brasil,1,Referido,Casos de éxito,3
+Brasil,1,Referido,Home,3
+Brasil,1,AI Referrals,Verificación de identidad,3
+Brasil,1,Redes sociales,Blog,3
+Brasil,1,De pago,Verificación de identidad,3
+Brasil,1,Orgánico,Casos de éxito,2
+Brasil,1,Directo,Precios,2
+Brasil,1,AI Referrals,Precios,2
+Brasil,1,Referido,Verificación de identidad,1
+Brasil,1,Email,Solicitar demo,1
+Brasil,1,Email,Blog,1
+Brasil,2,Home,Formulario de contacto,14
+Brasil,2,Solicitar demo,Solicitud de demo,10
+Brasil,2,Home,Descarga de guía,8
+Brasil,2,Home,Solicitud de demo,7
+Brasil,2,Blog,Descarga de guía,7
+Brasil,2,Blog,Registro en webinar,7
+Brasil,2,Casos de éxito,Solicitud de demo,7
+Brasil,2,Verificación de identidad,Solicitud de demo,6
+Brasil,2,Verificación de identidad,Formulario de contacto,5
+Brasil,2,Casos de éxito,Formulario de contacto,3
+Brasil,2,Precios,Solicitud de demo,3
+Brasil,2,Verificación de identidad,Descarga de guía,2
+Brasil,2,Precios,Formulario de contacto,1
+Brasil,2,Blog,Formulario de contacto,1
+Brasil,3,Formulario de contacto,Solo lead,22
+Brasil,3,Solicitud de demo,Solo lead,18
+Brasil,3,Descarga de guía,Solo lead,17
+Brasil,3,Solicitud de demo,XQL sin Deal,12
+Brasil,3,Registro en webinar,Solo lead,7
+Brasil,3,Solicitud de demo,Deal,3
+Brasil,3,Formulario de contacto,XQL sin Deal,2
+LATAM,1,Orgánico,Home,24
+LATAM,1,Orgánico,Verificación de identidad,20
+LATAM,1,Directo,Home,16
+LATAM,1,Orgánico,Blog,13
+LATAM,1,Directo,Solicitar demo,12
+LATAM,1,Referido,Verificación de identidad,12
+LATAM,1,De pago,Solicitar demo,10
+LATAM,1,Email,Solicitar demo,9
+LATAM,1,Redes sociales,Blog,8
+LATAM,1,Directo,Precios,6
+LATAM,1,AI Referrals,Contacto,6
+LATAM,1,Orgánico,Casos de éxito,5
+LATAM,1,Email,Casos de éxito,5
+LATAM,1,De pago,Verificación de identidad,5
+LATAM,1,Referido,Casos de éxito,4
+LATAM,1,Referido,Home,4
+LATAM,1,AI Referrals,Verificación de identidad,4
+LATAM,1,Redes sociales,Home,4
+LATAM,1,AI Referrals,Precios,3
+LATAM,1,Email,Blog,1
+LATAM,2,Solicitar demo,Solicitud de demo,28
+LATAM,2,Home,Formulario de contacto,26
+LATAM,2,Verificación de identidad,Solicitud de demo,19
+LATAM,2,Verificación de identidad,Formulario de contacto,13
+LATAM,2,Home,Solicitud de demo,13
+LATAM,2,Blog,Descarga de guía,11
+LATAM,2,Home,Descarga de guía,9
+LATAM,2,Verificación de identidad,Descarga de guía,9
+LATAM,2,Casos de éxito,Solicitud de demo,8
+LATAM,2,Blog,Registro en webinar,7
+LATAM,2,Precios,Solicitud de demo,7
+LATAM,2,Casos de éxito,Formulario de contacto,6
+LATAM,2,Contacto,Formulario de contacto,5
+LATAM,2,Blog,Formulario de contacto,4
+LATAM,2,Solicitar demo,Formulario de contacto,3
+LATAM,2,Precios,Formulario de contacto,2
+LATAM,2,Contacto,Solicitud de demo,1
+LATAM,3,Formulario de contacto,Solo lead,53
+LATAM,3,Solicitud de demo,Solo lead,49
+LATAM,3,Descarga de guía,Solo lead,29
+LATAM,3,Solicitud de demo,XQL sin Deal,20
+LATAM,3,Registro en webinar,Solo lead,7
+LATAM,3,Solicitud de demo,Deal,7
+LATAM,3,Formulario de contacto,XQL sin Deal,6

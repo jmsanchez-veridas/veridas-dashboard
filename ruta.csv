@@ -1,0 +1,24 @@
+region,paso,pagina,pct_usuarios,dias_desde_anterior,desvio,pct_desvio
+Todas,1,Home,100,0,Biometría de voz,23
+Todas,2,Verificación de identidad,78,2,Contacto,19
+Todas,3,Casos de éxito,57,7,Biometría de voz,9
+Todas,4,Precios,41,6,Contacto,12
+Todas,5,Solicitar demo,32,1,Biometría de voz,8
+Europa,1,Home,100,0,Biometría facial,10
+Europa,2,Verificación de identidad,81,2,Biometría de voz,12
+Europa,3,Casos de éxito,68,8,Biometría facial,19
+Europa,4,Precios,56,7,Biometría facial,13
+Europa,5,Solicitar demo,45,2,Seguridad y certificaciones,17
+USA,1,Blog,100,0,Documentación técnica,23
+USA,2,Biometría de voz,81,8,Biometría facial,11
+USA,3,Precios,64,7,Contacto,15
+USA,4,Solicitar demo,53,8,Seguridad y certificaciones,9
+Brasil,1,Home,100,0,Seguridad y certificaciones,22
+Brasil,2,Biometría facial,84,4,Seguridad y certificaciones,23
+Brasil,3,Casos de éxito,62,3,Blog,18
+Brasil,4,Contacto,48,5,Seguridad y certificaciones,22
+LATAM,1,Blog,100,0,Documentación técnica,21
+LATAM,2,Verificación de identidad,77,3,Biometría facial,19
+LATAM,3,Casos de éxito,62,1,Biometría facial,9
+LATAM,4,Precios,50,2,Documentación técnica,24
+LATAM,5,Contacto,39,1,Biometría de voz,14

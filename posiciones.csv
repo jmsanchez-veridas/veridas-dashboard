@@ -1,0 +1,51 @@
+region,pagina,pct_primera,pct_intermedia,pct_ultima,pct_post_deal,posicion_frecuente
+Todas,Home,61,27,6,6,Primera página
+Europa,Home,66,28,4,2,Primera página
+USA,Home,68,23,5,4,Primera página
+Brasil,Home,67,31,1,1,Primera página
+LATAM,Home,60,27,4,9,Primera página
+Todas,Blog,48,39,5,8,Primera página
+Europa,Blog,52,38,7,3,Primera página
+USA,Blog,44,38,9,9,Primera página
+Brasil,Blog,44,38,6,12,Primera página
+LATAM,Blog,47,41,6,6,Primera página
+Todas,Verificación de identidad,29,49,12,10,Intermedia
+Europa,Verificación de identidad,29,45,14,12,Intermedia
+USA,Verificación de identidad,26,51,9,14,Intermedia
+Brasil,Verificación de identidad,25,52,13,10,Intermedia
+LATAM,Verificación de identidad,28,53,8,11,Intermedia
+Todas,Biometría de voz,18,52,14,16,Intermedia
+Europa,Biometría de voz,16,52,19,13,Intermedia
+USA,Biometría de voz,16,52,15,17,Intermedia
+Brasil,Biometría de voz,13,54,15,18,Intermedia
+LATAM,Biometría de voz,21,50,10,19,Intermedia
+Todas,Casos de éxito,9,38,21,32,Intermedia
+Europa,Casos de éxito,9,34,22,35,Con el Deal ya abierto
+USA,Casos de éxito,5,35,22,38,Con el Deal ya abierto
+Brasil,Casos de éxito,7,37,20,36,Intermedia
+LATAM,Casos de éxito,9,33,25,33,Intermedia
+Todas,Precios,6,29,41,24,Última antes de convertir
+Europa,Precios,8,25,42,25,Última antes de convertir
+USA,Precios,1,33,40,26,Última antes de convertir
+Brasil,Precios,6,30,42,22,Última antes de convertir
+LATAM,Precios,10,25,40,25,Última antes de convertir
+Todas,Solicitar demo,8,14,71,7,Última antes de convertir
+Europa,Solicitar demo,4,17,68,11,Última antes de convertir
+USA,Solicitar demo,3,14,74,9,Última antes de convertir
+Brasil,Solicitar demo,10,10,77,3,Última antes de convertir
+LATAM,Solicitar demo,8,13,68,11,Última antes de convertir
+Todas,Contacto,12,13,66,9,Última antes de convertir
+Europa,Contacto,12,17,66,5,Última antes de convertir
+USA,Contacto,10,12,66,12,Última antes de convertir
+Brasil,Contacto,10,14,69,7,Última antes de convertir
+LATAM,Contacto,9,11,65,15,Última antes de convertir
+Todas,Documentación técnica,3,19,9,69,Con el Deal ya abierto
+Europa,Documentación técnica,1,19,13,67,Con el Deal ya abierto
+USA,Documentación técnica,1,16,9,74,Con el Deal ya abierto
+Brasil,Documentación técnica,7,19,10,64,Con el Deal ya abierto
+LATAM,Documentación técnica,6,22,6,66,Con el Deal ya abierto
+Todas,Seguridad y certificaciones,2,22,11,65,Con el Deal ya abierto
+Europa,Seguridad y certificaciones,2,20,10,68,Con el Deal ya abierto
+USA,Seguridad y certificaciones,6,19,11,64,Con el Deal ya abierto
+Brasil,Seguridad y certificaciones,1,25,6,68,Con el Deal ya abierto
+LATAM,Seguridad y certificaciones,2,20,16,62,Con el Deal ya abierto
