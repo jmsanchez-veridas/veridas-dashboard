@@ -58,12 +58,14 @@ const safePath = (p) => (typeof p === 'string' && p.startsWith('/') && !p.starts
 
 function page(title, text, button, status = 200) {
   const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${title}</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F7F7F9;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#17171C}
-.box{background:#fff;border:1px solid #E9E9EF;border-radius:18px;padding:36px 32px;max-width:380px;width:calc(100% - 48px);text-align:center}
-.logo{width:48px;height:48px;border-radius:13px;background:#EF5B5B;color:#fff;font-weight:700;font-size:26px;display:grid;place-items:center;margin:0 auto 18px}
-h1{font-size:20px;font-weight:600;margin:0 0 8px}p{color:#6E6E7A;font-size:14.5px;line-height:1.5;margin:0 0 22px}
-a.btn{display:inline-flex;align-items:center;gap:10px;background:#3667F0;color:#fff;text-decoration:none;padding:11px 18px;border-radius:10px;font-weight:500;font-size:14.5px}</style></head>
-<body><main class="box"><div class="logo">V</div><h1>${title}</h1><p>${text}</p>${button || ''}</main></body></html>`;
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F1F0ED;border-top:4px solid #FF6C72;box-sizing:border-box;font-family:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:#000D47}
+.box{background:#fff;border:1px solid #E3E1DC;border-radius:8px;padding:40px 36px;max-width:400px;width:calc(100% - 48px)}
+.eyebrow{text-transform:uppercase;letter-spacing:.06em;font-size:12px;margin:0 0 6px}
+h1{font-size:30px;font-weight:300;letter-spacing:-.02em;margin:0 0 12px}h1:before{content:"/";color:#FF6C72;margin-right:2px}
+p{color:#4D5578;font-size:14.5px;line-height:1.5;margin:0 0 24px}
+a.btn{display:inline-flex;align-items:center;gap:10px;background:#000D47;color:#fff;text-decoration:none;padding:12px 20px;border-radius:4px;font-weight:600;font-size:14.5px}a.btn:hover{background:#0A1A66}</style></head>
+<body><main class="box"><p class="eyebrow">Veridas · Rendimiento web</p><h1>${title}</h1><p>${text}</p>${button || ''}</main></body></html>`;
   return new Response(html, { status, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
 }
 

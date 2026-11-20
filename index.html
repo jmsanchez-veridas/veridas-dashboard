@@ -6,7 +6,7 @@
 <title>Veridas · Rendimiento web</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
 :root{
@@ -256,12 +256,69 @@ tr.flag td{background:#FFF6F5}
 .tabnote b{font-weight:600}
 .sidelink{color:var(--muted);text-decoration:none;display:block}
 .sidelink:hover{color:var(--ink);text-decoration:underline}
+
+/* ===== Identidad de Veridas ===== */
+:root{
+  --navy:#000D47; --coral:#FF6C72; --sand:#F1F0ED; --blush:#FDE6E6; --teal:#0097A7; --peach:#F8BF83; --mauve:#D5A6BD;
+  --bg:#F1F0ED; --panel:#FFFFFF; --line:#E3E1DC; --line2:#EEECE8;
+  --ink:#000D47; --muted:#4D5578; --faint:#8A8FA8;
+  --blue:#000D47; --blue-t:#FDE6E6;
+  --green:#1F9D3A; --green-t:#E6F4E8; --amber:#C27A14; --amber-t:#FDF1E1; --red:#E0262D; --red-t:#FDE6E6;
+  --rose-bg:#FDE6E6; --rose-bd:#F7C9CB; --mint-bg:#E3F3F4; --mint-bd:#BFE2E5; --lav-bg:#ECEDF3; --lav-bd:#D6D8E4;
+  --brand:#FF6C72;
+  --r-lg:8px; --r-md:6px; --r-sm:4px;
+  --font:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Public Sans',system-ui,sans-serif;
+}
+body{font-feature-settings:"tnum" 1}
+.top{border-top:4px solid var(--coral)}
+.brand{flex-direction:column;align-items:flex-start;gap:6px}
+.brandlogo{height:30px;width:auto;display:block}
+.wordmark{font-size:24px;font-weight:700;letter-spacing:-.02em;color:var(--navy)}
+.brand span{font-size:12px;color:var(--muted);margin:0}
+.side h3{text-transform:uppercase;letter-spacing:.06em;font-size:11px;color:var(--muted)}
+.nav[aria-current="true"],.tab[aria-selected="true"]{background:var(--blush);color:var(--navy);font-weight:600}
+.nav[aria-current="true"] svg{stroke:var(--coral)}
+.tab[aria-selected="true"] svg{stroke:var(--coral)}
+.eyebrow{text-transform:uppercase;letter-spacing:.06em;font-size:12px;color:var(--navy);margin-bottom:4px}
+.hero h1{font-weight:300;font-size:40px;letter-spacing:-.02em;color:var(--navy)}
+.hero h1 .slash{color:var(--coral);font-weight:300;margin-right:2px}
+.hero p#hero-sub{color:var(--muted)}
+.card{border-radius:var(--r-lg);border-color:var(--line)}
+.ch h2{font-weight:700;color:var(--navy)}
+.card.rose{background:linear-gradient(160deg,#FFF3F3,var(--panel) 70%)}
+.concl{border-left:4px solid var(--coral);border-radius:var(--r-lg)}
+.concl .ic{background:var(--blush)}.concl .ic svg{stroke:var(--coral)}
+.concl p{color:var(--navy)}
+th{background:var(--navy);color:#fff;font-weight:600;border-bottom:0}
+th:first-child{border-top-left-radius:4px}th:last-child{border-top-right-radius:4px}
+tbody tr:nth-child(even) td{background:#F8F7F5}
+tr.flag td{background:var(--blush)!important}
+.chip{border-radius:4px}
+.chip.a{background:var(--amber-t);color:var(--amber)}
+.tag{border-radius:4px}
+.tag.brand{background:var(--navy);color:#fff}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.btn.p{background:var(--navy);border-color:var(--navy)}
+.big{font-weight:300;letter-spacing:-.03em}
+.kpi b,.stat b{font-weight:300}
+.kpi{border-radius:var(--r-lg)}
+.mrow code{font-weight:600;color:var(--navy)}
+.spark i{background:var(--coral)}
+.tabnote{border-radius:4px}
+.sideuser a{color:var(--coral)}
+.side-foot strong.red{color:var(--coral)}.side-foot strong.red::before{background:var(--coral)}
+td.path{font-size:13px}
+[hidden]{display:none!important}
+.mint .ic{background:#D3ECEE}.mint .ic svg{stroke:var(--teal)}
+.lav .ic{background:#E1E3EC}.lav .ic svg{stroke:var(--navy)}
+.rose .ic svg{stroke:var(--coral)}
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="side">
-    <div class="brand"><div class="logo">V</div><div><b>Veridas</b><span>Rendimiento web</span></div></div>
+    <div class="brand"><img class="brandlogo" src="logo.svg" alt="Veridas" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><b class="wordmark" hidden>Veridas</b><span>Rendimiento web</span></div>
     <h3>Vistas</h3>
     <nav id="sidenav" aria-label="Vistas"></nav>
     <h3>Datos</h3>
@@ -281,8 +338,7 @@ tr.flag td{background:#FFF6F5}
 
     <main class="page">
       <div class="hero">
-        <div class="logo">V</div>
-        <div><h1>Veridas<span>, de un vistazo</span></h1><p id="hero-sub">veridas.com</p></div>
+        <div><p class="eyebrow">Veridas · Rendimiento web 2026</p><h1><span class="slash">/</span>De un vistazo</h1><p id="hero-sub">veridas.com</p></div>
         <div class="chips" id="hero-chips"></div>
       </div>
       <div id="errors"></div>
@@ -325,7 +381,7 @@ tr.flag td{background:#FFF6F5}
           <article class="card s6">
             <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19V11M10 19V6M15 19v-5M20 19V9"/></svg></div><h2>Sesiones y conversiones por semana</h2><button class="more" data-go="evolucion">24 meses →</button></div>
             <p class="cap">Sesiones a la izquierda, conversiones a la derecha. La última semana aún no está completa.</p>
-            <div class="legend"><span><i style="background:var(--blue)"></i>Sesiones</span><span><i style="background:var(--green)"></i>Conversiones</span></div>
+            <div class="legend"><span><i style="background:var(--navy)"></i>Sesiones</span><span><i style="background:var(--coral)"></i>Conversiones</span></div>
             <div class="chart" id="ch-week"></div>
           </article>
         </div>
@@ -338,19 +394,19 @@ tr.flag td{background:#FFF6F5}
           <article class="card s12">
             <div class="ch"><h2>Mes a mes: 2026 frente a 2025</h2><div class="more"><div class="seg" id="seg-month"><button data-m="sessions" aria-pressed="true">Sesiones</button><button data-m="conversions" aria-pressed="false">Conversiones</button></div></div></div>
             <p class="cap">Barra clara: 2025. Barra oscura: 2026. Noviembre de 2026 aún no está completo.</p>
-            <div class="legend"><span><i style="background:#C9D6FB"></i>2025</span><span><i style="background:var(--blue)"></i>2026</span></div>
+            <div class="legend"><span><i style="background:#C9CCD9"></i>2025</span><span><i style="background:var(--navy)"></i>2026</span></div>
             <div class="chart" id="ch-month"></div>
           </article>
           <article class="card s6">
             <div class="ch"><h2>Acumulado del año</h2></div>
             <p class="cap">Total sumado mes a mes. Gris: 2025. Azul: 2026.</p>
-            <div class="legend"><span><i style="background:#A0A0AB"></i>2025</span><span><i style="background:var(--blue)"></i>2026</span></div>
+            <div class="legend"><span><i style="background:#A3A6B8"></i>2025</span><span><i style="background:var(--navy)"></i>2026</span></div>
             <div class="chart" id="ch-cum"></div>
           </article>
           <article class="card s6">
             <div class="ch"><h2>Tasa de conversión por mes</h2></div>
             <p class="cap">Conversiones por cada 100 sesiones, en los dos años.</p>
-            <div class="legend"><span><i style="background:#A0A0AB"></i>2025</span><span><i style="background:var(--green)"></i>2026</span></div>
+            <div class="legend"><span><i style="background:#A3A6B8"></i>2025</span><span><i style="background:var(--coral)"></i>2026</span></div>
             <div class="chart" id="ch-rate"></div>
           </article>
         </div>
@@ -400,7 +456,7 @@ tr.flag td{background:#FFF6F5}
           <article class="card s12">
             <div class="ch"><h2>Países</h2></div>
             <p class="cap">Los 15 países con más usuarios. Barra azul: usuarios. Barra verde: conversiones.</p>
-            <div class="legend"><span><i style="background:var(--blue)"></i>Usuarios</span><span><i style="background:var(--green)"></i>Conversiones</span></div>
+            <div class="legend"><span><i style="background:var(--navy)"></i>Usuarios</span><span><i style="background:var(--coral)"></i>Conversiones</span></div>
             <div id="hb-country"></div>
           </article>
         </div>
@@ -463,7 +519,7 @@ tr.flag td{background:#FFF6F5}
           <article class="card s12">
             <div class="ch"><h2>Clics de Google frente a sesiones orgánicas de GA4</h2></div>
             <p class="cap">Search Console cuenta los clics desde Google sin depender de la etiqueta de Analytics. Si las dos líneas se separan de golpe, el problema está en la medición, no en el tráfico. La zona sombreada es el periodo con la medición rota.</p>
-            <div class="legend"><span><i style="background:var(--green)"></i>Clics en Google (Search Console)</span><span><i style="background:var(--blue)"></i>Sesiones orgánicas (GA4)</span></div>
+            <div class="legend"><span><i style="background:var(--coral)"></i>Clics en Google (Search Console)</span><span><i style="background:var(--navy)"></i>Sesiones orgánicas (GA4)</span></div>
             <div class="chart" id="ch-control"></div>
           </article>
           <article class="card s6">
@@ -582,8 +638,8 @@ const VIEWS_DEF = [
   ['seo','SEO','<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>'],
   ['ia','Asistentes de IA','<path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/>']
 ];
-const C = {blue:'#3667F0', blueL:'#C9D6FB', green:'#2F9E57', violet:'#8B5CF6', amber:'#C4861A', red:'#D6453D', grey:'#A0A0AB'};
-const EV_COLORS = {'Descarga':'#3667F0','Contacto - Formulario Web':'#2F9E57','Contacto - Cita Calendario':'#8B5CF6','Contacto - Formulario Footer':'#C4861A'};
+const C = {blue:'#000D47', blueL:'#C9CCD9', coral:'#FF6C72', teal:'#0097A7', peach:'#F8BF83', mauve:'#D5A6BD', green:'#1F9D3A', amber:'#C27A14', red:'#E0262D', grey:'#A3A6B8', violet:'#0097A7'};
+const EV_COLORS = {'Descarga':'#000D47','Contacto - Formulario Web':'#FF6C72','Contacto - Cita Calendario':'#0097A7','Contacto - Formulario Footer':'#F8BF83'};
 const EV_ES = {'Descarga':'Descarga','Contacto - Formulario Web':'Formulario web','Contacto - Cita Calendario':'Cita de calendario','Contacto - Formulario Footer':'Formulario del pie'};
 const evn = (n) => EV_ES[n] || n;
 const CH_ES = {'Organic Search':'Búsqueda orgánica','Direct':'Directo','Cross-network':'Multired','Paid Search':'Búsqueda de pago','Referral':'Referido','Unassigned':'Sin asignar','Organic Social':'Social orgánico','Email':'Email','AI Assistant':'Asistentes de IA','Paid Social':'Social de pago','Organic Shopping':'Shopping orgánico','Paid Other':'Otros de pago','Organic Video':'Vídeo orgánico','Paid Video':'Vídeo de pago','Display':'Display'};
@@ -677,7 +733,7 @@ function svgBox(el, h) {
   return [svg, W];
 }
 function grid(svg, y, ticks, x0, x1, fmt, side) {
-  svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x0).attr('x2', x1).attr('y1', y).attr('y2', y).attr('stroke', '#EFEFF3');
+  svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x0).attr('x2', x1).attr('y1', y).attr('y2', y).attr('stroke', '#E8E6E1');
   svg.append('g').selectAll('text').data(ticks).join('text').attr('x', side === 'r' ? x1 + 8 : x0 - 8).attr('y', (d) => y(d)).attr('dy', '0.32em').attr('text-anchor', side === 'r' ? 'start' : 'end').text(fmt);
 }
 function xLabels(svg, labels, x, H, W, ml, fmt) {
@@ -707,13 +763,13 @@ function dualChart(el, labels, left, right, H, lfmt, axfmt, shadeFrom) {
   const yl = d3.scaleLinear().domain([0, d3.max(left.vals) || 1]).nice().range([H - mb, mt]);
   const yr = d3.scaleLinear().domain([0, d3.max(right.vals) || 1]).nice().range([H - mb, mt]);
   grid(svg, yl, yl.ticks(4), ml, W - mr, (d) => d >= 1000 ? nf0.format(d / 1000) + ' k' : nf0.format(d));
-  svg.append('g').selectAll('text').data(yr.ticks(4)).join('text').attr('x', W - mr + 8).attr('y', (d) => yr(d)).attr('dy', '0.32em').style('fill', C.green).text((d) => nf0.format(d));
+  svg.append('g').selectAll('text').data(yr.ticks(4)).join('text').attr('x', W - mr + 8).attr('y', (d) => yr(d)).attr('dy', '0.32em').style('fill', C.coral).text((d) => nf0.format(d));
   xLabels(svg, labels, x, H, W, ml, axfmt || lfmt);
   const pl = labels.map((l, i) => [x(l), yl(left.vals[i])]), pr = labels.map((l, i) => [x(l), yr(right.vals[i])]);
   svg.append('path').attr('d', d3.area().x((p) => p[0]).y0(H - mb).y1((p) => p[1]).curve(d3.curveMonotoneX)(pl)).attr('fill', left.color).attr('opacity', 0.08);
   svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pl)).attr('fill', 'none').attr('stroke', left.color).attr('stroke-width', 2.2);
   svg.append('path').attr('d', d3.line().curve(d3.curveMonotoneX)(pr)).attr('fill', 'none').attr('stroke', right.color).attr('stroke-width', 2.2);
-  const rule = svg.append('line').attr('y1', mt).attr('y2', H - mb).attr('stroke', '#C9CAD3').attr('stroke-dasharray', '3 3').style('opacity', 0);
+  const rule = svg.append('line').attr('y1', mt).attr('y2', H - mb).attr('stroke', '#C9CCD9').attr('stroke-dasharray', '3 3').style('opacity', 0);
   const step = labels.length > 1 ? (W - ml - mr) / (labels.length - 1) : 1;
   svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H - mb).attr('fill', 'transparent')
     .on('pointermove pointerdown', (ev) => {
@@ -785,7 +841,7 @@ function scatter(el, rows, o) {
   g.append('circle').attr('r', (r) => rad(+r[o.r])).attr('fill', (r) => o.color(r)).attr('fill-opacity', 0.22).attr('stroke', (r) => o.color(r)).attr('stroke-width', 1.5);
   const right = (r) => x(+r[o.x]) > ml + (W - ml - mr) * 0.62;
   const lab = g.filter((r) => o.labelIf(r)).append('text').attr('x', (r) => right(r) ? -rad(+r[o.r]) - 6 : rad(+r[o.r]) + 6).attr('dy', '0.32em').attr('text-anchor', (r) => right(r) ? 'end' : 'start')
-    .style('fill', '#17171C').style('font-family', 'var(--mono)').style('font-size', '11px').style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', 3).text((r) => o.label(r));
+    .style('fill', '#000D47').style('font-family', 'var(--mono)').style('font-size', '11px').style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', 3).text((r) => o.label(r));
   const L = lab.nodes().map((n) => { const r = d3.select(n.parentNode).datum(); return {n, r, y: y(o.yv(r)), x: x(+r[o.x]), side: right(r)}; });
   for (let pass = 0; pass < 8; pass++) { L.sort((a, b) => b.y - a.y); for (let i = 1; i < L.length; i++) for (let j = 0; j < i; j++) { const a = L[j], b = L[i]; if (a.side === b.side && Math.abs(a.x - b.x) < 230 && a.y - b.y < 14) b.y = a.y - 14; } }
   L.forEach((l) => d3.select(l.n).attr('y', l.y - y(o.yv(l.r))));
@@ -877,7 +933,7 @@ function vResumen() {
   }
 
   const all = weeks();
-  dualChart($('ch-week'), all.map((r) => r.k), {name: 'Sesiones', color: C.blue, vals: all.map((r) => r.s)}, {name: 'Conversiones', color: C.green, vals: all.map((r) => r.c)}, 230, (k) => 'Semana del ' + fDay(isoMonday(k)), (k) => fDay(isoMonday(k)), incident().k);
+  dualChart($('ch-week'), all.map((r) => r.k), {name: 'Sesiones', color: C.blue, vals: all.map((r) => r.s)}, {name: 'Conversiones', color: C.coral, vals: all.map((r) => r.c)}, 230, (k) => 'Semana del ' + fDay(isoMonday(k)), (k) => fDay(isoMonday(k)), incident().k);
 }
 
 // ---------- Evolución ----------
@@ -907,7 +963,7 @@ function vEvolucion() {
   const cum = (o, f) => { let a = 0; return months.map((i) => { if (!o[i]) return null; a += +o[i][f]; return a; }); };
   lineChart($('ch-cum'), lab, [{name: '2025', color: C.grey, vals: cum(y0, MMETRIC)}, {name: '2026', color: C.blue, vals: cum(y1, MMETRIC)}], 240, fm);
   const rate = (o) => months.map((i) => o[i] ? 100 * +o[i].conversions / +o[i].sessions : null);
-  lineChart($('ch-rate'), lab, [{name: '2025', color: C.grey, vals: rate(y0)}, {name: '2026', color: C.green, vals: rate(y1)}], 240, (v) => nf1.format(v) + ' %');
+  lineChart($('ch-rate'), lab, [{name: '2025', color: C.grey, vals: rate(y0)}, {name: '2026', color: C.coral, vals: rate(y1)}], 240, (v) => nf1.format(v) + ' %');
 }
 
 // ---------- Adquisición ----------
@@ -936,7 +992,7 @@ function vAudiencia() {
     'Acción sugerida: revisar los formularios y las llamadas a la acción en móvil, y dar a quien vuelve un motivo claro para pedir una demo.');
   table($('t-dev'), [{h: 'Dispositivo', html: (r) => esc(DEV_ES[r.deviceCategory] || r.deviceCategory)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Duración', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], dv);
   table($('t-nr'), [{h: 'Tipo', html: (r) => esc(NR_ES[r.newVsReturning] || r.newVsReturning)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], nr);
-  hbars($('hb-country'), co, 'country', [{f: 'totalUsers', label: 'Usuarios', fmt: fInt, color: C.blue}, {f: 'conversions', label: 'Conversiones', fmt: fInt, color: C.green}], {perSeries: true, name: (r) => CO_ES[r.country] || r.country, sub: (r) => 'Usuarios ' + chg(r.totalUsers_chg), extra: (r) => ['Tasa de conversión: ' + fRate(r.sessionConversionRate)]});
+  hbars($('hb-country'), co, 'country', [{f: 'totalUsers', label: 'Usuarios', fmt: fInt, color: C.blue}, {f: 'conversions', label: 'Conversiones', fmt: fInt, color: C.coral}], {perSeries: true, name: (r) => CO_ES[r.country] || r.country, sub: (r) => 'Usuarios ' + chg(r.totalUsers_chg), extra: (r) => ['Tasa de conversión: ' + fRate(r.sessionConversionRate)]});
 }
 
 // ---------- Páginas ----------
@@ -990,7 +1046,7 @@ function vIa() {
   ];
   table($('t-aivs'), [{h: '', html: (r) => '<b style="font-weight:500">' + r.n + '</b>'}, {h: 'Sesiones', f: 's', n: 1, fmt: fInt}, {h: 'Interacción', f: 'e', n: 1, fmt: fRate1}, {h: 'Conversiones', f: 'c', n: 1, fmt: fInt}, {h: 'Tasa conv.', f: 'r', n: 1, fmt: fRate}], rows);
   const lm = D.llmMonthly || [];
-  barChart($('ch-aim'), lm.map((r) => MONTHS[+r.yearMonth.split('-')[1] - 1]), [{name: 'Sesiones', color: C.violet, vals: lm.map((r) => +r.sessions)}, {name: 'Conversiones', color: C.green, vals: lm.map((r) => +r.conversions)}], 230, (v) => nf0.format(v), false, (i) => MONTHS[+lm[i].yearMonth.split('-')[1] - 1] + ' 2026' + (i === lm.length - 1 ? ' (incompleto)' : ''));
+  barChart($('ch-aim'), lm.map((r) => MONTHS[+r.yearMonth.split('-')[1] - 1]), [{name: 'Sesiones', color: C.violet, vals: lm.map((r) => +r.sessions)}, {name: 'Conversiones', color: C.coral, vals: lm.map((r) => +r.conversions)}], 230, (v) => nf0.format(v), false, (i) => MONTHS[+lm[i].yearMonth.split('-')[1] - 1] + ' 2026' + (i === lm.length - 1 ? ' (incompleto)' : ''));
   table($('t-ais'), [{h: 'Asistente', f: 'sessionSource', cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duración', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], src);
   table($('t-ail'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duración media', f: 'averageSessionDuration', n: 1, fmt: fDur, cls: (r) => +r.averageSessionDuration < 20 ? 'neg' : ''}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], D.llmLanding || []);
 }
@@ -1004,7 +1060,7 @@ function vMedicion() {
       'Cae igual en todos los canales, dispositivos y páginas, y a la vez, el martes 27 de octubre. Eso apunta a un cambio en la web que afecta a la etiqueta de Google Analytics o al banner de cookies, no a una pérdida de posiciones ni a una campaña.');
   } else concl('cc-medicion', 'La medición de GA4 sigue el ritmo de los clics de Google: no se detecta ninguna rotura.', '');
   const labs = c.map((r) => r.k), lf = (k) => fDay(isoMonday(k));
-  lineChart($('ch-control'), labs, [{name: 'Clics en Google', color: C.green, vals: c.map((r) => r.g)}, {name: 'Sesiones orgánicas GA4', color: C.blue, vals: c.map((r) => r.a)}], 280, (v) => nf0.format(v), (i) => 'Semana del ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf});
+  lineChart($('ch-control'), labs, [{name: 'Clics en Google', color: C.coral, vals: c.map((r) => r.g)}, {name: 'Sesiones orgánicas GA4', color: C.blue, vals: c.map((r) => r.a)}], 280, (v) => nf0.format(v), (i) => 'Semana del ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf});
   lineChart($('ch-ratio'), labs, [{name: 'Sesiones por clic', color: C.violet, vals: c.map((r) => r.r)}], 220, (v) => nf2.format(v), (i) => 'Semana del ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf, refY: inc.base ? inc.base * 0.7 : null, refLabel: 'Umbral de aviso'});
   const dd = D.diag_daily || [];
   const dl = dd.map((r) => r.fecha);
@@ -1092,10 +1148,10 @@ function spotlight(rows) {
   const full = rows.filter((r) => r.month < '2026-11');
   const labs = rows.map((r) => MONTHS[+r.month.slice(5) - 1]);
   const tt = (i) => MONTHS[+rows[i].month.slice(5) - 1] + ' 2026' + (rows[i].month >= '2026-11' ? ' (incompleto)' : '');
-  barChart($('sp-clicks'), labs, [{name: 'Clics', color: '#17171C', vals: rows.map((r) => +r.clicks)}], 150, (v) => nf0.format(v), false, tt);
-  barChart($('sp-impr'), labs, [{name: 'Impresiones', color: '#14A3B8', vals: rows.map((r) => +r.impressions)}], 150, (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v), false, tt);
-  barChart($('sp-ctr'), labs, [{name: 'CTR', color: C.red, vals: rows.map((r) => 100 * +r.ctr)}], 150, (v) => nf1.format(v) + ' %', false, tt);
-  barChart($('sp-pos'), labs, [{name: 'Posición', color: C.amber, vals: rows.map((r) => +r.position)}], 150, (v) => nf1.format(v), false, tt);
+  barChart($('sp-clicks'), labs, [{name: 'Clics', color: C.blue, vals: rows.map((r) => +r.clicks)}], 150, (v) => nf0.format(v), false, tt);
+  barChart($('sp-impr'), labs, [{name: 'Impresiones', color: C.teal, vals: rows.map((r) => +r.impressions)}], 150, (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v), false, tt);
+  barChart($('sp-ctr'), labs, [{name: 'CTR', color: C.coral, vals: rows.map((r) => 100 * +r.ctr)}], 150, (v) => nf1.format(v) + ' %', false, tt);
+  barChart($('sp-pos'), labs, [{name: 'Posición', color: C.peach, vals: rows.map((r) => +r.position)}], 150, (v) => nf1.format(v), false, tt);
   const al = [];
   const live = full.filter((r) => +r.clicks >= 20);
   if (live.length >= 4) {
