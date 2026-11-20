@@ -247,6 +247,15 @@ tr.flag td{background:#FFF6F5}
 .sideuser span{color:var(--ink);overflow:hidden;text-overflow:ellipsis}
 .sideuser a{color:var(--blue);text-decoration:none}
 .sideuser:not([hidden]) + .side-foot{margin-top:0}
+
+.tabnote{grid-column:span 12;display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;padding:10px 14px;border-radius:10px;border-left:3px solid var(--amber);background:var(--amber-t);color:#6B5320}
+.tabnote svg{width:16px;height:16px;flex:none;margin-top:2px;fill:none;stroke:currentColor;stroke-width:2}
+.tabnote.g{border-left-color:var(--green);background:var(--green-t);color:#1F6B3B}
+.tabnote.g svg{display:none}
+.tabnote a{color:inherit;font-weight:600;white-space:nowrap}
+.tabnote b{font-weight:600}
+.sidelink{color:var(--muted);text-decoration:none;display:block}
+.sidelink:hover{color:var(--ink);text-decoration:underline}
 </style>
 </head>
 <body>
@@ -1106,9 +1115,41 @@ function spotlight(rows) {
   $('spot-alerts').innerHTML = al.map(([c, h]) => '<div class="al ' + c + '">' + h + '</div>').join('');
 }
 
+// ---------- Avisos por pestaña ----------
+function tabNote(tab) {
+  const inc = incident();
+  const footer = (D.convEvents || []).find((r) => /Footer/i.test(r.eventName));
+  const go = ' <a href="#medicion">Ver Medición</a>';
+  if (!inc.start) return tab === 'conversiones' && footer && +footer.conversions_chg < -90 ? ['a', '<b>Formulario del pie:</b> ' + fInt(footer.conversions) + ' conversiones en el año (' + fSigned(footer.conversions_chg) + '). Si sigue en la web, revisar que el evento se mide.'] : null;
+  const desde = fDay(inc.start.d);
+  const lost = nf0.format(10 * (1 - inc.after / inc.base));
+  const weeksOff = inc.rows.length - inc.rows.indexOf(inc.start);
+  const N = {
+    resumen: ['a', 'Desde el ' + desde + ', GA4 registra solo unas ' + (10 - +lost) + ' de cada 10 visitas: las cifras recientes salen más bajas de lo real.' + go],
+    evolucion: ['a', '<b>Octubre y noviembre salen bajos por la medición, no por el tráfico.</b> Desde el ' + desde + ' GA4 pierde unas ' + lost + ' de cada 10 visitas; compara esos meses con cautela.' + go],
+    adquisicion: ['a', 'Los cambios frente a 2025 incluyen ' + weeksOff + ' semanas con la medición rota desde el ' + desde + '. Afecta a todos los canales por igual, así que el reparto entre canales sigue siendo fiable; los totales, no.' + go],
+    audiencia: ['a', 'Desde el ' + desde + ' faltan visitas en todos los dispositivos y países por igual: las proporciones son fiables, los totales están por debajo de lo real.' + go],
+    paginas: ['a', 'Las sesiones y conversiones de cada página incluyen ' + weeksOff + ' semanas con la medición rota desde el ' + desde + '. Para el tráfico desde Google de cada página, la pestaña SEO usa Search Console, que no se ve afectada.' + go],
+    conversiones: ['a', 'Desde el ' + desde + ' las conversiones también se registran de menos.' + (footer && +footer.conversions_chg < -90 ? ' Aparte, el <b>formulario del pie</b> se queda en ' + fInt(footer.conversions) + ' conversiones en el año (' + fSigned(footer.conversions_chg) + '): si sigue en la web, revisar que su evento se mide.' : '') + go],
+    ia: ['a', 'Las visitas desde asistentes de IA de octubre y noviembre están infravaloradas por la medición rota desde el ' + desde + '.' + go],
+    seo: ['g', 'Search Console mide los clics desde Google sin depender de la etiqueta de Analytics, así que esta pestaña no se ve afectada por el fallo de medición.']
+  };
+  return N[tab] || null;
+}
+function placeNote() {
+  document.querySelectorAll('.tabnote').forEach((n) => n.remove());
+  const n = tabNote(TAB);
+  const grid = document.querySelector('#v-' + TAB + ' .grid');
+  if (!n || !grid) return;
+  const el = document.createElement('div');
+  el.className = 'tabnote s12 ' + n[0];
+  el.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></svg><span>' + n[1] + '</span>';
+  grid.prepend(el);
+}
+
 // ---------- Navegación ----------
 const VIEWS = {resumen: vResumen, medicion: vMedicion, seo: vSeo, evolucion: vEvolucion, adquisicion: vAdquisicion, audiencia: vAudiencia, paginas: vPaginas, conversiones: vConversiones, ia: vIa};
-function render() { hideTip(); try { VIEWS[TAB](); } catch (e) { console.error(e); $('errors').innerHTML = '<div class="err">Error al dibujar la vista: ' + esc(e.message) + '</div>'; } }
+function render() { hideTip(); try { VIEWS[TAB](); placeNote(); } catch (e) { console.error(e); $('errors').innerHTML = '<div class="err">Error al dibujar la vista: ' + esc(e.message) + '</div>'; } }
 function setTab(t, push) {
   if (!VIEWS[t]) t = 'resumen';
   TAB = t;
@@ -1143,8 +1184,8 @@ function chrome() {
     el.innerHTML = '<span>' + esc(u.email) + '</span><a href="/auth/logout">Cerrar sesión</a>';
   }).catch(() => {});
   const ws = warnings();
-  $('side-alerts').innerHTML = ws.length ? '<strong class="red">' + ws.length + (ws.length === 1 ? ' aviso' : ' avisos') + '</strong>' + esc(ws[0].title) : '<strong>Sin avisos</strong>Ningún dato fuera de lo normal.';
-  $('alert').innerHTML = ws.map((w) => '<div class="alert"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></svg></div><div><b>' + esc(w.title) + '</b><p>' + esc(w.text) + '</p></div></div>').join('');
+  $('side-alerts').innerHTML = ws.length ? '<strong class="red">' + ws.length + (ws.length === 1 ? ' aviso' : ' avisos') + '</strong><a href="#medicion" class="sidelink">' + esc(ws[0].title) + '</a>' : '<strong>Sin avisos</strong>Ningún dato fuera de lo normal.';
+  $('alert').innerHTML = '';
 }
 async function start() {
   if (!window.d3) { $('errors').innerHTML = '<div class="err">No se ha podido cargar la librería de gráficos. Comprueba la conexión a internet.</div>'; return; }
