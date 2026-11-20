@@ -242,6 +242,11 @@ tr.flag td{background:#FFF6F5}
 
 .tag{white-space:nowrap}
 @media (max-width:900px){.kpi b{font-size:22px}.kpirow{gap:12px}}
+
+.sideuser{margin-top:auto;padding:14px 22px;border-top:1px solid var(--line);font-size:12.5px;display:flex;flex-direction:column;gap:4px}
+.sideuser span{color:var(--ink);overflow:hidden;text-overflow:ellipsis}
+.sideuser a{color:var(--blue);text-decoration:none}
+.sideuser:not([hidden]) + .side-foot{margin-top:0}
 </style>
 </head>
 <body>
@@ -256,6 +261,7 @@ tr.flag td{background:#FFF6F5}
       <p id="side-period"></p>
       <p id="side-updated"></p>
     </div>
+    <div class="sideuser" id="side-user" hidden></div>
     <div class="side-foot" id="side-alerts"></div>
   </aside>
 
@@ -1131,6 +1137,11 @@ function chrome() {
   $('hero-chips').innerHTML = '<span class="chip g">Datos reales</span><span class="chip">Actualizado el ' + fUpd + '</span>';
   $('side-period').innerHTML = '<span class="dot"></span>' + esc(meta.periodo || '');
   $('side-updated').innerHTML = '<span class="dot"></span>Actualizado el ' + fUpd;
+  fetch('/auth/me', {cache: 'no-store'}).then((r) => r.ok ? r.json() : null).then((u) => {
+    if (!u || !u.email) return;
+    const el = $('side-user'); el.hidden = false;
+    el.innerHTML = '<span>' + esc(u.email) + '</span><a href="/auth/logout">Cerrar sesión</a>';
+  }).catch(() => {});
   const ws = warnings();
   $('side-alerts').innerHTML = ws.length ? '<strong class="red">' + ws.length + (ws.length === 1 ? ' aviso' : ' avisos') + '</strong>' + esc(ws[0].title) : '<strong>Sin avisos</strong>Ningún dato fuera de lo normal.';
   $('alert').innerHTML = ws.map((w) => '<div class="alert"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></svg></div><div><b>' + esc(w.title) + '</b><p>' + esc(w.text) + '</p></div></div>').join('');
