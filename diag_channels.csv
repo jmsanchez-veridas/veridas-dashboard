@@ -1,9 +1,9 @@
 grupo,nombre,antes,despues
-canal,Búsqueda orgánica,4180,1309
-canal,Directo,1025,247
-canal,Multired,417,151
-canal,Búsqueda de pago,212,54
-canal,Referido,155,25
-canal,Social orgánico,51,29
-dispositivo,Ordenador,3069,984
-dispositivo,Móvil,2982,890
+canal,Organic search,4180,1309
+canal,Direct,1025,247
+canal,Cross-network,417,151
+canal,Paid search,212,54
+canal,Referral,155,25
+canal,Organic social,51,29
+dispositivo,Desktop,3069,984
+dispositivo,Mobile,2982,890

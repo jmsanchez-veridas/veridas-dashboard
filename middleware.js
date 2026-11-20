@@ -1,13 +1,13 @@
-// Inicio de sesión con Google para el dashboard de Veridas.
-// Vercel ejecuta este fichero antes de servir cualquier página o CSV.
-// Solo deja pasar a cuentas del dominio permitido (o a correos sueltos de la lista).
+// Google sign-in for the Veridas dashboard.
+// Vercel runs this file before serving any page or CSV.
+// Only accounts from the allowed domain (or individually listed emails) get through.
 //
-// Variables de entorno (Vercel → Settings → Environment Variables):
-//   GOOGLE_CLIENT_ID      ID de cliente OAuth de Google Cloud
-//   GOOGLE_CLIENT_SECRET  Secreto de ese cliente
-//   SESSION_SECRET        Texto aleatorio largo (mínimo 32 caracteres)
-//   ALLOWED_DOMAIN        Dominio permitido, por ejemplo veridas.com
-//   ALLOWED_EMAILS        (opcional) correos de fuera del dominio, separados por comas
+// Environment variables (Vercel → Settings → Environment Variables):
+//   GOOGLE_CLIENT_ID      Google Cloud OAuth client ID
+//   GOOGLE_CLIENT_SECRET  That client's secret
+//   SESSION_SECRET        Long random text (at least 32 characters)
+//   ALLOWED_DOMAIN        Allowed domain, e.g. veridas.com
+//   ALLOWED_EMAILS        (optional) comma-separated emails from outside the domain
 
 export const config = { matcher: '/:path*' };
 
@@ -57,7 +57,7 @@ const setCookie = (name, value, maxAge) => `${name}=${encodeURIComponent(value)}
 const safePath = (p) => (typeof p === 'string' && p.startsWith('/') && !p.startsWith('//') && !p.startsWith('/auth/') ? p : '/');
 
 function page(title, text, button, status = 200) {
-  const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${title}</title>
+  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F1F0ED;border-top:4px solid #FF6C72;box-sizing:border-box;font-family:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:#000D47}
 .box{background:#fff;border:1px solid #E3E1DC;border-radius:8px;padding:40px 36px;max-width:400px;width:calc(100% - 48px)}
@@ -65,7 +65,7 @@ function page(title, text, button, status = 200) {
 h1{font-size:30px;font-weight:300;letter-spacing:-.02em;margin:0 0 12px}h1:before{content:"/";color:#FF6C72;margin-right:2px}
 p{color:#4D5578;font-size:14.5px;line-height:1.5;margin:0 0 24px}
 a.btn{display:inline-flex;align-items:center;gap:10px;background:#000D47;color:#fff;text-decoration:none;padding:12px 20px;border-radius:4px;font-weight:600;font-size:14.5px}a.btn:hover{background:#0A1A66}</style></head>
-<body><main class="box"><p class="eyebrow">Veridas · Rendimiento web</p><h1>${title}</h1><p>${text}</p>${button || ''}</main></body></html>`;
+<body><main class="box"><p class="eyebrow">Veridas · Web performance</p><h1>${title}</h1><p>${text}</p>${button || ''}</main></body></html>`;
   return new Response(html, { status, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
 }
 
@@ -77,7 +77,7 @@ export default async function middleware(req) {
   const extra = (env.ALLOWED_EMAILS || '').toLowerCase().split(',').map((s) => s.trim()).filter(Boolean);
 
   if (!env.GOOGLE_CLIENT_ID || !env.GOOGLE_CLIENT_SECRET || !env.SESSION_SECRET || env.SESSION_SECRET.length < 32 || !domain) {
-    return page('Acceso no configurado', 'Faltan variables de entorno en Vercel. Hasta que estén, la página no se muestra a nadie.', '', 503);
+    return page('Access not configured', 'Environment variables are missing in Vercel. Until they are added, the page is not shown to anyone.', '', 503);
   }
   const redirectUri = url.origin + '/auth/callback';
   const jar = cookies(req);
@@ -95,7 +95,7 @@ export default async function middleware(req) {
     const st = await verify(jar[STATE_COOKIE], env.SESSION_SECRET);
     const code = url.searchParams.get('code');
     if (!st || !code || st.state !== url.searchParams.get('state')) {
-      return page('No se ha podido iniciar sesión', 'La sesión de acceso ha caducado o no es válida. Vuelve a intentarlo.', '<a class="btn" href="/auth/login">Volver a intentarlo</a>', 400);
+      return page('Sign-in failed', 'The sign-in session has expired or is not valid. Please try again.', '<a class="btn" href="/auth/login">Try again</a>', 400);
     }
     const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
@@ -105,13 +105,13 @@ export default async function middleware(req) {
     const tok = tokenRes.ok ? await tokenRes.json() : null;
     let claims = null;
     try { claims = tok && tok.id_token ? JSON.parse(new TextDecoder().decode(fromB64url(tok.id_token.split('.')[1]))) : null; } catch { claims = null; }
-    // El id_token llega directamente de Google por HTTPS a cambio del código, así que basta con comprobar a quién va dirigido.
+    // The id_token comes straight from Google over HTTPS in exchange for the code, so checking its audience is enough.
     const okIssuer = claims && ['accounts.google.com', 'https://accounts.google.com'].includes(claims.iss);
     const email = claims && String(claims.email || '').toLowerCase();
     const allowed = okIssuer && claims.aud === env.GOOGLE_CLIENT_ID && claims.email_verified === true && claims.exp * 1000 > Date.now()
       && ((claims.hd || '').toLowerCase() === domain || extra.includes(email));
     if (!allowed) {
-      return page('Acceso restringido', `Este panel solo está disponible para cuentas de ${domain}.${email ? ' Has entrado como ' + email.replace(/[<>&"]/g, '') + '.' : ''}`, '<a class="btn" href="/auth/login">Entrar con otra cuenta</a>', 403);
+      return page('Restricted access', `This dashboard is only available to ${domain} accounts.${email ? ' You signed in as ' + email.replace(/[<>&"]/g, '') + '.' : ''}`, '<a class="btn" href="/auth/login">Use another account</a>', 403);
     }
     const session = await sign({ email, exp: Date.now() + SESSION_DAYS * 864e5 }, env.SESSION_SECRET);
     const headers = new Headers({ location: safePath(st.next), 'cache-control': 'no-store' });
@@ -124,7 +124,7 @@ export default async function middleware(req) {
     return new Response(null, { status: 302, headers: { location: '/auth/salir', 'set-cookie': setCookie(COOKIE, '', 0), 'cache-control': 'no-store' } });
   }
   if (pathname === '/auth/salir') {
-    return page('Has cerrado sesión', 'Para volver al panel, entra de nuevo con tu cuenta de Google.', '<a class="btn" href="/auth/login">Entrar con Google</a>');
+    return page('You have signed out', 'To return to the dashboard, sign in again with your Google account.', '<a class="btn" href="/auth/login">Sign in with Google</a>');
   }
 
   const session = await verify(jar[COOKIE], env.SESSION_SECRET);
@@ -136,7 +136,7 @@ export default async function middleware(req) {
 
   const wantsHtml = (req.headers.get('accept') || '').includes('text/html');
   if (wantsHtml) {
-    return page('Rendimiento web de Veridas', `Acceso solo para cuentas de ${domain}.`, `<a class="btn" href="/auth/login?next=${encodeURIComponent(pathname)}">Entrar con Google</a>`, 401);
+    return page('Veridas web performance', `Access restricted to ${domain} accounts.`, `<a class="btn" href="/auth/login?next=${encodeURIComponent(pathname)}">Sign in with Google</a>`, 401);
   }
-  return new Response('No autorizado', { status: 401, headers: { 'cache-control': 'no-store' } });
+  return new Response('Unauthorized', { status: 401, headers: { 'cache-control': 'no-store' } });
 }

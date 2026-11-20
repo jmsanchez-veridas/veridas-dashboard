@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Veridas · Rendimiento web</title>
+<title>Veridas · Web performance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -318,10 +318,10 @@ td.path{font-size:13px}
 <body>
 <div class="app">
   <aside class="side">
-    <div class="brand"><img class="brandlogo" src="logo.svg" alt="Veridas" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><b class="wordmark" hidden>Veridas</b><span>Rendimiento web</span></div>
-    <h3>Vistas</h3>
-    <nav id="sidenav" aria-label="Vistas"></nav>
-    <h3>Datos</h3>
+    <div class="brand"><img class="brandlogo" src="logo.svg" alt="Veridas" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><b class="wordmark" hidden>Veridas</b><span>Web performance</span></div>
+    <h3>Views</h3>
+    <nav id="sidenav" aria-label="Views"></nav>
+    <h3>Data</h3>
     <div class="sideinfo">
       <p><span class="dot g"></span>Google Analytics 4</p>
       <p id="side-period"></p>
@@ -338,7 +338,7 @@ td.path{font-size:13px}
 
     <main class="page">
       <div class="hero">
-        <div><p class="eyebrow">Veridas · Rendimiento web 2026</p><h1><span class="slash">/</span>De un vistazo</h1><p id="hero-sub">veridas.com</p></div>
+        <div><p class="eyebrow">Veridas · Web performance 2026</p><h1><span class="slash">/</span>At a glance</h1><p id="hero-sub">veridas.com</p></div>
         <div class="chips" id="hero-chips"></div>
       </div>
       <div id="errors"></div>
@@ -348,40 +348,40 @@ td.path{font-size:13px}
       <section class="view" id="v-resumen">
         <div class="grid">
           <article class="card rose s5">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><h2>Salud del sitio</h2><button class="more" data-go="evolucion">Evolución →</button></div>
-            <p class="cap">El anillo es la tasa de interacción: sesiones de más de 10 segundos, con conversión o con dos o más páginas vistas.</p>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><h2>Site health</h2><button class="more" data-go="evolucion">Trends →</button></div>
+            <p class="cap">The ring shows the engagement rate: sessions lasting over 10 seconds, with a conversion, or with two or more page views.</p>
             <div class="health"><div class="ring" id="r-health"></div><div><h3 id="h-title">—</h3><div class="chips" id="h-chips"></div></div></div>
             <div class="steps" id="h-steps"></div>
           </article>
           <article class="card s4">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/></svg></div><h2>Calidad de las visitas</h2><button class="more" data-go="audiencia">Audiencia →</button></div>
-            <p class="cap">Frente al mismo periodo de 2025. Verde si mejora, rojo si empeora.</p>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/></svg></div><h2>Visit quality</h2><button class="more" data-go="audiencia">Audience →</button></div>
+            <p class="cap">Against the same period in 2025. Green if it improves, red if it gets worse.</p>
             <div class="mlist" id="quality"></div>
           </article>
           <article class="card s3">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></div><h2>Conversiones</h2><button class="more" data-go="conversiones">Detalle →</button></div>
-            <p class="cap">Formularios, descargas y citas de calendario.</p>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></div><h2>Conversions</h2><button class="more" data-go="conversiones">Details →</button></div>
+            <p class="cap">Forms, downloads and calendar bookings.</p>
             <div class="big" id="c-big">—</div>
             <div class="bigsub" id="c-sub"></div>
-            <div class="spark" id="c-spark" role="img" aria-label="Conversiones por semana"></div>
+            <div class="spark" id="c-spark" role="img" aria-label="Conversions per week"></div>
             <p class="foot" id="c-foot"></p>
           </article>
           <article class="card mint s3">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></div><h2>Canales</h2><button class="more" data-go="adquisicion">Detalle →</button></div>
-            <p class="cap">Peso de la búsqueda orgánica y canales que pierden conversiones.</p>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></div><h2>Channels</h2><button class="more" data-go="adquisicion">Details →</button></div>
+            <p class="cap">Share of organic search, and channels losing conversions.</p>
             <div class="score"><div class="ring" id="r-chan"></div><div class="stat" id="ch-down"></div><div class="stat" id="ch-up"></div></div>
             <p class="foot" id="ch-foot"></p>
           </article>
           <article class="card lav s3">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg></div><h2>Asistentes de IA</h2><button class="more" data-go="ia">Detalle →</button></div>
-            <p class="cap">Visitas que llegan desde ChatGPT, Claude, Gemini y otros.</p>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg></div><h2>AI assistants</h2><button class="more" data-go="ia">Details →</button></div>
+            <p class="cap">Visits coming from ChatGPT, Claude, Gemini and others.</p>
             <div class="score"><div class="stat g" id="ai-ses"></div><div class="stat" id="ai-rate"></div></div>
             <p class="foot" id="ai-foot"></p>
           </article>
           <article class="card s6">
-            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19V11M10 19V6M15 19v-5M20 19V9"/></svg></div><h2>Sesiones y conversiones por semana</h2><button class="more" data-go="evolucion">24 meses →</button></div>
-            <p class="cap">Sesiones a la izquierda, conversiones a la derecha. La última semana aún no está completa.</p>
-            <div class="legend"><span><i style="background:var(--navy)"></i>Sesiones</span><span><i style="background:var(--coral)"></i>Conversiones</span></div>
+            <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19V11M10 19V6M15 19v-5M20 19V9"/></svg></div><h2>Sessions and conversions per week</h2><button class="more" data-go="evolucion">24 months →</button></div>
+            <p class="cap">Sessions on the left axis, conversions on the right. The last week is not complete yet.</p>
+            <div class="legend"><span><i style="background:var(--navy)"></i>Sessions</span><span><i style="background:var(--coral)"></i>Conversions</span></div>
             <div class="chart" id="ch-week"></div>
           </article>
         </div>
@@ -392,20 +392,20 @@ td.path{font-size:13px}
         <div class="grid">
           <div class="concl" id="cc-evolucion"></div>
           <article class="card s12">
-            <div class="ch"><h2>Mes a mes: 2026 frente a 2025</h2><div class="more"><div class="seg" id="seg-month"><button data-m="sessions" aria-pressed="true">Sesiones</button><button data-m="conversions" aria-pressed="false">Conversiones</button></div></div></div>
-            <p class="cap">Barra clara: 2025. Barra oscura: 2026. Noviembre de 2026 aún no está completo.</p>
+            <div class="ch"><h2>Month by month: 2026 vs 2025</h2><div class="more"><div class="seg" id="seg-month"><button data-m="sessions" aria-pressed="true">Sessions</button><button data-m="conversions" aria-pressed="false">Conversions</button></div></div></div>
+            <p class="cap">Light bar: 2025. Dark bar: 2026. November 2026 is not complete yet.</p>
             <div class="legend"><span><i style="background:#C9CCD9"></i>2025</span><span><i style="background:var(--navy)"></i>2026</span></div>
             <div class="chart" id="ch-month"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Acumulado del año</h2></div>
-            <p class="cap">Total sumado mes a mes. Gris: 2025. Azul: 2026.</p>
+            <div class="ch"><h2>Year to date</h2></div>
+            <p class="cap">Running total, month by month. Grey: 2025. Navy: 2026.</p>
             <div class="legend"><span><i style="background:#A3A6B8"></i>2025</span><span><i style="background:var(--navy)"></i>2026</span></div>
             <div class="chart" id="ch-cum"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Tasa de conversión por mes</h2></div>
-            <p class="cap">Conversiones por cada 100 sesiones, en los dos años.</p>
+            <div class="ch"><h2>Conversion rate by month</h2></div>
+            <p class="cap">Conversions per 100 sessions, for both years.</p>
             <div class="legend"><span><i style="background:#A3A6B8"></i>2025</span><span><i style="background:var(--coral)"></i>2026</span></div>
             <div class="chart" id="ch-rate"></div>
           </article>
@@ -417,23 +417,23 @@ td.path{font-size:13px}
         <div class="grid">
           <div class="concl" id="cc-adquisicion"></div>
           <article class="card s5">
-            <div class="ch"><h2>Sesiones por canal</h2></div>
-            <p class="cap">Canales con al menos 100 sesiones.</p>
+            <div class="ch"><h2>Sessions by channel</h2></div>
+            <p class="cap">Channels with at least 100 sessions.</p>
             <div id="hb-chan"></div>
           </article>
           <article class="card s7">
-            <div class="ch"><h2>Tráfico y conversiones por canal</h2></div>
-            <p class="cap">La tasa sale en verde si el canal convierte por encima de la media del sitio, y en rojo si queda por debajo.</p>
+            <div class="ch"><h2>Traffic and conversions by channel</h2></div>
+            <p class="cap">The rate is green when the channel converts above the site average, and red when it falls below.</p>
             <div class="tw" id="t-chan"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Fuente / medio</h2></div>
-            <p class="cap">Las 20 combinaciones con más sesiones.</p>
+            <div class="ch"><h2>Source / medium</h2></div>
+            <p class="cap">The 20 combinations with the most sessions.</p>
             <div class="tw" id="t-sm"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Campañas</h2></div>
-            <p class="cap">Marcadas en rojo las que tienen más de 1000 sesiones y convierten por debajo de la mitad de la media del sitio.</p>
+            <div class="ch"><h2>Campaigns</h2></div>
+            <p class="cap">Flagged in red: campaigns with more than 1,000 sessions converting at less than half the site average.</p>
             <div class="tw" id="t-camp"></div>
           </article>
         </div>
@@ -444,19 +444,19 @@ td.path{font-size:13px}
         <div class="grid">
           <div class="concl" id="cc-audiencia"></div>
           <article class="card s7">
-            <div class="ch"><h2>Rendimiento por dispositivo</h2></div>
-            <p class="cap">Ordenador y móvil traen un volumen parecido; la diferencia está en cuánto convierte cada uno.</p>
+            <div class="ch"><h2>Performance by device</h2></div>
+            <p class="cap">Desktop and mobile bring similar volumes; the difference is in how much each one converts.</p>
             <div class="tw" id="t-dev"></div>
           </article>
           <article class="card s5">
-            <div class="ch"><h2>Nuevos frente a recurrentes</h2></div>
-            <p class="cap">Quien vuelve convierte mucho más que quien llega por primera vez.</p>
+            <div class="ch"><h2>New vs returning</h2></div>
+            <p class="cap">Returning visitors convert far more than first-time visitors.</p>
             <div class="tw" id="t-nr"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Países</h2></div>
-            <p class="cap">Los 15 países con más usuarios. Barra azul: usuarios. Barra verde: conversiones.</p>
-            <div class="legend"><span><i style="background:var(--navy)"></i>Usuarios</span><span><i style="background:var(--coral)"></i>Conversiones</span></div>
+            <div class="ch"><h2>Countries</h2></div>
+            <p class="cap">The 15 countries with the most users. Navy bar: users. Coral bar: conversions.</p>
+            <div class="legend"><span><i style="background:var(--navy)"></i>Users</span><span><i style="background:var(--coral)"></i>Conversions</span></div>
             <div id="hb-country"></div>
           </article>
         </div>
@@ -467,23 +467,23 @@ td.path{font-size:13px}
         <div class="grid">
           <div class="concl" id="cc-paginas"></div>
           <article class="card s12">
-            <div class="ch"><h2>Páginas de entrada: tráfico frente a conversión</h2></div>
-            <p class="cap">Abajo a la derecha están las páginas con mucho tráfico que apenas convierten: ahí está la mayor oportunidad. La línea marca la tasa media del sitio. El tamaño son las conversiones.</p>
+            <div class="ch"><h2>Landing pages: traffic vs conversion</h2></div>
+            <p class="cap">Bottom right are the pages with lots of traffic that barely convert: that is the biggest opportunity. The line marks the site average rate. Bubble size is conversions.</p>
             <div class="chart" id="ch-land"></div>
           </article>
           <article class="card s7">
-            <div class="ch"><h2>Rendimiento de las páginas de entrada</h2></div>
-            <p class="cap">Las 25 páginas por las que más se entra.</p>
+            <div class="ch"><h2>Landing page performance</h2></div>
+            <p class="cap">The 25 most-used landing pages.</p>
             <div class="tw" id="t-land"></div>
           </article>
           <article class="card s5">
-            <div class="ch"><h2>Dónde se hace clic</h2></div>
-            <p class="cap">Evento «Clic en enlace» por página de origen.</p>
+            <div class="ch"><h2>Where people click</h2></div>
+            <p class="cap">“Clic en enlace” (link click) event by source page.</p>
             <div id="hb-clicks"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Páginas más vistas</h2></div>
-            <p class="cap">Tiempo medio: tiempo de interacción total dividido entre usuarios activos.</p>
+            <div class="ch"><h2>Most viewed pages</h2></div>
+            <p class="cap">Average time: total engagement time divided by active users.</p>
             <div class="tw" id="t-pages"></div>
           </article>
         </div>
@@ -494,19 +494,19 @@ td.path{font-size:13px}
         <div class="grid">
           <div class="concl" id="cc-conversiones"></div>
           <article class="card s5">
-            <div class="ch"><h2>Conversiones por tipo</h2></div>
-            <p class="cap">Con su cambio frente al mismo periodo de 2025.</p>
+            <div class="ch"><h2>Conversions by type</h2></div>
+            <p class="cap">With the change against the same period in 2025.</p>
             <div id="hb-ev"></div>
           </article>
           <article class="card s7">
-            <div class="ch"><h2>Conversiones por mes y tipo</h2></div>
-            <p class="cap">Noviembre aún no está completo.</p>
+            <div class="ch"><h2>Conversions by month and type</h2></div>
+            <p class="cap">November is not complete yet.</p>
             <div class="legend" id="lg-ev"></div>
             <div class="chart" id="ch-evm"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Páginas de entrada que más convierten</h2></div>
-            <p class="cap">Ordenadas por conversiones, entre las 25 páginas de entrada con conversiones y más sesiones.</p>
+            <div class="ch"><h2>Top converting landing pages</h2></div>
+            <p class="cap">Sorted by conversions, among the 25 landing pages with conversions and the most sessions.</p>
             <div class="tw" id="t-convland"></div>
           </article>
         </div>
@@ -517,39 +517,39 @@ td.path{font-size:13px}
         <div class="grid">
           <div class="concl" id="cc-medicion"></div>
           <article class="card s12">
-            <div class="ch"><h2>Clics de Google frente a sesiones orgánicas de GA4</h2></div>
-            <p class="cap">Search Console cuenta los clics desde Google sin depender de la etiqueta de Analytics. Si las dos líneas se separan de golpe, el problema está en la medición, no en el tráfico. La zona sombreada es el periodo con la medición rota.</p>
-            <div class="legend"><span><i style="background:var(--coral)"></i>Clics en Google (Search Console)</span><span><i style="background:var(--navy)"></i>Sesiones orgánicas (GA4)</span></div>
+            <div class="ch"><h2>Google clicks vs GA4 organic sessions</h2></div>
+            <p class="cap">Search Console counts clicks from Google without relying on the Analytics tag. If the two lines suddenly split, the problem is tracking, not traffic. The shaded area is the period with broken tracking.</p>
+            <div class="legend"><span><i style="background:var(--coral)"></i>Google clicks (Search Console)</span><span><i style="background:var(--navy)"></i>Organic sessions (GA4)</span></div>
             <div class="chart" id="ch-control"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Sesiones de GA4 por cada clic de Google</h2></div>
-            <p class="cap">Se mantiene estable mientras la medición funciona. Una caída de más del 30 % frente a la media de las 8 semanas anteriores dispara el aviso.</p>
+            <div class="ch"><h2>GA4 sessions per Google click</h2></div>
+            <p class="cap">It stays stable while tracking works. A drop of more than 30% against the average of the previous 8 weeks triggers the alert.</p>
             <div class="chart" id="ch-ratio"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Sesiones por día alrededor del corte</h2></div>
-            <p class="cap">Todas las sesiones de GA4, del 19 de octubre al 4 de noviembre.</p>
+            <div class="ch"><h2>Daily sessions around the break</h2></div>
+            <p class="cap">All GA4 sessions, from 19 October to 4 November.</p>
             <div class="chart" id="ch-daily"></div>
           </article>
           <article class="card s5">
-            <div class="ch"><h2>Qué cae y en qué proporción</h2></div>
-            <p class="cap">Semana del 19 de octubre frente a la del 26. Si fuera una caída real, se concentraría en un canal o un dispositivo.</p>
+            <div class="ch"><h2>What dropped, and by how much</h2></div>
+            <p class="cap">Week of 19 October vs week of 26 October. A real drop would be concentrated in one channel or device.</p>
             <div class="tw" id="t-diag"></div>
           </article>
           <article class="card s7">
-            <div class="ch"><h2>La caída de impresiones en Google</h2></div>
-            <p class="cap">Dos semanas antes y después del 2 de noviembre. Casi toda la pérdida es de una sola página, y sus clics apenas cambian.</p>
+            <div class="ch"><h2>The drop in Google impressions</h2></div>
+            <p class="cap">Two weeks before and after 2 November. Almost all the loss comes from a single page, and its clicks barely change.</p>
             <div class="tw" id="t-impr"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Cómo confirmar la causa</h2></div>
-            <p class="cap">Comprobaciones en orden de probabilidad. Ninguna se puede hacer desde los datos: requieren acceso a la web y a Google Tag Manager.</p>
+            <div class="ch"><h2>How to confirm the cause</h2></div>
+            <p class="cap">Checks in order of likelihood. None can be done from the data: they need access to the website and Google Tag Manager.</p>
             <ol class="checks">
-              <li><b>Historial de Google Tag Manager.</b> Revisar las versiones publicadas el 26 y 27 de octubre: cambios en la etiqueta de GA4, en su activador o en las condiciones de consentimiento.</li>
-              <li><b>Banner de cookies.</b> Comprobar si cambió la herramienta o su configuración esos días. Si ahora quien rechaza las cookies no se mide en absoluto, la caída sería de este tamaño.</li>
-              <li><b>Prueba en incógnito.</b> Abrir veridas.com con Tag Assistant, aceptar y rechazar cookies, y ver si la etiqueta de GA4 se dispara y envía la vista de página.</li>
-              <li><b>Cambios de la web por la fusión.</b> Preguntar al equipo web qué se publicó esa semana (páginas de la fusión, plantilla, scripts).</li>
+              <li><b>Google Tag Manager history.</b> Review the versions published on 26 and 27 October: changes to the GA4 tag, its trigger or its consent settings.</li>
+              <li><b>Cookie banner.</b> Check whether the tool or its settings changed on those days. If users who reject cookies are now not measured at all, the drop would be this size.</li>
+              <li><b>Incognito test.</b> Open veridas.com with Tag Assistant, accept and reject cookies, and check whether the GA4 tag fires and sends the page view.</li>
+              <li><b>Website changes for the merger.</b> Ask the web team what was published that week (merger pages, template, scripts).</li>
             </ol>
           </article>
         </div>
@@ -561,34 +561,34 @@ td.path{font-size:13px}
           <div class="concl" id="cc-seo"></div>
           <div class="s12 kpirow" id="seo-kpis"></div>
           <article class="card s12">
-            <div class="ch"><h2>Países</h2></div>
-            <p class="cap">Los 14 países con más clics. «Marca» es el porcentaje de clics que llega buscando «veridas»; «oculto», el que Google no detalla por privacidad.</p>
+            <div class="ch"><h2>Countries</h2></div>
+            <p class="cap">The 14 countries with the most clicks. “Brand” is the share of clicks from searches for “veridas”; “Hidden” is the share Google does not detail for privacy.</p>
             <div class="tw" id="t-gscc"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Búsquedas que traen clics, por país</h2><div class="more"><div class="seg" id="seg-country"></div></div></div>
-            <p class="cap" id="q-cap">Las búsquedas con más clics en el país elegido. Las de marca llevan etiqueta.</p>
+            <div class="ch"><h2>Searches bringing clicks, by country</h2><div class="more"><div class="seg" id="seg-country"></div></div></div>
+            <p class="cap" id="q-cap">Searches with the most clicks in the selected country. Branded searches are tagged.</p>
             <div class="tw" id="t-q"></div>
           </article>
           <article class="card lav s12">
-            <div class="ch"><h2>Páginas nuevas de 2026</h2><div class="more"><select class="sel" id="sel-spot" aria-label="Página"></select></div></div>
-            <p class="cap">Evolución mensual de cada página destacada en el informe del primer semestre. Noviembre aún no está completo. Los avisos se calculan solos con los meses completos.</p>
+            <div class="ch"><h2>New pages in 2026</h2><div class="more"><select class="sel" id="sel-spot" aria-label="Page"></select></div></div>
+            <p class="cap">Monthly trend for each page highlighted in the H1 report. November is not complete yet. Alerts are calculated automatically from complete months.</p>
             <div id="spot-alerts" class="alerts"></div>
             <div class="minis">
-              <div><h4>Clics</h4><div class="chart" id="sp-clicks"></div></div>
-              <div><h4>Impresiones</h4><div class="chart" id="sp-impr"></div></div>
+              <div><h4>Clicks</h4><div class="chart" id="sp-clicks"></div></div>
+              <div><h4>Impressions</h4><div class="chart" id="sp-impr"></div></div>
               <div><h4>CTR</h4><div class="chart" id="sp-ctr"></div></div>
-              <div><h4>Posición media (abajo es mejor)</h4><div class="chart" id="sp-pos"></div></div>
+              <div><h4>Average position (lower is better)</h4><div class="chart" id="sp-pos"></div></div>
             </div>
           </article>
           <article class="card s7">
-            <div class="ch"><h2>Oportunidades de posicionamiento</h2></div>
-            <p class="cap">Búsquedas en las posiciones 4 a 15 con más de 15.000 impresiones en los últimos 90 días. Subir unas pocas posiciones aquí es lo más rentable.</p>
+            <div class="ch"><h2>Ranking opportunities</h2></div>
+            <p class="cap">Searches in positions 4 to 15 with more than 15,000 impressions in the last 90 days. Moving up a few places here pays off the most.</p>
             <div class="tw" id="t-opps"></div>
           </article>
           <article class="card s5">
-            <div class="ch"><h2>Clics de Google que no convierten</h2></div>
-            <p class="cap">Las páginas con más clics de Google en 2026 y sus conversiones en GA4. En rojo, las de más de 3.000 clics con 3 conversiones o menos.</p>
+            <div class="ch"><h2>Google clicks that do not convert</h2></div>
+            <p class="cap">Pages with the most Google clicks in 2026 and their GA4 conversions. In red: more than 3,000 clicks with 3 conversions or fewer.</p>
             <div class="tw" id="t-gpc"></div>
           </article>
         </div>
@@ -598,23 +598,23 @@ td.path{font-size:13px}
         <div class="grid">
           <div class="concl" id="cc-ia"></div>
           <article class="card lav s12">
-            <div class="ch"><h2>Asistentes de IA frente a toda la web</h2></div>
-            <p class="cap">Canal «AI Assistant» de GA4. En esta propiedad aparece desde junio de 2026.</p>
+            <div class="ch"><h2>AI assistants vs the whole site</h2></div>
+            <p class="cap">GA4 “AI Assistant” channel. In this property it appears from June 2026.</p>
             <div class="tw" id="t-aivs"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Sesiones desde IA por mes</h2></div>
-            <p class="cap">Desde que el canal aparece en Google Analytics. Noviembre aún no está completo.</p>
+            <div class="ch"><h2>AI sessions by month</h2></div>
+            <p class="cap">Since the channel appears in Google Analytics. November is not complete yet.</p>
             <div class="chart" id="ch-aim"></div>
           </article>
           <article class="card s6">
-            <div class="ch"><h2>Asistentes que envían tráfico</h2></div>
-            <p class="cap">Sesiones, duración media y conversiones.</p>
+            <div class="ch"><h2>Assistants sending traffic</h2></div>
+            <p class="cap">Sessions, average duration and conversions.</p>
             <div class="tw" id="t-ais"></div>
           </article>
           <article class="card s12">
-            <div class="ch"><h2>Dónde aterrizan los usuarios de IA</h2></div>
-            <p class="cap">Una duración casi nula indica que la página no responde a lo que el asistente prometió.</p>
+            <div class="ch"><h2>Where AI users land</h2></div>
+            <p class="cap">A near-zero duration suggests the page does not deliver what the assistant promised.</p>
             <div class="tw" id="t-ail"></div>
           </article>
         </div>
@@ -628,43 +628,43 @@ td.path{font-size:13px}
 (() => {
 const FILES = ['meta','kpis','channels','landing','monthly','weekly','convEvents','convMonthly','convLanding','sourceMedium','campaigns','devices','newret','countries','pages','clicks','llmSources','llmLanding','llmMonthly','gsc_kpis','gsc_countries','gsc_brand','gsc_queries','gsc_spotlight','gsc_opps','gsc_pages','gsc_control','diag_channels','diag_daily','diag_impr'];
 const VIEWS_DEF = [
-  ['resumen','Resumen','<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'],
-  ['medicion','Medición','<path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l5-5"/><circle cx="12" cy="12" r="1.5"/>'],
-  ['evolucion','Evolución','<path d="M4 18 9 12l4 3 7-9"/>'],
-  ['adquisicion','Adquisición','<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/>'],
-  ['audiencia','Audiencia','<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14c2 .7 3 2.6 3 6"/>'],
-  ['paginas','Páginas','<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>'],
-  ['conversiones','Conversiones','<path d="M5 12l4 4 10-10"/>'],
+  ['resumen','Overview','<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'],
+  ['medicion','Tracking','<path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l5-5"/><circle cx="12" cy="12" r="1.5"/>'],
+  ['evolucion','Trends','<path d="M4 18 9 12l4 3 7-9"/>'],
+  ['adquisicion','Acquisition','<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/>'],
+  ['audiencia','Audience','<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14c2 .7 3 2.6 3 6"/>'],
+  ['paginas','Pages','<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>'],
+  ['conversiones','Conversions','<path d="M5 12l4 4 10-10"/>'],
   ['seo','SEO','<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>'],
-  ['ia','Asistentes de IA','<path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/>']
+  ['ia','AI assistants','<path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/>']
 ];
 const C = {blue:'#000D47', blueL:'#C9CCD9', coral:'#FF6C72', teal:'#0097A7', peach:'#F8BF83', mauve:'#D5A6BD', green:'#1F9D3A', amber:'#C27A14', red:'#E0262D', grey:'#A3A6B8', violet:'#0097A7'};
 const EV_COLORS = {'Descarga':'#000D47','Contacto - Formulario Web':'#FF6C72','Contacto - Cita Calendario':'#0097A7','Contacto - Formulario Footer':'#F8BF83'};
-const EV_ES = {'Descarga':'Descarga','Contacto - Formulario Web':'Formulario web','Contacto - Cita Calendario':'Cita de calendario','Contacto - Formulario Footer':'Formulario del pie'};
+const EV_ES = {'Descarga':'Download','Contacto - Formulario Web':'Web form','Contacto - Cita Calendario':'Calendar booking','Contacto - Formulario Footer':'Footer form'};
 const evn = (n) => EV_ES[n] || n;
-const CH_ES = {'Organic Search':'Búsqueda orgánica','Direct':'Directo','Cross-network':'Multired','Paid Search':'Búsqueda de pago','Referral':'Referido','Unassigned':'Sin asignar','Organic Social':'Social orgánico','Email':'Email','AI Assistant':'Asistentes de IA','Paid Social':'Social de pago','Organic Shopping':'Shopping orgánico','Paid Other':'Otros de pago','Organic Video':'Vídeo orgánico','Paid Video':'Vídeo de pago','Display':'Display'};
-const DEV_ES = {desktop:'Ordenador', mobile:'Móvil', tablet:'Tableta', 'smart tv':'Smart TV'};
-const NR_ES = {'new':'Nuevos', returning:'Recurrentes', '(not set)':'Sin definir'};
-const CO_ES = {'Mexico':'México','Brazil':'Brasil','Spain':'España','United States':'Estados Unidos','Colombia':'Colombia','Italy':'Italia','Peru':'Perú','China':'China','Chile':'Chile','India':'India','Argentina':'Argentina','United Kingdom':'Reino Unido','Germany':'Alemania','Netherlands':'Países Bajos','France':'Francia'};
-const MONTHS = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const CH_ES = {'Organic Search':'Organic search','Direct':'Direct','Cross-network':'Cross-network','Paid Search':'Paid search','Referral':'Referral','Unassigned':'Unassigned','Organic Social':'Organic social','Email':'Email','AI Assistant':'AI assistants','Paid Social':'Paid social','Organic Shopping':'Organic shopping','Paid Other':'Other paid','Organic Video':'Organic video','Paid Video':'Paid video','Display':'Display'};
+const DEV_ES = {desktop:'Desktop', mobile:'Mobile', tablet:'Tablet', 'smart tv':'Smart TV'};
+const NR_ES = {'new':'New', returning:'Returning', '(not set)':'Not set'};
+const CO_ES = {};
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const D = {};
 let TAB = 'resumen', MMETRIC = 'sessions';
 
-const nf0 = new Intl.NumberFormat('es-ES',{maximumFractionDigits:0});
-const nf1 = new Intl.NumberFormat('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1});
-const nf2 = new Intl.NumberFormat('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+const nf0 = new Intl.NumberFormat('en-GB',{maximumFractionDigits:0});
+const nf1 = new Intl.NumberFormat('en-GB',{minimumFractionDigits:1,maximumFractionDigits:1});
+const nf2 = new Intl.NumberFormat('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2});
 const has = (v) => v !== undefined && v !== null && v !== '' && v !== 'null';
 const fInt = (v) => has(v) ? nf0.format(+v) : '—';
-const fRate = (v) => has(v) ? nf2.format(+v * 100) + ' %' : '—';
-const fRate1 = (v) => has(v) ? nf1.format(+v * 100) + ' %' : '—';
-const fPct1 = (v) => has(v) ? nf1.format(+v) + ' %' : '—';
+const fRate = (v) => has(v) ? nf2.format(+v * 100) + '%' : '—';
+const fRate1 = (v) => has(v) ? nf1.format(+v * 100) + '%' : '—';
+const fPct1 = (v) => has(v) ? nf1.format(+v) + '%' : '—';
 const fDur = (s) => { if (!has(s)) return '—'; s = Math.round(+s); const m = Math.floor(s / 60); return m ? m + ' min ' + (s % 60) + ' s' : s + ' s'; };
-const fSigned = (v) => has(v) ? (+v > 0 ? '+' : '') + nf1.format(+v) + ' %' : 'nuevo';
+const fSigned = (v) => has(v) ? (+v > 0 ? '+' : '') + nf1.format(+v) + '%' : 'new';
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $ = (id) => document.getElementById(id);
-const chg = (v, inverse) => { if (!has(v)) return '<span class="chg na">nuevo</span>'; const good = inverse ? +v < 0 : +v > 0; return '<span class="chg ' + (Math.abs(+v) < 0.05 ? 'na' : good ? 'up' : 'down') + '">' + (+v > 0 ? '↑ ' : '↓ ') + nf1.format(Math.abs(+v)) + ' %</span>'; };
-const path = (p) => p === '(not set)' ? '(sin definir)' : p;
+const chg = (v, inverse) => { if (!has(v)) return '<span class="chg na">new</span>'; const good = inverse ? +v < 0 : +v > 0; return '<span class="chg ' + (Math.abs(+v) < 0.05 ? 'na' : good ? 'up' : 'down') + '">' + (+v > 0 ? '↑ ' : '↓ ') + nf1.format(Math.abs(+v)) + '%</span>'; };
+const path = (p) => p === '(not set)' ? '(not set)' : p;
 const maxBy = (rs, f) => rs.reduce((a, b) => (a == null || +b[f] > +a[f] ? b : a), null);
 const K = () => (D.kpis && D.kpis[0]) || {};
 const siteRate = () => +K().sessionConversionRate || 0;
@@ -697,7 +697,7 @@ function ring(el, pct, color, size = 104) {
 
 function hbars(el, rows, label, series, opts = {}) {
   el.innerHTML = '';
-  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos.</p>'; return; }
+  if (!rows.length) { el.innerHTML = '<p class="empty">No data.</p>'; return; }
   const maxOf = (s) => opts.perSeries ? (d3.max(rows, (r) => +r[s.f]) || 1) : (d3.max(rows, (r) => d3.max(series, (q) => +r[q.f] || 0)) || 1);
   rows.forEach((r) => {
     const row = document.createElement('div'); row.className = 'hb';
@@ -713,7 +713,7 @@ function hbars(el, rows, label, series, opts = {}) {
 }
 
 function table(el, cols, rows, rowCls) {
-  if (!rows.length) { el.innerHTML = '<p class="empty">Sin datos.</p>'; return; }
+  if (!rows.length) { el.innerHTML = '<p class="empty">No data.</p>'; return; }
   el.innerHTML = '<table><thead><tr>' + cols.map((c) => '<th class="' + (c.n ? 'n' : '') + '">' + esc(c.h) + '</th>').join('') + '</tr></thead><tbody>' +
     rows.map((r) => '<tr class="' + (rowCls ? rowCls(r) : '') + '">' + cols.map((c) => {
       const cls = [c.n ? 'n' : '', c.cls ? (typeof c.cls === 'function' ? c.cls(r) : c.cls) : ''].join(' ').trim();
@@ -742,18 +742,18 @@ function xLabels(svg, labels, x, H, W, ml, fmt) {
     .attr('x', (l) => x(l) + (x.bandwidth ? x.bandwidth() / 2 : 0)).attr('y', H - 6).attr('text-anchor', 'middle').text(fmt || ((l) => l));
 }
 
-// Semanas ISO -> lunes
+// ISO weeks -> Monday
 function isoMonday(key) { const [y, w] = key.split('-').map(Number); const j4 = new Date(Date.UTC(y, 0, 4)); const d = (j4.getUTCDay() + 6) % 7; return new Date(Date.UTC(y, 0, 4 - d + (w - 1) * 7)); }
 const fDay = (d) => d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()];
 
-// Gráfico de dos ejes: sesiones (área, izquierda) y conversiones (línea, derecha)
+// Dual-axis chart: sessions (area, left) and conversions (line, right)
 function shade(svg, x, labels, from, mt, bottom, right) {
   const i = labels.indexOf(from);
   if (i < 0) return;
   const step = labels.length > 1 ? x(labels[1]) - x(labels[0]) : 0;
   const x0 = x(from) - step / 2;
   svg.append('rect').attr('x', x0).attr('y', mt).attr('width', Math.max(0, right - x0)).attr('height', bottom - mt).attr('fill', '#D6453D').attr('opacity', 0.06);
-  svg.append('text').attr('x', x0 + 6).attr('y', mt + 12).style('fill', '#B23A33').style('font-size', '11px').text('Medición rota');
+  svg.append('text').attr('x', x0 + 6).attr('y', mt + 12).style('fill', '#B23A33').style('font-size', '11px').text('Tracking broken');
 }
 function dualChart(el, labels, left, right, H, lfmt, axfmt, shadeFrom) {
   const [svg, W] = svgBox(el, H);
@@ -762,7 +762,7 @@ function dualChart(el, labels, left, right, H, lfmt, axfmt, shadeFrom) {
   if (shadeFrom) shade(svg, x, labels, shadeFrom, mt, H - mb, W - mr);
   const yl = d3.scaleLinear().domain([0, d3.max(left.vals) || 1]).nice().range([H - mb, mt]);
   const yr = d3.scaleLinear().domain([0, d3.max(right.vals) || 1]).nice().range([H - mb, mt]);
-  grid(svg, yl, yl.ticks(4), ml, W - mr, (d) => d >= 1000 ? nf0.format(d / 1000) + ' k' : nf0.format(d));
+  grid(svg, yl, yl.ticks(4), ml, W - mr, (d) => d >= 1000 ? nf0.format(d / 1000) + 'k' : nf0.format(d));
   svg.append('g').selectAll('text').data(yr.ticks(4)).join('text').attr('x', W - mr + 8).attr('y', (d) => yr(d)).attr('dy', '0.32em').style('fill', C.coral).text((d) => nf0.format(d));
   xLabels(svg, labels, x, H, W, ml, axfmt || lfmt);
   const pl = labels.map((l, i) => [x(l), yl(left.vals[i])]), pr = labels.map((l, i) => [x(l), yr(right.vals[i])]);
@@ -834,7 +834,7 @@ function scatter(el, rows, o) {
   svg.append('g').selectAll('text').data(x.ticks(Math.max(3, Math.floor((W - ml) / 90)))).join('text').attr('x', (d) => x(d)).attr('y', H - 6).attr('text-anchor', 'middle').text(o.xfmt);
   if (has(o.refY)) {
     svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(o.refY)).attr('y2', y(o.refY)).attr('stroke', C.grey).attr('stroke-dasharray', '4 4');
-    svg.append('text').attr('x', W - mr).attr('y', y(o.refY) - 6).attr('text-anchor', 'end').text('Media del sitio');
+    svg.append('text').attr('x', W - mr).attr('y', y(o.refY) - 6).attr('text-anchor', 'end').text('Site average');
   }
   const rad = d3.scaleSqrt().domain([0, d3.max(rows, (r) => +r[o.r]) || 1]).range([4, 22]);
   const g = svg.append('g').selectAll('g').data(rows.slice().sort((a, b) => +b[o.r] - +a[o.r])).join('g').attr('transform', (r) => 'translate(' + x(+r[o.x]) + ',' + y(o.yv(r)) + ')');
@@ -848,7 +848,7 @@ function scatter(el, rows, o) {
   g.on('pointermove pointerdown', (ev, r) => showTip(ev, o.label(r), o.lines(r))).on('pointerleave', hideTip);
 }
 
-// ---------- Avisos ----------
+// ---------- Alerts ----------
 function weeks() { return (D.weekly || []).map((r) => ({k: r.yearWeekIso, d: isoMonday(r.yearWeekIso), s: +r.sessions, c: +r.conversions})); }
 function incident() {
   const c = (D.gsc_control || []).map((r) => ({k: r.semana, d: isoMonday(r.semana), g: +r.gsc_clicks, a: +r.ga_organic_sessions, imp: +r.gsc_impressions, r: +r.ga_organic_sessions / +r.gsc_clicks}));
@@ -874,43 +874,43 @@ function warnings() {
   const out = [];
   const t = trackingDrop();
   const inc = incident();
-  if (t && inc.start) out.push({title: 'Fallo de medición en Google Analytics', text: 'Desde la semana del ' + fDay(t.from) + ' las sesiones bajan de unas ' + nf0.format(t.base) + ' a unas ' + nf0.format(t.after) + ' por semana (' + nf0.format(t.pct) + ' %). No es una caída de tráfico: en esas mismas semanas los clics desde Google siguen en unos ' + nf0.format(inc.gAfter) + ' por semana, frente a ' + nf0.format(inc.gBefore) + ' antes. GA4 está dejando de registrar unas ' + nf0.format(10 * (1 - inc.after / inc.base)) + ' de cada 10 visitas, así que sus cifras desde entonces están infravaloradas. El detalle está en la pestaña Medición.'});
-  else if (t) out.push({title: 'Posible fallo de medición', text: 'Desde la semana del ' + fDay(t.from) + ' las sesiones bajan de unas ' + nf0.format(t.base) + ' a unas ' + nf0.format(t.after) + ' por semana (' + nf0.format(t.pct) + ' %).'});
+  if (t && inc.start) out.push({title: 'Google Analytics tracking failure', text: 'Since the week of ' + fDay(t.from) + ', sessions have dropped from about ' + nf0.format(t.base) + ' to about ' + nf0.format(t.after) + ' a week (' + nf0.format(t.pct) + '%). This is not a traffic drop: in the same weeks, clicks from Google stayed at about ' + nf0.format(inc.gAfter) + ' a week, against ' + nf0.format(inc.gBefore) + ' before. GA4 is missing about ' + nf0.format(10 * (1 - inc.after / inc.base)) + ' in every 10 visits, so its figures since then are understated. See the Tracking tab for details.'});
+  else if (t) out.push({title: 'Possible tracking failure', text: 'Since the week of ' + fDay(t.from) + ', sessions have dropped from about ' + nf0.format(t.base) + ' to about ' + nf0.format(t.after) + ' a week (' + nf0.format(t.pct) + '%).'});
   const footer = (D.convEvents || []).find((r) => /Footer/i.test(r.eventName));
-  if (footer && has(footer.conversions_chg) && +footer.conversions_chg < -90) out.push({title: 'Formulario del pie casi sin conversiones', text: 'El formulario del pie de página ha pasado a ' + fInt(footer.conversions) + ' conversiones (' + fSigned(footer.conversions_chg) + '). Si sigue en la web, revisar que el evento se mide.'});
+  if (footer && has(footer.conversions_chg) && +footer.conversions_chg < -90) out.push({title: 'Footer form almost without conversions', text: 'The footer form is down to ' + fInt(footer.conversions) + ' conversions (' + fSigned(footer.conversions_chg) + '). If it is still on the site, check that its event is being tracked.'});
   return out;
 }
 
-// ---------- Resumen ----------
+// ---------- Overview ----------
 function vResumen() {
   const k = K();
   ring($('r-health'), +k.engagementRate * 100, +k.engagementRate >= 0.5 ? C.green : +k.engagementRate >= 0.35 ? C.amber : C.red);
   const sUp = +k.sessions_chg > 0, cUp = +k.conversions_chg > 0;
-  $('h-title').textContent = (sUp ? 'Más tráfico que en 2025' : 'Menos tráfico que en 2025') + (sUp === cUp ? (cUp ? ' y más conversiones.' : ' y menos conversiones.') : (cUp ? ', y aun así más conversiones.' : ', pero menos conversiones.'));
-  $('h-chips').innerHTML = '<span class="chip ' + (sUp ? 'g' : 'r') + '">Sesiones ' + fSigned(k.sessions_chg) + '</span><span class="chip ' + (cUp ? 'g' : 'r') + '">Conversiones ' + fSigned(k.conversions_chg) + '</span><span class="chip">Conversión ' + fRate(k.sessionConversionRate) + '</span>';
-  const st = [['Sesiones', 'sessions'], ['Usuarios', 'totalUsers'], ['Conversiones', 'conversions']].map(([l, f]) => {
+  $('h-title').textContent = (sUp ? 'More traffic than in 2025' : 'Less traffic than in 2025') + (sUp === cUp ? (cUp ? ' and more conversions.' : ' and fewer conversions.') : (cUp ? ', and still more conversions.' : ', but fewer conversions.'));
+  $('h-chips').innerHTML = '<span class="chip ' + (sUp ? 'g' : 'r') + '">Sessions ' + fSigned(k.sessions_chg) + '</span><span class="chip ' + (cUp ? 'g' : 'r') + '">Conversions ' + fSigned(k.conversions_chg) + '</span><span class="chip">Conversion rate ' + fRate(k.sessionConversionRate) + '</span>';
+  const st = [['Sessions', 'sessions'], ['Users', 'totalUsers'], ['Conversions', 'conversions']].map(([l, f]) => {
     const v = +k[f], prev = v / (1 + +k[f + '_chg'] / 100), up = v >= prev;
     return '<div class="step"><div class="row1"><span class="l">' + l + '</span><span class="v" style="color:' + (up ? C.green : C.red) + '">' + fInt(v) + '</span></div><div class="bar"><i style="width:' + (100 * v / Math.max(v, prev)).toFixed(1) + '%;background:' + (up ? C.green : C.red) + '"></i></div><div class="s">2025: ' + fInt(prev) + '</div></div>';
   });
   $('h-steps').innerHTML = st.join('');
 
   const q = [
-    ['Conversión', 'Conversiones por sesión', fRate(k.sessionConversionRate), k.sessionConversionRate_chg],
-    ['Interacción', 'Sesiones con interacción', fRate1(k.engagementRate), k.engagementRate_chg],
-    ['Duración', 'Media por sesión', fDur(k.averageSessionDuration), k.averageSessionDuration_chg],
-    ['Vistas', 'Páginas por sesión', has(k.screenPageViewsPerSession) ? nf2.format(+k.screenPageViewsPerSession) : '—', k.screenPageViewsPerSession_chg],
-    ['Rebote', 'Sesiones sin interacción', fRate1(k.bounceRate), k.bounceRate_chg, true]
+    ['Conversion', 'Conversions per session', fRate(k.sessionConversionRate), k.sessionConversionRate_chg],
+    ['Engagement', 'Engaged sessions', fRate1(k.engagementRate), k.engagementRate_chg],
+    ['Duration', 'Average per session', fDur(k.averageSessionDuration), k.averageSessionDuration_chg],
+    ['Views', 'Pages per session', has(k.screenPageViewsPerSession) ? nf2.format(+k.screenPageViewsPerSession) : '—', k.screenPageViewsPerSession_chg],
+    ['Bounce', 'Sessions without engagement', fRate1(k.bounceRate), k.bounceRate_chg, true]
   ];
   $('quality').innerHTML = q.map(([l, d, v, c, inv]) => { const good = inv ? +c < 0 : +c > 0; return '<div class="mrow"><i style="background:' + (good ? C.green : C.red) + '"></i><div><b>' + l + '</b><span>' + d + ' · ' + chg(c, inv) + '</span></div><code>' + v + '</code></div>'; }).join('');
 
   $('c-big').textContent = fInt(k.conversions);
   $('c-big').style.color = cUp ? C.green : C.red;
-  $('c-sub').innerHTML = chg(k.conversions_chg) + ' frente a 2025';
+  $('c-sub').innerHTML = chg(k.conversions_chg) + ' vs 2025';
   const w = weeks().slice(-26), mx = d3.max(w, (r) => r.c) || 1;
   const sp = $('c-spark'); sp.innerHTML = '';
-  w.forEach((r) => { const i = document.createElement('i'); i.style.height = (100 * r.c / mx) + '%'; i.style.opacity = 0.4 + 0.6 * r.c / mx; hover(i, 'Semana del ' + fDay(r.d), [nf0.format(r.c) + ' conversiones', nf0.format(r.s) + ' sesiones']); sp.append(i); });
+  w.forEach((r) => { const i = document.createElement('i'); i.style.height = (100 * r.c / mx) + '%'; i.style.opacity = 0.4 + 0.6 * r.c / mx; hover(i, 'Week of ' + fDay(r.d), [nf0.format(r.c) + ' conversions', nf0.format(r.s) + ' sessions']); sp.append(i); });
   const top = maxBy(D.convEvents || [], 'conversions');
-  $('c-foot').innerHTML = top ? 'La más frecuente: <b>' + esc(evn(top.eventName)) + '</b> (' + fInt(top.conversions) + ')' : '';
+  $('c-foot').innerHTML = top ? 'Most frequent: <b>' + esc(evn(top.eventName)) + '</b> (' + fInt(top.conversions) + ')' : '';
 
   const ch = (D.channels || []);
   const tot = d3.sum(ch, (r) => +r.sessions || 0);
@@ -918,32 +918,32 @@ function vResumen() {
   ring($('r-chan'), org ? 100 * +org.sessions / tot : 0, C.green, 96);
   const big = ch.filter((r) => +r.sessions >= 1000 && has(r.conversions_chg));
   const down = big.filter((r) => +r.conversions_chg < 0).length, up = big.filter((r) => +r.conversions_chg > 0).length;
-  $('ch-down').className = 'stat ' + (down ? 'r' : 'n'); $('ch-down').innerHTML = '<b>' + down + '</b><span>convierten menos</span>';
-  $('ch-up').className = 'stat ' + (up ? 'g' : 'n'); $('ch-up').innerHTML = '<b>' + up + '</b><span>convierten más</span>';
+  $('ch-down').className = 'stat ' + (down ? 'r' : 'n'); $('ch-down').innerHTML = '<b>' + down + '</b><span>converting less</span>';
+  $('ch-up').className = 'stat ' + (up ? 'g' : 'n'); $('ch-up').innerHTML = '<b>' + up + '</b><span>converting more</span>';
   const best = maxBy(ch.filter((r) => +r.sessions >= 1000), 'sessionConversionRate');
-  $('ch-foot').innerHTML = 'Búsqueda orgánica trae el ' + nf0.format(org ? 100 * +org.sessions / tot : 0) + ' % de las sesiones. Mejor tasa: <b>' + esc(CH_ES[best.sessionDefaultChannelGrouping] || best.sessionDefaultChannelGrouping) + '</b> (' + fRate(best.sessionConversionRate) + ')';
+  $('ch-foot').innerHTML = 'Organic search brings ' + nf0.format(org ? 100 * +org.sessions / tot : 0) + '% of sessions. Best rate: <b>' + esc(CH_ES[best.sessionDefaultChannelGrouping] || best.sessionDefaultChannelGrouping) + '</b> (' + fRate(best.sessionConversionRate) + ')';
 
   const ai = ch.find((r) => r.sessionDefaultChannelGrouping === 'AI Assistant');
   if (ai) {
-    $('ai-ses').innerHTML = '<b>' + fInt(ai.sessions) + '</b><span>sesiones</span>';
+    $('ai-ses').innerHTML = '<b>' + fInt(ai.sessions) + '</b><span>sessions</span>';
     const better = +ai.sessionConversionRate > siteRate();
-    $('ai-rate').className = 'stat ' + (better ? 'g' : 'a'); $('ai-rate').innerHTML = '<b>' + fRate(ai.sessionConversionRate) + '</b><span>conversión</span>';
+    $('ai-rate').className = 'stat ' + (better ? 'g' : 'a'); $('ai-rate').innerHTML = '<b>' + fRate(ai.sessionConversionRate) + '</b><span>conversion rate</span>';
     const src = maxBy(D.llmSources || [], 'sessions');
-    $('ai-foot').innerHTML = (better ? 'Convierte <b>' + nf1.format(+ai.sessionConversionRate / siteRate()) + ' veces</b> más que la media del sitio. ' : '') + (src ? 'Principal: <b>' + esc(src.sessionSource) + '</b>' : '');
+    $('ai-foot').innerHTML = (better ? 'Converts <b>' + nf1.format(+ai.sessionConversionRate / siteRate()) + ' times</b> the site average. ' : '') + (src ? 'Top source: <b>' + esc(src.sessionSource) + '</b>' : '');
   }
 
   const all = weeks();
-  dualChart($('ch-week'), all.map((r) => r.k), {name: 'Sesiones', color: C.blue, vals: all.map((r) => r.s)}, {name: 'Conversiones', color: C.coral, vals: all.map((r) => r.c)}, 230, (k) => 'Semana del ' + fDay(isoMonday(k)), (k) => fDay(isoMonday(k)), incident().k);
+  dualChart($('ch-week'), all.map((r) => r.k), {name: 'Sessions', color: C.blue, vals: all.map((r) => r.s)}, {name: 'Conversions', color: C.coral, vals: all.map((r) => r.c)}, 230, (k) => 'Week of ' + fDay(isoMonday(k)), (k) => fDay(isoMonday(k)), incident().k);
 }
 
-// ---------- Evolución ----------
+// ---------- Trends ----------
 function growthNote() {
   const sr = siteRate();
   const g = (D.landing || []).filter((r) => r.landingPage !== '(not set)').map((r) => ({p: r.landingPage, add: has(r.sessions_chg) ? +r.sessions - +r.sessions / (1 + +r.sessions_chg / 100) : +r.sessions, low: +r.sessionConversionRate < sr / 4}))
     .sort((a, b) => b.add - a.add).slice(0, 4);
   const lows = g.filter((x) => x.low);
   if (lows.length < 2) return '';
-  return 'De las cuatro páginas de entrada que más tráfico han ganado, ' + lows.length + ' apenas convierten (' + lows.map((x) => x.p).join(', ') + '). El tráfico nuevo llega sobre todo a contenido informativo.';
+  return 'Of the four landing pages that gained the most traffic, ' + lows.length + ' barely convert (' + lows.map((x) => x.p).join(', ') + '). New traffic mostly lands on informational content.';
 }
 function byMonth() {
   const m = {}; (D.monthly || []).forEach((r) => { const [y, mo] = r.yearMonth.split('-'); (m[y] = m[y] || {})[+mo] = r; });
@@ -956,72 +956,72 @@ function vEvolucion() {
   const lastFull = d3.max(full) || 10;
   const sum = (o, f, upto) => d3.sum(d3.range(1, upto + 1), (i) => o[i] ? +o[i][f] : 0);
   const s0 = sum(y0, 'sessions', lastFull), s1 = sum(y1, 'sessions', lastFull), c0 = sum(y0, 'conversions', lastFull), c1 = sum(y1, 'conversions', lastFull);
-  concl('cc-evolucion', 'De enero a ' + ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][lastFull - 1] + ', 2026 suma <b>' + fInt(s1) + '</b> sesiones (' + fSigned(100 * (s1 / s0 - 1)) + ') y <b>' + fInt(c1) + '</b> conversiones (' + fSigned(100 * (c1 / c0 - 1)) + '). Las conversiones por cada 100 sesiones pasan de ' + nf2.format(100 * c0 / s0) + ' a ' + nf2.format(100 * c1 / s1) + '.', growthNote());
+  concl('cc-evolucion', 'From January to ' + ['January','February','March','April','May','June','July','August','September','October','November','December'][lastFull - 1] + ', 2026 adds up to <b>' + fInt(s1) + '</b> sessions (' + fSigned(100 * (s1 / s0 - 1)) + ') and <b>' + fInt(c1) + '</b> conversions (' + fSigned(100 * (c1 / c0 - 1)) + '). Conversions per 100 sessions go from ' + nf2.format(100 * c0 / s0) + ' to ' + nf2.format(100 * c1 / s1) + '.', growthNote());
   const lab = MONTHS;
-  const fm = MMETRIC === 'sessions' ? (v) => (v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v)) : (v) => nf0.format(v);
-  barChart($('ch-month'), lab, [{name: '2025', color: C.blueL, vals: months.map((i) => y0[i] ? +y0[i][MMETRIC] : null)}, {name: '2026', color: C.blue, vals: months.map((i) => y1[i] ? +y1[i][MMETRIC] : null)}], 260, fm, false, (i) => MONTHS[i] + (i === 10 ? ' (2026 incompleto)' : ''));
+  const fm = MMETRIC === 'sessions' ? (v) => (v >= 1000 ? nf0.format(v / 1000) + 'k' : nf0.format(v)) : (v) => nf0.format(v);
+  barChart($('ch-month'), lab, [{name: '2025', color: C.blueL, vals: months.map((i) => y0[i] ? +y0[i][MMETRIC] : null)}, {name: '2026', color: C.blue, vals: months.map((i) => y1[i] ? +y1[i][MMETRIC] : null)}], 260, fm, false, (i) => MONTHS[i] + (i === 10 ? ' (2026 partial)' : ''));
   const cum = (o, f) => { let a = 0; return months.map((i) => { if (!o[i]) return null; a += +o[i][f]; return a; }); };
   lineChart($('ch-cum'), lab, [{name: '2025', color: C.grey, vals: cum(y0, MMETRIC)}, {name: '2026', color: C.blue, vals: cum(y1, MMETRIC)}], 240, fm);
   const rate = (o) => months.map((i) => o[i] ? 100 * +o[i].conversions / +o[i].sessions : null);
-  lineChart($('ch-rate'), lab, [{name: '2025', color: C.grey, vals: rate(y0)}, {name: '2026', color: C.coral, vals: rate(y1)}], 240, (v) => nf1.format(v) + ' %');
+  lineChart($('ch-rate'), lab, [{name: '2025', color: C.grey, vals: rate(y0)}, {name: '2026', color: C.coral, vals: rate(y1)}], 240, (v) => nf1.format(v) + '%');
 }
 
-// ---------- Adquisición ----------
+// ---------- Acquisition ----------
 function vAdquisicion() {
   const ch = (D.channels || []).filter((r) => +r.sessions >= 100);
   const tot = d3.sum(D.channels || [], (r) => +r.sessions || 0);
   const org = ch.find((r) => r.sessionDefaultChannelGrouping === 'Organic Search'), paid = ch.find((r) => r.sessionDefaultChannelGrouping === 'Paid Search');
-  concl('cc-adquisicion', 'La búsqueda orgánica trae el <b>' + nf0.format(100 * +org.sessions / tot) + ' %</b> de las sesiones y ' + (+org.sessions_chg >= 0 ? 'ha crecido' : 'ha caído') + ' un ' + nf1.format(Math.abs(+org.sessions_chg)) + ' %, pero sus conversiones bajan un ' + nf1.format(Math.abs(+org.conversions_chg)) + ' %. ' + (paid ? 'La búsqueda de pago pierde ' + nf0.format(Math.abs(+paid.sessions_chg)) + ' % de sesiones y ' + nf0.format(Math.abs(+paid.conversions_chg)) + ' % de conversiones.' : ''),
-    'Acción sugerida: revisar las campañas marcadas en rojo y llevar el tráfico orgánico informativo hacia páginas de producto con una llamada a la acción clara.');
+  concl('cc-adquisicion', 'Organic search brings <b>' + nf0.format(100 * +org.sessions / tot) + '%</b> of sessions and has ' + (+org.sessions_chg >= 0 ? 'grown' : 'fallen') + ' ' + nf1.format(Math.abs(+org.sessions_chg)) + '%, but its conversions are down ' + nf1.format(Math.abs(+org.conversions_chg)) + '%. ' + (paid ? 'Paid search has lost ' + nf0.format(Math.abs(+paid.sessions_chg)) + '% of its sessions and ' + nf0.format(Math.abs(+paid.conversions_chg)) + '% of its conversions.' : ''),
+    'Suggested action: review the campaigns flagged in red and steer informational organic traffic towards product pages with a clear call to action.');
   const nm = (r) => CH_ES[r.sessionDefaultChannelGrouping] || r.sessionDefaultChannelGrouping;
-  hbars($('hb-chan'), ch, 'sessionDefaultChannelGrouping', [{f: 'sessions', label: 'Sesiones', fmt: fInt, color: C.blue}], {name: nm, sub: (r) => chg(r.sessions_chg)});
+  hbars($('hb-chan'), ch, 'sessionDefaultChannelGrouping', [{f: 'sessions', label: 'Sessions', fmt: fInt, color: C.blue}], {name: nm, sub: (r) => chg(r.sessions_chg)});
   const sr = siteRate();
   const rateCls = (r) => +r.sessionConversionRate >= sr ? 'pos' : 'neg';
-  table($('t-chan'), [{h: 'Canal', html: (r) => esc(nm(r)), cls: 'nw'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.conversions_chg)}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], ch);
-  table($('t-sm'), [{h: 'Fuente / medio', f: 'sessionSourceMedium', cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], D.sourceMedium || []);
-  table($('t-camp'), [{h: 'Campaña', f: 'sessionCampaignName', cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], D.campaigns || [], (r) => +r.sessions > 1000 && +r.sessionConversionRate < sr / 2 ? 'flag' : '');
+  table($('t-chan'), [{h: 'Channel', html: (r) => esc(nm(r)), cls: 'nw'}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Engagement', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.conversions_chg)}, {h: 'Rate', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], ch);
+  table($('t-sm'), [{h: 'Source / medium', f: 'sessionSourceMedium', cls: 'path'}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Rate', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], D.sourceMedium || []);
+  table($('t-camp'), [{h: 'Campaign', f: 'sessionCampaignName', cls: 'path'}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Rate', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: rateCls}], D.campaigns || [], (r) => +r.sessions > 1000 && +r.sessionConversionRate < sr / 2 ? 'flag' : '');
 }
 
-// ---------- Audiencia ----------
+// ---------- Audience ----------
 function vAudiencia() {
   const dv = D.devices || [], nr = (D.newret || []).filter((r) => r.newVsReturning);
   const desk = dv.find((r) => r.deviceCategory === 'desktop'), mob = dv.find((r) => r.deviceCategory === 'mobile');
   const nw = nr.find((r) => r.newVsReturning === 'new'), rt = nr.find((r) => r.newVsReturning === 'returning');
   const co = D.countries || [];
-  concl('cc-audiencia', (desk && mob ? 'El ordenador convierte <b>' + nf1.format(+desk.sessionConversionRate / +mob.sessionConversionRate) + ' veces</b> más que el móvil con un volumen de sesiones parecido. ' : '') + (nw && rt ? 'Un visitante recurrente convierte ' + nf1.format(+rt.sessionConversionRate / +nw.sessionConversionRate) + ' veces más que uno nuevo. ' : '') + (co[0] ? 'México es el primer país en usuarios (' + fInt(co[0].totalUsers) + ').' : ''),
-    'Acción sugerida: revisar los formularios y las llamadas a la acción en móvil, y dar a quien vuelve un motivo claro para pedir una demo.');
-  table($('t-dev'), [{h: 'Dispositivo', html: (r) => esc(DEV_ES[r.deviceCategory] || r.deviceCategory)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Duración', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], dv);
-  table($('t-nr'), [{h: 'Tipo', html: (r) => esc(NR_ES[r.newVsReturning] || r.newVsReturning)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], nr);
-  hbars($('hb-country'), co, 'country', [{f: 'totalUsers', label: 'Usuarios', fmt: fInt, color: C.blue}, {f: 'conversions', label: 'Conversiones', fmt: fInt, color: C.coral}], {perSeries: true, name: (r) => CO_ES[r.country] || r.country, sub: (r) => 'Usuarios ' + chg(r.totalUsers_chg), extra: (r) => ['Tasa de conversión: ' + fRate(r.sessionConversionRate)]});
+  concl('cc-audiencia', (desk && mob ? 'Desktop converts <b>' + nf1.format(+desk.sessionConversionRate / +mob.sessionConversionRate) + ' times</b> more than mobile, with a similar number of sessions. ' : '') + (nw && rt ? 'A returning visitor converts ' + nf1.format(+rt.sessionConversionRate / +nw.sessionConversionRate) + ' times more than a new one. ' : '') + (co[0] ? 'Mexico is the top country by users (' + fInt(co[0].totalUsers) + ').' : ''),
+    'Suggested action: review forms and calls to action on mobile, and give returning visitors a clear reason to request a demo.');
+  table($('t-dev'), [{h: 'Device', html: (r) => esc(DEV_ES[r.deviceCategory] || r.deviceCategory)}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Duration', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Engagement', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Rate', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], dv);
+  table($('t-nr'), [{h: 'Type', html: (r) => esc(NR_ES[r.newVsReturning] || r.newVsReturning)}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Rate', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], nr);
+  hbars($('hb-country'), co, 'country', [{f: 'totalUsers', label: 'Users', fmt: fInt, color: C.blue}, {f: 'conversions', label: 'Conversions', fmt: fInt, color: C.coral}], {perSeries: true, name: (r) => CO_ES[r.country] || r.country, sub: (r) => 'Users ' + chg(r.totalUsers_chg), extra: (r) => ['Conversion rate: ' + fRate(r.sessionConversionRate)]});
 }
 
-// ---------- Páginas ----------
+// ---------- Pages ----------
 function vPaginas() {
   const ld = (D.landing || []).filter((r) => r.landingPage !== '(not set)' && +r.sessions >= 20);
   const sr = siteRate();
   const leak = ld.filter((r) => +r.sessionConversionRate < sr / 4).sort((a, b) => +b.sessions - +a.sessions);
   const leakSes = d3.sum(leak, (r) => +r.sessions);
   const best = maxBy(ld, 'conversions');
-  concl('cc-paginas', 'Las páginas de entrada que convierten menos de una cuarta parte de la media suman <b>' + fInt(leakSes) + '</b> sesiones; la mayor es <b>' + esc(leak[0] ? leak[0].landingPage : '—') + '</b> (' + fInt(leak[0] && leak[0].sessions) + ' sesiones, ' + fInt(leak[0] && leak[0].conversions) + ' conversiones). La que más convierte es <b>' + esc(best.landingPage) + '</b> (' + fInt(best.conversions) + ').',
-    'Acción sugerida: añadir en esas páginas informativas un bloque que enlace al producto relacionado y una llamada a la acción visible.');
+  concl('cc-paginas', 'Landing pages converting at less than a quarter of the average add up to <b>' + fInt(leakSes) + '</b> sessions; the largest is <b>' + esc(leak[0] ? leak[0].landingPage : '—') + '</b> (' + fInt(leak[0] && leak[0].sessions) + ' sessions, ' + fInt(leak[0] && leak[0].conversions) + ' conversions). The one that converts most is <b>' + esc(best.landingPage) + '</b> (' + fInt(best.conversions) + ').',
+    'Suggested action: add a block to those informational pages linking to the related product, with a visible call to action.');
   scatter($('ch-land'), ld, {x: 'sessions', r: 'conversions', yv: (r) => 100 * +r.sessionConversionRate, refY: 100 * sr,
-    xfmt: (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v), yfmt: (v) => nf1.format(v) + ' %',
+    xfmt: (v) => v >= 1000 ? nf0.format(v / 1000) + 'k' : nf0.format(v), yfmt: (v) => nf1.format(v) + '%',
     color: (r) => +r.sessionConversionRate >= sr ? C.green : +r.sessions > 8000 ? C.red : C.blue,
     label: (r) => r.landingPage, labelIf: (r) => +r.sessions > 9000 || +r.conversions >= 30,
-    lines: (r) => ['Sesiones: ' + fInt(r.sessions), 'Conversiones: ' + fInt(r.conversions), 'Tasa: ' + fRate(r.sessionConversionRate)]});
-  table($('t-land'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= sr ? 'pos' : 'neg'}], D.landing || []);
-  hbars($('hb-clicks'), D.clicks || [], 'pagePathWithoutQueryString', [{f: 'eventCount', label: 'Clics', fmt: fInt, color: C.violet}], {mono: true, sub: (r) => chg(r.eventCount_chg)});
-  table($('t-pages'), [{h: 'Página', f: 'pagePathWithoutQueryString', cls: 'path'}, {h: 'Vistas', f: 'screenPageViews', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.screenPageViews_chg)}, {h: 'Interacción', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Tiempo medio', n: 1, html: (r) => fDur(+r.userEngagementDuration / +r.activeUsers)}, {h: 'Usuarios', f: 'activeUsers', n: 1, fmt: fInt}], D.pages || []);
+    lines: (r) => ['Sessions: ' + fInt(r.sessions), 'Conversions: ' + fInt(r.conversions), 'Rate: ' + fRate(r.sessionConversionRate)]});
+  table($('t-land'), [{h: 'Landing page', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.sessions_chg)}, {h: 'Engagement', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Rate', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= sr ? 'pos' : 'neg'}], D.landing || []);
+  hbars($('hb-clicks'), D.clicks || [], 'pagePathWithoutQueryString', [{f: 'eventCount', label: 'Clicks', fmt: fInt, color: C.violet}], {mono: true, sub: (r) => chg(r.eventCount_chg)});
+  table($('t-pages'), [{h: 'Page', f: 'pagePathWithoutQueryString', cls: 'path'}, {h: 'Views', f: 'screenPageViews', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.screenPageViews_chg)}, {h: 'Engagement', f: 'engagementRate', n: 1, fmt: fRate1}, {h: 'Avg. time', n: 1, html: (r) => fDur(+r.userEngagementDuration / +r.activeUsers)}, {h: 'Users', f: 'activeUsers', n: 1, fmt: fInt}], D.pages || []);
 }
 
-// ---------- Conversiones ----------
+// ---------- Conversions ----------
 function vConversiones() {
   const ev = (D.convEvents || []).slice().sort((a, b) => +b.conversions - +a.conversions);
   const tot = d3.sum(ev, (r) => +r.conversions);
   const dl = ev.find((r) => r.eventName === 'Descarga'), fw = ev.find((r) => r.eventName === 'Contacto - Formulario Web'), cal = ev.find((r) => /Cita/.test(r.eventName));
-  concl('cc-conversiones', (dl ? 'Las descargas son el <b>' + nf0.format(100 * +dl.conversions / tot) + ' %</b> de las conversiones y bajan un ' + nf1.format(Math.abs(+dl.conversions_chg)) + ' %. ' : '') + (fw ? 'El formulario web ' + (+fw.conversions_chg >= 0 ? 'crece' : 'baja') + ' un ' + nf1.format(Math.abs(+fw.conversions_chg)) + ' %; ' : '') + (cal ? 'las citas de calendario caen un ' + nf1.format(Math.abs(+cal.conversions_chg)) + ' %.' : ''),
-    'Las conversiones de contacto (formulario y cita) son las que más se acercan a una oportunidad: conviene seguirlas por separado de las descargas.');
-  hbars($('hb-ev'), ev, 'eventName', [{f: 'conversions', label: 'Conversiones', fmt: fInt, color: C.blue}], {name: (r) => evn(r.eventName), sub: (r) => chg(r.conversions_chg) + ' · ' + fInt(r.totalUsers) + ' usuarios'});
+  concl('cc-conversiones', (dl ? 'Downloads make up <b>' + nf0.format(100 * +dl.conversions / tot) + '%</b> of conversions and are down ' + nf1.format(Math.abs(+dl.conversions_chg)) + '%. ' : '') + (fw ? 'The web form is ' + (+fw.conversions_chg >= 0 ? 'up' : 'down') + ' ' + nf1.format(Math.abs(+fw.conversions_chg)) + '%; ' : '') + (cal ? 'calendar bookings are down ' + nf1.format(Math.abs(+cal.conversions_chg)) + '%.' : ''),
+    'Contact conversions (form and booking) are the closest to an opportunity: track them separately from downloads.');
+  hbars($('hb-ev'), ev, 'eventName', [{f: 'conversions', label: 'Conversions', fmt: fInt, color: C.blue}], {name: (r) => evn(r.eventName), sub: (r) => chg(r.conversions_chg) + ' · ' + fInt(r.totalUsers) + ' users'});
   const names = ev.map((r) => r.eventName);
   $('lg-ev').innerHTML = names.map((n) => '<span><i style="background:' + (EV_COLORS[n] || C.grey) + '"></i>' + esc(evn(n)) + '</span>').join('');
   const cm = D.convMonthly || [];
@@ -1029,55 +1029,55 @@ function vConversiones() {
   const val = new Map(cm.map((r) => [r.yearMonth + '|' + r.eventName, +r.conversions]));
   barChart($('ch-evm'), ms.map((m) => MONTHS[+m.split('-')[1] - 1]), names.map((n) => ({name: evn(n), color: EV_COLORS[n] || C.grey, vals: ms.map((m) => val.get(m + '|' + n) || 0)})), 260, (v) => nf0.format(v), true);
   const cl = (D.convLanding || []).slice().sort((a, b) => +b.conversions - +a.conversions);
-  table($('t-convland'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.conversions_chg)}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Tasa', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], cl);
+  table($('t-convland'), [{h: 'Landing page', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.conversions_chg)}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Rate', f: 'sessionConversionRate', n: 1, fmt: fRate, cls: (r) => +r.sessionConversionRate >= siteRate() ? 'pos' : 'neg'}], cl);
 }
 
-// ---------- IA ----------
+// ---------- AI ----------
 function vIa() {
   const ch = D.channels || [], ai = ch.find((r) => r.sessionDefaultChannelGrouping === 'AI Assistant'), k = K();
   const src = (D.llmSources || []).slice().sort((a, b) => +b.sessions - +a.sessions);
   const ref = (D.sourceMedium || []).filter((r) => /chatgpt|gemini|claude|perplexity|copilot/.test(r.sessionSourceMedium) && /referral/.test(r.sessionSourceMedium));
   const refSes = d3.sum(ref, (r) => +r.sessions);
-  concl('cc-ia', ai ? 'Los asistentes de IA traen <b>' + fInt(ai.sessions) + '</b> sesiones con una conversión del <b>' + fRate(ai.sessionConversionRate) + '</b>, ' + nf1.format(+ai.sessionConversionRate / siteRate()) + ' veces la media del sitio. ' + (src[0] ? esc(src[0].sessionSource) + ' aporta el ' + nf0.format(100 * +src[0].sessions / +ai.sessions) + ' %.' : '') : 'Sin datos.',
-    refSes ? 'Otras ' + nf0.format(refSes) + ' sesiones desde asistentes de IA aparecen como referidos y no en este canal, así que el peso real de la IA es mayor de lo que muestra.' : '');
+  concl('cc-ia', ai ? 'AI assistants bring <b>' + fInt(ai.sessions) + '</b> sessions with a <b>' + fRate(ai.sessionConversionRate) + '</b> conversion rate, ' + nf1.format(+ai.sessionConversionRate / siteRate()) + ' times the site average. ' + (src[0] ? esc(src[0].sessionSource) + ' accounts for ' + nf0.format(100 * +src[0].sessions / +ai.sessions) + '%.' : '') : 'No data.',
+    refSes ? 'Another ' + nf0.format(refSes) + ' sessions from AI assistants show up as referrals rather than in this channel, so the real weight of AI is larger than shown.' : '');
   const rows = [
-    {n: 'Asistentes de IA', s: ai && ai.sessions, e: ai && ai.engagementRate, c: ai && ai.conversions, r: ai && ai.sessionConversionRate},
-    {n: 'Toda la web', s: k.sessions, e: k.engagementRate, c: k.conversions, r: k.sessionConversionRate}
+    {n: 'AI assistants', s: ai && ai.sessions, e: ai && ai.engagementRate, c: ai && ai.conversions, r: ai && ai.sessionConversionRate},
+    {n: 'Whole site', s: k.sessions, e: k.engagementRate, c: k.conversions, r: k.sessionConversionRate}
   ];
-  table($('t-aivs'), [{h: '', html: (r) => '<b style="font-weight:500">' + r.n + '</b>'}, {h: 'Sesiones', f: 's', n: 1, fmt: fInt}, {h: 'Interacción', f: 'e', n: 1, fmt: fRate1}, {h: 'Conversiones', f: 'c', n: 1, fmt: fInt}, {h: 'Tasa conv.', f: 'r', n: 1, fmt: fRate}], rows);
+  table($('t-aivs'), [{h: '', html: (r) => '<b style="font-weight:500">' + r.n + '</b>'}, {h: 'Sessions', f: 's', n: 1, fmt: fInt}, {h: 'Engagement', f: 'e', n: 1, fmt: fRate1}, {h: 'Conversions', f: 'c', n: 1, fmt: fInt}, {h: 'Conv. rate', f: 'r', n: 1, fmt: fRate}], rows);
   const lm = D.llmMonthly || [];
-  barChart($('ch-aim'), lm.map((r) => MONTHS[+r.yearMonth.split('-')[1] - 1]), [{name: 'Sesiones', color: C.violet, vals: lm.map((r) => +r.sessions)}, {name: 'Conversiones', color: C.coral, vals: lm.map((r) => +r.conversions)}], 230, (v) => nf0.format(v), false, (i) => MONTHS[+lm[i].yearMonth.split('-')[1] - 1] + ' 2026' + (i === lm.length - 1 ? ' (incompleto)' : ''));
-  table($('t-ais'), [{h: 'Asistente', f: 'sessionSource', cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duración', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], src);
-  table($('t-ail'), [{h: 'Página de entrada', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sesiones', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duración media', f: 'averageSessionDuration', n: 1, fmt: fDur, cls: (r) => +r.averageSessionDuration < 20 ? 'neg' : ''}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], D.llmLanding || []);
+  barChart($('ch-aim'), lm.map((r) => MONTHS[+r.yearMonth.split('-')[1] - 1]), [{name: 'Sessions', color: C.violet, vals: lm.map((r) => +r.sessions)}, {name: 'Conversions', color: C.coral, vals: lm.map((r) => +r.conversions)}], 230, (v) => nf0.format(v), false, (i) => MONTHS[+lm[i].yearMonth.split('-')[1] - 1] + ' 2026' + (i === lm.length - 1 ? ' (partial)' : ''));
+  table($('t-ais'), [{h: 'Assistant', f: 'sessionSource', cls: 'path'}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Duration', f: 'averageSessionDuration', n: 1, fmt: fDur}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], src);
+  table($('t-ail'), [{h: 'Landing page', html: (r) => esc(path(r.landingPage)), cls: 'path'}, {h: 'Sessions', f: 'sessions', n: 1, fmt: fInt}, {h: 'Avg. duration', f: 'averageSessionDuration', n: 1, fmt: fDur, cls: (r) => +r.averageSessionDuration < 20 ? 'neg' : ''}, {h: 'Conv.', f: 'conversions', n: 1, fmt: fInt}], D.llmLanding || []);
 }
 
 
-// ---------- Medición ----------
+// ---------- Tracking ----------
 function vMedicion() {
   const inc = incident(), c = inc.rows;
   if (inc.start) {
-    concl('cc-medicion', 'Desde la semana del <b>' + fDay(inc.start.d) + '</b>, Google Analytics registra ' + nf2.format(inc.after) + ' sesiones orgánicas por cada clic de Google, cuando antes registraba ' + nf2.format(inc.base) + '. Los clics desde Google apenas cambian (de ' + nf0.format(inc.gBefore) + ' a ' + nf0.format(inc.gAfter) + ' por semana). <b>El tráfico sigue llegando; lo que falla es la medición:</b> GA4 pierde unas ' + nf0.format(10 * (1 - inc.after / inc.base)) + ' de cada 10 visitas.',
-      'Cae igual en todos los canales, dispositivos y páginas, y a la vez, el martes 27 de octubre. Eso apunta a un cambio en la web que afecta a la etiqueta de Google Analytics o al banner de cookies, no a una pérdida de posiciones ni a una campaña.');
-  } else concl('cc-medicion', 'La medición de GA4 sigue el ritmo de los clics de Google: no se detecta ninguna rotura.', '');
+    concl('cc-medicion', 'Since the week of <b>' + fDay(inc.start.d) + '</b>, Google Analytics records ' + nf2.format(inc.after) + ' organic sessions per Google click, against ' + nf2.format(inc.base) + ' before. Clicks from Google barely change (from ' + nf0.format(inc.gBefore) + ' to ' + nf0.format(inc.gAfter) + ' a week). <b>Traffic is still arriving; what is failing is tracking:</b> GA4 is missing about ' + nf0.format(10 * (1 - inc.after / inc.base)) + ' in every 10 visits.',
+      'It drops by the same amount across all channels, devices and pages, all at once, on Tuesday 27 October. That points to a change on the website affecting the Google Analytics tag or the cookie banner, not to lost rankings or a campaign.');
+  } else concl('cc-medicion', 'GA4 tracking keeps pace with Google clicks: no break detected.', '');
   const labs = c.map((r) => r.k), lf = (k) => fDay(isoMonday(k));
-  lineChart($('ch-control'), labs, [{name: 'Clics en Google', color: C.coral, vals: c.map((r) => r.g)}, {name: 'Sesiones orgánicas GA4', color: C.blue, vals: c.map((r) => r.a)}], 280, (v) => nf0.format(v), (i) => 'Semana del ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf});
-  lineChart($('ch-ratio'), labs, [{name: 'Sesiones por clic', color: C.violet, vals: c.map((r) => r.r)}], 220, (v) => nf2.format(v), (i) => 'Semana del ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf, refY: inc.base ? inc.base * 0.7 : null, refLabel: 'Umbral de aviso'});
+  lineChart($('ch-control'), labs, [{name: 'Google clicks', color: C.coral, vals: c.map((r) => r.g)}, {name: 'GA4 organic sessions', color: C.blue, vals: c.map((r) => r.a)}], 280, (v) => nf0.format(v), (i) => 'Week of ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf});
+  lineChart($('ch-ratio'), labs, [{name: 'Sessions per click', color: C.violet, vals: c.map((r) => r.r)}], 220, (v) => nf2.format(v), (i) => 'Week of ' + lf(labs[i]), {shadeFrom: inc.k, xfmt: lf, refY: inc.base ? inc.base * 0.7 : null, refLabel: 'Alert threshold'});
   const dd = D.diag_daily || [];
   const dl = dd.map((r) => r.fecha);
-  barChart($('ch-daily'), dl.map((f) => +f.slice(8) + ' ' + MONTHS[+f.slice(5, 7) - 1]), [{name: 'Sesiones', color: C.blue, vals: dd.map((r) => +r.sesiones)}], 220, (v) => nf0.format(v), false, (i) => new Date(dl[i] + 'T12:00:00').toLocaleDateString('es-ES', {weekday: 'long', day: 'numeric', month: 'long'}));
-  table($('t-diag'), [{h: '', html: (r) => esc(r.nombre) + ' <span style="color:var(--faint);font-size:12px">' + (r.grupo === 'canal' ? 'canal' : 'dispositivo') + '</span>'}, {h: 'Antes', f: 'antes', n: 1, fmt: fInt}, {h: 'Después', f: 'despues', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(100 * (+r.despues / +r.antes - 1))}], D.diag_channels || []);
-  table($('t-impr'), [{h: 'Página', f: 'page', cls: 'path'}, {h: 'Impresiones', n: 1, html: (r) => fInt(r.impr_antes) + ' → ' + fInt(r.impr_despues)}, {h: 'Cambio', n: 1, html: (r) => chg(100 * (+r.impr_despues / +r.impr_antes - 1))}, {h: 'Clics', n: 1, html: (r) => fInt(r.clicks_antes) + ' → ' + fInt(r.clicks_despues)}], D.diag_impr || []);
+  barChart($('ch-daily'), dl.map((f) => +f.slice(8) + ' ' + MONTHS[+f.slice(5, 7) - 1]), [{name: 'Sessions', color: C.blue, vals: dd.map((r) => +r.sesiones)}], 220, (v) => nf0.format(v), false, (i) => new Date(dl[i] + 'T12:00:00').toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long'}));
+  table($('t-diag'), [{h: '', html: (r) => esc(r.nombre) + ' <span style="color:var(--faint);font-size:12px">' + (r.grupo === 'canal' ? 'channel' : 'device') + '</span>'}, {h: 'Before', f: 'antes', n: 1, fmt: fInt}, {h: 'After', f: 'despues', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(100 * (+r.despues / +r.antes - 1))}], D.diag_channels || []);
+  table($('t-impr'), [{h: 'Page', f: 'page', cls: 'path'}, {h: 'Impressions', n: 1, html: (r) => fInt(r.impr_antes) + ' → ' + fInt(r.impr_despues)}, {h: 'Change', n: 1, html: (r) => chg(100 * (+r.impr_despues / +r.impr_antes - 1))}, {h: 'Clicks', n: 1, html: (r) => fInt(r.clicks_antes) + ' → ' + fInt(r.clicks_despues)}], D.diag_impr || []);
 }
 
 // ---------- SEO ----------
 const MARKET = {'Mexico':'in','Brazil':'in','Spain':'in','Italy':'in','Chile':'in','United States':'in','Colombia':'in','Argentina':'in','Portugal':'in','Peru':'latam','Venezuela':'latam','Guatemala':'latam','United Kingdom':'eu','India':'odd','Pakistan':'odd'};
-const MARKET_TAG = {in: ['in', 'Mercado del informe'], latam: ['in', 'LATAM'], eu: ['in', 'Europa'], odd: ['odd', 'Fuera de mercado']};
-const CO_ES2 = Object.assign({}, CO_ES, {'Peru':'Perú','Venezuela':'Venezuela','Guatemala':'Guatemala','Pakistan':'Pakistán','Portugal':'Portugal'});
+const MARKET_TAG = {in: ['in', 'Report market'], latam: ['in', 'LATAM'], eu: ['in', 'Europe'], odd: ['odd', 'Off-market']};
+const CO_ES2 = {};
 const isBrand = (q) => /veridas/i.test(q);
 const SPOT_NOTES = {
-  '/en/carding-proof/': 'Revisión manual: «carding» es jerga de quien comete fraude con tarjetas. El informe del primer semestre ve este tráfico concentrado en India, Pakistán, Bangladés y Nigeria, y India y Pakistán están entre los 14 países con más clics del sitio.',
-  '/en/selfie-with-id/': 'Revisión manual: el informe del primer semestre detecta búsquedas que copian el texto de verificación de otra empresa y tráfico de Sudáfrica, India y Filipinas. Conviene descartar contenido duplicado antes de invertir más en ella.',
-  '/br/identidade-falso/': 'Revisión manual: varias de las búsquedas con más clics en Brasil piden cómo fabricar una identidad falsa («como fazer identidade falsa»). El contenido debería orientarse a quien detecta el fraude, no a quien lo comete.'
+  '/en/carding-proof/': 'Manual review: “carding” is slang used by card fraudsters. The H1 report finds this traffic concentrated in India, Pakistan, Bangladesh and Nigeria, and India and Pakistan are among the 14 countries with most clicks on the site.',
+  '/en/selfie-with-id/': 'Manual review: the H1 report finds searches copying another company’s verification prompt and traffic from South Africa, India and the Philippines. Rule out duplicate content before investing more in this page.',
+  '/br/identidade-falso/': 'Manual review: several of the searches bringing most clicks in Brazil ask how to make a fake ID (“como fazer identidade falsa”). The content should target people who detect fraud, not people who commit it.'
 };
 let QCOUNTRY = 'Mexico', SPOT = null;
 
@@ -1091,25 +1091,25 @@ function vSeo() {
   const sp = (D.gsc_spotlight || []);
   const esB = br.get('Spain') / +(co.find((r) => r.country === 'Spain') || {}).clicks, mxB = br.get('Mexico') / +(co.find((r) => r.country === 'Mexico') || {}).clicks;
   const odd = co.filter((r) => MARKET[r.country] === 'odd');
-  concl('cc-seo', 'Del ' + fDayStr(k.desde) + ' al ' + fDayStr(k.hasta) + ', Google trae <b>' + fInt(k.clicks) + '</b> clics (' + fSigned(k.clicks_chg) + ' frente al mismo periodo de 2025) y la posición media mejora de ' + nf1.format(pos0) + ' a ' + nf1.format(+k.position) + '. México y Brasil concentran el ' + nf0.format(100 * (+co[0].clicks + +co[1].clicks) / d3.sum(co, (r) => +r.clicks)) + ' % de los clics de los 14 primeros países.',
-    'La marca pesa poco fuera de España (' + nf0.format(100 * esB) + ' % de los clics en España, ' + nf1.format(100 * mxB) + ' % en México): casi todo llega por búsquedas genéricas. ' + (odd.length ? odd.map((r) => CO_ES2[r.country] || r.country).join(' y ') + ' aparecen entre los países con más clics sin ser mercado de Veridas; encaja con el tráfico de la página de carding.' : ''));
+  concl('cc-seo', 'From ' + fDayStr(k.desde) + ' to ' + fDayStr(k.hasta) + ', Google brings <b>' + fInt(k.clicks) + '</b> clicks (' + fSigned(k.clicks_chg) + ' vs the same period in 2025) and the average position improves from ' + nf1.format(pos0) + ' to ' + nf1.format(+k.position) + '. Mexico and Brazil account for ' + nf0.format(100 * (+co[0].clicks + +co[1].clicks) / d3.sum(co, (r) => +r.clicks)) + '% of clicks from the top 14 countries.',
+    'Branded search carries little weight outside Spain (' + nf0.format(100 * esB) + '% of clicks in Spain, ' + nf1.format(100 * mxB) + '% in Mexico): almost everything comes from generic searches. ' + (odd.length ? odd.map((r) => CO_ES2[r.country] || r.country).join(' and ') + ' appear among the countries with most clicks without being Veridas markets, which matches the traffic to the carding page.' : ''));
 
   const kp = [
-    ['Clics', fInt(k.clicks), chg(k.clicks_chg), '2025: ' + fInt(prev(k.clicks, k.clicks_chg))],
-    ['Impresiones', fInt(k.impressions), chg(k.impressions_chg), '2025: ' + fInt(prev(k.impressions, k.impressions_chg))],
+    ['Clicks', fInt(k.clicks), chg(k.clicks_chg), '2025: ' + fInt(prev(k.clicks, k.clicks_chg))],
+    ['Impressions', fInt(k.impressions), chg(k.impressions_chg), '2025: ' + fInt(prev(k.impressions, k.impressions_chg))],
     ['CTR', fRate(k.ctr), chg(k.ctr_chg), '2025: ' + fRate(prev(k.ctr, k.ctr_chg))],
-    ['Posición media', nf1.format(+k.position), '<span class="chg ' + (pos0 > +k.position ? 'up' : 'down') + '">' + (pos0 > +k.position ? '↑ mejora ' : '↓ empeora ') + nf1.format(Math.abs(pos0 - +k.position)) + ' puestos</span>', '2025: ' + nf1.format(pos0) + ' · menos es mejor']
+    ['Average position', nf1.format(+k.position), '<span class="chg ' + (pos0 > +k.position ? 'up' : 'down') + '">' + (pos0 > +k.position ? '↑ up ' : '↓ down ') + nf1.format(Math.abs(pos0 - +k.position)) + ' places</span>', '2025: ' + nf1.format(pos0) + ' · lower is better']
   ];
   $('seo-kpis').innerHTML = kp.map(([l, v, c, s]) => '<div class="kpi"><span>' + l + '</span><b>' + v + '</b>' + c + '<br><small>' + s + '</small></div>').join('');
 
   table($('t-gscc'), [
-    {h: 'País', cls: 'nw', html: (r) => esc(CO_ES2[r.country] || r.country)},
+    {h: 'Country', cls: 'nw', html: (r) => esc(CO_ES2[r.country] || r.country)},
     {h: '', html: (r) => { const m = MARKET_TAG[MARKET[r.country]] || ['n', '']; return m[1] ? '<span class="tag ' + m[0] + '">' + m[1] + '</span>' : ''; }},
-    {h: 'Clics', f: 'clicks', n: 1, fmt: fInt}, {h: 'Cambio', n: 1, html: (r) => chg(r.clicks_chg)},
-    {h: 'Impresiones', f: 'impressions', n: 1, fmt: fInt}, {h: 'CTR', f: 'ctr', n: 1, fmt: fRate},
-    {h: 'Posición', n: 1, html: (r) => nf1.format(+r.position)},
-    {h: 'Marca', n: 1, html: (r) => br.has(r.country) ? nf1.format(100 * br.get(r.country) / +r.clicks) + ' %' : '—'},
-    {h: 'Oculto', n: 1, html: (r) => unk.has(r.country) ? nf0.format(100 * unk.get(r.country) / +r.clicks) + ' %' : '—'}
+    {h: 'Clicks', f: 'clicks', n: 1, fmt: fInt}, {h: 'Change', n: 1, html: (r) => chg(r.clicks_chg)},
+    {h: 'Impressions', f: 'impressions', n: 1, fmt: fInt}, {h: 'CTR', f: 'ctr', n: 1, fmt: fRate},
+    {h: 'Position', n: 1, html: (r) => nf1.format(+r.position)},
+    {h: 'Brand', n: 1, html: (r) => br.has(r.country) ? nf1.format(100 * br.get(r.country) / +r.clicks) + '%' : '—'},
+    {h: 'Hidden', n: 1, html: (r) => unk.has(r.country) ? nf0.format(100 * unk.get(r.country) / +r.clicks) + '%' : '—'}
   ], co);
 
   const qc = [...new Set(q.map((r) => r.country))];
@@ -1117,11 +1117,11 @@ function vSeo() {
   $('seg-country').innerHTML = qc.map((c) => '<button data-c="' + esc(c) + '" aria-pressed="' + (c === QCOUNTRY) + '">' + esc(CO_ES2[c] || c) + '</button>').join('');
   const rows = q.filter((r) => r.country === QCOUNTRY && r.query !== '(unknown)');
   const u = unk.get(QCOUNTRY), tot = +(co.find((r) => r.country === QCOUNTRY) || {}).clicks;
-  $('q-cap').innerHTML = 'Las búsquedas con más clics en ' + esc(CO_ES2[QCOUNTRY] || QCOUNTRY) + '. Google oculta por privacidad ' + (u ? fInt(u) + ' clics' + (tot ? ' (' + nf0.format(100 * u / tot) + ' % del total)' : '') : 'parte de las búsquedas') + ', que no aparecen aquí.';
+  $('q-cap').innerHTML = 'Searches with the most clicks in ' + esc(CO_ES2[QCOUNTRY] || QCOUNTRY) + '. For privacy, Google hides ' + (u ? fInt(u) + ' clicks' + (tot ? ' (' + nf0.format(100 * u / tot) + '% of the total)' : '') : 'some searches') + ', which are not listed here.';
   table($('t-q'), [
-    {h: 'Búsqueda', html: (r) => esc(r.query) + (isBrand(r.query) ? ' <span class="tag brand">Marca</span>' : '') + (/como fazer|how to do|como hacer/i.test(r.query) ? ' <span class="tag odd">Intención dudosa</span>' : '')},
-    {h: 'Clics', f: 'clicks', n: 1, fmt: fInt}, {h: 'Impresiones', f: 'impressions', n: 1, fmt: fInt},
-    {h: 'CTR', n: 1, html: (r) => fRate(+r.clicks / +r.impressions)}, {h: 'Posición', n: 1, html: (r) => nf1.format(+r.position)}
+    {h: 'Search query', html: (r) => esc(r.query) + (isBrand(r.query) ? ' <span class="tag brand">Brand</span>' : '') + (/como fazer|how to do|como hacer/i.test(r.query) ? ' <span class="tag odd">Questionable intent</span>' : '')},
+    {h: 'Clicks', f: 'clicks', n: 1, fmt: fInt}, {h: 'Impressions', f: 'impressions', n: 1, fmt: fInt},
+    {h: 'CTR', n: 1, html: (r) => fRate(+r.clicks / +r.impressions)}, {h: 'Position', n: 1, html: (r) => nf1.format(+r.position)}
   ], rows);
 
   const pages = [...new Set(sp.map((r) => r.page))].sort((a, b) => d3.sum(sp.filter((r) => r.page === b), (r) => +r.clicks) - d3.sum(sp.filter((r) => r.page === a), (r) => +r.clicks));
@@ -1131,64 +1131,64 @@ function vSeo() {
 
   const opp = (D.gsc_opps || []).slice().sort((a, b) => +b.impressions - +a.impressions);
   table($('t-opps'), [
-    {h: 'Búsqueda', html: (r) => esc(r.query) + (+r.ctr < 0.0005 ? ' <span class="tag out">Impresiones sin clics</span>' : +r.position <= 6 ? ' <span class="tag in">Cerca del top 3</span>' : '')},
-    {h: 'Impresiones', f: 'impressions', n: 1, fmt: fInt}, {h: 'Clics', f: 'clicks', n: 1, fmt: fInt},
-    {h: 'CTR', f: 'ctr', n: 1, fmt: fRate}, {h: 'Posición', n: 1, html: (r) => nf1.format(+r.position)}
+    {h: 'Search query', html: (r) => esc(r.query) + (+r.ctr < 0.0005 ? ' <span class="tag out">Impressions, no clicks</span>' : +r.position <= 6 ? ' <span class="tag in">Close to top 3</span>' : '')},
+    {h: 'Impressions', f: 'impressions', n: 1, fmt: fInt}, {h: 'Clicks', f: 'clicks', n: 1, fmt: fInt},
+    {h: 'CTR', f: 'ctr', n: 1, fmt: fRate}, {h: 'Position', n: 1, html: (r) => nf1.format(+r.position)}
   ], opp);
 
   const gp = D.gsc_pages || [];
   table($('t-gpc'), [
-    {h: 'Página', f: 'page', cls: 'path'}, {h: 'Clics', f: 'clicks', n: 1, fmt: fInt},
-    {h: 'Conv. GA4', n: 1, html: (r) => has(r.ga_conversions) ? fInt(r.ga_conversions) : '<span style="color:var(--faint)">sin dato</span>'}
+    {h: 'Page', f: 'page', cls: 'path'}, {h: 'Clicks', f: 'clicks', n: 1, fmt: fInt},
+    {h: 'GA4 conv.', n: 1, html: (r) => has(r.ga_conversions) ? fInt(r.ga_conversions) : '<span style="color:var(--faint)">no data</span>'}
   ], gp.filter((r) => has(r.ga_conversions)), (r) => +r.clicks > 3000 && +r.ga_conversions <= 3 ? 'flag' : '');
 }
-function fDayStr(s) { if (!s) return '—'; const d = new Date(s + 'T12:00:00'); return d.getDate() + ' de ' + ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()]; }
+function fDayStr(s) { if (!s) return '—'; const d = new Date(s + 'T12:00:00'); return d.getDate() + ' ' + ['January','February','March','April','May','June','July','August','September','October','November','December'][d.getMonth()]; }
 
 function spotlight(rows) {
   const full = rows.filter((r) => r.month < '2026-11');
   const labs = rows.map((r) => MONTHS[+r.month.slice(5) - 1]);
-  const tt = (i) => MONTHS[+rows[i].month.slice(5) - 1] + ' 2026' + (rows[i].month >= '2026-11' ? ' (incompleto)' : '');
-  barChart($('sp-clicks'), labs, [{name: 'Clics', color: C.blue, vals: rows.map((r) => +r.clicks)}], 150, (v) => nf0.format(v), false, tt);
-  barChart($('sp-impr'), labs, [{name: 'Impresiones', color: C.teal, vals: rows.map((r) => +r.impressions)}], 150, (v) => v >= 1000 ? nf0.format(v / 1000) + ' k' : nf0.format(v), false, tt);
-  barChart($('sp-ctr'), labs, [{name: 'CTR', color: C.coral, vals: rows.map((r) => 100 * +r.ctr)}], 150, (v) => nf1.format(v) + ' %', false, tt);
-  barChart($('sp-pos'), labs, [{name: 'Posición', color: C.peach, vals: rows.map((r) => +r.position)}], 150, (v) => nf1.format(v), false, tt);
+  const tt = (i) => MONTHS[+rows[i].month.slice(5) - 1] + ' 2026' + (rows[i].month >= '2026-11' ? ' (partial)' : '');
+  barChart($('sp-clicks'), labs, [{name: 'Clicks', color: C.blue, vals: rows.map((r) => +r.clicks)}], 150, (v) => nf0.format(v), false, tt);
+  barChart($('sp-impr'), labs, [{name: 'Impressions', color: C.teal, vals: rows.map((r) => +r.impressions)}], 150, (v) => v >= 1000 ? nf0.format(v / 1000) + 'k' : nf0.format(v), false, tt);
+  barChart($('sp-ctr'), labs, [{name: 'CTR', color: C.coral, vals: rows.map((r) => 100 * +r.ctr)}], 150, (v) => nf1.format(v) + '%', false, tt);
+  barChart($('sp-pos'), labs, [{name: 'Position', color: C.peach, vals: rows.map((r) => +r.position)}], 150, (v) => nf1.format(v), false, tt);
   const al = [];
   const live = full.filter((r) => +r.clicks >= 20);
   if (live.length >= 4) {
     const a = live.slice(0, 3), b = live.slice(-3);
     const p0 = d3.mean(a, (r) => +r.position), p1 = d3.mean(b, (r) => +r.position);
-    if (p1 - p0 > 1.5) al.push(['r', '<b>La posición empeora</b> de ' + nf1.format(p0) + ' en sus primeros meses a ' + nf1.format(p1) + ' en los tres últimos. Conviene actualizar el contenido y reforzar los enlaces hacia ella.']);
-    else if (p0 - p1 > 1.5) al.push(['g', '<b>La posición mejora</b> de ' + nf1.format(p0) + ' a ' + nf1.format(p1) + '.']);
+    if (p1 - p0 > 1.5) al.push(['r', '<b>Position is getting worse</b>, from ' + nf1.format(p0) + ' in its first months to ' + nf1.format(p1) + ' in the last three. Refresh the content and strengthen internal links to it.']);
+    else if (p0 - p1 > 1.5) al.push(['g', '<b>Position is improving</b>, from ' + nf1.format(p0) + ' to ' + nf1.format(p1) + '.']);
     const sums = live.map((r, i) => i >= 2 ? d3.sum(live.slice(i - 2, i + 1), (x) => +x.clicks) : null).filter((v) => v != null);
     const peak = d3.max(sums), last = sums[sums.length - 1];
-    if (peak && last < 0.6 * peak) al.push(['a', '<b>Los clics han caído un ' + nf0.format(100 * (1 - last / peak)) + ' %</b> desde su mejor trimestre. Search Console no depende de la etiqueta de Analytics, así que esta caída es real.']);
+    if (peak && last < 0.6 * peak) al.push(['a', '<b>Clicks are down ' + nf0.format(100 * (1 - last / peak)) + '%</b> from its best quarter. Search Console does not depend on the Analytics tag, so this drop is real.']);
   }
   const ci = d3.sum(full, (r) => +r.clicks), im = d3.sum(full, (r) => +r.impressions);
   const wpos = im ? d3.sum(full, (r) => +r.position * +r.impressions) / im : 0;
-  if (im && ci / im < 0.01 && wpos < 9) al.push(['a', '<b>Buena posición, pocos clics:</b> posición media ' + nf1.format(wpos) + ' pero solo un ' + nf2.format(100 * ci / im) + ' % de CTR. Es candidata a probar otro título y otra descripción.']);
+  if (im && ci / im < 0.01 && wpos < 9) al.push(['a', '<b>Good position, few clicks:</b> average position ' + nf1.format(wpos) + ' but only ' + nf2.format(100 * ci / im) + '% CTR. A good candidate for testing a new title and description.']);
   if (SPOT_NOTES[SPOT]) al.push(['n', SPOT_NOTES[SPOT]]);
-  if (!al.length) al.push(['g', '<b>Sin avisos:</b> posición y clics estables.']);
+  if (!al.length) al.push(['g', '<b>No alerts:</b> stable position and clicks.']);
   $('spot-alerts').innerHTML = al.map(([c, h]) => '<div class="al ' + c + '">' + h + '</div>').join('');
 }
 
-// ---------- Avisos por pestaña ----------
+// ---------- Per-tab notes ----------
 function tabNote(tab) {
   const inc = incident();
   const footer = (D.convEvents || []).find((r) => /Footer/i.test(r.eventName));
-  const go = ' <a href="#medicion">Ver Medición</a>';
-  if (!inc.start) return tab === 'conversiones' && footer && +footer.conversions_chg < -90 ? ['a', '<b>Formulario del pie:</b> ' + fInt(footer.conversions) + ' conversiones en el año (' + fSigned(footer.conversions_chg) + '). Si sigue en la web, revisar que el evento se mide.'] : null;
+  const go = ' <a href="#medicion">See Tracking</a>';
+  if (!inc.start) return tab === 'conversiones' && footer && +footer.conversions_chg < -90 ? ['a', '<b>Footer form:</b> ' + fInt(footer.conversions) + ' conversions this year (' + fSigned(footer.conversions_chg) + '). If it is still on the site, check that its event is being tracked.'] : null;
   const desde = fDay(inc.start.d);
   const lost = nf0.format(10 * (1 - inc.after / inc.base));
   const weeksOff = inc.rows.length - inc.rows.indexOf(inc.start);
   const N = {
-    resumen: ['a', 'Desde el ' + desde + ', GA4 registra solo unas ' + (10 - +lost) + ' de cada 10 visitas: las cifras recientes salen más bajas de lo real.' + go],
-    evolucion: ['a', '<b>Octubre y noviembre salen bajos por la medición, no por el tráfico.</b> Desde el ' + desde + ' GA4 pierde unas ' + lost + ' de cada 10 visitas; compara esos meses con cautela.' + go],
-    adquisicion: ['a', 'Los cambios frente a 2025 incluyen ' + weeksOff + ' semanas con la medición rota desde el ' + desde + '. Afecta a todos los canales por igual, así que el reparto entre canales sigue siendo fiable; los totales, no.' + go],
-    audiencia: ['a', 'Desde el ' + desde + ' faltan visitas en todos los dispositivos y países por igual: las proporciones son fiables, los totales están por debajo de lo real.' + go],
-    paginas: ['a', 'Las sesiones y conversiones de cada página incluyen ' + weeksOff + ' semanas con la medición rota desde el ' + desde + '. Para el tráfico desde Google de cada página, la pestaña SEO usa Search Console, que no se ve afectada.' + go],
-    conversiones: ['a', 'Desde el ' + desde + ' las conversiones también se registran de menos.' + (footer && +footer.conversions_chg < -90 ? ' Aparte, el <b>formulario del pie</b> se queda en ' + fInt(footer.conversions) + ' conversiones en el año (' + fSigned(footer.conversions_chg) + '): si sigue en la web, revisar que su evento se mide.' : '') + go],
-    ia: ['a', 'Las visitas desde asistentes de IA de octubre y noviembre están infravaloradas por la medición rota desde el ' + desde + '.' + go],
-    seo: ['g', 'Search Console mide los clics desde Google sin depender de la etiqueta de Analytics, así que esta pestaña no se ve afectada por el fallo de medición.']
+    resumen: ['a', 'Since ' + desde + ', GA4 records only about ' + (10 - +lost) + ' in every 10 visits: recent figures are lower than reality.' + go],
+    evolucion: ['a', '<b>October and November look low because of tracking, not traffic.</b> Since ' + desde + ' GA4 has been missing about ' + lost + ' in every 10 visits; compare those months with caution.' + go],
+    adquisicion: ['a', 'Changes vs 2025 include ' + weeksOff + ' weeks of broken tracking since ' + desde + '. It affects all channels equally, so the split between channels is still reliable; the totals are not.' + go],
+    audiencia: ['a', 'Since ' + desde + ', visits are missing equally across all devices and countries: shares are reliable, totals are below reality.' + go],
+    paginas: ['a', 'Sessions and conversions for each page include ' + weeksOff + ' weeks of broken tracking since ' + desde + '. For Google traffic to each page, the SEO tab uses Search Console, which is not affected.' + go],
+    conversiones: ['a', 'Since ' + desde + ', conversions are also undercounted.' + (footer && +footer.conversions_chg < -90 ? ' Separately, the <b>footer form</b> is down to ' + fInt(footer.conversions) + ' conversions this year (' + fSigned(footer.conversions_chg) + '): if it is still on the site, check that its event is being tracked.' : '') + go],
+    ia: ['a', 'AI assistant visits in October and November are understated because of the broken tracking since ' + desde + '.' + go],
+    seo: ['g', 'Search Console measures clicks from Google without relying on the Analytics tag, so this tab is not affected by the tracking failure.']
   };
   return N[tab] || null;
 }
@@ -1203,9 +1203,9 @@ function placeNote() {
   grid.prepend(el);
 }
 
-// ---------- Navegación ----------
+// ---------- Navigation ----------
 const VIEWS = {resumen: vResumen, medicion: vMedicion, seo: vSeo, evolucion: vEvolucion, adquisicion: vAdquisicion, audiencia: vAudiencia, paginas: vPaginas, conversiones: vConversiones, ia: vIa};
-function render() { hideTip(); try { VIEWS[TAB](); placeNote(); } catch (e) { console.error(e); $('errors').innerHTML = '<div class="err">Error al dibujar la vista: ' + esc(e.message) + '</div>'; } }
+function render() { hideTip(); try { VIEWS[TAB](); placeNote(); } catch (e) { console.error(e); $('errors').innerHTML = '<div class="err">Error drawing this view: ' + esc(e.message) + '</div>'; } }
 function setTab(t, push) {
   if (!VIEWS[t]) t = 'resumen';
   TAB = t;
@@ -1230,24 +1230,24 @@ function chrome() {
   const meta = (D.meta && D.meta[0]) || {};
   const upd = meta.actualizado ? new Date(meta.actualizado + 'T12:00:00') : null;
   const fUpd = upd ? upd.getDate() + ' ' + MONTHS[upd.getMonth()] + ' ' + upd.getFullYear() : '—';
-  $('hero-sub').textContent = 'veridas.com · Google Analytics 4 · ' + (meta.periodo || '') + ', frente al ' + (meta.comparacion || '');
-  $('hero-chips').innerHTML = '<span class="chip g">Datos reales</span><span class="chip">Actualizado el ' + fUpd + '</span>';
+  $('hero-sub').textContent = 'veridas.com · Google Analytics 4 · ' + (meta.periodo || '') + ' vs ' + (meta.comparacion || '');
+  $('hero-chips').innerHTML = '<span class="chip g">Live data</span><span class="chip">Updated ' + fUpd + '</span>';
   $('side-period').innerHTML = '<span class="dot"></span>' + esc(meta.periodo || '');
-  $('side-updated').innerHTML = '<span class="dot"></span>Actualizado el ' + fUpd;
+  $('side-updated').innerHTML = '<span class="dot"></span>Updated ' + fUpd;
   fetch('/auth/me', {cache: 'no-store'}).then((r) => r.ok ? r.json() : null).then((u) => {
     if (!u || !u.email) return;
     const el = $('side-user'); el.hidden = false;
-    el.innerHTML = '<span>' + esc(u.email) + '</span><a href="/auth/logout">Cerrar sesión</a>';
+    el.innerHTML = '<span>' + esc(u.email) + '</span><a href="/auth/logout">Sign out</a>';
   }).catch(() => {});
   const ws = warnings();
-  $('side-alerts').innerHTML = ws.length ? '<strong class="red">' + ws.length + (ws.length === 1 ? ' aviso' : ' avisos') + '</strong><a href="#medicion" class="sidelink">' + esc(ws[0].title) + '</a>' : '<strong>Sin avisos</strong>Ningún dato fuera de lo normal.';
+  $('side-alerts').innerHTML = ws.length ? '<strong class="red">' + ws.length + (ws.length === 1 ? ' alert' : ' alerts') + '</strong><a href="#medicion" class="sidelink">' + esc(ws[0].title) + '</a>' : '<strong>No alerts</strong>Nothing out of the ordinary.';
   $('alert').innerHTML = '';
 }
 async function start() {
-  if (!window.d3) { $('errors').innerHTML = '<div class="err">No se ha podido cargar la librería de gráficos. Comprueba la conexión a internet.</div>'; return; }
+  if (!window.d3) { $('errors').innerHTML = '<div class="err">The charting library could not be loaded. Check your internet connection.</div>'; return; }
   const missing = [];
   await Promise.all(FILES.map((f) => d3.csv(f + '.csv').then((r) => { D[f] = r; }).catch(() => { D[f] = []; missing.push(f + '.csv'); })));
-  if (missing.length) $('errors').innerHTML = '<div class="err">Faltan estos ficheros junto a index.html: ' + esc(missing.join(', ')) + '.</div>';
+  if (missing.length) $('errors').innerHTML = '<div class="err">These files are missing next to index.html: ' + esc(missing.join(', ')) + '.</div>';
   chrome();
   setTab(location.hash.slice(1), false);
 }
